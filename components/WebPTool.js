@@ -20,29 +20,69 @@ export default function WebPTool() {
 
             const img = new Image();
             const reader = new FileReader();
+            let timeoutTriggered = false;
 
-            // Set timeout for conversion
+            // Dynamic timeout based on file size
+            const fileSizeMB = file.size / (1024 * 1024);
+            let timeoutDuration;
+            if (fileSizeMB < 5) {
+                timeoutDuration = 30000; // 30 seconds for < 5MB
+            } else if (fileSizeMB < 10) {
+                timeoutDuration = 60000; // 60 seconds for 5-10MB
+            } else {
+                timeoutDuration = 120000; // 120 seconds for > 10MB
+            }
+
             const timeout = setTimeout(() => {
-                reject(new Error("Conversion timeout"));
-            }, 30000); // 30 second timeout
+                timeoutTriggered = true;
+                clearTimeout(timeout);
+                reject(new Error("Image too large for browser conversion. Try a smaller size."));
+            }, timeoutDuration);
 
             reader.onerror = () => {
                 clearTimeout(timeout);
-                reject(new Error("Failed to read file"));
+                if (!timeoutTriggered) {
+                    reject(new Error("Failed to read file"));
+                }
             };
 
             reader.onload = (e) => {
-                img.src = e.target.result;
+                if (!timeoutTriggered) {
+                    img.src = e.target.result;
+                }
             };
 
             img.onerror = () => {
                 clearTimeout(timeout);
-                reject(new Error("Failed to load image"));
+                if (!timeoutTriggered) {
+                    reject(new Error("Failed to load image"));
+                }
             };
 
             img.onload = () => {
+                if (timeoutTriggered) return;
+
                 try {
+                    // Pre-scale large images before compression
+                    let targetWidth = img.width;
+                    let targetHeight = img.height;
+                    const MAX_DIMENSION = 3000;
+
+                    if (img.width > MAX_DIMENSION || img.height > MAX_DIMENSION) {
+                        const aspectRatio = img.width / img.height;
+                        if (img.width > img.height) {
+                            targetWidth = MAX_DIMENSION;
+                            targetHeight = Math.round(MAX_DIMENSION / aspectRatio);
+                        } else {
+                            targetHeight = MAX_DIMENSION;
+                            targetWidth = Math.round(MAX_DIMENSION * aspectRatio);
+                        }
+                        console.log(`Large image detected (${img.width}x${img.height}), scaling to ${targetWidth}x${targetHeight}`);
+                    }
+
                     const compressImage = (width, height, isRetry = false) => {
+                        if (timeoutTriggered) return;
+
                         const canvas = document.createElement("canvas");
                         canvas.width = width;
                         canvas.height = height;
@@ -58,8 +98,12 @@ export default function WebPTool() {
                         let bestQuality = currentQuality;
 
                         const tryConvert = (quality) => {
+                            if (timeoutTriggered) return;
+
                             canvas.toBlob(
                                 (blob) => {
+                                    if (timeoutTriggered) return;
+
                                     if (!blob) {
                                         clearTimeout(timeout);
                                         reject(new Error("Failed to create blob"));
@@ -130,11 +174,13 @@ export default function WebPTool() {
                         tryConvert(currentQuality);
                     };
 
-                    // Start with original dimensions
-                    compressImage(img.width, img.height);
+                    // Start with pre-scaled dimensions
+                    compressImage(targetWidth, targetHeight);
                 } catch (err) {
                     clearTimeout(timeout);
-                    reject(err);
+                    if (!timeoutTriggered) {
+                        reject(err);
+                    }
                 }
             };
 
@@ -154,6 +200,8 @@ export default function WebPTool() {
 
         for (let i = 0; i < fileList.length; i++) {
             const file = fileList[i];
+            const fileSizeMB = (file.size / (1024 * 1024)).toFixed(1);
+
             try {
                 const result = await convertToWebP(file);
                 convertedFiles.push({
@@ -165,7 +213,8 @@ export default function WebPTool() {
                 setProgress({ current: i + 1, total: fileList.length });
             } catch (err) {
                 console.error(`Failed to convert ${file.name}:`, err);
-                errors.push(file.name);
+                const errorMessage = err.message || "Unknown error";
+                errors.push(`${file.name} (${fileSizeMB}MB): ${errorMessage}`);
                 setProgress({ current: i + 1, total: fileList.length });
             }
         }
