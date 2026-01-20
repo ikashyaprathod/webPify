@@ -6,6 +6,7 @@ export default function WebPTool() {
     const fileInputRef = useRef(null);
     const [files, setFiles] = useState([]);
     const [converting, setConverting] = useState(false);
+    const [downloading, setDownloading] = useState(false);
     const [selectedFiles, setSelectedFiles] = useState(new Set());
     const [error, setError] = useState("");
     const [progress, setProgress] = useState({ current: 0, total: 0 });
@@ -286,12 +287,24 @@ export default function WebPTool() {
         setSelectedFiles(newSelected);
     };
 
-    const handleDownloadSelected = () => {
-        files
-            .filter((f) => selectedFiles.has(f.id))
-            .forEach((f) => {
-                setTimeout(() => handleDownload(f), 100);
-            });
+    const handleDownloadSelected = async () => {
+        if (downloading || selectedFiles.size === 0) return;
+
+        setDownloading(true);
+
+        const filesToDownload = files.filter((f) => selectedFiles.has(f.id));
+
+        // Download files one by one with delay to prevent browser blocking
+        for (let i = 0; i < filesToDownload.length; i++) {
+            handleDownload(filesToDownload[i]);
+
+            // Wait 500ms between downloads (except after the last one)
+            if (i < filesToDownload.length - 1) {
+                await new Promise(resolve => setTimeout(resolve, 500));
+            }
+        }
+
+        setDownloading(false);
     };
 
     const handleClearError = () => {
@@ -390,12 +403,12 @@ export default function WebPTool() {
                             style={{
                                 ...styles.controlBtn,
                                 ...styles.downloadBtn,
-                                ...(selectedFiles.size === 0 ? styles.downloadBtnDisabled : {}),
+                                ...(selectedFiles.size === 0 || downloading ? styles.downloadBtnDisabled : {}),
                             }}
                             onClick={handleDownloadSelected}
-                            disabled={selectedFiles.size === 0}
+                            disabled={selectedFiles.size === 0 || downloading}
                         >
-                            Download selected ({selectedFiles.size})
+                            {downloading ? "Downloading..." : `Download selected (${selectedFiles.size})`}
                         </button>
                         <button
                             style={{
