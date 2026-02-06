@@ -1,0 +1,17 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+# Disallow admin and API routes
+Disallow: /api/
+Disallow: /admin/
+
+# Allow Next.js static assets
+Allow: /_next/static/
+Allow: /_next/image/
+
+# Disallow Next.js data and build files
+Disallow: /_next/data/
+
+# Sitemaps
+Sitemap: https://webpify.vercel.app/sitemap.xml
