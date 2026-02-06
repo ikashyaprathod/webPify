@@ -12,8 +12,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "WebPify – Image to WebP Converter",
-  description: "Convert images to WebP easily. Fast, simple, and free.",
+  title: "WebPify – Image Compressor & Image Converter Online",
+  description: "Compress and convert images online. Reduce image size without quality loss or convert images to PNG, JPEG, and WebP instantly.",
 };
 
 export default function RootLayout({ children }) {
