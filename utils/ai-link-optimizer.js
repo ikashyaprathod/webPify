@@ -1,6 +1,8 @@
 import { getFullAuthorityReport } from './authority-score';
 import { getAnchorVariations } from './anchor-text';
 import { topicalGraph } from './topical-graph';
+import { getAllCategories } from '@/data/blog-clusters';
+import { generatedContent } from '@/data/generated-posts';
 
 /**
  * AI-Driven Internal Link Optimizer
@@ -29,9 +31,34 @@ export function generateLinkSuggestions(searchConsoleData = {}) {
         ? identifyRisingPages(searchConsoleData.pages)
         : [];
 
+    // [NEW] Get all blog posts for cross-linking (Manual + Generated)
+    const { generatedContent } = require('@/data/generated-posts'); // Dynamic require for script/tool safety if needed, or stick to import if using ESM entirely.
+    // Note: ai-link-optimizer.js might be used in node scripts where import is tricky without modules. 
+    // But since it's in `utils` let's assume standard import if top-level is ESM.
+    // The previous edit used `getAllCategories`.
+
+    // Let's refactor to use a unified source.
+    const manualPosts = getAllCategories().flatMap(c => c.posts.map(p => ({
+        path: `/blog/${c.slug}/${p.slug}`,
+        name: p.title,
+        score: p.priority === 'high' ? 70 : 50,
+        clusterId: c.slug,
+        type: 'blog'
+    })));
+
+    const generatedPostsList = Object.values(generatedContent).map(p => ({
+        path: `/blog/${p.category}/${p.slug}`,
+        name: p.title,
+        score: 60, // Standard score for programmatic content
+        clusterId: p.category,
+        type: 'blog'
+    }));
+
+    const allStrongPages = [...strongPages, ...manualPosts.filter(p => p.score >= 70), ...generatedPostsList];
+
     // Generate "boost weak pages" suggestions
     weakPages.forEach(weakPage => {
-        const bestSources = findBestLinkSources(weakPage, strongPages);
+        const bestSources = findBestLinkSources(weakPage, allStrongPages);
 
         bestSources.slice(0, 3).forEach((source, index) => {
             suggestions.push({
@@ -53,7 +80,7 @@ export function generateLinkSuggestions(searchConsoleData = {}) {
     risingPages.forEach(risingPage => {
         const bestSources = findBestLinkSources(
             { path: risingPage.page, score: 50 },
-            strongPages
+            allStrongPages
         );
 
         if (bestSources.length > 0) {
@@ -183,6 +210,16 @@ function calculateRelevance(sourcePath, targetPath) {
     // Related formats = low-medium relevance
     if (sourceFormat && targetFormat) {
         return 0.5;
+    }
+
+    // [NEW] Blog to Tool relevance
+    if (sourcePath.includes('/blog/') && targetPath.includes('/image/')) {
+        const category = sourcePath.split('/')[2];
+        const toolHub = extractHub(targetPath);
+        // Direct match (e.g., image-compression blog -> compressor tool)
+        if (category.includes(toolHub) || (category === 'image-formats' && toolHub === 'compare')) {
+            return 0.8;
+        }
     }
 
     return 0.3; // Default low relevance

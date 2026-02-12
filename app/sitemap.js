@@ -1,10 +1,51 @@
 import { getSEOMetadata } from '@/utils/seo-config';
+import { blogClusters } from '@/data/blog-clusters';
+import { generatedContent } from '@/data/generated-posts';
 
 export default function sitemap() {
     const baseUrl = 'https://webpify.vercel.app';
     const currentDate = new Date();
 
+    // Generate blog posts sitemap entries
+    const blogEntries = Object.values(blogClusters).flatMap(cluster => {
+        // Category page
+        const categoryEntry = {
+            url: `${baseUrl}/blog/${cluster.slug}`,
+            lastModified: currentDate,
+            changeFrequency: 'weekly',
+            priority: 0.8,
+        };
+
+        // Post pages
+        const postEntries = cluster.posts.map(post => ({
+            url: `${baseUrl}/blog/${cluster.slug}/${post.slug}`,
+            lastModified: currentDate,
+            changeFrequency: 'weekly',
+            priority: post.priority === 'high' ? 0.9 : 0.7,
+        }));
+
+        return [categoryEntry, ...postEntries];
+    });
+
+    const generatedEntries = Object.values(generatedContent).map(post => ({
+        url: `${baseUrl}/blog/${post.category}/${post.slug}`,
+        lastModified: currentDate,
+        changeFrequency: 'weekly',
+        priority: 0.8 // Default high priority for scale-up content
+    }));
+
+    // Combine manual and generated
+    const allBlogEntries = [...blogEntries, ...generatedEntries];
+
+
     return [
+        {
+            url: `${baseUrl}/blog`,
+            lastModified: currentDate,
+            changeFrequency: 'weekly',
+            priority: 0.9,
+        },
+        ...allBlogEntries,
         // Homepage
         {
             url: baseUrl,
