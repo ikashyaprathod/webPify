@@ -61,15 +61,7 @@ export default function Footer() {
       <div className="site-footer__stars" aria-hidden="true" />
       <div className="site-footer__inner">
         <p className="site-footer__copy">
-          © 2026–2027 Humayn. All Rights Reserved by{" "}
-          <a
-            href="https://ikashyap.vercel.app/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="site-footer__author-link"
-          >
-            <strong>Kashyap Rathod.</strong>
-          </a>
+          © 2026–2027 Webpifyy. All Rights Reserved
         </p>
         <div className="site-footer__socials" role="list" aria-label="Social links">
           {SOCIALS.map(({ label, href, icon }) => (
