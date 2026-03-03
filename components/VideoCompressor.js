@@ -9,15 +9,15 @@ const MAX_FILE_SIZE  = 500  * 1024 * 1024;        // 500 MB per file
 const MAX_TOTAL_SIZE = 1.5  * 1024 * 1024 * 1024; // 1.5 GB per session
 
 const SPEED_PRESETS = {
-  ultrafast: { label: "Ultra Fast",      ffpreset: "ultrafast", tune: "fastdecode", vpxSpeed: "8" },
-  balanced:  { label: "Balanced",        ffpreset: "veryfast",  tune: "film",       vpxSpeed: "4" },
-  slow:      { label: "Max Compression", ffpreset: "slow",      tune: "film",       vpxSpeed: "2" },
+  ultrafast: { label: "Ultra Fast",      ffpreset: "ultrafast" },
+  balanced:  { label: "Balanced",        ffpreset: "veryfast"  },
+  slow:      { label: "Max Compression", ffpreset: "slow"      },
 };
 
 const QUALITY_PRESETS = {
-  high:    { label: "High Quality", crfOffset: -2, audioBitrate: "192k" },
-  balanced:{ label: "Balanced",     crfOffset:  0, audioBitrate: "128k" },
-  maximum: { label: "Maximum",      crfOffset:  4, audioBitrate:  "96k" },
+  high:    { label: "High Quality", crfOffset: -2 },
+  balanced:{ label: "Balanced",     crfOffset:  0 },
+  maximum: { label: "Maximum",      crfOffset:  4 },
 };
 
 const RESOLUTIONS = [
@@ -41,23 +41,54 @@ function fmtBytes(bytes) {
 }
 
 /**
- * Extract resolution + duration from HTML5 video element (main thread only).
- * Derives estimated total bitrate from file size ÷ duration.
+ * Analyze video: resolution, duration, estimated bitrate, and codec.
+ *
+ * Codec detection uses the VideoTracks API (Chrome/Edge) with a file
+ * extension heuristic fallback for Firefox and other browsers.
  */
 async function analyzeVideo(file) {
   return new Promise((resolve) => {
     const v = document.createElement("video");
     v.preload = "metadata";
+
     v.onloadedmetadata = () => {
       const res      = { w: v.videoWidth, h: v.videoHeight };
       const duration = v.duration || 0;
       const estimatedBitrateKbps = duration > 0
         ? Math.round((file.size * 8) / (duration * 1000))
         : 0;
+
+      // Codec detection via VideoTracks API (Chrome/Edge)
+      let codec = "unknown";
+      try {
+        const tracks = v.videoTracks;
+        if (tracks && tracks.length > 0) {
+          const raw = (tracks[0].codec || "").toLowerCase();
+          if      (raw.startsWith("avc1") || raw.startsWith("avc3") || raw === "h264") codec = "h264";
+          else if (raw.startsWith("hvc1") || raw.startsWith("hev1"))                   codec = "hevc";
+          else if (raw.startsWith("vp09") || raw.startsWith("vp9"))                    codec = "vp9";
+          else if (raw.startsWith("vp8"))                                               codec = "vp8";
+          else if (raw.startsWith("av01"))                                              codec = "av1";
+          else if (raw)                                                                 codec = raw;
+        }
+      } catch { /* API unavailable in this browser */ }
+
+      // Extension-based heuristic fallback
+      if (codec === "unknown") {
+        const lower = file.name.toLowerCase();
+        if      (lower.endsWith(".mp4") || lower.endsWith(".mov") || lower.endsWith(".m4v")) codec = "h264";
+        else if (lower.endsWith(".webm"))                                                     codec = "vp9";
+      }
+
       URL.revokeObjectURL(v.src);
-      resolve({ res, duration, estimatedBitrateKbps, fileSize: file.size });
+      resolve({ res, duration, estimatedBitrateKbps, fileSize: file.size, codec });
     };
-    v.onerror = () => resolve({ res: null, duration: 0, estimatedBitrateKbps: 0, fileSize: file.size });
+
+    v.onerror = () => resolve({
+      res: null, duration: 0, estimatedBitrateKbps: 0,
+      fileSize: file.size, codec: "unknown",
+    });
+
     v.src = URL.createObjectURL(file);
   });
 }
@@ -67,52 +98,68 @@ function getDynamicCRF(res, qualityKey, aggressive) {
   let base = 26;
   if (res) {
     const px = res.w * res.h;
-    if (px >= 3840 * 2160)      base = 22;
+    if      (px >= 3840 * 2160) base = 22;
     else if (px >= 1920 * 1080) base = 24;
-    else if (px >= 1280 * 720)  base = 26;
+    else if (px >= 1280 *  720) base = 26;
     else                         base = 28;
   }
   return Math.min(51, Math.max(0, base + offset));
 }
 
 /**
- * Smart Adaptive Mode: compute per-file encoding settings from video analysis.
+ * Smart Adaptive Mode: compute per-file encoding settings.
  *
- * Bitrate targets:
- *   > 3 Mbps  → 55% of original
- *   > 1.5 Mbps → 65% of original
- *   ≤ 1.5 Mbps → 85% of original
+ * Skip condition (no re-encode):
+ *   codec is H.264 AND bitrate < 2.5 Mbps AND output format is MP4
+ *   → return original, show "Already optimized"
  *
- * Falls back to CRF if bitrate reduction < 10% (little to gain).
- * Two-pass H.264 enabled for MP4 files > 20 MB with a valid target bitrate.
- * Smart resolution: auto-scale to max 1920px wide if source is wider.
- * Audio: always 128k AAC (covers "reduce if > 192k" without detection).
+ * Target bitrate:
+ *   ≥ 2500 kbps → 65% of original
+ *   < 2500 kbps → 85% of original (or CRF if < 10% reduction possible)
+ *   Never allow target > original bitrate
+ *
+ * Two-pass H.264 for MP4 > 20 MB with valid target bitrate.
+ * Smart resolution: auto-scale to 1920px wide if source is wider.
  */
 function computeSmartSettings(analysis, snap) {
-  const { res, estimatedBitrateKbps, fileSize } = analysis;
+  const { res, estimatedBitrateKbps, fileSize, codec } = analysis;
   const { fmt, sp, ql, noAudio, agg } = snap;
 
-  // ── Smart resolution (overridden by user's manual selection) ────────────
+  // ── Skip: already H.264, low bitrate, targeting MP4 output ─────────────
+  if (
+    codec === "h264" &&
+    estimatedBitrateKbps > 0 &&
+    estimatedBitrateKbps < 2500 &&
+    fmt === "mp4" &&
+    !agg
+  ) {
+    return { skip: true, fmt };
+  }
+
+  // ── Smart resolution ─────────────────────────────────────────────────────
   const smartRes = (!snap.res && res && res.w > 1920) ? "1920:-2" : null;
   const effRes   = agg && !snap.res ? "1280:720" : snap.res || null;
 
   // ── Target bitrate ───────────────────────────────────────────────────────
   let targetBitrateKbps = 0;
-  if (estimatedBitrateKbps > 3000) {
-    targetBitrateKbps = Math.round(estimatedBitrateKbps * 0.55);
-  } else if (estimatedBitrateKbps > 1500) {
+  if (estimatedBitrateKbps >= 2500) {
     targetBitrateKbps = Math.round(estimatedBitrateKbps * 0.65);
   } else if (estimatedBitrateKbps > 0) {
     targetBitrateKbps = Math.round(estimatedBitrateKbps * 0.85);
   }
 
-  // Apply quality preset modifier (+/−15%)
+  // Apply quality preset modifier (±15%)
   const qualMod = { high: 0.15, balanced: 0, maximum: -0.15 }[ql] ?? 0;
   if (targetBitrateKbps > 0) {
     targetBitrateKbps = Math.round(targetBitrateKbps * (1 + qualMod));
   }
 
-  // If less than 10% reduction, skip bitrate mode → use CRF (more reliable)
+  // Clamp: never allow output bitrate > original
+  if (estimatedBitrateKbps > 0 && targetBitrateKbps > estimatedBitrateKbps) {
+    targetBitrateKbps = estimatedBitrateKbps;
+  }
+
+  // CRF fallback if reduction would be < 10% (little to gain from ABR)
   const reduction = estimatedBitrateKbps > 0
     ? 1 - targetBitrateKbps / estimatedBitrateKbps
     : 0;
@@ -122,17 +169,15 @@ function computeSmartSettings(analysis, snap) {
   const twoPass = fmt !== "webm"
     && fileSize > 20 * 1024 * 1024
     && targetBitrateKbps > 0
-    && !agg; // aggressive mode skips two-pass for speed
+    && !agg;
 
-  // CRF fallback (used when targetBitrateKbps = 0)
-  const crf = getDynamicCRF(res, ql, agg);
-
-  // Audio: 128k satisfies "reduce if > 192k" without detection
+  const crf      = getDynamicCRF(res, ql, agg);
   const audioBit = agg ? "64k" : "128k";
 
   return {
+    skip: false,
     fmt,
-    sp: twoPass ? "slow" : (sp || "balanced"),
+    sp:  twoPass ? "slow" : (sp || "balanced"),
     crf,
     targetBitrateKbps,
     smartRes,
@@ -140,17 +185,25 @@ function computeSmartSettings(analysis, snap) {
     twoPass,
     audioBit,
     noAudio: noAudio || false,
-    agg: agg || false,
+    agg:     agg     || false,
   };
 }
 
 /**
- * Worker count = min(3, floor(cpuCores / 2))
- * Examples: 8 cores → 3 workers · 4 cores → 2 workers · 2 cores → 1 worker
+ * Dynamic worker count based on CPU core count.
+ *   cores <= 4  → 2 workers
+ *   cores 5–7   → 3 workers
+ *   cores >= 8  → 4 workers
+ *   cores >= 12 → 6 workers
+ * Maximum is always capped; never unlimited.
  */
 function getMaxWorkers() {
-  if (typeof navigator === "undefined") return 1;
-  return Math.min(3, Math.max(1, Math.floor((navigator.hardwareConcurrency || 2) / 2)));
+  if (typeof navigator === "undefined") return 2;
+  const cores = navigator.hardwareConcurrency || 4;
+  if (cores >= 12) return 6;
+  if (cores >= 8)  return 4;
+  if (cores <= 4)  return 2;
+  return 3;
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -175,7 +228,7 @@ export default function VideoCompressor({
   // ── Processing UI ────────────────────────────────────────────────────────
   const [processing, setProcessing]   = useState(false);
   const [overallPct, setOverallPct]   = useState(0);
-  const [workerCount, setWorkerCount] = useState(0); // active workers shown in badge
+  const [workerCount, setWorkerCount] = useState(0);
   const [globalErr, setGlobalErr]     = useState("");
 
   // ── Preview ──────────────────────────────────────────────────────────────
@@ -183,22 +236,13 @@ export default function VideoCompressor({
   const [previewCompressed, setPreviewCompressed] = useState(false);
 
   // ── Refs ─────────────────────────────────────────────────────────────────
-  const fileInput = useRef(null);
-  const cancelRef = useRef(false);
-
-  /**
-   * poolRef.current shape:
-   * {
-   *   workers:     Worker[]         – one per slot (null until created)
-   *   workerBusy:  boolean[]        – is this slot processing a job?
-   *   workerJobId: (string|null)[]  – which file ID is this slot processing?
-   *   jobQueue:    JobDesc[]        – jobs waiting for a free worker
-   *   jobMap:      Map<id, JobDesc> – all jobs (for retry data lookup)
-   *   totalJobs:   number
-   *   completedJobs: number         – counts final completions (success + failed after retries)
-   * }
-   */
-  const poolRef = useRef(null);
+  const fileInput      = useRef(null);
+  const cancelRef      = useRef(false);
+  const poolRef        = useRef(null);
+  /** Active worker ceiling – reduced by CPU lag monitor */
+  const activeMaxRef   = useRef(0);
+  /** setInterval handle for CPU lag detection */
+  const lagMonitorRef  = useRef(null);
 
   // ── Derived values ───────────────────────────────────────────────────────
   const pendingCount = queue.filter(i => i.status === "pending").length;
@@ -215,8 +259,12 @@ export default function VideoCompressor({
     setQueue(prev => prev.map(it => it.id === id ? { ...it, ...patch } : it));
   }, []);
 
-  // ── Terminate all workers ────────────────────────────────────────────────
+  // ── Terminate all workers + stop lag monitor ──────────────────────────────
   const terminatePool = useCallback(() => {
+    if (lagMonitorRef.current) {
+      clearInterval(lagMonitorRef.current);
+      lagMonitorRef.current = null;
+    }
     if (!poolRef.current) return;
     poolRef.current.workers.forEach(w => { try { w?.terminate(); } catch { /* ignore */ } });
     poolRef.current = null;
@@ -311,10 +359,15 @@ export default function VideoCompressor({
   // ── Cancel ───────────────────────────────────────────────────────────────
   const cancelProcessing = useCallback(() => {
     cancelRef.current = true;
+
+    if (lagMonitorRef.current) {
+      clearInterval(lagMonitorRef.current);
+      lagMonitorRef.current = null;
+    }
+
     if (poolRef.current) {
       const p = poolRef.current;
       p.workers.forEach(w => { try { w?.terminate(); } catch { /* ignore */ } });
-      // Collect IDs that were in-flight or queued
       const resetIds = new Set([
         ...p.workerJobId.filter(Boolean),
         ...p.jobQueue.map(j => j.id),
@@ -324,6 +377,7 @@ export default function VideoCompressor({
       ));
       poolRef.current = null;
     }
+
     setProcessing(false);
     setWorkerCount(0);
     cancelRef.current = false;
@@ -339,55 +393,120 @@ export default function VideoCompressor({
     setOverallPct(0);
     setGlobalErr("");
 
-    // Snapshot settings at call time (avoids stale closure)
+    // Snapshot settings at call time (prevents stale closures)
     const snap = {
       fmt: outFmt, sp: speed, ql: quality,
       res: resolution, noAudio: removeAudio, agg: aggressive,
     };
 
-    // ── Phase 1: Analyze each video + compute Smart Adaptive settings ─────
-    // analyzeVideo uses the DOM (video element) — must run on main thread
-    const jobs = await Promise.all(pending.map(async (item) => {
+    // ── Phase 1: Analyze + Smart Adaptive settings ─────────────────────────
+    // Immediately set all items to "queued" so they show as active in the UI
+    setQueue(prev => prev.map(it =>
+      it.status === "pending" ? { ...it, status: "queued" } : it
+    ));
+
+    const toEncode = [];
+    let skipCount  = 0;
+
+    await Promise.all(pending.map(async (item) => {
       const analysis = await analyzeVideo(item.file);
       patchItem(item.id, {
-        detRes: analysis.res,
-        status: "queued",
+        detRes:               analysis.res,
         estimatedBitrateKbps: analysis.estimatedBitrateKbps,
-        duration: analysis.duration,
+        duration:             analysis.duration,
       });
+
       const settings = computeSmartSettings(analysis, snap);
-      return { id: item.id, file: item.file, settings, retryCount: 0 };
+
+      if (settings.skip) {
+        // Already optimal: mark done immediately without sending to worker
+        skipCount++;
+        patchItem(item.id, {
+          status: "done", progress: 100,
+          outBlob: item.file,
+          outSize: item.file.size,
+          reduction: 0,
+          alreadyOptimized: true,
+        });
+        return;
+      }
+
+      toEncode.push({ id: item.id, file: item.file, settings, retryCount: 0 });
     }));
 
     if (cancelRef.current) { setProcessing(false); return; }
 
+    // All files were already optimal — nothing to encode
+    if (toEncode.length === 0) {
+      setProcessing(false);
+      setOverallPct(100);
+      return;
+    }
+
     // ── Phase 2: Set up worker pool ────────────────────────────────────────
     const maxW = getMaxWorkers();
+    activeMaxRef.current = maxW;
+
     const p = {
-      workers:      new Array(maxW).fill(null),
-      workerBusy:   new Array(maxW).fill(false),
-      workerJobId:  new Array(maxW).fill(null),
-      jobQueue:     [...jobs],
-      jobMap:       new Map(jobs.map(j => [j.id, j])),
-      totalJobs:    jobs.length,
-      completedJobs: 0,
+      workers:       new Array(maxW).fill(null),
+      workerBusy:    new Array(maxW).fill(false),
+      workerJobId:   new Array(maxW).fill(null),
+      jobQueue:      [...toEncode],
+      jobMap:        new Map(toEncode.map(j => [j.id, j])),
+      totalJobs:     pending.length,   // includes skip-resolved items
+      completedJobs: skipCount,        // skip items already count as done
     };
     poolRef.current = p;
     setWorkerCount(maxW);
 
+    // Initial overall progress (reflects any pre-skipped items)
+    setOverallPct(Math.round((p.completedJobs / p.totalJobs) * 100));
+
+    // ── CPU lag monitor ────────────────────────────────────────────────────
+    // Measures interval drift; reduces active worker ceiling on sustained lag.
+    {
+      let lastPing  = Date.now();
+      let lagHits   = 0;
+      lagMonitorRef.current = setInterval(() => {
+        const now   = Date.now();
+        const drift = now - lastPing - 250; // 250ms target interval
+        lastPing    = now;
+
+        if (!poolRef.current) return;
+
+        if (drift > 300) {  // interval fired >550ms late → CPU is overloaded
+          lagHits++;
+          if (lagHits >= 2 && activeMaxRef.current > 1) {
+            activeMaxRef.current--;
+            setWorkerCount(activeMaxRef.current);
+            lagHits = 0;
+          }
+        } else {
+          lagHits = Math.max(0, lagHits - 1);
+        }
+      }, 250);
+    }
+
     // ── Assign next queued job to worker at idx ────────────────────────────
     const assignNext = (idx) => {
+      // Respect the dynamic ceiling set by the lag monitor
+      if (idx >= activeMaxRef.current) return;
       if (cancelRef.current || !p.jobQueue.length || p.workerBusy[idx]) return;
+
       const job = p.jobQueue.shift();
-      p.workerBusy[idx]   = true;
-      p.workerJobId[idx]  = job.id;
+      p.workerBusy[idx]  = true;
+      p.workerJobId[idx] = job.id;
       patchItem(job.id, { status: "loading-ffmpeg", progress: 0 });
       p.workers[idx].postMessage({ type: "compress", id: job.id, file: job.file, settings: job.settings });
     };
 
-    // ── Check if all jobs are resolved ────────────────────────────────────
+    // ── Check if all jobs are resolved ─────────────────────────────────────
     const checkAllDone = () => {
       if (p.jobQueue.length === 0 && p.workerBusy.every(b => !b)) {
+        if (lagMonitorRef.current) {
+          clearInterval(lagMonitorRef.current);
+          lagMonitorRef.current = null;
+        }
         setProcessing(false);
         setWorkerCount(0);
         setOverallPct(100);
@@ -395,7 +514,7 @@ export default function VideoCompressor({
       }
     };
 
-    // ── Handle job result (done or error) from worker ─────────────────────
+    // ── Handle job result from worker ──────────────────────────────────────
     const handleResult = (idx, msg) => {
       p.workerBusy[idx]  = false;
       p.workerJobId[idx] = null;
@@ -406,10 +525,9 @@ export default function VideoCompressor({
         const origSize = job?.file?.size ?? 0;
 
         if (msg.alreadyOptimized) {
-          // Output would be >= original – return original file as-is
           patchItem(msg.id, {
             status: "done", progress: 100,
-            outBlob: job?.file ?? null, // File extends Blob; supports download
+            outBlob: job?.file ?? null,
             outSize: origSize,
             reduction: 0,
             alreadyOptimized: true,
@@ -423,7 +541,6 @@ export default function VideoCompressor({
         // msg.type === "error"
         const job = p.jobMap.get(msg.id);
         if (job && job.retryCount < 1) {
-          // Retry once: requeue at front, don't count as completed yet
           job.retryCount++;
           p.jobQueue.unshift(job);
           patchItem(msg.id, { status: "loading-ffmpeg", progress: 0, error: null });
@@ -438,13 +555,13 @@ export default function VideoCompressor({
       checkAllDone();
     };
 
-    // ── Restart crashed worker and retry its current job ──────────────────
+    // ── Restart crashed worker and retry its current job ───────────────────
     const restartWorker = (idx) => {
       try { p.workers[idx]?.terminate(); } catch { /* ignore */ }
       createWorkerAt(idx); // eslint-disable-line no-use-before-define
     };
 
-    // ── Create (or recreate) a worker at pool index idx ───────────────────
+    // ── Create (or recreate) a worker at pool index idx ────────────────────
     const createWorkerAt = (idx) => {
       const w = new Worker(
         new URL("../workers/videoWorker.js", import.meta.url),
@@ -452,7 +569,6 @@ export default function VideoCompressor({
       w.onmessage = ({ data: msg }) => {
         if (msg.type === "progress") {
           patchItem(msg.id, { status: "compressing", progress: msg.pct });
-          // Smooth overall progress: completed + fraction of active jobs
           const activePct = msg.pct / 100;
           const approx = Math.min(
             99,
@@ -492,7 +608,7 @@ export default function VideoCompressor({
       p.workers[idx] = w;
     };
 
-    // ── Phase 3: Spin up workers and immediately feed them jobs ───────────
+    // ── Phase 3: Spin up workers and immediately feed them jobs ────────────
     for (let i = 0; i < maxW; i++) createWorkerAt(i);
     for (let i = 0; i < maxW; i++) assignNext(i);
 
@@ -544,7 +660,7 @@ export default function VideoCompressor({
           <p className="vc-dropzone-sub">MP4 · MOV · WebM · Up to 20 files · 500 MB each</p>
         </div>
 
-        {/* ── Settings + Queue (visible once files are added) ── */}
+        {/* Settings + Queue */}
         {queue.length > 0 && (
           <>
             {/* Settings Panel */}
@@ -647,17 +763,17 @@ export default function VideoCompressor({
               )}
             </div>
 
-            {/* ── Active Worker Badge ── */}
+            {/* Worker Badge */}
             {processing && workerCount > 0 && (
               <div className="vc-worker-badge">
                 ⚡ Parallel Mode Active · {workerCount} worker{workerCount > 1 ? "s" : ""} running
-                {workerCount === 3 && (
+                {workerCount >= 4 && (
                   <span className="vc-worker-warn"> · High CPU usage expected</span>
                 )}
               </div>
             )}
 
-            {/* ── Overall Progress ── */}
+            {/* Overall Progress */}
             {processing && (
               <div className="vc-overall-progress">
                 <div className="vc-overall-label">
@@ -671,7 +787,7 @@ export default function VideoCompressor({
               </div>
             )}
 
-            {/* ── Batch Summary ── */}
+            {/* Batch Summary */}
             {batchSaving !== null && !processing && (
               <div className="vc-batch-summary">
                 <div className="vc-sum-cell">
@@ -687,7 +803,7 @@ export default function VideoCompressor({
               </div>
             )}
 
-            {/* ── Action Buttons ── */}
+            {/* Action Buttons */}
             <div className="vc-actions">
               {pendingCount > 0 && !processing && (
                 <button onClick={processQueue} className="vc-btn-primary">
@@ -709,7 +825,7 @@ export default function VideoCompressor({
               )}
             </div>
 
-            {/* ── File Queue ── */}
+            {/* File Queue */}
             <div className="vc-queue">
               {queue.map(item => (
                 <QueueItem key={item.id} item={item} processing={processing}
@@ -723,7 +839,7 @@ export default function VideoCompressor({
         )}
       </div>
 
-      {/* ── Preview Modal ── */}
+      {/* Preview Modal */}
       {previewItem && (
         <PreviewModal
           item={previewItem}
@@ -740,11 +856,12 @@ export default function VideoCompressor({
 // QUEUE ITEM
 // ─────────────────────────────────────────────────────────────────────────────
 function QueueItem({ item, processing, onDownload, onRemove, onPreview }) {
-  const active = item.status === "loading-ffmpeg" || item.status === "compressing";
+  // queued = waiting for a CPU slot; loading-ffmpeg / compressing = actively working
+  const active = ["queued", "loading-ffmpeg", "compressing"].includes(item.status);
 
   const STATUS_TEXT = {
-    pending:          "Queued",
-    queued:           "Queued",
+    pending:          processing ? "Waiting for available CPU slot" : "Ready",
+    queued:           "Waiting for available CPU slot",
     "loading-ffmpeg": "Loading engine…",
     compressing:      `Compressing ${item.progress}%`,
     done:             item.alreadyOptimized
@@ -755,7 +872,7 @@ function QueueItem({ item, processing, onDownload, onRemove, onPreview }) {
 
   const STATUS_COLOR = {
     pending:          "var(--foreground)",
-    queued:           "var(--foreground)",
+    queued:           "var(--primary)",
     "loading-ffmpeg": "var(--primary)",
     compressing:      "var(--primary)",
     done:             item.alreadyOptimized ? "#6c757d" : "#1a7f37",
@@ -789,11 +906,13 @@ function QueueItem({ item, processing, onDownload, onRemove, onPreview }) {
             <span style={{ opacity: 0.45, fontSize: "0.75rem" }}>
               {item.detRes.w}×{item.detRes.h}
               {item.estimatedBitrateKbps > 0 && ` · ~${(item.estimatedBitrateKbps / 1000).toFixed(1)} Mbps`}
+              {item.codec && item.codec !== "unknown" && ` · ${item.codec.toUpperCase()}`}
             </span>
           )}
         </div>
 
-        {active && (
+        {/* Progress bar only for actively encoding items */}
+        {(item.status === "loading-ffmpeg" || item.status === "compressing") && (
           <div className="vc-progress-bar" style={{ height: 4, marginTop: "0.5rem" }}>
             <div className="vc-progress-fill"
               style={{ width: item.status === "loading-ffmpeg" ? "6%" : `${Math.max(item.progress, 3)}%` }} />
