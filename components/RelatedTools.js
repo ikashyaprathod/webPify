@@ -17,6 +17,12 @@ const toolMetadata = {
     '/image/compressor': { name: 'Image Compressor', icon: '⚡' },
     '/image/converter': { name: 'Image Converter', icon: '🔄' },
     '/image/compare': { name: 'Compare Tools', icon: '⚖️' },
+    '/video/compressor': { name: 'Video Compressor', icon: '🎬' },
+    '/video/compressor/mp4': { name: 'MP4 Compressor', icon: '🎬' },
+    '/video/compressor/webm': { name: 'WebM Compressor', icon: '🌐' },
+    '/video/compressor/mov': { name: 'MOV Compressor', icon: '📱' },
+    '/compress-mp4-online': { name: 'Compress MP4 Online', icon: '🎬' },
+    '/compress-video-for-website': { name: 'Compress Video for Website', icon: '⚡' },
 };
 
 /**

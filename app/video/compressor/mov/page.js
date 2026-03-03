@@ -1,0 +1,125 @@
+import VideoCompressor from "@/components/VideoCompressor";
+import Breadcrumb from "@/components/Breadcrumb";
+import Link from "next/link";
+
+export const metadata = {
+  title: "Compress MOV Online – Reduce iPhone MOV File Size Free",
+  description:
+    "Compress MOV videos from iPhone online. Convert and compress to MP4 or WebM — client-side, no uploads.",
+};
+
+const movFaqs = [
+  {
+    question: "What is a MOV file?",
+    answer:
+      "MOV is Apple's QuickTime movie format. It's the default recording format on iPhones and Mac cameras. MOV files are often very large because they use high-quality HEVC or H.264 encoding at high bitrates.",
+  },
+  {
+    question: "How do I reduce MOV file size from iPhone?",
+    answer:
+      "Upload your MOV file and select MP4 as output format with 'Balanced' or 'Maximum Compression' preset. This re-encodes the video at lower bitrate, dramatically reducing file size while keeping good quality.",
+  },
+  {
+    question: "Can I convert MOV to MP4?",
+    answer:
+      "Yes. Upload your MOV file and select 'MP4' as output format. The tool will re-encode it using H.264, which is universally compatible with all devices, browsers, and platforms.",
+  },
+  {
+    question: "Why are iPhone MOV files so large?",
+    answer:
+      "iPhones record at very high bitrates (50–200 Mbps on newer models) to preserve maximum quality. While great for editing, these files are impractical for sharing. Compression reduces them to practical sizes.",
+  },
+  {
+    question: "Does compressing MOV affect quality?",
+    answer:
+      "Using our 'High Quality' preset, the visual difference is nearly imperceptible for screen viewing. File sizes can be reduced by 60–85% while maintaining excellent visual clarity.",
+  },
+];
+
+export default function MOVCompressorPage() {
+  const breadcrumbItems = [
+    { label: "Home", href: "/" },
+    { label: "Video", href: "/video/compressor" },
+    { label: "Compressor", href: "/video/compressor" },
+    { label: "MOV", href: "/video/compressor/mov" },
+  ];
+
+  const schema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: "https://webpify.vercel.app/" },
+          { "@type": "ListItem", position: 2, name: "Video Compressor", item: "https://webpify.vercel.app/video/compressor" },
+          { "@type": "ListItem", position: 3, name: "MOV Compressor" },
+        ],
+      },
+      {
+        "@type": "SoftwareApplication",
+        name: "MOV Video Compressor",
+        applicationCategory: "VideoProcessing",
+        operatingSystem: "Web",
+        offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+        description: "Compress and convert MOV files from iPhone online. No server uploads — fully client-side.",
+      },
+      {
+        "@type": "FAQPage",
+        mainEntity: movFaqs.map((faq) => ({
+          "@type": "Question",
+          name: faq.question,
+          acceptedAnswer: { "@type": "Answer", text: faq.answer },
+        })),
+      },
+    ],
+  };
+
+  return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+
+      <div style={{ maxWidth: "860px", margin: "0 auto", padding: "2rem 1rem 0" }}>
+        <Breadcrumb items={breadcrumbItems} />
+      </div>
+
+      <div style={{ textAlign: "center", maxWidth: "860px", margin: "0 auto", padding: "0 1rem" }}>
+        <p style={{ fontSize: "0.9rem", opacity: 0.7, marginBottom: "0.5rem" }}>
+          <Link href="/video/compressor" style={{ color: "var(--primary)", textDecoration: "underline" }}>← All Video Formats</Link>
+          {" | "}
+          <Link href="/video/compressor/mp4" style={{ color: "var(--primary)", textDecoration: "underline" }}>MP4 Compressor</Link>
+          {" | "}
+          <Link href="/video/compressor/webm" style={{ color: "var(--primary)", textDecoration: "underline" }}>WebM Compressor</Link>
+        </p>
+      </div>
+
+      <VideoCompressor
+        allowedFormats={["video/quicktime", "video/mp4"]}
+        formatName="MOV"
+        title="MOV Compressor – Compress iPhone Videos Online"
+        description="Compress and convert MOV files from iPhone, iPad, or Mac directly in your browser. No uploads. No server."
+      />
+
+      {/* FAQ */}
+      <div className="faq-section">
+        <h2>MOV Compression FAQ</h2>
+        {movFaqs.map((faq, i) => (
+          <details key={i} className="faq-details">
+            <summary className="faq-question">{faq.question}</summary>
+            <p className="faq-answer">{faq.answer}</p>
+          </details>
+        ))}
+      </div>
+
+      <div style={{ maxWidth: "860px", margin: "2rem auto", padding: "0 1rem 3rem", textAlign: "center" }}>
+        <p style={{ fontSize: "0.875rem", opacity: 0.7 }}>
+          Also try:{" "}
+          <Link href="/image/compressor" style={{ color: "var(--primary)" }}>Image Compressor</Link>
+          {" · "}
+          <Link href="/compress-video-for-website" style={{ color: "var(--primary)" }}>Compress Video for Website</Link>
+          {" · "}
+          <Link href="/compress-mp4-online" style={{ color: "var(--primary)" }}>Compress MP4 Online</Link>
+        </p>
+      </div>
+    </>
+  );
+}

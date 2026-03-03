@@ -12,8 +12,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Image Compressor & Converter – PNG, JPEG, WebP Tools",
-  description: "Compress and convert images online using professional-grade tools. Supports PNG, JPEG, and WebP with high quality and fast processing.",
+  title: "Image & Video Compressor – PNG, JPEG, WebP, MP4 Tools",
+  description: "Compress and convert images and videos online. Supports PNG, JPEG, WebP, MP4, MOV, and WebM with client-side privacy-first processing.",
 };
 
 export default function RootLayout({ children }) {
@@ -73,14 +73,19 @@ export default function RootLayout({ children }) {
                   "provider": {
                     "@id": "https://webpify.vercel.app/#organization"
                   },
-                  "description": "Professional image compression and conversion tools supporting PNG, JPEG, and WebP formats",
+                  "description": "Professional image and video compression and conversion tools supporting PNG, JPEG, WebP, MP4, MOV, and WebM formats",
                   "featureList": [
                     "Image Compression",
                     "Image Conversion",
+                    "Video Compression",
                     "PNG Support",
                     "JPEG Support",
                     "WebP Support",
-                    "Client-side Processing"
+                    "MP4 Compression",
+                    "WebM Compression",
+                    "MOV Compression",
+                    "Client-side Processing",
+                    "Privacy-First No Server Upload"
                   ]
                 }
               ]

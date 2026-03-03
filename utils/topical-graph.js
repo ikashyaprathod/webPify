@@ -6,15 +6,22 @@
  */
 export const topicalGraph = {
     '/': {
-        children: ['/image', '/about', '/privacy', '/terms'],
-        related: ['/image/compressor', '/image/converter', '/image/compare']
+        children: ['/image', '/video', '/about', '/privacy', '/terms'],
+        related: ['/image/compressor', '/image/converter', '/video/compressor']
     },
 
     // Master Hub
     '/image': {
         parent: '/',
         children: ['/image/compressor', '/image/converter', '/image/compare'],
-        related: []
+        related: ['/video/compressor']
+    },
+
+    // Video Hub
+    '/video': {
+        parent: '/',
+        children: ['/video/compressor'],
+        related: ['/image/compressor', '/image/converter']
     },
 
     // Tool Hubs
@@ -22,13 +29,64 @@ export const topicalGraph = {
         parent: '/image',
         siblings: ['/image/converter'],
         children: ['/image/compressor/png', '/image/compressor/jpeg', '/image/compressor/webp'],
-        related: ['/image/compare']
+        related: ['/image/compare', '/video/compressor']
     },
     '/image/converter': {
         parent: '/image',
         siblings: ['/image/compressor'],
         children: ['/image/converter/png', '/image/converter/jpeg', '/image/converter/webp'],
-        related: ['/image/compare']
+        related: ['/image/compare', '/video/compressor']
+    },
+
+    // Video Compressor Hub
+    '/video/compressor': {
+        parent: '/video',
+        siblings: [],
+        children: ['/video/compressor/mp4', '/video/compressor/webm', '/video/compressor/mov'],
+        related: ['/image/compressor', '/image/converter', '/compress-mp4-online', '/compress-video-for-website']
+    },
+
+    // Video Compressor Format Pages
+    '/video/compressor/mp4': {
+        parent: '/video/compressor',
+        siblings: ['/video/compressor/webm', '/video/compressor/mov'],
+        related: ['/compress-mp4-online', '/reduce-mp4-file-size', '/image/compressor']
+    },
+    '/video/compressor/webm': {
+        parent: '/video/compressor',
+        siblings: ['/video/compressor/mp4', '/video/compressor/mov'],
+        related: ['/compress-video-for-website', '/image/compressor']
+    },
+    '/video/compressor/mov': {
+        parent: '/video/compressor',
+        siblings: ['/video/compressor/mp4', '/video/compressor/webm'],
+        related: ['/compress-mp4-online', '/image/compressor']
+    },
+
+    // Video Programmatic Pages
+    '/compress-mp4-online': {
+        parent: '/video/compressor',
+        related: ['/video/compressor/mp4', '/reduce-mp4-file-size', '/compress-video-for-website', '/image/compressor']
+    },
+    '/reduce-mp4-file-size': {
+        parent: '/video/compressor',
+        related: ['/compress-mp4-online', '/shrink-video-without-losing-quality', '/image/compressor']
+    },
+    '/compress-video-for-website': {
+        parent: '/video/compressor',
+        related: ['/compress-video-for-seo', '/compress-mp4-online', '/image/compressor']
+    },
+    '/compress-video-for-seo': {
+        parent: '/video/compressor',
+        related: ['/compress-video-for-website', '/shrink-video-without-losing-quality', '/image/compressor']
+    },
+    '/shrink-video-without-losing-quality': {
+        parent: '/video/compressor',
+        related: ['/reduce-video-file-size-without-losing-quality', '/reduce-mp4-file-size', '/compress-mp4-online', '/image/compressor']
+    },
+    '/reduce-video-file-size-without-losing-quality': {
+        parent: '/video/compressor',
+        related: ['/shrink-video-without-losing-quality', '/reduce-mp4-file-size', '/compress-video-for-seo', '/image/compressor']
     },
     '/image/compare': {
         parent: '/image',

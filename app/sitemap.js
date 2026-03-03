@@ -300,6 +300,70 @@ export default function sitemap() {
             priority: 0.7,
         },
 
+        // Video Compressor Pages (indexed)
+        {
+            url: `${baseUrl}/video/compressor`,
+            lastModified: currentDate,
+            changeFrequency: 'weekly',
+            priority: 0.9,
+        },
+        {
+            url: `${baseUrl}/video/compressor/mp4`,
+            lastModified: currentDate,
+            changeFrequency: 'weekly',
+            priority: 0.8,
+        },
+        {
+            url: `${baseUrl}/video/compressor/webm`,
+            lastModified: currentDate,
+            changeFrequency: 'weekly',
+            priority: 0.8,
+        },
+        {
+            url: `${baseUrl}/video/compressor/mov`,
+            lastModified: currentDate,
+            changeFrequency: 'weekly',
+            priority: 0.8,
+        },
+
+        // Video Programmatic Pages (hold long-tail until traction)
+        {
+            url: `${baseUrl}/compress-mp4-online`,
+            lastModified: currentDate,
+            changeFrequency: 'monthly',
+            priority: 0.6,
+        },
+        {
+            url: `${baseUrl}/reduce-mp4-file-size`,
+            lastModified: currentDate,
+            changeFrequency: 'monthly',
+            priority: 0.6,
+        },
+        {
+            url: `${baseUrl}/compress-video-for-website`,
+            lastModified: currentDate,
+            changeFrequency: 'monthly',
+            priority: 0.6,
+        },
+        {
+            url: `${baseUrl}/compress-video-for-seo`,
+            lastModified: currentDate,
+            changeFrequency: 'monthly',
+            priority: 0.6,
+        },
+        {
+            url: `${baseUrl}/shrink-video-without-losing-quality`,
+            lastModified: currentDate,
+            changeFrequency: 'monthly',
+            priority: 0.6,
+        },
+        {
+            url: `${baseUrl}/reduce-video-file-size-without-losing-quality`,
+            lastModified: currentDate,
+            changeFrequency: 'monthly',
+            priority: 0.7,
+        },
+
         // High-Priority Programmatic Pages - Quality Intent
         {
             url: `${baseUrl}/compress-png-without-losing-quality`,

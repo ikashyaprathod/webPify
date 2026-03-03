@@ -4,10 +4,10 @@ export default function Home() {
   return (
     <div className="home-container">
       <div className="home-content">
-        <h1 className="home-title">Compress and Convert Images Without Quality Loss</h1>
-        <p className="home-subtitle">Reduce image file size or convert formats using professional-grade compression. Supports PNG, JPEG, and WebP.</p>
+        <h1 className="home-title">Compress Images & Videos Without Quality Loss</h1>
+        <p className="home-subtitle">Reduce file size or convert formats using professional-grade compression. Supports PNG, JPEG, WebP, MP4, MOV, and WebM.</p>
 
-        <div className="tools-grid">
+        <div className="tools-grid" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", maxWidth: "1100px" }}>
           {/* Image Converter Card */}
           <div className="tool-card-detailed">
             <div className="card-icon">🔄</div>
@@ -41,10 +41,29 @@ export default function Home() {
               <Link href="/image/compressor/webp">• Compress WebP</Link>
             </div>
           </div>
+
+          {/* Video Compressor Card */}
+          <div className="tool-card-detailed">
+            <div className="card-icon">🎬</div>
+            <h2 className="tool-card-title">Video Compressor</h2>
+            <p className="tool-card-description">Compress MP4, MOV, and WebM videos in your browser. No uploads — 100% private.</p>
+
+            <Link href="/video/compressor" className="tool-card-button">
+              Open Video Compressor
+            </Link>
+
+            <div className="tool-card-links">
+              <Link href="/video/compressor/mp4">• Compress MP4</Link>
+              <Link href="/video/compressor/webm">• Compress WebM</Link>
+              <Link href="/video/compressor/mov">• Compress MOV</Link>
+            </div>
+          </div>
         </div>
 
-        <div style={{ textAlign: "center", marginTop: "2rem", opacity: 0.7, fontSize: "0.875rem" }}>
-          Not sure which tool to use? <Link href="/image/compare" style={{ color: "var(--primary)", textDecoration: "underline" }}>Compare Compressor vs Converter</Link>
+        <div style={{ textAlign: "center", marginTop: "2rem", opacity: 0.7, fontSize: "0.875rem", display: "flex", gap: "1.5rem", justifyContent: "center", flexWrap: "wrap" }}>
+          <Link href="/image/compare" style={{ color: "var(--primary)", textDecoration: "underline" }}>Compare Compressor vs Converter</Link>
+          <Link href="/compress-video-for-website" style={{ color: "var(--primary)", textDecoration: "underline" }}>Compress Video for Website</Link>
+          <Link href="/compress-mp4-online" style={{ color: "var(--primary)", textDecoration: "underline" }}>Compress MP4 Online</Link>
         </div>
       </div>
     </div>
