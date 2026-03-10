@@ -1,3 +1,4 @@
+import PageShell from "@/components/PageShell";
 import SvgOptimizer from "@/components/SvgOptimizer";
 import Breadcrumb from "@/components/Breadcrumb";
 import Link from "next/link";
@@ -44,53 +45,45 @@ export default function SvgOptimizerPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
-      <div style={{ minHeight: "100vh", padding: "2rem" }}>
-        <div style={{ maxWidth: "860px", margin: "0 auto" }}>
-          <Breadcrumb items={breadcrumbs} />
-          <div style={{ textAlign: "center", marginBottom: "2rem" }}>
-            <h1 style={{ fontSize: "2.25rem", fontWeight: 700, marginBottom: "0.75rem" }}>SVG Optimizer</h1>
-            <p style={{ fontSize: "1.125rem", opacity: 0.8 }}>Minify and clean SVG files using SVGO. Remove metadata, merge styles, optimize paths.</p>
-          </div>
+      <PageShell>
+        <Breadcrumb items={breadcrumbs} />
+        <div className="page-hero">
+          <h1 className="page-title">SVG Optimizer</h1>
+          <p className="page-subtitle">Minify and clean SVG files using SVGO. Remove metadata, merge styles, optimize paths.</p>
+        </div>
 
-          <SvgOptimizer />
+        <SvgOptimizer />
 
-          <div style={{ marginTop: "3rem", padding: "1.5rem 2rem", background: "rgba(0,112,243,0.04)", border: "1px solid rgba(0,112,243,0.15)", borderRadius: "12px" }}>
-            <h2 style={{ fontSize: "1.125rem", fontWeight: 600, marginBottom: "0.75rem" }}>What gets optimized?</h2>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "0.75rem", fontSize: "0.9rem" }}>
-              <div>✂️ Removes doctype, XML declarations, comments</div>
-              <div>🏷️ Strips editor metadata (Inkscape, Illustrator)</div>
-              <div>🎨 Merges and minifies CSS styles</div>
-              <div>📐 Converts and minifies path data</div>
-              <div>🔤 Cleans up IDs and attribute names</div>
-              <div>🗂️ Collapses redundant groups</div>
-            </div>
-          </div>
-
-          <div style={{ marginTop: "3rem" }}>
-            <h2 style={{ fontSize: "1.125rem", fontWeight: 600, marginBottom: "1rem" }}>Related Tools</h2>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: "0.75rem" }}>
-              {[
-                { href: "/image/compressor", label: "Image Compressor" },
-                { href: "/image/converter",  label: "Image Converter" },
-                { href: "/image/resizer",    label: "Image Resizer" },
-                { href: "/gif/compressor",   label: "GIF Compressor" },
-              ].map(l => (
-                <Link key={l.href} href={l.href} style={{ padding: "0.5rem 1rem", border: "1.5px solid rgba(0,0,0,0.12)", borderRadius: "6px", fontSize: "0.875rem", textDecoration: "none", color: "var(--foreground)" }}>{l.label}</Link>
-              ))}
-            </div>
-          </div>
-
-          <div className="faq-section" style={{ marginTop: "3rem" }}>
-            <h2>Frequently Asked Questions</h2>
-            {faqs.map((f, i) => (
-              <details key={i} className="faq-details">
-                <summary className="faq-question">{f.q}</summary>
-                <p className="faq-answer">{f.a}</p>
-              </details>
-            ))}
+        <div className="info-box">
+          <h2>What gets optimized?</h2>
+          <div className="info-box-grid">
+            <div>✂️ Removes doctype, XML declarations, comments</div>
+            <div>🏷️ Strips editor metadata (Inkscape, Illustrator)</div>
+            <div>🎨 Merges and minifies CSS styles</div>
+            <div>📐 Converts and minifies path data</div>
+            <div>🔤 Cleans up IDs and attribute names</div>
+            <div>🗂️ Collapses redundant groups</div>
           </div>
         </div>
-      </div>
+
+        <h2 className="section-heading">Related Tools</h2>
+        <div className="tool-chips">
+          <Link href="/image/compressor" className="tool-chip">Image Compressor</Link>
+          <Link href="/image/converter" className="tool-chip">Image Converter</Link>
+          <Link href="/image/resizer" className="tool-chip">Image Resizer</Link>
+          <Link href="/gif/compressor" className="tool-chip">GIF Compressor</Link>
+        </div>
+
+        <div className="faq-section">
+          <h2>Frequently Asked Questions</h2>
+          {faqs.map((f, i) => (
+            <details key={i} className="faq-details">
+              <summary className="faq-question">{f.q}</summary>
+              <p className="faq-answer">{f.a}</p>
+            </details>
+          ))}
+        </div>
+      </PageShell>
     </>
   );
 }

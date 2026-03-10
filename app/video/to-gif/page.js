@@ -1,3 +1,4 @@
+import PageShell from "@/components/PageShell";
 import VideoToGif from "@/components/VideoToGif";
 import Breadcrumb from "@/components/Breadcrumb";
 import Link from "next/link";
@@ -44,41 +45,46 @@ export default function VideoToGifPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
-      <div style={{ minHeight: "100vh", padding: "2rem" }}>
-        <div style={{ maxWidth: "860px", margin: "0 auto" }}>
-          <Breadcrumb items={breadcrumbs} />
-          <div style={{ textAlign: "center", marginBottom: "2rem" }}>
-            <h1 style={{ fontSize: "2.25rem", fontWeight: 700, marginBottom: "0.75rem" }}>Video to GIF Converter</h1>
-            <p style={{ fontSize: "1.125rem", opacity: 0.8 }}>Turn any video clip into a high-quality animated GIF. Adjust FPS, width, and color count.</p>
-          </div>
-
-          <VideoToGif />
-
-          <div style={{ marginTop: "3rem" }}>
-            <h2 style={{ fontSize: "1.125rem", fontWeight: 600, marginBottom: "1rem" }}>Related Tools</h2>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: "0.75rem" }}>
-              {[
-                { href: "/gif/compressor",      label: "GIF Compressor" },
-                { href: "/gif/compressor/mp4",  label: "GIF to MP4" },
-                { href: "/video/compressor",    label: "Video Compressor" },
-                { href: "/image/compressor",    label: "Image Compressor" },
-              ].map(l => (
-                <Link key={l.href} href={l.href} style={{ padding: "0.5rem 1rem", border: "1.5px solid rgba(0,0,0,0.12)", borderRadius: "6px", fontSize: "0.875rem", textDecoration: "none", color: "var(--foreground)" }}>{l.label}</Link>
-              ))}
-            </div>
-          </div>
-
-          <div className="faq-section" style={{ marginTop: "3rem" }}>
-            <h2>Frequently Asked Questions</h2>
-            {faqs.map((f, i) => (
-              <details key={i} className="faq-details">
-                <summary className="faq-question">{f.q}</summary>
-                <p className="faq-answer">{f.a}</p>
-              </details>
-            ))}
+      <PageShell>
+        <Breadcrumb items={breadcrumbs} />
+        <div className="page-hero">
+          <h1 className="page-title">Video to GIF Converter</h1>
+          <p className="page-subtitle">Turn any video clip into a high-quality animated GIF. Adjust FPS, width, and color count.</p>
+          <div className="use-tags">
+            <span className="use-tag">MP4 to GIF</span>
+            <span className="use-tag">No Uploads</span>
+            <span className="use-tag">Custom FPS & Size</span>
           </div>
         </div>
-      </div>
+
+        <div className="tool-nav">
+          <Link href="/gif/compressor">← GIF Hub</Link>
+          <span className="tool-nav-sep" />
+          <Link href="/gif/compressor/mp4">GIF to MP4</Link>
+          <span className="tool-nav-sep" />
+          <Link href="/video/compressor">Video Compressor</Link>
+        </div>
+
+        <VideoToGif />
+
+        <h2 className="section-heading">Related Tools</h2>
+        <div className="tool-chips">
+          <Link href="/gif/compressor" className="tool-chip">GIF Compressor</Link>
+          <Link href="/gif/compressor/mp4" className="tool-chip">GIF to MP4</Link>
+          <Link href="/video/compressor" className="tool-chip">Video Compressor</Link>
+          <Link href="/image/compressor" className="tool-chip">Image Compressor</Link>
+        </div>
+
+        <div className="faq-section">
+          <h2>Frequently Asked Questions</h2>
+          {faqs.map((f, i) => (
+            <details key={i} className="faq-details">
+              <summary className="faq-question">{f.q}</summary>
+              <p className="faq-answer">{f.a}</p>
+            </details>
+          ))}
+        </div>
+      </PageShell>
     </>
   );
 }

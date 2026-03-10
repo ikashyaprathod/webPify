@@ -1,3 +1,4 @@
+import PageShell from "@/components/PageShell";
 import Breadcrumb from "@/components/Breadcrumb";
 import Link from "next/link";
 
@@ -70,6 +71,15 @@ const videoFaqs = [
   },
 ];
 
+const cards = [
+  { href: "/video/compressor/mp4",  icon: "🎬", title: "MP4 Compressor",  desc: "Compress MP4 videos with H.264 encoding" },
+  { href: "/video/compressor/webm", icon: "🌐", title: "WebM Compressor", desc: "Compress WebM videos with VP9 codec" },
+  { href: "/video/compressor/mov",  icon: "📱", title: "MOV Compressor",  desc: "Convert and compress iPhone MOV files" },
+];
+
+const ACCENT = "linear-gradient(90deg,#7c3aed,#a78bfa)";
+const ICON_BG = "rgba(124,58,237,0.08)";
+
 export default function VideoCompressorHubPage() {
   const breadcrumbItems = [
     { label: "Home", href: "/" },
@@ -111,122 +121,55 @@ export default function VideoCompressorHubPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      <PageShell>
+        <Breadcrumb items={breadcrumbItems} />
+        <div className="page-hero">
+          <div className="page-badge">Free · Browser-based · No Upload</div>
+          <h1 className="page-title">Video Compressor</h1>
+          <p className="page-subtitle">
+            Reduce video file size online. No uploads, no registration — compression happens entirely in your browser.
+          </p>
+        </div>
 
-      <div style={{ minHeight: "100vh", padding: "2rem", display: "flex", flexDirection: "column", alignItems: "center" }}>
-        <div style={{ maxWidth: "860px", width: "100%" }}>
-          <Breadcrumb items={breadcrumbItems} />
+        <div className="hub-grid">
+          {cards.map(card => (
+            <a key={card.href} href={card.href} className="hub-card"
+               style={{ "--hub-accent": ACCENT, "--hub-icon-bg": ICON_BG }}>
+              <div className="hub-card-icon">{card.icon}</div>
+              <div className="hub-card-title">{card.title}</div>
+              <div className="hub-card-desc">{card.desc}</div>
+            </a>
+          ))}
+        </div>
 
-          <div style={{ textAlign: "center", marginBottom: "3rem" }}>
-            <h1 style={{ fontSize: "2.5rem", fontWeight: 700, marginBottom: "1rem" }}>
-              Video Compressor
-            </h1>
-            <p style={{ fontSize: "1.125rem", opacity: 0.8, marginBottom: "2.5rem" }}>
-              Reduce video file size online. No uploads, no registration — compression happens entirely in your browser.
-            </p>
-
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "1.5rem" }}>
-              <a href="/video/compressor/mp4" className="compressor-card">
-                <div style={{ fontSize: "3rem", marginBottom: "1rem" }}>🎬</div>
-                <h2 style={{ fontSize: "1.5rem", fontWeight: 600, marginBottom: "0.5rem" }}>MP4 Compressor</h2>
-                <p style={{ fontSize: "0.875rem", opacity: 0.7 }}>Compress MP4 videos with H.264 encoding</p>
-              </a>
-
-              <a href="/video/compressor/webm" className="compressor-card">
-                <div style={{ fontSize: "3rem", marginBottom: "1rem" }}>🌐</div>
-                <h2 style={{ fontSize: "1.5rem", fontWeight: 600, marginBottom: "0.5rem" }}>WebM Compressor</h2>
-                <p style={{ fontSize: "0.875rem", opacity: 0.7 }}>Compress WebM videos with VP9 codec</p>
-              </a>
-
-              <a href="/video/compressor/mov" className="compressor-card">
-                <div style={{ fontSize: "3rem", marginBottom: "1rem" }}>📱</div>
-                <h2 style={{ fontSize: "1.5rem", fontWeight: 600, marginBottom: "0.5rem" }}>MOV Compressor</h2>
-                <p style={{ fontSize: "0.875rem", opacity: 0.7 }}>Convert and compress iPhone MOV files</p>
-              </a>
-            </div>
-
-            <div style={{ marginTop: "2rem", fontSize: "0.875rem", opacity: 0.7 }}>
-              Need to compress images? <Link href="/image/compressor" style={{ color: "var(--primary)", textDecoration: "underline" }}>Try Image Compressor</Link>
-            </div>
-          </div>
-
-          {/* Trust Section */}
-          <div style={{
-            background: "rgba(0,112,243,0.04)",
-            border: "1px solid rgba(0,112,243,0.15)",
-            borderRadius: "12px",
-            padding: "1.5rem 2rem",
-            marginBottom: "3rem",
-            textAlign: "center",
-          }}>
-            <h2 style={{ fontSize: "1.25rem", fontWeight: 600, marginBottom: "1rem" }}>Privacy-First Compression</h2>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "1rem" }}>
-              <div><strong>🔒 No Server Uploads</strong><br /><span style={{ fontSize: "0.875rem", opacity: 0.75 }}>Your videos never leave your device.</span></div>
-              <div><strong>⚡ FFmpeg-Powered</strong><br /><span style={{ fontSize: "0.875rem", opacity: 0.75 }}>Client-side compression using WebAssembly.</span></div>
-              <div><strong>🗑️ No Storage</strong><br /><span style={{ fontSize: "0.875rem", opacity: 0.75 }}>Nothing is saved, logged, or stored.</span></div>
-            </div>
-          </div>
-
-          {/* Internal Links */}
-          <div style={{ marginBottom: "3rem" }}>
-            <h2 style={{ fontSize: "1.25rem", fontWeight: 600, marginBottom: "1rem" }}>Related Tools</h2>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: "0.75rem" }}>
-              {[
-                { href: "/image/compressor", label: "Image Compressor" },
-                { href: "/image/converter", label: "Image Converter" },
-                { href: "/image/compressor/png", label: "PNG Compressor" },
-                { href: "/image/compressor/jpeg", label: "JPEG Compressor" },
-              ].map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  style={{
-                    padding: "0.5rem 1rem",
-                    border: "1.5px solid rgba(0,0,0,0.12)",
-                    borderRadius: "6px",
-                    fontSize: "0.875rem",
-                    textDecoration: "none",
-                    color: "var(--foreground)",
-                    transition: "all 0.15s",
-                  }}
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </div>
-          </div>
-
-          {/* FAQ */}
-          <div className="faq-section">
-            <h2>Frequently Asked Questions</h2>
-            {videoFaqs.map((faq, i) => (
-              <details key={i} className="faq-details">
-                <summary className="faq-question">{faq.question}</summary>
-                <p className="faq-answer">{faq.answer}</p>
-              </details>
-            ))}
+        <div className="info-box">
+          <h2>Privacy-First Compression</h2>
+          <div className="info-box-grid">
+            <div><strong>🔒 No Server Uploads</strong><br /><span>Your videos never leave your device.</span></div>
+            <div><strong>⚡ FFmpeg-Powered</strong><br /><span>Client-side compression using WebAssembly.</span></div>
+            <div><strong>🗑️ No Storage</strong><br /><span>Nothing is saved, logged, or stored.</span></div>
           </div>
         </div>
-      </div>
 
-      <style dangerouslySetInnerHTML={{ __html: `
-        .compressor-card {
-          padding: 2rem;
-          border: 2px solid #e0e0e0;
-          border-radius: 12px;
-          text-decoration: none;
-          color: inherit;
-          transition: all 0.3s ease;
-          display: block;
-        }
-        .compressor-card:hover {
-          border-color: var(--primary);
-          transform: translateY(-4px);
-          box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-        @media (prefers-color-scheme: dark) {
-          .compressor-card { border-color: rgba(255,255,255,0.15); }
-        }
-      `}} />
+        <h2 className="section-heading">Related Tools</h2>
+        <div className="tool-chips">
+          <Link href="/image/compressor" className="tool-chip">Image Compressor</Link>
+          <Link href="/gif/compressor" className="tool-chip">GIF Compressor</Link>
+          <Link href="/image/converter" className="tool-chip">Image Converter</Link>
+          <Link href="/image/compressor/png" className="tool-chip">PNG Compressor</Link>
+          <Link href="/image/compressor/jpeg" className="tool-chip">JPEG Compressor</Link>
+        </div>
+
+        <div className="faq-section">
+          <h2>Frequently Asked Questions</h2>
+          {videoFaqs.map((faq, i) => (
+            <details key={i} className="faq-details">
+              <summary className="faq-question">{faq.question}</summary>
+              <p className="faq-answer">{faq.answer}</p>
+            </details>
+          ))}
+        </div>
+      </PageShell>
     </>
   );
 }

@@ -1,5 +1,7 @@
+import PageShell from "@/components/PageShell";
 import GifCompressor from "@/components/GifCompressor";
 import Breadcrumb from "@/components/Breadcrumb";
+import Link from "next/link";
 
 export const metadata = {
   title: "Compress GIF Online Free – Reduce GIF File Size Without Quality Loss",
@@ -15,16 +17,28 @@ export default function CompressGifPage() {
 
   return (
     <>
-      <div style={{ minHeight: "100vh", padding: "2rem" }}>
-        <div style={{ maxWidth: "860px", margin: "0 auto" }}>
-          <Breadcrumb items={breadcrumbs} />
-          <div style={{ textAlign: "center", marginBottom: "2rem" }}>
-            <h1 style={{ fontSize: "2.25rem", fontWeight: 700, marginBottom: "0.75rem" }}>GIF Compressor</h1>
-            <p style={{ fontSize: "1.125rem", opacity: 0.8 }}>Reduce GIF file size with advanced palette optimization. Keep your animations smooth and colorful.</p>
+      <PageShell>
+        <Breadcrumb items={breadcrumbs} />
+        <div className="page-hero">
+          <h1 className="page-title">GIF Compressor</h1>
+          <p className="page-subtitle">Reduce GIF file size with advanced palette optimization. Keep your animations smooth and colorful.</p>
+          <div className="use-tags">
+            <span className="use-tag">Palette Optimization</span>
+            <span className="use-tag">Animation Preserved</span>
+            <span className="use-tag">Browser-based</span>
           </div>
-          <GifCompressor defaultTask="gif-compress" />
         </div>
-      </div>
+
+        <div className="tool-nav">
+          <Link href="/gif/compressor">← GIF Hub</Link>
+          <span className="tool-nav-sep" />
+          <Link href="/gif/compressor/mp4">GIF to MP4</Link>
+          <span className="tool-nav-sep" />
+          <Link href="/gif/compressor/webm">GIF to WebM</Link>
+        </div>
+
+        <GifCompressor defaultTask="gif-compress" />
+      </PageShell>
     </>
   );
 }

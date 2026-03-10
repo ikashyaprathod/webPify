@@ -1,9 +1,20 @@
+import PageShell from "@/components/PageShell";
 import Breadcrumb from "@/components/Breadcrumb";
+import Link from "next/link";
 
 export const metadata = {
     title: "Image Converter – Convert Images to PNG, JPEG, WebP",
     description: "Convert images between PNG, JPEG, and WebP formats easily while keeping quality.",
 };
+
+const cards = [
+  { href: "/image/converter/webp", icon: "🔄", title: "Convert to WebP", desc: "Convert any image to WebP format" },
+  { href: "/image/converter/png",  icon: "🖼️", title: "Convert to PNG",  desc: "Convert any image to PNG format" },
+  { href: "/image/converter/jpeg", icon: "📷", title: "Convert to JPEG", desc: "Convert any image to JPEG format" },
+];
+
+const ACCENT = "linear-gradient(90deg,#06b6d4,#67e8f9)";
+const ICON_BG = "rgba(6,182,212,0.08)";
 
 export default function ConverterHubPage() {
     const breadcrumbItems = [
@@ -12,116 +23,58 @@ export default function ConverterHubPage() {
         { label: "Converter", href: "/image/converter" }
     ];
 
+    const schema = {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://webpify.vercel.app/" },
+                    { "@type": "ListItem", "position": 2, "name": "Image", "item": "https://webpify.vercel.app/" },
+                    { "@type": "ListItem", "position": 3, "name": "Converter" }
+                ]
+            },
+            {
+                "@type": "SoftwareApplication",
+                "name": "Image Converter",
+                "applicationCategory": "ImageProcessing",
+                "operatingSystem": "Web",
+                "offers": { "@type": "Offer", "price": "0" },
+                "description": "Convert images between PNG, JPEG, and WebP formats easily while keeping quality."
+            }
+        ]
+    };
+
     return (
         <>
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{
-                    __html: JSON.stringify({
-                        "@context": "https://schema.org",
-                        "@graph": [
-                            {
-                                "@type": "BreadcrumbList",
-                                "itemListElement": [
-                                    {
-                                        "@type": "ListItem",
-                                        "position": 1,
-                                        "name": "Home",
-                                        "item": "https://webpify.vercel.app/"
-                                    },
-                                    {
-                                        "@type": "ListItem",
-                                        "position": 2,
-                                        "name": "Image",
-                                        "item": "https://webpify.vercel.app/"
-                                    },
-                                    {
-                                        "@type": "ListItem",
-                                        "position": 3,
-                                        "name": "Converter"
-                                    }
-                                ]
-                            },
-                            {
-                                "@type": "SoftwareApplication",
-                                "name": "Image Converter",
-                                "applicationCategory": "ImageProcessing",
-                                "operatingSystem": "Web",
-                                "offers": {
-                                    "@type": "Offer",
-                                    "price": "0"
-                                },
-                                "description": "Convert images between PNG, JPEG, and WebP formats easily while keeping quality."
-                            }
-                        ]
-                    })
-                }}
-            />
-
-            <style dangerouslySetInnerHTML={{
-                __html: `
-        .converter-card {
-          padding: 2rem;
-          border: 2px solid #e0e0e0;
-          border-radius: 12px;
-          text-decoration: none;
-          color: inherit;
-          transition: all 0.3s ease;
-          display: block;
-        }
-        .converter-card:hover {
-          border-color: var(--primary);
-          transform: translateY(-4px);
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-        .hub-link {
-          margin-top: 2rem;
-          text-align: center;
-          font-size: 0.875rem;
-          opacity: 0.7;
-        }
-        .hub-link a {
-          color: var(--primary);
-          text-decoration: underline;
-        }
-      `}} />
-
-            <div style={{ minHeight: "100vh", padding: "2rem", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
-                <div style={{ maxWidth: "800px", width: "100%" }}>
-                    <Breadcrumb items={breadcrumbItems} />
-
-                    <div style={{ textAlign: "center" }}>
-                        <h1 style={{ fontSize: "2.5rem", marginBottom: "0.5rem", fontWeight: 700 }}>Image Converter</h1>
-                        <p style={{ fontSize: "1.125rem", marginBottom: "3rem", opacity: 0.8 }}>
-                            Convert images to PNG, JPEG, or WebP format with high quality.
-                        </p>
-
-                        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: "1.5rem" }}>
-                            <a href="/image/converter/webp" className="converter-card">
-                                <div style={{ fontSize: "3rem", marginBottom: "1rem" }}>🔄</div>
-                                <h2 style={{ fontSize: "1.5rem", fontWeight: 600, marginBottom: "0.5rem" }}>Convert to WebP</h2>
-                                <p style={{ fontSize: "0.875rem", opacity: 0.7 }}>Convert any image to WebP format</p>
-                            </a>
-
-                            <a href="/image/converter/png" className="converter-card">
-                                <div style={{ fontSize: "3rem", marginBottom: "1rem" }}>🖼️</div>
-                                <h2 style={{ fontSize: "1.5rem", fontWeight: 600, marginBottom: "0.5rem" }}>Convert to PNG</h2>
-                                <p style={{ fontSize: "0.875rem", opacity: 0.7 }}>Convert any image to PNG format</p>
-                            </a>
-
-                            <a href="/image/converter/jpeg" className="converter-card">
-                                <div style={{ fontSize: "3rem", marginBottom: "1rem" }}>📷</div>
-                                <h2 style={{ fontSize: "1.5rem", fontWeight: 600, marginBottom: "0.5rem" }}>Convert to JPEG</h2>
-                                <p style={{ fontSize: "0.875rem", opacity: 0.7 }}>Convert any image to JPEG format</p>
-                            </a>
-                        </div>
-
-                        <div className="hub-link">
-                            Need to compress without changing format? <a href="/image/compressor">Try Image Compressor</a>
-                        </div>
-                    </div>
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+            <PageShell>
+                <Breadcrumb items={breadcrumbItems} />
+                <div className="page-hero">
+                    <div className="page-badge">Free · Browser-based · No Upload</div>
+                    <h1 className="page-title">Image Converter</h1>
+                    <p className="page-subtitle">
+                        Convert images to PNG, JPEG, or WebP format with high quality.
+                    </p>
                 </div>
-            </div>
+
+                <div className="hub-grid">
+                    {cards.map(card => (
+                        <a key={card.href} href={card.href} className="hub-card"
+                           style={{ "--hub-accent": ACCENT, "--hub-icon-bg": ICON_BG }}>
+                            <div className="hub-card-icon">{card.icon}</div>
+                            <div className="hub-card-title">{card.title}</div>
+                            <div className="hub-card-desc">{card.desc}</div>
+                        </a>
+                    ))}
+                </div>
+
+                <h2 className="section-heading">Related Tools</h2>
+                <div className="tool-chips">
+                    <Link href="/image/compressor" className="tool-chip">Image Compressor</Link>
+                    <Link href="/image/resizer" className="tool-chip">Image Resizer</Link>
+                </div>
+            </PageShell>
         </>
     );
 }

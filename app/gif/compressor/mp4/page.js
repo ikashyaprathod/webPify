@@ -1,5 +1,7 @@
+import PageShell from "@/components/PageShell";
 import GifCompressor from "@/components/GifCompressor";
 import Breadcrumb from "@/components/Breadcrumb";
+import Link from "next/link";
 
 export const metadata = {
   title: "GIF to MP4 Converter – Convert Animated GIF to MP4 Online Free",
@@ -38,22 +40,37 @@ export default function GifToMp4Page() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
-      <div style={{ minHeight: "100vh", padding: "2rem" }}>
-        <div style={{ maxWidth: "860px", margin: "0 auto" }}>
-          <Breadcrumb items={breadcrumbs} />
-          <div style={{ textAlign: "center", marginBottom: "2rem" }}>
-            <h1 style={{ fontSize: "2.25rem", fontWeight: 700, marginBottom: "0.75rem" }}>GIF to MP4 Converter</h1>
-            <p style={{ fontSize: "1.125rem", opacity: 0.8 }}>Convert animated GIFs to H.264 MP4 — up to 90% smaller, same visual quality.</p>
-          </div>
-          <GifCompressor defaultTask="gif-to-mp4" />
-          <div style={{ marginTop: "3rem", padding: "1.5rem 2rem", background: "rgba(0,112,243,0.04)", border: "1px solid rgba(0,112,243,0.15)", borderRadius: "12px" }}>
-            <h2 style={{ fontSize: "1.125rem", fontWeight: 600, marginBottom: "0.75rem" }}>Why convert GIF to MP4?</h2>
-            <p style={{ fontSize: "0.9375rem", opacity: 0.85, lineHeight: 1.7 }}>
-              GIF is one of the oldest image formats and extremely inefficient for animation. A 5 MB GIF can often be converted to a 0.5 MB MP4 with identical or better visual quality. MP4 videos use H.264 encoding which supports millions of colors (vs GIF's 256), smooth gradients, and advanced compression algorithms. The result loads faster and looks sharper.
-            </p>
+      <PageShell>
+        <Breadcrumb items={breadcrumbs} />
+        <div className="page-hero">
+          <h1 className="page-title">GIF to MP4 Converter</h1>
+          <p className="page-subtitle">Convert animated GIFs to H.264 MP4 — up to 90% smaller, same visual quality.</p>
+          <div className="use-tags">
+            <span className="use-tag">Up to 90% Smaller</span>
+            <span className="use-tag">H.264 Encoding</span>
+            <span className="use-tag">No Uploads</span>
           </div>
         </div>
-      </div>
+
+        <div className="tool-nav">
+          <Link href="/gif/compressor">← GIF Hub</Link>
+          <span className="tool-nav-sep" />
+          <Link href="/gif/compressor/gif">Compress GIF</Link>
+          <span className="tool-nav-sep" />
+          <Link href="/gif/compressor/webm">GIF to WebM</Link>
+        </div>
+
+        <GifCompressor defaultTask="gif-to-mp4" />
+
+        <div className="info-box">
+          <h2>Why convert GIF to MP4?</h2>
+          <div className="info-box-grid">
+            <div>
+              GIF is one of the oldest image formats and extremely inefficient for animation. A 5 MB GIF can often be converted to a 0.5 MB MP4 with identical or better visual quality. MP4 videos use H.264 encoding which supports millions of colors (vs GIF's 256), smooth gradients, and advanced compression algorithms. The result loads faster and looks sharper.
+            </div>
+          </div>
+        </div>
+      </PageShell>
     </>
   );
 }

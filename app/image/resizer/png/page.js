@@ -1,5 +1,7 @@
+import PageShell from "@/components/PageShell";
 import ImageResizer from "@/components/ImageResizer";
 import Breadcrumb from "@/components/Breadcrumb";
+import Link from "next/link";
 
 export const metadata = {
   title: "PNG Image Resizer – Resize PNG Online Free",
@@ -12,16 +14,31 @@ export default function ResizePngPage() {
     { label: "Image Resizer", href: "/image/resizer" },
     { label: "PNG", href: "/image/resizer/png" },
   ];
+
   return (
-    <div style={{ minHeight: "100vh", padding: "2rem" }}>
-      <div style={{ maxWidth: "860px", margin: "0 auto" }}>
+    <>
+      <PageShell>
         <Breadcrumb items={breadcrumbs} />
-        <div style={{ textAlign: "center", marginBottom: "2rem" }}>
-          <h1 style={{ fontSize: "2.25rem", fontWeight: 700, marginBottom: "0.75rem" }}>PNG Image Resizer</h1>
-          <p style={{ fontSize: "1.125rem", opacity: 0.8 }}>Resize PNG images to any width and height. Preserves transparency.</p>
+        <div className="page-hero">
+          <h1 className="page-title">PNG Image Resizer</h1>
+          <p className="page-subtitle">Resize PNG images to any width and height. Preserves transparency.</p>
+          <div className="use-tags">
+            <span className="use-tag">Exact Dimensions</span>
+            <span className="use-tag">Transparency Preserved</span>
+            <span className="use-tag">Bulk Resize</span>
+          </div>
         </div>
+
+        <div className="tool-nav">
+          <Link href="/image/resizer">← Resizer Hub</Link>
+          <span className="tool-nav-sep" />
+          <Link href="/image/resizer/jpeg">Resize JPEG</Link>
+          <span className="tool-nav-sep" />
+          <Link href="/image/resizer/webp">Resize WebP</Link>
+        </div>
+
         <ImageResizer allowedFormats={["image/png"]} />
-      </div>
-    </div>
+      </PageShell>
+    </>
   );
 }

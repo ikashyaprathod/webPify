@@ -1,5 +1,7 @@
+import PageShell from "@/components/PageShell";
 import ImageResizer from "@/components/ImageResizer";
 import Breadcrumb from "@/components/Breadcrumb";
+import Link from "next/link";
 
 export const metadata = {
   title: "WebP Image Resizer – Resize WebP Images Online Free",
@@ -12,16 +14,31 @@ export default function ResizeWebpPage() {
     { label: "Image Resizer", href: "/image/resizer" },
     { label: "WebP", href: "/image/resizer/webp" },
   ];
+
   return (
-    <div style={{ minHeight: "100vh", padding: "2rem" }}>
-      <div style={{ maxWidth: "860px", margin: "0 auto" }}>
+    <>
+      <PageShell>
         <Breadcrumb items={breadcrumbs} />
-        <div style={{ textAlign: "center", marginBottom: "2rem" }}>
-          <h1 style={{ fontSize: "2.25rem", fontWeight: 700, marginBottom: "0.75rem" }}>WebP Image Resizer</h1>
-          <p style={{ fontSize: "1.125rem", opacity: 0.8 }}>Resize WebP images to precise dimensions. Output stays in WebP format.</p>
+        <div className="page-hero">
+          <h1 className="page-title">WebP Image Resizer</h1>
+          <p className="page-subtitle">Resize WebP images to precise dimensions. Output stays in WebP format.</p>
+          <div className="use-tags">
+            <span className="use-tag">Exact Dimensions</span>
+            <span className="use-tag">WebP Output</span>
+            <span className="use-tag">Bulk Resize</span>
+          </div>
         </div>
+
+        <div className="tool-nav">
+          <Link href="/image/resizer">← Resizer Hub</Link>
+          <span className="tool-nav-sep" />
+          <Link href="/image/resizer/png">Resize PNG</Link>
+          <span className="tool-nav-sep" />
+          <Link href="/image/resizer/jpeg">Resize JPEG</Link>
+        </div>
+
         <ImageResizer allowedFormats={["image/webp"]} />
-      </div>
-    </div>
+      </PageShell>
+    </>
   );
 }

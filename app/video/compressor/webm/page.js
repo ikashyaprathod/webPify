@@ -1,3 +1,4 @@
+import PageShell from "@/components/PageShell";
 import VideoCompressor from "@/components/VideoCompressor";
 import Breadcrumb from "@/components/Breadcrumb";
 import Link from "next/link";
@@ -77,47 +78,51 @@ export default function WebMCompressorPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
-
-      <div style={{ maxWidth: "860px", margin: "0 auto", padding: "2rem 1rem 0" }}>
+      <PageShell>
         <Breadcrumb items={breadcrumbItems} />
-      </div>
+        <div className="page-hero">
+          <h1 className="page-title">WebM Compressor</h1>
+          <p className="page-subtitle">
+            Compress WebM videos using VP9 encoding directly in your browser. No uploads. No server.
+          </p>
+          <div className="use-tags">
+            <span className="use-tag">No Uploads</span>
+            <span className="use-tag">VP9 Encoding</span>
+            <span className="use-tag">100% Private</span>
+          </div>
+        </div>
 
-      <div style={{ textAlign: "center", maxWidth: "860px", margin: "0 auto", padding: "0 1rem" }}>
-        <p style={{ fontSize: "0.9rem", opacity: 0.7, marginBottom: "0.5rem" }}>
-          <Link href="/video/compressor" style={{ color: "var(--primary)", textDecoration: "underline" }}>← All Video Formats</Link>
-          {" | "}
-          <Link href="/video/compressor/mp4" style={{ color: "var(--primary)", textDecoration: "underline" }}>MP4 Compressor</Link>
-          {" | "}
-          <Link href="/video/compressor/mov" style={{ color: "var(--primary)", textDecoration: "underline" }}>MOV Compressor</Link>
-        </p>
-      </div>
+        <div className="tool-nav">
+          <Link href="/video/compressor">← All Video Formats</Link>
+          <span className="tool-nav-sep" />
+          <Link href="/video/compressor/mp4">MP4</Link>
+          <span className="tool-nav-sep" />
+          <Link href="/video/compressor/mov">MOV</Link>
+        </div>
 
-      <VideoCompressor
-        allowedFormats={["video/webm"]}
-        formatName="WebM"
-        title="WebM Compressor – Reduce WebM File Size Online"
-        description="Compress WebM videos using VP9 encoding directly in your browser. No uploads. No server."
-      />
+        <VideoCompressor
+          allowedFormats={["video/webm"]}
+          formatName="WebM"
+          title="WebM Compressor – Reduce WebM File Size Online"
+          description="Compress WebM videos using VP9 encoding directly in your browser. No uploads. No server."
+        />
 
-      {/* FAQ */}
-      <div className="faq-section">
-        <h2>WebM Compression FAQ</h2>
-        {webmFaqs.map((faq, i) => (
-          <details key={i} className="faq-details">
-            <summary className="faq-question">{faq.question}</summary>
-            <p className="faq-answer">{faq.answer}</p>
-          </details>
-        ))}
-      </div>
+        <div className="faq-section">
+          <h2>WebM Compression FAQ</h2>
+          {webmFaqs.map((faq, i) => (
+            <details key={i} className="faq-details">
+              <summary className="faq-question">{faq.question}</summary>
+              <p className="faq-answer">{faq.answer}</p>
+            </details>
+          ))}
+        </div>
 
-      <div style={{ maxWidth: "860px", margin: "2rem auto", padding: "0 1rem 3rem", textAlign: "center" }}>
-        <p style={{ fontSize: "0.875rem", opacity: 0.7 }}>
-          Also try:{" "}
-          <Link href="/image/compressor" style={{ color: "var(--primary)" }}>Image Compressor</Link>
-          {" · "}
-          <Link href="/compress-video-for-website" style={{ color: "var(--primary)" }}>Compress Video for Website</Link>
-        </p>
-      </div>
+        <h2 className="section-heading">Related Tools</h2>
+        <div className="tool-chips">
+          <Link href="/image/compressor" className="tool-chip">Image Compressor</Link>
+          <Link href="/compress-video-for-website" className="tool-chip">Compress Video for Website</Link>
+        </div>
+      </PageShell>
     </>
   );
 }
