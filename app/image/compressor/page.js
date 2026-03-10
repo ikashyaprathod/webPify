@@ -5,6 +5,12 @@ import Link from "next/link";
 export const metadata = {
     title: "Image Compressor – Compress PNG, JPEG, WebP Online",
     description: "Compress images online without visible quality loss. Supports PNG, JPEG, and WebP formats.",
+    alternates: { canonical: "https://webpify.vercel.app/image/compressor" },
+    openGraph: {
+        title: "Image Compressor – Compress PNG, JPEG, WebP Online",
+        description: "Compress images online without visible quality loss. Supports PNG, JPEG, and WebP formats.",
+        url: "https://webpify.vercel.app/image/compressor",
+    },
 };
 
 const cards = [

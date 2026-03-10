@@ -6,6 +6,12 @@ import Link from "next/link";
 export const metadata = {
   title: "PNG Image Resizer – Resize PNG Online Free",
   description: "Resize PNG images online to exact dimensions. Choose fit mode, maintain aspect ratio. Fast, free, server-side processing with Sharp.",
+  alternates: { canonical: "https://webpify.vercel.app/image/resizer/png" },
+  openGraph: {
+    title: "PNG Image Resizer – Resize PNG Online Free",
+    description: "Resize PNG images online to exact dimensions. Choose fit mode, maintain aspect ratio. Fast, free, server-side processing with Sharp.",
+    url: "https://webpify.vercel.app/image/resizer/png",
+  },
 };
 
 export default function ResizePngPage() {

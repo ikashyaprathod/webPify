@@ -6,6 +6,12 @@ import Link from "next/link";
 export const metadata = {
   title: "Compress JPEG Images Online – Reduce JPG File Size",
   description: "Compress JPEG images online with professional-grade compression. Fast, free, and high quality.",
+  alternates: { canonical: "https://webpify.vercel.app/image/compressor/jpeg" },
+  openGraph: {
+    title: "Compress JPEG Images Online – Reduce JPG File Size",
+    description: "Compress JPEG images online with professional-grade compression. Fast, free, and high quality.",
+    url: "https://webpify.vercel.app/image/compressor/jpeg",
+  },
 };
 
 export default function JPEGCompressorPage() {

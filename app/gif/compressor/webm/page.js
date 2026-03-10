@@ -6,6 +6,12 @@ import Link from "next/link";
 export const metadata = {
   title: "GIF to WebM Converter – Convert GIF to WebM Online Free",
   description: "Convert animated GIF to WebM video online. VP9 encoding, excellent quality, tiny file size. No uploads — 100% browser-based.",
+  alternates: { canonical: "https://webpify.vercel.app/gif/compressor/webm" },
+  openGraph: {
+    title: "GIF to WebM Converter – Convert GIF to WebM Online Free",
+    description: "Convert animated GIF to WebM video online. VP9 encoding, excellent quality, tiny file size. No uploads — 100% browser-based.",
+    url: "https://webpify.vercel.app/gif/compressor/webm",
+  },
 };
 
 export default function GifToWebmPage() {

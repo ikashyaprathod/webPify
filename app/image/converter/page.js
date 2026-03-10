@@ -5,6 +5,12 @@ import Link from "next/link";
 export const metadata = {
     title: "Image Converter – Convert Images to PNG, JPEG, WebP",
     description: "Convert images between PNG, JPEG, and WebP formats easily while keeping quality.",
+    alternates: { canonical: "https://webpify.vercel.app/image/converter" },
+    openGraph: {
+        title: "Image Converter – Convert Images to PNG, JPEG, WebP",
+        description: "Convert images between PNG, JPEG, and WebP formats easily while keeping quality.",
+        url: "https://webpify.vercel.app/image/converter",
+    },
 };
 
 const cards = [

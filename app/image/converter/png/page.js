@@ -6,6 +6,12 @@ import Link from "next/link";
 export const metadata = {
   title: "Convert Images to PNG Online – Fast & High Quality",
   description: "Convert images to PNG online. Supports JPEG, WebP with professional compression.",
+  alternates: { canonical: "https://webpify.vercel.app/image/converter/png" },
+  openGraph: {
+    title: "Convert Images to PNG Online – Fast & High Quality",
+    description: "Convert images to PNG online. Supports JPEG, WebP with professional compression.",
+    url: "https://webpify.vercel.app/image/converter/png",
+  },
 };
 
 export default function PNGConverterPage() {

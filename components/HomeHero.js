@@ -83,7 +83,7 @@ const CARDS = [
     iconBg: "rgba(99,102,241,0.1)",
     btnBg: "#4f46e5",
     links: [
-      { label: "Optimize SVG Online", href: "/optimize-svg-online" },
+      { label: "Optimize SVG", href: "/svg-optimizer" },
     ],
   },
 ];
@@ -195,9 +195,6 @@ export default function HomeHero() {
         {/* ── Quick links ── */}
         <div className="hp-quicklinks">
           <Link href="/image/compare">Compare Tools</Link>
-          <Link href="/compress-video-for-website">Compress Video for Website</Link>
-          <Link href="/gif-to-mp4">GIF to MP4</Link>
-          <Link href="/resize-image-online">Resize Image Online</Link>
         </div>
       </div>
     </div>

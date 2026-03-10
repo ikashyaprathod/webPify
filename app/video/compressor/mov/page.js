@@ -7,6 +7,12 @@ export const metadata = {
   title: "Compress MOV Online – Reduce iPhone MOV File Size Free",
   description:
     "Compress MOV videos from iPhone online. Convert and compress to MP4 or WebM — client-side, no uploads.",
+  alternates: { canonical: "https://webpify.vercel.app/video/compressor/mov" },
+  openGraph: {
+    title: "Compress MOV Online – Reduce iPhone MOV File Size Free",
+    description: "Compress MOV videos from iPhone online. Convert and compress to MP4 or WebM — client-side, no uploads.",
+    url: "https://webpify.vercel.app/video/compressor/mov",
+  },
 };
 
 const movFaqs = [
@@ -120,8 +126,8 @@ export default function MOVCompressorPage() {
         <h2 className="section-heading">Related Tools</h2>
         <div className="tool-chips">
           <Link href="/image/compressor" className="tool-chip">Image Compressor</Link>
-          <Link href="/compress-video-for-website" className="tool-chip">Compress Video for Website</Link>
-          <Link href="/compress-mp4-online" className="tool-chip">Compress MP4 Online</Link>
+          <Link href="/video/compressor" className="tool-chip">Video Compressor</Link>
+          <Link href="/gif/compressor" className="tool-chip">GIF Compressor</Link>
         </div>
       </PageShell>
     </>

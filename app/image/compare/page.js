@@ -1,9 +1,16 @@
+import PageShell from "@/components/PageShell";
 import Breadcrumb from "@/components/Breadcrumb";
 import Link from "next/link";
 
 export const metadata = {
     title: "Image Compressor vs Image Converter – What's the Difference?",
     description: "Compare image compression and image conversion tools. Learn which tool to use for PNG, JPEG, and WebP images.",
+    alternates: { canonical: "https://webpify.vercel.app/image/compare" },
+    openGraph: {
+        title: "Image Compressor vs Image Converter – What's the Difference?",
+        description: "Compare image compression and image conversion tools. Learn which tool to use for PNG, JPEG, and WebP images.",
+        url: "https://webpify.vercel.app/image/compare",
+    },
 };
 
 export default function ComparePage() {
@@ -77,92 +84,92 @@ export default function ComparePage() {
                 }}
             />
 
-            <div style={{ minHeight: "100vh", padding: "2rem", display: "flex", flexDirection: "column", alignItems: "center" }}>
-                <div style={{ maxWidth: "900px", width: "100%" }}>
-                    <Breadcrumb items={breadcrumbItems} />
+            <PageShell blob1="#bfdbfe" blob2="#99f6e4">
+                <Breadcrumb items={breadcrumbItems} />
 
-                    <div style={{ textAlign: "center", marginBottom: "3rem" }}>
-                        <h1 style={{ fontSize: "2.5rem", marginBottom: "1rem", fontWeight: 700 }}>
-                            Image Compressor vs Image Converter
-                        </h1>
-                        <p style={{ fontSize: "1.125rem", opacity: 0.8, marginBottom: "0.5rem" }}>
-                            Not sure whether to compress or convert?
-                        </p>
-                        <p style={{ fontSize: "1.125rem", opacity: 0.8 }}>
-                            Here's a clear breakdown to help you choose the right tool.
-                        </p>
-                    </div>
-
-                    <div className="comparison-table-wrapper">
-                        <table className="comparison-table">
-                            <thead>
-                                <tr>
-                                    <th>Feature</th>
-                                    <th>Image Compressor</th>
-                                    <th>Image Converter</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Reduces file size</td>
-                                    <td className="check">✅</td>
-                                    <td className="check">✅</td>
-                                </tr>
-                                <tr>
-                                    <td>Changes image format</td>
-                                    <td className="cross">❌</td>
-                                    <td className="check">✅</td>
-                                </tr>
-                                <tr>
-                                    <td>Keeps original format</td>
-                                    <td className="check">✅</td>
-                                    <td className="cross">❌</td>
-                                </tr>
-                                <tr>
-                                    <td>Best for SEO & performance</td>
-                                    <td className="check">✅</td>
-                                    <td className="check">✅</td>
-                                </tr>
-                                <tr>
-                                    <td>Common use cases</td>
-                                    <td>Speed optimization</td>
-                                    <td>Format compatibility</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <div style={{ display: "flex", gap: "1rem", justifyContent: "center", marginTop: "3rem", flexWrap: "wrap" }}>
-                        <Link href="/image/compressor" className="comparison-cta">
-                            Open Image Compressor
-                        </Link>
-                        <Link href="/image/converter" className="comparison-cta">
-                            Open Image Converter
-                        </Link>
-                    </div>
-
-                    <div style={{ marginTop: "4rem", textAlign: "left" }}>
-                        <h2 style={{ fontSize: "1.75rem", marginBottom: "1.5rem", fontWeight: 600 }}>
-                            Frequently Asked Questions
-                        </h2>
-
-                        <div className="faq-item">
-                            <h3>What's the difference between image compression and image conversion?</h3>
-                            <p>Image compression reduces file size while keeping the same format. Image conversion changes the file format (e.g., PNG to WebP).</p>
-                        </div>
-
-                        <div className="faq-item">
-                            <h3>Should I compress or convert my images?</h3>
-                            <p>Use compression if you want to reduce file size without changing format. Use conversion if you need to change to a different format like WebP.</p>
-                        </div>
-
-                        <div className="faq-item">
-                            <h3>Can I compress and convert images at the same time?</h3>
-                            <p>Yes, if you use the Image Converter, the output is automatically compressed with professional-grade compression.</p>
-                        </div>
-                    </div>
+                <div className="page-hero">
+                    <div className="page-badge">Tool Guide</div>
+                    <h1 className="page-title">Compressor vs Converter</h1>
+                    <p className="page-subtitle">
+                        Not sure whether to compress or convert? Here's a clear breakdown to help you choose the right tool.
+                    </p>
                 </div>
-            </div>
+
+                <div className="comparison-table-wrapper">
+                    <table className="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Feature</th>
+                                <th>Image Compressor</th>
+                                <th>Image Converter</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Reduces file size</td>
+                                <td className="check">✅</td>
+                                <td className="check">✅</td>
+                            </tr>
+                            <tr>
+                                <td>Changes image format</td>
+                                <td className="cross">❌</td>
+                                <td className="check">✅</td>
+                            </tr>
+                            <tr>
+                                <td>Keeps original format</td>
+                                <td className="check">✅</td>
+                                <td className="cross">❌</td>
+                            </tr>
+                            <tr>
+                                <td>Best for SEO &amp; performance</td>
+                                <td className="check">✅</td>
+                                <td className="check">✅</td>
+                            </tr>
+                            <tr>
+                                <td>Common use cases</td>
+                                <td>Speed optimization</td>
+                                <td>Format compatibility</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div style={{ display: "flex", gap: "1rem", justifyContent: "center", marginTop: "2.5rem", marginBottom: "2.5rem", flexWrap: "wrap" }}>
+                    <Link href="/image/compressor" className="comparison-cta">
+                        Open Image Compressor
+                    </Link>
+                    <Link href="/image/converter" className="comparison-cta">
+                        Open Image Converter
+                    </Link>
+                </div>
+
+                <div className="faq-section">
+                    <h2>Frequently Asked Questions</h2>
+
+                    <details className="faq-details">
+                        <summary className="faq-question">What's the difference between image compression and image conversion?</summary>
+                        <p className="faq-answer">Image compression reduces file size while keeping the same format. Image conversion changes the file format (e.g., PNG to WebP).</p>
+                    </details>
+
+                    <details className="faq-details">
+                        <summary className="faq-question">Should I compress or convert my images?</summary>
+                        <p className="faq-answer">Use compression if you want to reduce file size without changing format. Use conversion if you need to change to a different format like WebP.</p>
+                    </details>
+
+                    <details className="faq-details">
+                        <summary className="faq-question">Can I compress and convert images at the same time?</summary>
+                        <p className="faq-answer">Yes, if you use the Image Converter, the output is automatically compressed with professional-grade compression.</p>
+                    </details>
+                </div>
+
+                <h2 className="section-heading">Related Tools</h2>
+                <div className="tool-chips">
+                    <Link href="/image/compressor" className="tool-chip">Image Compressor</Link>
+                    <Link href="/image/converter" className="tool-chip">Image Converter</Link>
+                    <Link href="/image/resizer" className="tool-chip">Image Resizer</Link>
+                    <Link href="/svg-optimizer" className="tool-chip">SVG Optimizer</Link>
+                </div>
+            </PageShell>
         </>
     );
 }

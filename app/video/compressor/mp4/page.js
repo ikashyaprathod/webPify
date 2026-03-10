@@ -7,6 +7,12 @@ export const metadata = {
   title: "Compress MP4 Online – Reduce MP4 File Size Without Losing Quality",
   description:
     "Compress MP4 videos online for free. Client-side H.264 compression — no uploads, no server, 100% private.",
+  alternates: { canonical: "https://webpify.vercel.app/video/compressor/mp4" },
+  openGraph: {
+    title: "Compress MP4 Online – Reduce MP4 File Size Without Losing Quality",
+    description: "Compress MP4 videos online for free. Client-side H.264 compression — no uploads, no server, 100% private.",
+    url: "https://webpify.vercel.app/video/compressor/mp4",
+  },
 };
 
 const mp4Faqs = [
@@ -120,8 +126,8 @@ export default function MP4CompressorPage() {
         <h2 className="section-heading">Related Tools</h2>
         <div className="tool-chips">
           <Link href="/image/compressor" className="tool-chip">Image Compressor</Link>
-          <Link href="/compress-mp4-online" className="tool-chip">Compress MP4 Online</Link>
-          <Link href="/compress-video-for-website" className="tool-chip">Compress Video for Website</Link>
+          <Link href="/video/compressor" className="tool-chip">Video Compressor</Link>
+          <Link href="/gif/compressor" className="tool-chip">GIF Compressor</Link>
         </div>
       </PageShell>
     </>

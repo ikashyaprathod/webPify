@@ -6,6 +6,12 @@ export const metadata = {
   title: "Video Compressor Online – Reduce MP4 & MOV Size Without Losing Quality",
   description:
     "Compress MP4, MOV, and WebM videos online using privacy-first compression. No server uploads. Client-side processing powered by FFmpeg.",
+  alternates: { canonical: "https://webpify.vercel.app/video/compressor" },
+  openGraph: {
+    title: "Video Compressor Online – Reduce MP4 & MOV Size Without Losing Quality",
+    description: "Compress MP4, MOV, and WebM videos online using privacy-first compression. No server uploads. Client-side processing powered by FFmpeg.",
+    url: "https://webpify.vercel.app/video/compressor",
+  },
 };
 
 const videoFaqs = [

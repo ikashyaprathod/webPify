@@ -6,6 +6,12 @@ import Link from "next/link";
 export const metadata = {
   title: "JPEG Image Resizer – Resize JPEG/JPG Online Free",
   description: "Resize JPEG and JPG images online to exact dimensions. Choose fit mode, maintain aspect ratio. Fast, free server-side processing.",
+  alternates: { canonical: "https://webpify.vercel.app/image/resizer/jpeg" },
+  openGraph: {
+    title: "JPEG Image Resizer – Resize JPEG/JPG Online Free",
+    description: "Resize JPEG and JPG images online to exact dimensions. Choose fit mode, maintain aspect ratio. Fast, free server-side processing.",
+    url: "https://webpify.vercel.app/image/resizer/jpeg",
+  },
 };
 
 export default function ResizeJpegPage() {

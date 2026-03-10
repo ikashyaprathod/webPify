@@ -6,6 +6,12 @@ import Link from "next/link";
 export const metadata = {
   title: "GIF to MP4 Converter – Convert Animated GIF to MP4 Online Free",
   description: "Convert animated GIF to MP4 video online. Up to 90% smaller file size. Free, fast, browser-based — your files never leave your device.",
+  alternates: { canonical: "https://webpify.vercel.app/gif/compressor/mp4" },
+  openGraph: {
+    title: "GIF to MP4 Converter – Convert Animated GIF to MP4 Online Free",
+    description: "Convert animated GIF to MP4 video online. Up to 90% smaller file size. Free, fast, browser-based — your files never leave your device.",
+    url: "https://webpify.vercel.app/gif/compressor/mp4",
+  },
 };
 
 export default function GifToMp4Page() {

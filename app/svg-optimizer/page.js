@@ -6,6 +6,12 @@ import Link from "next/link";
 export const metadata = {
   title: "SVG Optimizer Online – Optimize & Minify SVG Files Free",
   description: "Optimize SVG files online. Removes metadata, minifies paths, merges styles. Powered by SVGO. Free, instant, no upload needed.",
+  alternates: { canonical: "https://webpify.vercel.app/svg-optimizer" },
+  openGraph: {
+    title: "SVG Optimizer Online – Optimize & Minify SVG Files Free",
+    description: "Optimize SVG files online. Removes metadata, minifies paths, merges styles. Powered by SVGO. Free, instant, no upload needed.",
+    url: "https://webpify.vercel.app/svg-optimizer",
+  },
 };
 
 export default function SvgOptimizerPage() {

@@ -5,6 +5,12 @@ import Link from "next/link";
 export const metadata = {
   title: "Image Resizer Online – Resize PNG, JPEG, WebP, AVIF Free",
   description: "Resize images to exact dimensions online. Supports PNG, JPEG, WebP, and AVIF. Choose fit mode, width, height. Fast server-side processing.",
+  alternates: { canonical: "https://webpify.vercel.app/image/resizer" },
+  openGraph: {
+    title: "Image Resizer Online – Resize PNG, JPEG, WebP, AVIF Free",
+    description: "Resize images to exact dimensions online. Supports PNG, JPEG, WebP, and AVIF. Choose fit mode, width, height. Fast server-side processing.",
+    url: "https://webpify.vercel.app/image/resizer",
+  },
 };
 
 const cards = [

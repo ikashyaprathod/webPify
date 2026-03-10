@@ -7,6 +7,12 @@ export const metadata = {
   title: "Compress WebM Online – Reduce WebM File Size Free",
   description:
     "Compress WebM videos online using VP9 encoding. Client-side processing — your video never leaves your browser.",
+  alternates: { canonical: "https://webpify.vercel.app/video/compressor/webm" },
+  openGraph: {
+    title: "Compress WebM Online – Reduce WebM File Size Free",
+    description: "Compress WebM videos online using VP9 encoding. Client-side processing — your video never leaves your browser.",
+    url: "https://webpify.vercel.app/video/compressor/webm",
+  },
 };
 
 const webmFaqs = [
@@ -120,7 +126,8 @@ export default function WebMCompressorPage() {
         <h2 className="section-heading">Related Tools</h2>
         <div className="tool-chips">
           <Link href="/image/compressor" className="tool-chip">Image Compressor</Link>
-          <Link href="/compress-video-for-website" className="tool-chip">Compress Video for Website</Link>
+          <Link href="/video/compressor" className="tool-chip">Video Compressor</Link>
+          <Link href="/gif/compressor" className="tool-chip">GIF Compressor</Link>
         </div>
       </PageShell>
     </>

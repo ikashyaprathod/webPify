@@ -6,6 +6,12 @@ import Link from "next/link";
 export const metadata = {
   title: "Video to GIF Converter – Convert MP4 to GIF Online Free",
   description: "Convert MP4, WebM, or MOV videos to animated GIF online. Choose FPS, width, and color depth. Free, browser-based, no uploads.",
+  alternates: { canonical: "https://webpify.vercel.app/video/to-gif" },
+  openGraph: {
+    title: "Video to GIF Converter – Convert MP4 to GIF Online Free",
+    description: "Convert MP4, WebM, or MOV videos to animated GIF online. Choose FPS, width, and color depth. Free, browser-based, no uploads.",
+    url: "https://webpify.vercel.app/video/to-gif",
+  },
 };
 
 export default function VideoToGifPage() {

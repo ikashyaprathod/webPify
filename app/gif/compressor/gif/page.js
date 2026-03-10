@@ -6,6 +6,12 @@ import Link from "next/link";
 export const metadata = {
   title: "Compress GIF Online Free – Reduce GIF File Size Without Quality Loss",
   description: "Compress animated GIFs online with palettegen optimization. Reduce GIF file size by up to 60% while maintaining animation quality. Free browser-based tool.",
+  alternates: { canonical: "https://webpify.vercel.app/gif/compressor/gif" },
+  openGraph: {
+    title: "Compress GIF Online Free – Reduce GIF File Size Without Quality Loss",
+    description: "Compress animated GIFs online with palettegen optimization. Reduce GIF file size by up to 60% while maintaining animation quality. Free browser-based tool.",
+    url: "https://webpify.vercel.app/gif/compressor/gif",
+  },
 };
 
 export default function CompressGifPage() {

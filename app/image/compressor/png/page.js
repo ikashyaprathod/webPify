@@ -6,6 +6,12 @@ import Link from "next/link";
 export const metadata = {
   title: "Compress PNG Images Online – Reduce File Size Without Quality Loss",
   description: "Compress PNG images online with professional-grade compression. Fast, free, and high quality.",
+  alternates: { canonical: "https://webpify.vercel.app/image/compressor/png" },
+  openGraph: {
+    title: "Compress PNG Images Online – Reduce File Size Without Quality Loss",
+    description: "Compress PNG images online with professional-grade compression. Fast, free, and high quality.",
+    url: "https://webpify.vercel.app/image/compressor/png",
+  },
 };
 
 export default function PNGCompressorPage() {

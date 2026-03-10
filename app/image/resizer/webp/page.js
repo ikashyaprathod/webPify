@@ -6,6 +6,12 @@ import Link from "next/link";
 export const metadata = {
   title: "WebP Image Resizer – Resize WebP Images Online Free",
   description: "Resize WebP images online to any dimension. Maintains WebP format with quality control. Free, fast, server-side processing.",
+  alternates: { canonical: "https://webpify.vercel.app/image/resizer/webp" },
+  openGraph: {
+    title: "WebP Image Resizer – Resize WebP Images Online Free",
+    description: "Resize WebP images online to any dimension. Maintains WebP format with quality control. Free, fast, server-side processing.",
+    url: "https://webpify.vercel.app/image/resizer/webp",
+  },
 };
 
 export default function ResizeWebpPage() {

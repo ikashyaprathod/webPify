@@ -22,12 +22,12 @@ const nextConfig = {
   },
   async redirects() {
     return [
-      { source: '/compressor',  destination: '/image/compressor', permanent: true  },
-      { source: '/video',       destination: '/video/compressor',  permanent: false },
-      { source: '/tool',        destination: '/image/converter/webp', permanent: true },
-      { source: '/gif',         destination: '/gif/compressor',    permanent: false },
-      { source: '/resize',      destination: '/image/resizer',     permanent: false },
-      { source: '/svg',         destination: '/svg-optimizer',     permanent: false },
+      { source: '/compressor', destination: '/image/compressor',    permanent: true },
+      { source: '/video',      destination: '/video/compressor',    permanent: true },
+      { source: '/tool',       destination: '/image/converter/webp', permanent: true },
+      { source: '/gif',        destination: '/gif/compressor',      permanent: true },
+      { source: '/resize',     destination: '/image/resizer',       permanent: true },
+      { source: '/svg',        destination: '/svg-optimizer',       permanent: true },
     ];
   },
 };

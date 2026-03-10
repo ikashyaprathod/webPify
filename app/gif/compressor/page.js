@@ -5,6 +5,12 @@ import Link from "next/link";
 export const metadata = {
   title: "GIF Compressor – Compress GIF & Convert to MP4/WebM Online",
   description: "Compress animated GIFs or convert them to MP4/WebM. Free, fast, browser-based. No upload needed.",
+  alternates: { canonical: "https://webpify.vercel.app/gif/compressor" },
+  openGraph: {
+    title: "GIF Compressor – Compress GIF & Convert to MP4/WebM Online",
+    description: "Compress animated GIFs or convert them to MP4/WebM. Free, fast, browser-based. No upload needed.",
+    url: "https://webpify.vercel.app/gif/compressor",
+  },
 };
 
 const cards = [

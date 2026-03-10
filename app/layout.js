@@ -13,8 +13,31 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Image & Video Compressor – PNG, JPEG, WebP, MP4 Tools",
+  metadataBase: new URL("https://webpify.vercel.app"),
+  title: {
+    default: "Webpifyy – Free Image, Video & GIF Tools Online",
+    template: "%s | Webpifyy",
+  },
   description: "Compress and convert images and videos online. Supports PNG, JPEG, WebP, MP4, MOV, and WebM with client-side privacy-first processing.",
+  openGraph: {
+    type: "website",
+    siteName: "Webpifyy",
+    title: "Webpifyy – Free Image, Video & GIF Tools Online",
+    description: "Compress and convert images and videos online. Supports PNG, JPEG, WebP, MP4, MOV, and WebM with client-side privacy-first processing.",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Webpifyy – Free Image, Video & GIF Tools Online",
+    description: "Compress and convert images and videos online. Supports PNG, JPEG, WebP, MP4, MOV, and WebM with client-side privacy-first processing.",
+    images: ["/og-image.png"],
+  },
 };
 
 export default function RootLayout({ children }) {

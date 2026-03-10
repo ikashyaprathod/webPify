@@ -6,6 +6,12 @@ import Link from "next/link";
 export const metadata = {
   title: "Compress WebP Images Online – Reduce WebP File Size",
   description: "Compress WebP images online with professional-grade compression. Fast, free, and high quality.",
+  alternates: { canonical: "https://webpify.vercel.app/image/compressor/webp" },
+  openGraph: {
+    title: "Compress WebP Images Online – Reduce WebP File Size",
+    description: "Compress WebP images online with professional-grade compression. Fast, free, and high quality.",
+    url: "https://webpify.vercel.app/image/compressor/webp",
+  },
 };
 
 export default function WebPCompressorPage() {
