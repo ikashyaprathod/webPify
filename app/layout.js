@@ -95,6 +95,14 @@ export default function RootLayout({ children }) {
         />
 
 
+        {/* PWA manifest */}
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#0070f3" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-mobile-web-app-title" content="Webpifyy" />
+
         {/* hreflang tags for international SEO */}
         <link rel="alternate" hrefLang="x-default" href="https://webpify.vercel.app/" />
         <link rel="alternate" hrefLang="en" href="https://webpify.vercel.app/" />

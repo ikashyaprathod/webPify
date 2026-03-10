@@ -1,0 +1,47 @@
+{
+  "name": "Webpifyy – Image & Video Tools",
+  "short_name": "Webpifyy",
+  "description": "Compress and convert images, videos, and GIFs online. Free, fast, private.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0070f3",
+  "orientation": "any",
+  "categories": ["utilities", "productivity"],
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Image Compressor",
+      "url": "/image/compressor",
+      "description": "Compress PNG, JPEG, WebP images"
+    },
+    {
+      "name": "Video Compressor",
+      "url": "/video/compressor",
+      "description": "Compress MP4, MOV, WebM videos"
+    },
+    {
+      "name": "GIF Compressor",
+      "url": "/gif/compressor",
+      "description": "Compress GIFs or convert to MP4"
+    },
+    {
+      "name": "Image Resizer",
+      "url": "/image/resizer",
+      "description": "Resize images to any dimension"
+    }
+  ]
+}

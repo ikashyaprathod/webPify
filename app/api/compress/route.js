@@ -1,95 +1,60 @@
 import sharp from 'sharp';
 import { NextResponse } from 'next/server';
 
-// Configure API route
 export const runtime = 'nodejs';
-export const maxDuration = 30; // 30 seconds timeout
+export const maxDuration = 30;
 
 export async function POST(request) {
     try {
-        // Parse form data
         const formData = await request.formData();
         const file = formData.get('file');
 
         if (!file) {
-            return NextResponse.json(
-                { error: 'No file provided' },
-                { status: 400 }
-            );
+            return NextResponse.json({ error: 'No file provided' }, { status: 400 });
         }
 
-        // Check file size (max 10MB)
         if (file.size > 10 * 1024 * 1024) {
-            return NextResponse.json(
-                { error: 'File too large. Maximum size is 10MB.' },
-                { status: 400 }
-            );
+            return NextResponse.json({ error: 'File too large. Maximum size is 10MB.' }, { status: 400 });
         }
 
-        // Convert file to buffer
         const arrayBuffer = await file.arrayBuffer();
         const buffer = Buffer.from(arrayBuffer);
-
-        // Detect file type
         const fileType = file.type;
         let compressedBuffer;
         let outputType = fileType;
 
-        // Apply format-specific compression
         if (fileType === 'image/png') {
-            // PNG compression using pngquant algorithm
             compressedBuffer = await sharp(buffer)
-                .png({
-                    quality: 80,           // Quality 70-90 (adaptive)
-                    compressionLevel: 9,   // Maximum compression
-                    palette: true,         // Use pngquant palette optimization
-                    effort: 10,            // Maximum effort (slower but better)
-                })
+                .png({ quality: 80, compressionLevel: 9, palette: true, effort: 10 })
                 .toBuffer();
-
             outputType = 'image/png';
-        }
-        else if (fileType === 'image/jpeg' || fileType === 'image/jpg') {
-            // JPEG compression using mozjpeg
+        } else if (fileType === 'image/jpeg' || fileType === 'image/jpg') {
             compressedBuffer = await sharp(buffer)
-                .jpeg({
-                    quality: 82,          // Adaptive quality
-                    mozjpeg: true,        // Use mozjpeg encoder
-                    progressive: true,    // Progressive JPEG
-                    optimiseScans: true,  // Optimize scan scripts
-                })
+                .jpeg({ quality: 82, mozjpeg: true, progressive: true, optimiseScans: true })
                 .toBuffer();
-
             outputType = 'image/jpeg';
-        }
-        else if (fileType === 'image/webp') {
-            // WebP compression
+        } else if (fileType === 'image/webp') {
             compressedBuffer = await sharp(buffer)
-                .webp({
-                    quality: 80,          // Quality 70-90
-                    alphaQuality: 90,     // Preserve transparency quality
-                    effort: 6,            // Compression effort (0-6)
-                })
+                .webp({ quality: 80, alphaQuality: 90, effort: 6 })
                 .toBuffer();
-
             outputType = 'image/webp';
-        }
-        else {
+        } else if (fileType === 'image/avif') {
+            compressedBuffer = await sharp(buffer)
+                .avif({ quality: 60, effort: 6 })
+                .toBuffer();
+            outputType = 'image/avif';
+        } else {
             return NextResponse.json(
-                { error: 'Unsupported file type. Use PNG, JPG, or WebP.' },
+                { error: 'Unsupported file type. Use PNG, JPG, WebP, or AVIF.' },
                 { status: 400 }
             );
         }
 
-        // Smart stopping: if compressed is larger, return original
-        const originalSize = buffer.length;
+        const originalSize   = buffer.length;
         const compressedSize = compressedBuffer.length;
-
-        let finalBuffer;
-        let reduction;
+        let finalBuffer, reduction;
 
         if (compressedSize >= originalSize) {
-            // Return original if compression didn't help
             finalBuffer = buffer;
             reduction = 0;
         } else {
@@ -97,15 +62,14 @@ export async function POST(request) {
             reduction = ((originalSize - compressedSize) / originalSize * 100).toFixed(1);
         }
 
-        // Return compressed image with metadata
         return new NextResponse(finalBuffer, {
             status: 200,
             headers: {
-                'Content-Type': outputType,
-                'Content-Length': finalBuffer.length.toString(),
-                'X-Original-Size': originalSize.toString(),
-                'X-Compressed-Size': finalBuffer.length.toString(),
-                'X-Reduction': reduction.toString(),
+                'Content-Type':        outputType,
+                'Content-Length':      finalBuffer.length.toString(),
+                'X-Original-Size':     originalSize.toString(),
+                'X-Compressed-Size':   finalBuffer.length.toString(),
+                'X-Reduction':         reduction.toString(),
             },
         });
 

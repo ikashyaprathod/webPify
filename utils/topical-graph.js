@@ -6,44 +6,72 @@
  */
 export const topicalGraph = {
     '/': {
-        children: ['/image', '/video', '/about', '/privacy', '/terms'],
-        related: ['/image/compressor', '/image/converter', '/video/compressor']
+        children: ['/image', '/video', '/gif', '/about', '/privacy', '/terms'],
+        related: ['/image/compressor', '/image/converter', '/video/compressor', '/gif/compressor', '/image/resizer', '/svg-optimizer']
     },
 
     // Master Hub
     '/image': {
         parent: '/',
-        children: ['/image/compressor', '/image/converter', '/image/compare'],
-        related: ['/video/compressor']
+        children: ['/image/compressor', '/image/converter', '/image/compare', '/image/resizer'],
+        related: ['/video/compressor', '/gif/compressor', '/svg-optimizer']
     },
 
     // Video Hub
     '/video': {
         parent: '/',
-        children: ['/video/compressor'],
-        related: ['/image/compressor', '/image/converter']
+        children: ['/video/compressor', '/video/to-gif'],
+        related: ['/image/compressor', '/image/converter', '/gif/compressor']
+    },
+
+    // GIF Hub
+    '/gif': {
+        parent: '/',
+        children: ['/gif/compressor'],
+        related: ['/video/compressor', '/image/compressor']
     },
 
     // Tool Hubs
     '/image/compressor': {
         parent: '/image',
-        siblings: ['/image/converter'],
+        siblings: ['/image/converter', '/image/resizer'],
         children: ['/image/compressor/png', '/image/compressor/jpeg', '/image/compressor/webp'],
-        related: ['/image/compare', '/video/compressor']
+        related: ['/image/compare', '/video/compressor', '/gif/compressor', '/image/resizer']
     },
     '/image/converter': {
         parent: '/image',
-        siblings: ['/image/compressor'],
+        siblings: ['/image/compressor', '/image/resizer'],
         children: ['/image/converter/png', '/image/converter/jpeg', '/image/converter/webp'],
         related: ['/image/compare', '/video/compressor']
+    },
+    '/image/resizer': {
+        parent: '/image',
+        siblings: ['/image/compressor', '/image/converter'],
+        children: ['/image/resizer/png', '/image/resizer/jpeg', '/image/resizer/webp'],
+        related: ['/image/compressor', '/svg-optimizer', '/resize-image-online']
+    },
+    '/image/resizer/png': {
+        parent: '/image/resizer',
+        siblings: ['/image/resizer/jpeg', '/image/resizer/webp'],
+        related: ['/image/compressor/png', '/resize-image-online']
+    },
+    '/image/resizer/jpeg': {
+        parent: '/image/resizer',
+        siblings: ['/image/resizer/png', '/image/resizer/webp'],
+        related: ['/image/compressor/jpeg', '/resize-image-online']
+    },
+    '/image/resizer/webp': {
+        parent: '/image/resizer',
+        siblings: ['/image/resizer/png', '/image/resizer/jpeg'],
+        related: ['/image/compressor/webp', '/resize-image-online']
     },
 
     // Video Compressor Hub
     '/video/compressor': {
         parent: '/video',
-        siblings: [],
+        siblings: ['/video/to-gif'],
         children: ['/video/compressor/mp4', '/video/compressor/webm', '/video/compressor/mov'],
-        related: ['/image/compressor', '/image/converter', '/compress-mp4-online', '/compress-video-for-website']
+        related: ['/image/compressor', '/image/converter', '/compress-mp4-online', '/compress-video-for-website', '/gif/compressor']
     },
 
     // Video Compressor Format Pages
@@ -61,6 +89,41 @@ export const topicalGraph = {
         parent: '/video/compressor',
         siblings: ['/video/compressor/mp4', '/video/compressor/webm'],
         related: ['/compress-mp4-online', '/image/compressor']
+    },
+
+    // Video to GIF
+    '/video/to-gif': {
+        parent: '/video',
+        siblings: ['/video/compressor'],
+        related: ['/gif/compressor', '/gif/compressor/mp4', '/video-to-gif']
+    },
+
+    // GIF Compressor Hub
+    '/gif/compressor': {
+        parent: '/gif',
+        children: ['/gif/compressor/gif', '/gif/compressor/mp4', '/gif/compressor/webm'],
+        related: ['/video/to-gif', '/video/compressor', '/image/compressor', '/gif-to-mp4', '/compress-gif-online']
+    },
+    '/gif/compressor/gif': {
+        parent: '/gif/compressor',
+        siblings: ['/gif/compressor/mp4', '/gif/compressor/webm'],
+        related: ['/compress-gif-online', '/gif/compressor/mp4', '/video/to-gif']
+    },
+    '/gif/compressor/mp4': {
+        parent: '/gif/compressor',
+        siblings: ['/gif/compressor/gif', '/gif/compressor/webm'],
+        related: ['/gif-to-mp4', '/video/compressor', '/gif/compressor/webm']
+    },
+    '/gif/compressor/webm': {
+        parent: '/gif/compressor',
+        siblings: ['/gif/compressor/gif', '/gif/compressor/mp4'],
+        related: ['/gif/compressor/mp4', '/video/compressor']
+    },
+
+    // SVG Optimizer
+    '/svg-optimizer': {
+        parent: '/',
+        related: ['/image/compressor', '/image/converter', '/image/resizer', '/optimize-svg-online']
     },
 
     // Video Programmatic Pages
@@ -88,6 +151,31 @@ export const topicalGraph = {
         parent: '/video/compressor',
         related: ['/shrink-video-without-losing-quality', '/reduce-mp4-file-size', '/compress-video-for-seo', '/image/compressor']
     },
+
+    // GIF Programmatic Pages
+    '/gif-to-mp4': {
+        parent: '/gif/compressor',
+        related: ['/gif/compressor/mp4', '/video-to-gif', '/compress-gif-online', '/video/compressor']
+    },
+    '/compress-gif-online': {
+        parent: '/gif/compressor',
+        related: ['/gif/compressor/gif', '/gif-to-mp4', '/image/compressor']
+    },
+    '/video-to-gif': {
+        parent: '/video/to-gif',
+        related: ['/video/to-gif', '/gif/compressor', '/gif-to-mp4']
+    },
+
+    // Image Programmatic Pages
+    '/resize-image-online': {
+        parent: '/image/resizer',
+        related: ['/image/resizer', '/image/compressor', '/optimize-svg-online']
+    },
+    '/optimize-svg-online': {
+        parent: '/svg-optimizer',
+        related: ['/svg-optimizer', '/image/compressor', '/resize-image-online']
+    },
+
     '/image/compare': {
         parent: '/image',
         siblings: ['/image/compressor', '/image/converter'],
