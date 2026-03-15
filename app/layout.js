@@ -163,6 +163,17 @@ export default function RootLayout({ children }) {
         <link rel="alternate" hrefLang="en-IN" href="https://webpifyy.vercel.app/" />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
+        {/* Hidden Google Translate element — our custom select drives it */}
+        <div id="google_translate_element" style={{display:"none"}} />
+        <script dangerouslySetInnerHTML={{__html:`
+          function googleTranslateElementInit() {
+            new google.translate.TranslateElement(
+              { pageLanguage: 'en', autoDisplay: false },
+              'google_translate_element'
+            );
+          }
+        `}} />
+        <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async />
         <Navbar />
         {children}
         <Footer />

@@ -1,81 +1,163 @@
-const SOCIALS = [
-  {
-    label: "GitHub",
-    href: "https://github.com/ikashyaprathod",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" width="18" height="18">
-        <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
-      </svg>
-    ),
-  },
-  {
-    label: "LinkedIn",
-    href: "https://www.linkedin.com/in/kashyaprathod/",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" width="18" height="18">
-        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-      </svg>
-    ),
-  },
-  {
-    label: "X (Twitter)",
-    href: "https://x.com/ikashyaprathod",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" width="18" height="18">
-        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.258 5.622L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z" />
-      </svg>
-    ),
-  },
-  {
-    label: "Reddit",
-    href: "https://www.reddit.com/user/ikashyaprathod/",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" width="18" height="18">
-        <path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.701zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 0 0-.231.094.33.33 0 0 0 0 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 0 0 .029-.463.33.33 0 0 0-.464 0c-.547.533-1.684.73-2.512.73-.828 0-1.979-.196-2.512-.73a.326.326 0 0 0-.232-.095z" />
-      </svg>
-    ),
-  },
-  {
-    label: "Product Hunt",
-    href: "https://www.producthunt.com/@kashyaprathod",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" width="18" height="18">
-        <path d="M13.604 8.4h-3.405V12h3.405c.991 0 1.801-.81 1.801-1.8 0-.99-.81-1.8-1.801-1.8zM12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zm1.604 14.4h-3.405V18H7.8V6h5.804c2.319 0 4.2 1.881 4.2 4.2 0 2.319-1.881 4.2-4.2 4.2z" />
-      </svg>
-    ),
-  },
-  {
-    label: "Instagram",
-    href: "https://www.instagram.com/ikashyaprathod/",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" width="18" height="18">
-        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
-      </svg>
-    ),
-  },
+"use client";
+
+import { useState } from "react";
+import Link from "next/link";
+
+const LANGUAGES = [
+  { code: "en",    label: "English (USA)" },
+  { code: "hi",    label: "हिन्दी (Hindi)" },
+  { code: "es",    label: "Español (Spanish)" },
+  { code: "fr",    label: "Français (French)" },
+  { code: "de",    label: "Deutsch (German)" },
+  { code: "zh-CN", label: "中文简体 (Chinese)" },
+  { code: "ja",    label: "日本語 (Japanese)" },
+  { code: "ko",    label: "한국어 (Korean)" },
+  { code: "pt",    label: "Português (Portuguese)" },
+  { code: "ru",    label: "Русский (Russian)" },
+  { code: "ar",    label: "العربية (Arabic)" },
+  { code: "it",    label: "Italiano (Italian)" },
+  { code: "nl",    label: "Nederlands (Dutch)" },
+  { code: "tr",    label: "Türkçe (Turkish)" },
+  { code: "pl",    label: "Polski (Polish)" },
+  { code: "sv",    label: "Svenska (Swedish)" },
+  { code: "id",    label: "Bahasa Indonesia" },
+  { code: "th",    label: "ภาษาไทย (Thai)" },
+  { code: "vi",    label: "Tiếng Việt (Vietnamese)" },
+  { code: "bn",    label: "বাংলা (Bengali)" },
 ];
 
+function translatePage(langCode) {
+  if (langCode === "en") {
+    // Reset to original English
+    const cookie = document.cookie.match(/googtrans=([^;]+)/);
+    if (cookie) {
+      document.cookie = "googtrans=; path=/; domain=" + window.location.hostname + "; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+      document.cookie = "googtrans=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+    }
+    window.location.reload();
+    return;
+  }
+  // Set the googtrans cookie then trigger the Google Translate widget
+  const combo = document.querySelector(".goog-te-combo");
+  if (combo) {
+    combo.value = langCode;
+    combo.dispatchEvent(new Event("change"));
+  } else {
+    // Widget not loaded yet — set cookie and reload
+    document.cookie = `googtrans=/en/${langCode}; path=/`;
+    document.cookie = `googtrans=/en/${langCode}; path=/; domain=.${window.location.hostname}`;
+    window.location.reload();
+  }
+}
+
 export default function Footer() {
+  const [lang, setLang] = useState("en");
+
+  function handleLangChange(e) {
+    const code = e.target.value;
+    setLang(code);
+    translatePage(code);
+  }
+
   return (
-    <footer className="site-footer">
-      <div className="site-footer__stars" aria-hidden="true" />
-      <div className="site-footer__inner">
-        <p className="site-footer__copy">
-          © 2026–2027 Webpifyy. All Rights Reserved
-        </p>
-        <div className="site-footer__socials" role="list" aria-label="Social links">
-          {SOCIALS.map(({ label, href, icon }) => (
-            <a
-              key={label}
-              href={href}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={label}
-              className="site-footer__social-link"
-            >
-              {icon}
+    <footer className="ft-footer">
+      {/* ── Top content ── */}
+      <div className="ft-top">
+        {/* Left: logo + language + socials */}
+        <div className="ft-brand-col">
+          <Link href="/" className="ft-logo">
+            <div className="ft-logo-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+              </svg>
+            </div>
+            <span className="ft-logo-text">webpifyy</span>
+          </Link>
+
+          <div className="ft-lang-wrap">
+            <span className="ft-lang-label">Language</span>
+            <div className="ft-lang-select-wrap">
+              <select className="ft-lang-select" value={lang} onChange={handleLangChange}>
+                {LANGUAGES.map(({ code, label }) => (
+                  <option key={code} value={code}>{label}</option>
+                ))}
+              </select>
+              <svg className="ft-lang-chevron" width="14" height="14" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+              </svg>
+            </div>
+          </div>
+
+          <div className="ft-socials">
+            <a href="https://x.com/ikashyaprathod" target="_blank" rel="noopener noreferrer" className="ft-social" aria-label="X">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
             </a>
-          ))}
+            <a href="https://www.instagram.com/ikashyaprathod/" target="_blank" rel="noopener noreferrer" className="ft-social" aria-label="Instagram">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+            <a href="https://github.com/ikashyaprathod" target="_blank" rel="noopener noreferrer" className="ft-social" aria-label="GitHub">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+            </a>
+            <a href="https://www.linkedin.com/in/kashyaprathod/" target="_blank" rel="noopener noreferrer" className="ft-social" aria-label="LinkedIn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        {/* Right: nav columns */}
+        <div className="ft-nav-grid">
+          <div className="ft-nav-col">
+            <h4 className="ft-nav-heading">Image Tools</h4>
+            <Link href="/image/compressor" className="ft-nav-link">Image Compressor</Link>
+            <Link href="/image/converter" className="ft-nav-link">Image Converter</Link>
+            <Link href="/image/resizer" className="ft-nav-link">Image Resizer</Link>
+            <Link href="/image/compare" className="ft-nav-link">Image Compare</Link>
+            <Link href="/image/compressor/png" className="ft-nav-link">PNG Compressor</Link>
+          </div>
+          <div className="ft-nav-col">
+            <h4 className="ft-nav-heading">Video Tools</h4>
+            <Link href="/video/compressor" className="ft-nav-link">Video Compressor</Link>
+            <Link href="/video/compressor/mp4" className="ft-nav-link">MP4 Compressor</Link>
+            <Link href="/video/compressor/webm" className="ft-nav-link">WebM Compressor</Link>
+            <Link href="/video/compressor/mov" className="ft-nav-link">MOV Compressor</Link>
+            <Link href="/video/to-gif" className="ft-nav-link">Video → GIF</Link>
+          </div>
+          <div className="ft-nav-col">
+            <h4 className="ft-nav-heading">GIF &amp; SVG</h4>
+            <Link href="/gif/compressor" className="ft-nav-link">GIF Compressor</Link>
+            <Link href="/gif/compressor/mp4" className="ft-nav-link">GIF → MP4</Link>
+            <Link href="/gif/compressor/webm" className="ft-nav-link">GIF → WebM</Link>
+            <Link href="/svg-optimizer" className="ft-nav-link">SVG Optimizer</Link>
+          </div>
+          <div className="ft-nav-col">
+            <h4 className="ft-nav-heading">Company</h4>
+            <Link href="/about" className="ft-nav-link">About</Link>
+            <a href="https://github.com/ikashyaprathod/webPify" target="_blank" rel="noopener noreferrer" className="ft-nav-link">GitHub</a>
+            <Link href="/privacy" className="ft-nav-link">Privacy Policy</Link>
+            <Link href="/terms" className="ft-nav-link">Terms of Service</Link>
+          </div>
+        </div>
+      </div>
+
+      {/* ── Giant watermark ── */}
+      <div className="ft-watermark" aria-hidden="true">webpifyy</div>
+
+      {/* ── Bottom bar ── */}
+      <div className="ft-bottom">
+        <div className="ft-bottom-inner">
+          <div className="ft-copy">
+            <div className="ft-copy-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+              </svg>
+            </div>
+            <span>© 2026–2027 webpifyy.</span>
+          </div>
+          <div className="ft-legal-links">
+            <Link href="/privacy" className="ft-legal-link">Privacy Policy</Link>
+            <Link href="/terms" className="ft-legal-link">Terms of Service</Link>
+            <a href="https://github.com/ikashyaprathod/webPify" target="_blank" rel="noopener noreferrer" className="ft-legal-link">GitHub</a>
+          </div>
         </div>
       </div>
     </footer>

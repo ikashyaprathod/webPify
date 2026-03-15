@@ -1,172 +1,196 @@
 import Link from "next/link";
-import PageShell from "@/components/PageShell";
 
 export const metadata = {
-    title: "Terms of Service – WebPify",
-    description: "WebPify Terms of Service. Free image compression and conversion tools provided as-is.",
-    alternates: {
-        canonical: 'https://webpifyy.vercel.app/terms'
-    },
+    title: "Terms of Service – Webpifyy",
+    description: "Webpifyy Terms of Service. Free image, video, and GIF tools provided as-is.",
+    alternates: { canonical: 'https://webpifyy.vercel.app/terms' },
     robots: 'index, follow',
     openGraph: {
-        title: "Terms of Service – WebPify",
-        description: "WebPify Terms of Service. Free image compression and conversion tools provided as-is.",
+        title: "Terms of Service – Webpifyy",
+        description: "Webpifyy Terms of Service. Free tools provided as-is.",
         url: "https://webpifyy.vercel.app/terms",
     },
 };
 
 export default function TermsPage() {
-    const breadcrumbItems = [
-        { label: "Home", href: "/" },
-        { label: "Terms of Service", href: "/terms" }
-    ];
-
     return (
         <>
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{
-                    __html: JSON.stringify({
-                        "@context": "https://schema.org",
-                        "@type": "BreadcrumbList",
-                        "itemListElement": [
-                            {
-                                "@type": "ListItem",
-                                "position": 1,
-                                "name": "Home",
-                                "item": "https://webpifyy.vercel.app/"
-                            },
-                            {
-                                "@type": "ListItem",
-                                "position": 2,
-                                "name": "Terms of Service"
-                            }
-                        ]
-                    })
-                }}
-            />
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+                "@context": "https://schema.org", "@type": "BreadcrumbList",
+                "itemListElement": [
+                    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://webpifyy.vercel.app/" },
+                    { "@type": "ListItem", "position": 2, "name": "Terms of Service" }
+                ]
+            })}} />
 
-            <PageShell blob1="#fef3c7" blob2="#ddd6fe">
-
-                <div className="page-hero">
-                    <div className="page-badge">Legal</div>
-                    <h1 className="page-title">Terms of Service</h1>
-                    <p className="page-subtitle">
-                        Simple, fair terms for a free tool that respects your privacy.
-                    </p>
-                    <p style={{ fontSize: "0.9rem", opacity: 0.6, marginTop: "0.5rem" }}>Last updated: February 2026</p>
+            <div className="lp-page">
+                {/* Hero */}
+                <div className="lp-hero">
+                    <div className="lp-hero-inner">
+                        <div className="lp-badge">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                            Updated Feb 2026
+                        </div>
+                        <h1 className="lp-hero-title">Terms of <span className="lp-gradient">Service.</span></h1>
+                        <p className="lp-hero-sub">Simple, fair terms for a free tool that respects your privacy. No registration, no limits, no surprises.</p>
+                    </div>
                 </div>
 
-                <div className="info-box" style={{ marginBottom: "2rem", borderLeft: "4px solid #f59e0b" }}>
-                    <h2 style={{ marginBottom: "0.5rem" }}>Summary</h2>
-                    <p>
-                        <strong>WebPify is free, provided as-is, with no warranties. Use responsibly and keep backups of your files.</strong> Your files are never uploaded or stored — all processing happens in your browser.
-                    </p>
-                </div>
+                {/* Body */}
+                <div className="lp-body">
+                    <aside className="lp-sidebar">
+                        <div className="lp-sidebar-nav">
+                            <span className="lp-sidebar-label">Documentation</span>
+                            <a href="#acceptance" className="lp-sidebar-link lp-sidebar-link--active">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                                Acceptance
+                            </a>
+                            <a href="#service" className="lp-sidebar-link">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                                Service
+                            </a>
+                            <a href="#responsibilities" className="lp-sidebar-link">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                                Responsibilities
+                            </a>
+                            <a href="#liability" className="lp-sidebar-link">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                                Liability
+                            </a>
+                            <a href="#contact" className="lp-sidebar-link">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                                Contact
+                            </a>
+                        </div>
+                        <div className="lp-sidebar-cta">
+                            <span className="lp-sidebar-cta-label">Need Help?</span>
+                            <h4 className="lp-sidebar-cta-title">Questions about terms?</h4>
+                            <Link href="/about" className="lp-sidebar-cta-btn">Contact Us</Link>
+                        </div>
+                    </aside>
 
-                <h2 className="section-heading">Acceptance of Terms</h2>
-                <div className="info-box" style={{ marginBottom: "2rem" }}>
-                    <p>
-                        By accessing and using WebPify, you accept and agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our service.
-                    </p>
-                </div>
+                    <main className="lp-main">
+                        <section id="acceptance" className="lp-section">
+                            <div className="lp-section-head">
+                                <div className="lp-section-icon">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                                </div>
+                                <h2 className="lp-section-title">Acceptance of Terms</h2>
+                            </div>
+                            <div className="lp-glass-card">
+                                <p className="lp-p">By accessing and using Webpifyy, you accept and agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our service.</p>
+                                <p className="lp-p"><strong>Webpifyy is free, provided as-is, with no warranties.</strong> Use responsibly and keep backups of your original files. Your files are never uploaded or stored — all processing happens in your browser.</p>
+                            </div>
+                        </section>
 
-                <h2 className="section-heading">Service Description</h2>
-                <div className="info-box" style={{ marginBottom: "2rem" }}>
-                    <p style={{ marginBottom: "1rem" }}>WebPify provides free image compression and conversion tools that process files client-side in your browser. We offer:</p>
-                    <ul style={{ paddingLeft: "1.5rem", lineHeight: "1.8" }}>
-                        <li>PNG image compression</li>
-                        <li>JPEG image compression</li>
-                        <li>WebP image conversion</li>
-                        <li>Image format conversion (PNG, JPEG, WebP)</li>
-                    </ul>
-                </div>
+                        <section id="service" className="lp-section">
+                            <div className="lp-section-head">
+                                <div className="lp-section-icon">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                                </div>
+                                <h2 className="lp-section-title">Service Description</h2>
+                            </div>
+                            <div className="lp-card-grid">
+                                <div className="lp-soft-card">
+                                    <div className="lp-soft-card-icon">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                                    </div>
+                                    <h3 className="lp-soft-card-title">What You Can Do</h3>
+                                    <ul className="lp-list">
+                                        <li>Use all tools free, no registration</li>
+                                        <li>Process unlimited images, videos, GIFs</li>
+                                        <li>Use results for personal or commercial use</li>
+                                        <li>Access from any device, anywhere</li>
+                                    </ul>
+                                </div>
+                                <div className="lp-soft-card">
+                                    <div className="lp-soft-card-icon">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+                                    </div>
+                                    <h3 className="lp-soft-card-title">What You Must Not Do</h3>
+                                    <ul className="lp-list">
+                                        <li>Reverse engineer or modify the service</li>
+                                        <li>Use for illegal purposes</li>
+                                        <li>Attempt to overload or interfere</li>
+                                        <li>Misrepresent your use of outputs</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </section>
 
-                <h2 className="section-heading">Use of Service</h2>
-                <div className="info-box" style={{ marginBottom: "2rem" }}>
-                    <p style={{ marginBottom: "1rem" }}>WebPify is provided "as-is" for personal and commercial use. You may:</p>
-                    <ul style={{ paddingLeft: "1.5rem", lineHeight: "1.8", marginBottom: "1rem" }}>
-                        <li>Use the service for free without registration</li>
-                        <li>Process unlimited images</li>
-                        <li>Use compressed/converted images for any purpose</li>
-                    </ul>
-                    <p style={{ marginBottom: "1rem" }}>You must not:</p>
-                    <ul style={{ paddingLeft: "1.5rem", lineHeight: "1.8" }}>
-                        <li>Attempt to reverse engineer or modify the service</li>
-                        <li>Use the service for illegal purposes</li>
-                        <li>Attempt to overload or interfere with the service</li>
-                    </ul>
-                </div>
+                        <section id="responsibilities" className="lp-section">
+                            <div className="lp-section-head">
+                                <div className="lp-section-icon">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                                </div>
+                                <h2 className="lp-section-title">User Responsibilities</h2>
+                            </div>
+                            <div className="lp-glass-card">
+                                <div className="lp-check-list">
+                                    <div className="lp-check-item">
+                                        <svg className="lp-check-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                                        <p>Keep backups of original files before processing.</p>
+                                    </div>
+                                    <div className="lp-check-item">
+                                        <svg className="lp-check-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                                        <p>Verify compressed/converted files meet your quality standards.</p>
+                                    </div>
+                                    <div className="lp-check-item">
+                                        <svg className="lp-check-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                                        <p>Ensure you have rights to process the images/videos you use.</p>
+                                    </div>
+                                    <div className="lp-check-item">
+                                        <svg className="lp-check-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                                        <p>Use the service reasonably without attempting to abuse or overload it.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
 
-                <h2 className="section-heading">No Guarantees</h2>
-                <div className="info-box" style={{ marginBottom: "2rem" }}>
-                    <p style={{ marginBottom: "1rem" }}>While we strive for high-quality results:</p>
-                    <ul style={{ paddingLeft: "1.5rem", lineHeight: "1.8" }}>
-                        <li>Compression results may vary based on image complexity</li>
-                        <li>We do not guarantee specific file size reductions</li>
-                        <li>Quality perception varies by use case</li>
-                        <li>Service availability is not guaranteed (though we aim for 99%+ uptime)</li>
-                    </ul>
-                </div>
+                        <section id="liability" className="lp-section">
+                            <div className="lp-section-head">
+                                <div className="lp-section-icon">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                                </div>
+                                <h2 className="lp-section-title">Limitation of Liability</h2>
+                            </div>
+                            <div className="lp-glass-card">
+                                <p className="lp-p">Webpifyy is provided free of charge. To the maximum extent permitted by law, we are not liable for any data loss, compression quality issues, service interruptions, or indirect/consequential damages.</p>
+                                <p className="lp-p">You retain all rights to files you process. We do not claim ownership of your files. The Webpifyy platform and its code remain our intellectual property. We may update these terms at any time — continued use constitutes acceptance.</p>
+                            </div>
+                        </section>
 
-                <h2 className="section-heading">User Responsibility</h2>
-                <div className="info-box" style={{ marginBottom: "2rem" }}>
-                    <p style={{ marginBottom: "1rem" }}>You are responsible for:</p>
-                    <ul style={{ paddingLeft: "1.5rem", lineHeight: "1.8" }}>
-                        <li>Keeping backups of original images before processing</li>
-                        <li>Verifying compressed/converted images meet your quality standards</li>
-                        <li>Ensuring you have rights to process images you upload</li>
-                    </ul>
+                        <section id="contact" className="lp-section">
+                            <div className="lp-section-head">
+                                <div className="lp-section-icon">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                                </div>
+                                <h2 className="lp-section-title">Contact</h2>
+                            </div>
+                            <div className="lp-contact-card">
+                                <div className="lp-contact-left">
+                                    <h3 className="lp-contact-title">Have questions about these terms?</h3>
+                                    <p className="lp-contact-sub">Our team is happy to clarify anything about our terms of service or how we handle your data.</p>
+                                    <div className="lp-contact-links">
+                                        <div className="lp-contact-link-item">
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                                            <span>legal@webpifyy.com</span>
+                                        </div>
+                                        <div className="lp-contact-link-item">
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+                                            <span>github.com/ikashyaprathod/webPify</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="lp-contact-actions">
+                                    <Link href="/about" className="lp-contact-btn">Visit About Page</Link>
+                                    <Link href="/privacy" className="lp-contact-btn-outline">Privacy Policy</Link>
+                                </div>
+                            </div>
+                        </section>
+                    </main>
                 </div>
-
-                <h2 className="section-heading">Limitation of Liability</h2>
-                <div className="info-box" style={{ marginBottom: "2rem" }}>
-                    <p style={{ marginBottom: "1rem" }}>WebPify is provided free of charge. To the maximum extent permitted by law:</p>
-                    <ul style={{ paddingLeft: "1.5rem", lineHeight: "1.8" }}>
-                        <li>We are not liable for any data loss</li>
-                        <li>We are not liable for compression quality issues</li>
-                        <li>We are not liable for service interruptions</li>
-                        <li>We are not liable for any indirect or consequential damages</li>
-                    </ul>
-                </div>
-
-                <h2 className="section-heading">Intellectual Property</h2>
-                <div className="info-box" style={{ marginBottom: "2rem" }}>
-                    <p>
-                        You retain all rights to images you process. We do not claim ownership of your files. The WebPify platform and its code remain our intellectual property.
-                    </p>
-                </div>
-
-                <h2 className="section-heading">Fair Use Policy</h2>
-                <div className="info-box" style={{ marginBottom: "2rem" }}>
-                    <p style={{ marginBottom: "1rem" }}>While we don't impose hard limits:</p>
-                    <ul style={{ paddingLeft: "1.5rem", lineHeight: "1.8" }}>
-                        <li>Use the service reasonably</li>
-                        <li>Don't attempt to abuse or overload the service</li>
-                        <li>We reserve the right to implement rate limiting if necessary</li>
-                    </ul>
-                </div>
-
-                <h2 className="section-heading">Changes to Terms</h2>
-                <div className="info-box" style={{ marginBottom: "2rem" }}>
-                    <p>
-                        We may update these Terms of Service at any time. Continued use of the service constitutes acceptance of updated terms.
-                    </p>
-                </div>
-
-                <h2 className="section-heading">Contact</h2>
-                <div className="info-box" style={{ marginBottom: "2.5rem" }}>
-                    <p>
-                        For questions about these terms, visit our <Link href="/about" style={{ color: "var(--primary)", textDecoration: "underline" }}>About page</Link>.
-                    </p>
-                </div>
-
-                <h2 className="section-heading">Related Pages</h2>
-                <div className="tool-chips">
-                    <Link href="/about" className="tool-chip">About Us</Link>
-                    <Link href="/privacy" className="tool-chip">Privacy Policy</Link>
-                </div>
-            </PageShell>
+            </div>
         </>
     );
 }

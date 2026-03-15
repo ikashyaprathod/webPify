@@ -1,171 +1,216 @@
 import Link from "next/link";
-import PageShell from "@/components/PageShell";
 
 export const metadata = {
-    title: "About Webpifyy – Professional Image Optimization Tools",
+    title: "About Webpifyy – Professional Image & Video Optimization Tools",
     description: "Learn about Webpifyy, our mission to provide free professional image compression and conversion tools for web optimization and SEO.",
-    alternates: {
-        canonical: 'https://webpifyy.vercel.app/about'
-    },
+    alternates: { canonical: 'https://webpifyy.vercel.app/about' },
     openGraph: {
-        title: "About Webpifyy – Professional Image Optimization Tools",
-        description: "Learn about Webpifyy, our mission to provide free professional image compression and conversion tools for web optimization and SEO.",
+        title: "About Webpifyy – Professional Image & Video Optimization Tools",
+        description: "Learn about Webpifyy, our mission to provide free professional tools.",
         url: "https://webpifyy.vercel.app/about",
     },
 };
 
 export default function AboutPage() {
-    const breadcrumbItems = [
-        { label: "Home", href: "/" },
-        { label: "About", href: "/about" }
-    ];
-
     return (
         <>
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{
-                    __html: JSON.stringify({
-                        "@context": "https://schema.org",
-                        "@graph": [
-                            {
-                                "@type": "BreadcrumbList",
-                                "itemListElement": [
-                                    {
-                                        "@type": "ListItem",
-                                        "position": 1,
-                                        "name": "Home",
-                                        "item": "https://webpifyy.vercel.app/"
-                                    },
-                                    {
-                                        "@type": "ListItem",
-                                        "position": 2,
-                                        "name": "About"
-                                    }
-                                ]
-                            },
-                            {
-                                "@type": "AboutPage",
-                                "@id": "https://webpifyy.vercel.app/about",
-                                "mainEntity": {
-                                    "@id": "https://webpifyy.vercel.app/#organization"
-                                }
-                            }
-                        ]
-                    })
-                }}
-            />
+            <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@graph": [
+                    { "@type": "BreadcrumbList", "itemListElement": [
+                        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://webpifyy.vercel.app/" },
+                        { "@type": "ListItem", "position": 2, "name": "About" }
+                    ]},
+                    { "@type": "AboutPage", "@id": "https://webpifyy.vercel.app/about", "mainEntity": { "@id": "https://webpifyy.vercel.app/#organization" }}
+                ]
+            })}} />
 
-            <PageShell blob1="#bfdbfe" blob2="#ddd6fe">
-
-                <div className="page-hero">
-                    <div className="page-badge">Free Tools · Privacy-First · Open Source</div>
-                    <h1 className="page-title">About Webpifyy</h1>
-                    <p className="page-subtitle">
-                        Professional image, video, and GIF tools that run entirely in your browser. No uploads, no tracking, no limits.
-                    </p>
-                </div>
-
-                <div className="info-box-grid" style={{ gridTemplateColumns: "repeat(3, 1fr)", gap: "1.5rem", marginBottom: "2.5rem" }}>
-                    <div className="info-box">
-                        <div style={{ fontSize: "2rem", marginBottom: "0.5rem" }}>6</div>
-                        <strong>Free Tools</strong>
-                        <p>Image, video, GIF, SVG — all covered</p>
+            <div className="lp-page">
+                {/* Hero */}
+                <div className="lp-hero lp-hero--about">
+                    <div className="lp-hero-inner">
+                        <div className="lp-badge">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                            Free Tools · Privacy-First · Open Source
+                        </div>
+                        <h1 className="lp-hero-title">About <span className="lp-gradient">Webpifyy.</span></h1>
+                        <p className="lp-hero-sub">Professional image, video, and GIF tools that run entirely in your browser. No uploads, no tracking, no limits.</p>
                     </div>
-                    <div className="info-box">
-                        <div style={{ fontSize: "2rem", marginBottom: "0.5rem" }}>100%</div>
-                        <strong>Browser-based</strong>
-                        <p>Processing runs in your device, not our servers</p>
-                    </div>
-                    <div className="info-box">
-                        <div style={{ fontSize: "2rem", marginBottom: "0.5rem" }}>0</div>
-                        <strong>Zero Uploads</strong>
-                        <p>Your files never leave your device</p>
+                    {/* Stats row inside hero */}
+                    <div className="lp-stats-row">
+                        <div className="lp-stat">
+                            <span className="lp-stat-num">10+</span>
+                            <span className="lp-stat-label">Free Tools</span>
+                        </div>
+                        <div className="lp-stat-divider"/>
+                        <div className="lp-stat">
+                            <span className="lp-stat-num">100%</span>
+                            <span className="lp-stat-label">Browser-based</span>
+                        </div>
+                        <div className="lp-stat-divider"/>
+                        <div className="lp-stat">
+                            <span className="lp-stat-num">0</span>
+                            <span className="lp-stat-label">Uploads Ever</span>
+                        </div>
+                        <div className="lp-stat-divider"/>
+                        <div className="lp-stat">
+                            <span className="lp-stat-num">Free</span>
+                            <span className="lp-stat-label">Forever</span>
+                        </div>
                     </div>
                 </div>
 
-                <div className="info-box" style={{ marginBottom: "2rem" }}>
-                    <h2>What is Webpifyy?</h2>
-                    <p>
-                        Webpifyy is a professional image compression and conversion platform designed to help users optimize images and videos for web performance and SEO. We provide free, high-quality tools that process files directly in your browser for maximum privacy and speed.
-                    </p>
-                </div>
+                {/* Body */}
+                <div className="lp-body">
+                    <aside className="lp-sidebar">
+                        <div className="lp-sidebar-nav">
+                            <span className="lp-sidebar-label">Sections</span>
+                            <a href="#what-is" className="lp-sidebar-link lp-sidebar-link--active">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                                What is Webpifyy
+                            </a>
+                            <a href="#mission" className="lp-sidebar-link">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                                Our Mission
+                            </a>
+                            <a href="#who" className="lp-sidebar-link">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+                                Who It's For
+                            </a>
+                            <a href="#how" className="lp-sidebar-link">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                                How It Works
+                            </a>
+                            <a href="#contact" className="lp-sidebar-link">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                                Contact
+                            </a>
+                        </div>
+                        <div className="lp-sidebar-cta">
+                            <span className="lp-sidebar-cta-label">Get Started</span>
+                            <h4 className="lp-sidebar-cta-title">Try our tools now</h4>
+                            <Link href="/image/compressor" className="lp-sidebar-cta-btn">Open Tools</Link>
+                        </div>
+                    </aside>
 
-                <div className="info-box" style={{ marginBottom: "2rem" }}>
-                    <h2>What Problem Does It Solve?</h2>
-                    <p style={{ marginBottom: "1rem" }}>
-                        Large image files slow down websites, hurt SEO rankings, fail Core Web Vitals audits, and increase bandwidth costs. Many website owners don't realize how much file size impacts performance.
-                    </p>
-                    <p style={{ marginBottom: "0.75rem" }}>Webpifyy solves this by:</p>
-                    <ul style={{ paddingLeft: "1.5rem", lineHeight: "1.8" }}>
-                        <li><strong>Compressing images by 60–90%</strong> without visible quality loss</li>
-                        <li><strong>Converting images to modern formats</strong> like WebP for better compression</li>
-                        <li><strong>Processing files client-side</strong> for privacy, security, and speed</li>
-                    </ul>
-                </div>
+                    <main className="lp-main">
+                        <section id="what-is" className="lp-section">
+                            <div className="lp-section-head">
+                                <div className="lp-section-icon">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                                </div>
+                                <h2 className="lp-section-title">What is Webpifyy?</h2>
+                            </div>
+                            <div className="lp-glass-card">
+                                <p className="lp-p">Webpifyy is a professional image compression and conversion platform designed to help users optimize images, videos, and GIFs for web performance and SEO. We provide free, high-quality tools that process files directly in your browser for maximum privacy and speed.</p>
+                                <p className="lp-p">Large image files slow down websites, hurt SEO rankings, fail Core Web Vitals audits, and increase bandwidth costs. Webpifyy solves this by compressing images by <strong>60–90%</strong> without visible quality loss, converting to modern formats like WebP, and processing everything client-side.</p>
+                            </div>
+                        </section>
 
-                <h2 className="section-heading">Who It's For</h2>
-                <div className="info-box-grid" style={{ marginBottom: "2.5rem" }}>
-                    <div>
-                        <strong>Web Developers</strong>
-                        <p>Optimizing site performance and Core Web Vitals</p>
-                    </div>
-                    <div>
-                        <strong>Designers</strong>
-                        <p>Preparing assets for web delivery</p>
-                    </div>
-                    <div>
-                        <strong>Content Creators</strong>
-                        <p>Improving page load times for blogs and media sites</p>
-                    </div>
-                    <div>
-                        <strong>SEO Specialists</strong>
-                        <p>Enhancing website speed for better rankings</p>
-                    </div>
-                    <div>
-                        <strong>E-commerce Managers</strong>
-                        <p>Optimizing product images for faster checkout</p>
-                    </div>
-                </div>
+                        <section id="mission" className="lp-section">
+                            <div className="lp-section-head">
+                                <div className="lp-section-icon">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                                </div>
+                                <h2 className="lp-section-title">Our Mission</h2>
+                            </div>
+                            <div className="lp-glass-card">
+                                <div className="lp-check-list">
+                                    <div className="lp-check-item">
+                                        <svg className="lp-check-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                                        <p><strong>Free forever.</strong> No ads. No paywalls. No file size limits.</p>
+                                    </div>
+                                    <div className="lp-check-item">
+                                        <svg className="lp-check-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                                        <p><strong>Privacy-first.</strong> Your files never leave your device — zero uploads to any server.</p>
+                                    </div>
+                                    <div className="lp-check-item">
+                                        <svg className="lp-check-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                                        <p><strong>Professional quality.</strong> Same algorithms used by major platforms and CDNs.</p>
+                                    </div>
+                                    <div className="lp-check-item">
+                                        <svg className="lp-check-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                                        <p><strong>Fast websites for everyone.</strong> We believe performance shouldn't be a premium feature.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
 
-                <div className="info-box" style={{ marginBottom: "2rem" }}>
-                    <h2>How It Works</h2>
-                    <p style={{ marginBottom: "1rem" }}>Webpifyy uses professional compression algorithms to reduce file sizes while maintaining visual quality:</p>
-                    <ul style={{ paddingLeft: "1.5rem", lineHeight: "1.8" }}>
-                        <li><strong>PNG compression:</strong> Uses pngquant for lossless compression (60–90% reduction)</li>
-                        <li><strong>JPEG compression:</strong> Uses mozjpeg for optimized lossy compression (40–90% reduction)</li>
-                        <li><strong>WebP conversion:</strong> Uses Sharp library for modern format conversion (25–35% smaller than PNG/JPEG)</li>
-                        <li><strong>Video compression:</strong> Uses FFmpeg.wasm for client-side H.264/VP9 encoding</li>
-                        <li><strong>GIF tools:</strong> Convert GIFs to MP4/WebM for up to 90% size reduction</li>
-                    </ul>
-                    <p style={{ marginTop: "1rem" }}>
-                        All processing happens in your browser. No files are uploaded to servers, ensuring complete privacy and instant results.
-                    </p>
-                </div>
+                        <section id="who" className="lp-section">
+                            <div className="lp-section-head">
+                                <div className="lp-section-icon">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+                                </div>
+                                <h2 className="lp-section-title">Who It's For</h2>
+                            </div>
+                            <div className="lp-card-grid lp-card-grid--3">
+                                {[
+                                    { title: "Web Developers", desc: "Optimize site performance and Core Web Vitals scores." },
+                                    { title: "Designers", desc: "Prepare and deliver web-ready assets instantly." },
+                                    { title: "Content Creators", desc: "Improve page load times for blogs and media sites." },
+                                    { title: "SEO Specialists", desc: "Enhance website speed for better search rankings." },
+                                    { title: "E-commerce Managers", desc: "Optimize product images for faster checkouts." },
+                                    { title: "Everyone", desc: "Anyone who wants fast, private, free file optimization." },
+                                ].map(({ title, desc }) => (
+                                    <div key={title} className="lp-soft-card lp-soft-card--sm">
+                                        <h3 className="lp-soft-card-title">{title}</h3>
+                                        <p className="lp-soft-card-desc">{desc}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        </section>
 
-                <div className="info-box" style={{ marginBottom: "2.5rem" }}>
-                    <h2>Our Commitment</h2>
-                    <p style={{ marginBottom: "1rem" }}>
-                        Webpifyy is committed to providing free, professional-grade image optimization tools that respect user privacy. We believe fast websites should be accessible to everyone.
-                    </p>
-                    <p>
-                        <strong>Free forever.</strong> No ads. No tracking. No file size limits.
-                    </p>
-                </div>
+                        <section id="how" className="lp-section">
+                            <div className="lp-section-head">
+                                <div className="lp-section-icon">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                                </div>
+                                <h2 className="lp-section-title">How It Works</h2>
+                            </div>
+                            <div className="lp-glass-card">
+                                <ul className="lp-tech-list">
+                                    <li><strong>PNG compression:</strong> Uses pngquant — lossless compression (60–90% reduction)</li>
+                                    <li><strong>JPEG compression:</strong> Uses mozjpeg — optimized lossy compression (40–90% reduction)</li>
+                                    <li><strong>WebP conversion:</strong> Uses Sharp — modern format (25–35% smaller than PNG/JPEG)</li>
+                                    <li><strong>Video compression:</strong> Uses FFmpeg.wasm — client-side H.264/VP9 encoding</li>
+                                    <li><strong>GIF tools:</strong> Converts GIFs to MP4/WebM for up to 90% size reduction</li>
+                                    <li><strong>SVG optimizer:</strong> Removes metadata and redundant paths for leaner SVGs</li>
+                                </ul>
+                                <p className="lp-p" style={{marginTop:"1rem"}}>All processing runs entirely in your browser using WebAssembly and modern browser APIs. No files are uploaded to servers, ensuring complete privacy and instant results.</p>
+                            </div>
+                        </section>
 
-                <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", marginBottom: "2.5rem" }}>
-                    <Link href="/image/compressor" className="hub-card-btn">Try Image Tools</Link>
-                    <Link href="/video/compressor" className="hub-card-btn">Try Video Tools</Link>
+                        <section id="contact" className="lp-section">
+                            <div className="lp-section-head">
+                                <div className="lp-section-icon">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                                </div>
+                                <h2 className="lp-section-title">Connect</h2>
+                            </div>
+                            <div className="lp-contact-card">
+                                <div className="lp-contact-left">
+                                    <h3 className="lp-contact-title">Built by Kashyap Rathod</h3>
+                                    <p className="lp-contact-sub">Open source, community-driven, and built with love. Contributions and feedback are always welcome.</p>
+                                    <div className="lp-contact-links">
+                                        <div className="lp-contact-link-item">
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+                                            <span>github.com/ikashyaprathod</span>
+                                        </div>
+                                        <div className="lp-contact-link-item">
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                                            <span>linkedin.com/in/kashyaprathod</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="lp-contact-actions">
+                                    <a href="https://github.com/ikashyaprathod/webPify" target="_blank" rel="noopener noreferrer" className="lp-contact-btn">View on GitHub</a>
+                                    <Link href="/image/compressor" className="lp-contact-btn-outline">Try Tools</Link>
+                                </div>
+                            </div>
+                        </section>
+                    </main>
                 </div>
-
-                <h2 className="section-heading">Related Pages</h2>
-                <div className="tool-chips">
-                    <Link href="/privacy" className="tool-chip">Privacy Policy</Link>
-                    <Link href="/terms" className="tool-chip">Terms of Service</Link>
-                    <Link href="/image/compressor" className="tool-chip">Image Compressor</Link>
-                    <Link href="/video/compressor" className="tool-chip">Video Compressor</Link>
-                </div>
-            </PageShell>
+            </div>
         </>
     );
 }
