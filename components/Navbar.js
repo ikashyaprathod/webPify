@@ -5,25 +5,32 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 const ALL_TOOLS = [
-  { name: "Image Compressor",   href: "/image/compressor",       category: "Image" },
-  { name: "Image Converter",    href: "/image/converter",        category: "Image" },
-  { name: "Image Resizer",      href: "/image/resizer",          category: "Image" },
-  { name: "Image Compare",      href: "/image/compare",          category: "Image" },
-  { name: "PNG Compressor",     href: "/image/compressor/png",   category: "Image" },
-  { name: "JPEG Compressor",    href: "/image/compressor/jpeg",  category: "Image" },
-  { name: "WebP Compressor",    href: "/image/compressor/webp",  category: "Image" },
-  { name: "PNG Converter",      href: "/image/converter/png",    category: "Image" },
-  { name: "JPEG Converter",     href: "/image/converter/jpeg",   category: "Image" },
-  { name: "WebP Converter",     href: "/image/converter/webp",   category: "Image" },
-  { name: "Video Compressor",   href: "/video/compressor",       category: "Video" },
-  { name: "MP4 Compressor",     href: "/video/compressor/mp4",   category: "Video" },
-  { name: "WebM Compressor",    href: "/video/compressor/webm",  category: "Video" },
-  { name: "MOV Compressor",     href: "/video/compressor/mov",   category: "Video" },
-  { name: "Video to GIF",       href: "/video/to-gif",           category: "Video" },
-  { name: "GIF Compressor",     href: "/gif/compressor",         category: "GIF & SVG" },
-  { name: "GIF to MP4",         href: "/gif/compressor/mp4",     category: "GIF & SVG" },
-  { name: "GIF to WebM",        href: "/gif/compressor/webm",    category: "GIF & SVG" },
-  { name: "SVG Optimizer",      href: "/svg-optimizer",          category: "GIF & SVG" },
+  { name: "Image Compressor",    href: "/image/compressor",          category: "Image" },
+  { name: "Image Converter",     href: "/image/converter",           category: "Image" },
+  { name: "Image Resizer",       href: "/image/resizer",             category: "Image" },
+  { name: "Image Compare",       href: "/image/compare",             category: "Image" },
+  { name: "Crop Image",          href: "/image/crop",                category: "Image" },
+  { name: "Rotate Image",        href: "/image/rotate",              category: "Image" },
+  { name: "Add Watermark",       href: "/image/watermark",           category: "Image" },
+  { name: "HEIC to JPG",         href: "/image/heic-to-jpg",         category: "Image" },
+  { name: "Image to PDF",        href: "/image/to-pdf",              category: "Image" },
+  { name: "Remove Background",   href: "/image/remove-background",   category: "Image" },
+  { name: "PNG Compressor",      href: "/image/compressor/png",      category: "Image" },
+  { name: "JPEG Compressor",     href: "/image/compressor/jpeg",     category: "Image" },
+  { name: "WebP Compressor",     href: "/image/compressor/webp",     category: "Image" },
+  { name: "PNG Converter",       href: "/image/converter/png",       category: "Image" },
+  { name: "JPEG Converter",      href: "/image/converter/jpeg",      category: "Image" },
+  { name: "WebP Converter",      href: "/image/converter/webp",      category: "Image" },
+  { name: "PDF to JPG",          href: "/pdf-to-jpg",                category: "Image" },
+  { name: "Video Compressor",    href: "/video/compressor",          category: "Video" },
+  { name: "MP4 Compressor",      href: "/video/compressor/mp4",      category: "Video" },
+  { name: "WebM Compressor",     href: "/video/compressor/webm",     category: "Video" },
+  { name: "MOV Compressor",      href: "/video/compressor/mov",      category: "Video" },
+  { name: "Video to GIF",        href: "/video/to-gif",              category: "Video" },
+  { name: "GIF Compressor",      href: "/gif/compressor",            category: "GIF & SVG" },
+  { name: "GIF to MP4",          href: "/gif/compressor/mp4",        category: "GIF & SVG" },
+  { name: "GIF to WebM",         href: "/gif/compressor/webm",       category: "GIF & SVG" },
+  { name: "SVG Optimizer",       href: "/svg-optimizer",             category: "GIF & SVG" },
 ];
 
 export default function Navbar() {
@@ -99,6 +106,13 @@ export default function Navbar() {
                   <Link href="/image/converter" className="nb-dropdown-item">Image Converter</Link>
                   <Link href="/image/resizer" className="nb-dropdown-item">Image Resizer</Link>
                   <Link href="/image/compare" className="nb-dropdown-item">Image Compare</Link>
+                  <Link href="/image/crop" className="nb-dropdown-item">Crop Image</Link>
+                  <Link href="/image/rotate" className="nb-dropdown-item">Rotate Image</Link>
+                  <Link href="/image/watermark" className="nb-dropdown-item">Add Watermark</Link>
+                  <Link href="/image/heic-to-jpg" className="nb-dropdown-item">HEIC → JPG</Link>
+                  <Link href="/image/to-pdf" className="nb-dropdown-item">Image → PDF</Link>
+                  <Link href="/pdf-to-jpg" className="nb-dropdown-item">PDF → JPG</Link>
+                  <Link href="/image/remove-background" className="nb-dropdown-item">Remove Background</Link>
                 </div>
                 <div className="nb-dropdown-group">
                   <span className="nb-dropdown-label">Video</span>
@@ -218,6 +232,13 @@ export default function Navbar() {
             <Link href="/image/converter" className="nb-mobile-item" onClick={() => setMobileOpen(false)}>Image Converter</Link>
             <Link href="/image/resizer" className="nb-mobile-item" onClick={() => setMobileOpen(false)}>Image Resizer</Link>
             <Link href="/image/compare" className="nb-mobile-item" onClick={() => setMobileOpen(false)}>Image Compare</Link>
+            <Link href="/image/crop" className="nb-mobile-item" onClick={() => setMobileOpen(false)}>Crop Image</Link>
+            <Link href="/image/rotate" className="nb-mobile-item" onClick={() => setMobileOpen(false)}>Rotate Image</Link>
+            <Link href="/image/watermark" className="nb-mobile-item" onClick={() => setMobileOpen(false)}>Add Watermark</Link>
+            <Link href="/image/heic-to-jpg" className="nb-mobile-item" onClick={() => setMobileOpen(false)}>HEIC → JPG</Link>
+            <Link href="/image/to-pdf" className="nb-mobile-item" onClick={() => setMobileOpen(false)}>Image → PDF</Link>
+            <Link href="/pdf-to-jpg" className="nb-mobile-item" onClick={() => setMobileOpen(false)}>PDF → JPG</Link>
+            <Link href="/image/remove-background" className="nb-mobile-item" onClick={() => setMobileOpen(false)}>Remove Background</Link>
           </div>
           <div className="nb-mobile-section">
             <span className="nb-mobile-label">Video Tools</span>

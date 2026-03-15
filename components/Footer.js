@@ -111,8 +111,13 @@ export default function Footer() {
             <Link href="/image/compressor" className="ft-nav-link">Image Compressor</Link>
             <Link href="/image/converter" className="ft-nav-link">Image Converter</Link>
             <Link href="/image/resizer" className="ft-nav-link">Image Resizer</Link>
-            <Link href="/image/compare" className="ft-nav-link">Image Compare</Link>
-            <Link href="/image/compressor/png" className="ft-nav-link">PNG Compressor</Link>
+            <Link href="/image/crop" className="ft-nav-link">Crop Image</Link>
+            <Link href="/image/rotate" className="ft-nav-link">Rotate Image</Link>
+            <Link href="/image/watermark" className="ft-nav-link">Add Watermark</Link>
+            <Link href="/image/heic-to-jpg" className="ft-nav-link">HEIC to JPG</Link>
+            <Link href="/image/to-pdf" className="ft-nav-link">Image to PDF</Link>
+            <Link href="/pdf-to-jpg" className="ft-nav-link">PDF to JPG</Link>
+            <Link href="/image/remove-background" className="ft-nav-link">Remove Background</Link>
           </div>
           <div className="ft-nav-col">
             <h4 className="ft-nav-heading">Video Tools</h4>

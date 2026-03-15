@@ -37,6 +37,62 @@ const cards = [
         gradient: "linear-gradient(135deg,#fffbeb,#fef3c7)",
         cta: "Resize now",
     },
+    {
+        href: "/image/crop",
+        icon: "✂️",
+        title: "Crop Image",
+        desc: "Draw a selection on any image and crop it instantly. Download as PNG in one click.",
+        gradient: "linear-gradient(135deg,#fdf4ff,#fae8ff)",
+        cta: "Crop now",
+    },
+    {
+        href: "/image/rotate",
+        icon: "🔃",
+        title: "Rotate & Flip",
+        desc: "Rotate 90°, 180°, or flip horizontally/vertically. Before/after preview included.",
+        gradient: "linear-gradient(135deg,#f0f9ff,#e0f2fe)",
+        cta: "Rotate now",
+    },
+    {
+        href: "/image/watermark",
+        icon: "💧",
+        title: "Add Watermark",
+        desc: "Stamp a custom text watermark with full control over position, opacity, font size and color.",
+        gradient: "linear-gradient(135deg,#fff1f2,#ffe4e6)",
+        cta: "Add watermark",
+    },
+    {
+        href: "/image/heic-to-jpg",
+        icon: "📱",
+        title: "HEIC to JPG",
+        desc: "Convert iPhone HEIC/HEIF photos to JPG instantly. Batch convert with quality control.",
+        gradient: "linear-gradient(135deg,#f0fdf4,#dcfce7)",
+        cta: "Convert HEIC",
+    },
+    {
+        href: "/image/to-pdf",
+        icon: "📄",
+        title: "Image to PDF",
+        desc: "Combine multiple images into a single PDF. Choose page size and orientation per image.",
+        gradient: "linear-gradient(135deg,#fefce8,#fef9c3)",
+        cta: "Create PDF",
+    },
+    {
+        href: "/pdf-to-jpg",
+        icon: "📑",
+        title: "PDF to JPG",
+        desc: "Convert every page of a PDF to a high-quality JPG. Download individually or as a ZIP.",
+        gradient: "linear-gradient(135deg,#fff7ed,#fed7aa)",
+        cta: "Convert PDF",
+    },
+    {
+        href: "/image/remove-background",
+        icon: "✂️",
+        title: "Remove Background",
+        desc: "AI-powered background removal. Get a transparent PNG in seconds — runs entirely in your browser.",
+        gradient: "linear-gradient(135deg,#faf5ff,#f3e8ff)",
+        cta: "Remove BG",
+    },
 ];
 
 export default function ImageMasterHub() {
@@ -146,11 +202,11 @@ export default function ImageMasterHub() {
                             </div>
                         </div>
                         <div className="hubv2-stat-card">
-                            <span className="hubv2-stat-ghost">⚡</span>
-                            <p className="hubv2-stat-label">Formats Supported</p>
+                            <span className="hubv2-stat-ghost">🛠️</span>
+                            <p className="hubv2-stat-label">Total Tools</p>
                             <div className="hubv2-stat-row">
-                                <span className="hubv2-stat-value">3</span>
-                                <span className="hubv2-stat-badge hubv2-stat-badge--green">PNG · JPEG · WebP</span>
+                                <span className="hubv2-stat-value">10</span>
+                                <span className="hubv2-stat-badge hubv2-stat-badge--green">All free</span>
                             </div>
                             <div className="hubv2-stat-progress-track">
                                 <div className="hubv2-stat-progress-bar hubv2-stat-progress-bar--green" style={{ "--prog": "100%" }}></div>
@@ -167,50 +223,6 @@ export default function ImageMasterHub() {
                                 <div className="hubv2-stat-progress-bar hubv2-stat-progress-bar--amber" style={{ "--prog": "74%" }}></div>
                             </div>
                         </div>
-                    </div>
-                </section>
-
-                {/* ── Recent Assets ── */}
-                <section className="hubv2-recent">
-                    <div className="hubv2-recent-hd">
-                        <h2 className="hubv2-recent-hd-title">Recent Assets</h2>
-                        <a href="/image/compressor" className="hubv2-recent-view-all">View All Tools →</a>
-                    </div>
-                    <div className="hubv2-recent-card">
-                        <table className="hubv2-recent-table">
-                            <thead className="hubv2-recent-thead">
-                                <tr>
-                                    <th className="hubv2-recent-th">File Name</th>
-                                    <th className="hubv2-recent-th">Type</th>
-                                    <th className="hubv2-recent-th">Original</th>
-                                    <th className="hubv2-recent-th">Optimized</th>
-                                    <th className="hubv2-recent-th hubv2-recent-td-right">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr className="hubv2-recent-tr">
-                                    <td className="hubv2-recent-td"><div className="hubv2-recent-file"><div className="hubv2-recent-thumb">🖼️</div><span className="hubv2-recent-filename">hero-banner.jpg</span></div></td>
-                                    <td className="hubv2-recent-td">JPG → WebP</td>
-                                    <td className="hubv2-recent-td">2.4 MB</td>
-                                    <td className="hubv2-recent-td"><span className="hubv2-recent-badge">420 KB (-82%)</span></td>
-                                    <td className="hubv2-recent-td hubv2-recent-td-right"><a href="/image/compressor" className="hubv2-recent-dl">↓</a></td>
-                                </tr>
-                                <tr className="hubv2-recent-tr">
-                                    <td className="hubv2-recent-td"><div className="hubv2-recent-file"><div className="hubv2-recent-thumb">🏞️</div><span className="hubv2-recent-filename">product-shot-01.png</span></div></td>
-                                    <td className="hubv2-recent-td">PNG → PNG</td>
-                                    <td className="hubv2-recent-td">1.1 MB</td>
-                                    <td className="hubv2-recent-td"><span className="hubv2-recent-badge">310 KB (-71%)</span></td>
-                                    <td className="hubv2-recent-td hubv2-recent-td-right"><a href="/image/compressor" className="hubv2-recent-dl">↓</a></td>
-                                </tr>
-                                <tr className="hubv2-recent-tr">
-                                    <td className="hubv2-recent-td"><div className="hubv2-recent-file"><div className="hubv2-recent-thumb">🎨</div><span className="hubv2-recent-filename">logo-design.png</span></div></td>
-                                    <td className="hubv2-recent-td">PNG → WebP</td>
-                                    <td className="hubv2-recent-td">450 KB</td>
-                                    <td className="hubv2-recent-td"><span className="hubv2-recent-badge">95 KB (-79%)</span></td>
-                                    <td className="hubv2-recent-td hubv2-recent-td-right"><a href="/image/converter" className="hubv2-recent-dl">↓</a></td>
-                                </tr>
-                            </tbody>
-                        </table>
                     </div>
                 </section>
 

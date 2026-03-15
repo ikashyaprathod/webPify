@@ -155,6 +155,50 @@ export default function sitemap() {
             priority: 0.8,
         },
 
+        // New Tier 1 Image Tools
+        {
+            url: `${baseUrl}/image/heic-to-jpg`,
+            lastModified: staticDate,
+            changeFrequency: 'weekly',
+            priority: 0.8,
+        },
+        {
+            url: `${baseUrl}/image/rotate`,
+            lastModified: staticDate,
+            changeFrequency: 'weekly',
+            priority: 0.8,
+        },
+        {
+            url: `${baseUrl}/image/crop`,
+            lastModified: staticDate,
+            changeFrequency: 'weekly',
+            priority: 0.8,
+        },
+        {
+            url: `${baseUrl}/image/watermark`,
+            lastModified: staticDate,
+            changeFrequency: 'weekly',
+            priority: 0.8,
+        },
+        {
+            url: `${baseUrl}/image/to-pdf`,
+            lastModified: staticDate,
+            changeFrequency: 'weekly',
+            priority: 0.8,
+        },
+        {
+            url: `${baseUrl}/pdf-to-jpg`,
+            lastModified: staticDate,
+            changeFrequency: 'weekly',
+            priority: 0.8,
+        },
+        {
+            url: `${baseUrl}/image/remove-background`,
+            lastModified: staticDate,
+            changeFrequency: 'weekly',
+            priority: 0.9,
+        },
+
         // SVG Optimizer
         {
             url: `${baseUrl}/svg-optimizer`,
