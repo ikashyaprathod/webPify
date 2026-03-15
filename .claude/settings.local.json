@@ -24,7 +24,8 @@
       "Bash(do echo:*)",
       "Bash(node update-pages.mjs)",
       "Bash(echo \"=== $f ===\")",
-      "Bash(node add-tpg-sections.mjs)"
+      "Bash(node add-tpg-sections.mjs)",
+      "Bash(node -e \"const fs=require\\(''fs''\\); fs.appendFileSync\\(''app/globals.css'', fs.readFileSync\\(''temp-component-styles.css'',''utf8''\\)\\); console.log\\(''Done''\\);\")"
     ]
   }
 }
