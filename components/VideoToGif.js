@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState, useEffect, useCallback } from "react";
+import { saveRecent, loadRecent, clearRecent } from "../utils/recent-files-db";
 
 const FPS_OPTIONS   = [5, 10, 15, 20];
 const SCALE_OPTIONS = [
@@ -10,6 +11,15 @@ const SCALE_OPTIONS = [
   { label: "640px", value: 640 },
 ];
 const COLOR_OPTIONS = [64, 128, 192, 256];
+const IDB_STORE     = 'recent_videotogif';
+
+function blobToDataUrl(blob) {
+  return new Promise(resolve => {
+    const reader = new FileReader();
+    reader.onloadend = () => resolve(reader.result);
+    reader.readAsDataURL(blob);
+  });
+}
 
 function formatBytes(b) {
   if (b === 0) return "0 B";
@@ -21,31 +31,60 @@ function formatBytes(b) {
 function newId() { return Math.random().toString(36).slice(2, 10); }
 
 export default function VideoToGif() {
-  const [items,     setItems]     = useState([]);
-  const [fps,       setFps]       = useState(15);
-  const [scale,     setScale]     = useState(480);
-  const [maxColors, setMaxColors] = useState(128);
-  const [working,   setWorking]   = useState(false);
+  const [items,       setItems]       = useState([]);
+  const [fps,         setFps]         = useState(15);
+  const [scale,       setScale]       = useState(480);
+  const [maxColors,   setMaxColors]   = useState(128);
+  const [working,     setWorking]     = useState(false);
+  const [recentFiles, setRecentFiles] = useState([]);
   const fileInputRef = useRef(null);
   const workerRef    = useRef(null);
   const pendingRef   = useRef([]);
 
+  // Load from IndexedDB on mount
+  useEffect(() => {
+    loadRecent(IDB_STORE).then(stored => {
+      if (!stored.length) return;
+      setRecentFiles(stored);
+    });
+  }, []);
+
+  // Save to IndexedDB whenever recentFiles changes
+  useEffect(() => {
+    if (recentFiles.length === 0) return;
+    saveRecent(IDB_STORE, recentFiles.map(f => ({
+      id: f.id,
+      name: f.name,
+      origSize: f.origSize,
+      outputSize: f.outputSize,
+      reduction: f.reduction,
+      previewUrl: f.previewUrl,
+    })));
+  }, [recentFiles]);
+
   function getWorker() {
     if (!workerRef.current) {
       workerRef.current = new Worker(new URL("../workers/gifWorker.js", import.meta.url));
-      workerRef.current.onmessage = ({ data }) => {
+      workerRef.current.onmessage = async ({ data }) => {
         const { type, id, pct, buffer, message } = data;
         if (type === "progress") {
           setItems(prev => prev.map(it => it.id === id ? { ...it, pct, status: "processing" } : it));
         } else if (type === "done") {
           const blob = new Blob([buffer], { type: "image/gif" });
-          const url  = URL.createObjectURL(blob);
-          setItems(prev => prev.map(it => it.id !== id ? it : {
-            ...it, status: "done", pct: 100,
-            outputUrl: url, outputSize: buffer.byteLength,
-            reduction: it.origSize > 0
+          const outputUrl  = URL.createObjectURL(blob);
+          const previewUrl = await blobToDataUrl(blob);
+
+          setItems(prev => prev.map(it => {
+            if (it.id !== id) return it;
+            const reduction = it.origSize > 0
               ? ((it.origSize - buffer.byteLength) / it.origSize * 100).toFixed(1)
-              : "0",
+              : "0";
+            setRecentFiles(prev2 => [{
+              id: it.id, name: it.name,
+              origSize: it.origSize, outputSize: buffer.byteLength,
+              reduction, previewUrl,
+            }, ...prev2].slice(0, 20));
+            return { ...it, status: "done", pct: 100, outputUrl, previewUrl, outputSize: buffer.byteLength, reduction };
           }));
           processNext();
         } else if (type === "error") {
@@ -73,7 +112,7 @@ export default function VideoToGif() {
     const newItems = videos.map(file => ({
       id: newId(), file, origSize: file.size, name: file.name,
       status: "queued", pct: 0, statusMsg: "",
-      outputUrl: null, outputSize: 0, reduction: "0",
+      outputUrl: null, previewUrl: null, outputSize: 0, reduction: "0",
     }));
 
     setItems(prev => [...prev, ...newItems]);
@@ -85,19 +124,23 @@ export default function VideoToGif() {
   }, [fps, scale, maxColors, working]);
 
   const handleReset = () => {
-    setItems([]); pendingRef.current = []; setWorking(false);
+    setItems([]); setRecentFiles([]);
+    pendingRef.current = []; setWorking(false);
     if (workerRef.current) { workerRef.current.terminate(); workerRef.current = null; }
+    clearRecent(IDB_STORE);
   };
 
   const handleDownload = (item) => {
     const a = document.createElement("a");
-    a.href = item.outputUrl;
+    a.href = item.outputUrl || item.previewUrl;
     a.download = item.name.replace(/\.[^.]+$/, "") + ".gif";
     a.click();
   };
 
+  const doneItems = items.filter(i => i.status === "done");
+
   return (
-    <div className="vtg-wrap">
+    <div className="tc-wrap">
       {items.length === 0 && (
         <div className="vtg-settings">
           <div className="vtg-group">
@@ -129,89 +172,125 @@ export default function VideoToGif() {
 
       {items.length === 0 ? (
         <div
-          className="vtg-drop"
+          className="tc-drop-card"
           onClick={() => fileInputRef.current?.click()}
           onDrop={e => { e.preventDefault(); processFiles(e.dataTransfer.files); }}
           onDragOver={e => e.preventDefault()}
         >
           <input ref={fileInputRef} type="file" accept="video/*" multiple style={{ display: "none" }} onChange={e => processFiles(e.target.files)} />
-          <div style={{ fontSize: "3rem", marginBottom: "1rem" }}>🎥</div>
-          <p className="vtg-drop-title">Drop video files here or click to select</p>
-          <p className="vtg-drop-hint">Supports MP4, WebM, MOV • Converts to animated GIF</p>
+          <div className="tc-drop-icon">🎥</div>
+          <div>
+            <p className="tc-drop-title">Drag &amp; Drop Video Files</p>
+            <p className="tc-drop-subtitle">Supports MP4, WebM, MOV &nbsp;·&nbsp; Converts to animated GIF</p>
+          </div>
+          <button className="tc-drop-btn" onClick={e => { e.stopPropagation(); fileInputRef.current?.click(); }} disabled={working}>
+            {working ? "Converting…" : "Select Videos"}
+          </button>
         </div>
       ) : (
-        <>
-          <div className="vtg-bar">
-            <button className="vtg-btn vtg-btn--blue" onClick={() => fileInputRef.current?.click()} disabled={working}>Add More Videos</button>
-            <button className="vtg-btn vtg-btn--red" onClick={handleReset}>Reset</button>
+        <div className="tc-queue-card">
+          <div className="tc-queue-hd">
+            <div className="tc-queue-hd-left">
+              <div className="tc-queue-hd-icon">🎥</div>
+              <h3 className="tc-queue-hd-title">Conversion Queue</h3>
+            </div>
+            <div className="tc-queue-actions">
+              <button className="tc-queue-btn tc-queue-btn-primary" onClick={() => fileInputRef.current?.click()} disabled={working}>+ Add More</button>
+              <button className="tc-queue-btn tc-queue-btn-danger" onClick={handleReset}>Reset</button>
+            </div>
           </div>
-          <div className="vtg-list">
+
+          <div className="tc-queue-list">
             {items.map(item => (
-              <div key={item.id} className={`vtg-item vtg-item--${item.status}`}>
-                <div className="vtg-thumb">
+              <div key={item.id} className={`tc-file-item${item.status === "done" ? "" : " tc-file-item--pending"}`}>
+                <div className="tc-file-thumb-ph">
                   {item.outputUrl
-                    ? <img src={item.outputUrl} alt="GIF preview" />
-                    : <span style={{ fontSize: "1.5rem" }}>🎥</span>
+                    ? <img src={item.outputUrl} alt="GIF preview" style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: "1rem" }} />
+                    : <span>🎥</span>
                   }
                 </div>
-                <div className="vtg-info">
-                  <p className="vtg-name">{item.name}</p>
-                  {item.status === "queued"     && <p className="vtg-sub">Waiting...</p>}
+                <div className="tc-file-info">
+                  <p className="tc-file-name">{item.name}</p>
+                  {item.status === "queued"     && <p className="tc-file-status">Waiting...</p>}
                   {item.status === "processing" && (
                     <div>
-                      <p className="vtg-sub vtg-sub--blue">Converting… {item.pct}%</p>
-                      <div className="vtg-prog"><div style={{ width: item.pct + "%", height: "100%", background: "var(--primary,#0070f3)", borderRadius: "2px", transition: "width 0.3s" }} /></div>
+                      <p className="tc-file-status">Converting… {item.pct}%</p>
+                      <div style={{ height: "4px", background: "#e2e8f0", borderRadius: "2px", marginTop: "0.375rem" }}>
+                        <div style={{ width: item.pct + "%", height: "100%", background: "#3b82f6", borderRadius: "2px", transition: "width 0.3s" }} />
+                      </div>
                     </div>
                   )}
                   {item.status === "done" && (
-                    <p className="vtg-sub">{formatBytes(item.origSize)} → {formatBytes(item.outputSize)} GIF</p>
+                    <>
+                      <p className="tc-file-sizes">{formatBytes(item.origSize)} → {formatBytes(item.outputSize)} GIF</p>
+                      <p className="tc-file-status-ok">
+                        <span className="tc-file-status-dot" />
+                        CONVERTED TO GIF
+                      </p>
+                    </>
                   )}
-                  {item.status === "error" && <p className="vtg-sub vtg-sub--red">{item.statusMsg}</p>}
+                  {item.status === "error" && <p className="tc-file-status" style={{ color: "#dc2626" }}>{item.statusMsg}</p>}
                 </div>
                 {item.status === "done" && (
-                  <button className="vtg-btn vtg-btn--blue vtg-btn--sm" onClick={() => handleDownload(item)}>Download GIF</button>
+                  <div className="tc-file-btns">
+                    <button className="tc-file-dl-btn" onClick={() => handleDownload(item)}>Download GIF</button>
+                  </div>
                 )}
               </div>
             ))}
           </div>
+
+          <div className="tc-queue-ft">
+            <span className="tc-queue-ft-info">{doneItems.length} of {items.length} converted</span>
+            <button className="tc-queue-cta-btn" onClick={() => doneItems.forEach(handleDownload)} disabled={doneItems.length === 0 || working}>
+              ⚡ Download All ({doneItems.length})
+            </button>
+            <button className="tc-queue-clear-btn" onClick={handleReset}>Clear Queue</button>
+          </div>
+
           <input ref={fileInputRef} type="file" accept="video/*" multiple style={{ display: "none" }} onChange={e => processFiles(e.target.files)} />
-        </>
+        </div>
+      )}
+
+      {recentFiles.length > 0 && (
+        <div className="tc-recent-card">
+          <div className="tc-recent-hd">
+            <div className="tc-recent-hd-left">
+              <div className="tc-recent-hd-icon">🕐</div>
+              <h3 className="tc-recent-hd-title">Recent Assets</h3>
+            </div>
+            <button className="tc-recent-view-all">View all {recentFiles.length} assets →</button>
+          </div>
+          <div className="tc-recent-scroll">
+            {recentFiles.map(item => (
+              <div key={item.id} className="tc-recent-item">
+                <div className="tc-recent-thumb">
+                  {item.previewUrl
+                    ? <img src={item.previewUrl} alt={item.name} />
+                    : <span>🎥</span>
+                  }
+                  <button className="tc-recent-dl-btn" onClick={() => handleDownload(item)} title="Download">↓</button>
+                </div>
+                <p className="tc-recent-name">{item.name.replace(/\.[^/.]+$/, "")}</p>
+                <p className="tc-recent-sizes">{formatBytes(item.origSize)} → {formatBytes(item.outputSize)}</p>
+              </div>
+            ))}
+          </div>
+        </div>
       )}
 
       <style>{`
-        .vtg-wrap { max-width: 800px; margin: 0 auto; padding: 1.5rem; }
-        .vtg-settings { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 1.5rem; }
+        .vtg-settings { background: #fff; border-radius: 1.5rem; border: 1px solid rgba(255,255,255,0.8); box-shadow: 0 4px 12px -2px rgba(0,0,0,0.07), inset 0 1px 0 rgba(255,255,255,0.8); padding: 1.5rem 2rem; margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 1rem; }
         .vtg-group { display: flex; flex-direction: column; gap: 0.375rem; }
-        .vtg-group label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; opacity: 0.55; }
+        .vtg-group label { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: #64748b; }
         .vtg-row { display: flex; gap: 0.375rem; flex-wrap: wrap; }
-        .vtg-pill { padding: 0.375rem 0.75rem; border: 1.5px solid rgba(0,0,0,0.15); border-radius: 20px; background: transparent; cursor: pointer; font-size: 0.875rem; color: inherit; }
-        .vtg-pill--on { background: var(--primary,#0070f3); color: white; border-color: var(--primary,#0070f3); }
-        .vtg-drop { border: 2px dashed var(--primary,#0070f3); border-radius: 12px; padding: 4rem 2rem; text-align: center; cursor: pointer; }
-        .vtg-drop:hover { background: rgba(0,112,243,0.04); }
-        .vtg-drop-title { font-size: 1.125rem; font-weight: 600; margin-bottom: 0.5rem; }
-        .vtg-drop-hint { font-size: 0.875rem; opacity: 0.6; }
-        .vtg-bar { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem; }
-        .vtg-btn { padding: 0.5rem 1rem; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.875rem; }
-        .vtg-btn:disabled { opacity: 0.5; cursor: not-allowed; }
-        .vtg-btn--blue { background: var(--primary,#0070f3); color: white; }
-        .vtg-btn--red  { background: #ef4444; color: white; }
-        .vtg-btn--sm   { padding: 0.375rem 0.75rem; font-size: 0.8125rem; }
-        .vtg-list { display: flex; flex-direction: column; gap: 0.75rem; }
-        .vtg-item { display: flex; align-items: center; gap: 1rem; padding: 1rem; border: 1.5px solid rgba(0,0,0,0.1); border-radius: 8px; }
-        .vtg-item--done { border-color: rgba(34,197,94,0.4); }
-        .vtg-item--error { border-color: rgba(239,68,68,0.4); }
-        .vtg-thumb { width: 72px; height: 56px; flex-shrink: 0; border-radius: 6px; overflow: hidden; background: rgba(0,0,0,0.05); display: flex; align-items: center; justify-content: center; }
-        .vtg-thumb img { width: 100%; height: 100%; object-fit: cover; }
-        .vtg-info { flex: 1; min-width: 0; text-align: left; }
-        .vtg-name { font-weight: 600; font-size: 0.875rem; margin-bottom: 0.25rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .vtg-sub { font-size: 0.8125rem; opacity: 0.7; }
-        .vtg-sub--blue { color: var(--primary,#0070f3); opacity: 1; font-weight: 600; }
-        .vtg-sub--red  { color: #ef4444; opacity: 1; }
-        .vtg-prog { height: 4px; background: rgba(0,0,0,0.08); border-radius: 2px; margin-top: 0.375rem; }
+        .vtg-pill { padding: 0.4rem 0.875rem; border: 1.5px solid #e2e8f0; border-radius: 0.625rem; background: #f8fafc; cursor: pointer; font-size: 0.8rem; font-weight: 600; color: #475569; transition: all 0.15s; }
+        .vtg-pill:hover { border-color: #bfdbfe; background: #eff6ff; }
+        .vtg-pill--on { background: linear-gradient(135deg,#3b82f6 0%,#6366f1 100%); color: white; border-color: transparent; box-shadow: 0 2px 8px -1px rgba(59,130,246,0.4); }
         @media (prefers-color-scheme: dark) {
-          .vtg-pill { border-color: rgba(255,255,255,0.2); }
-          .vtg-item { border-color: rgba(255,255,255,0.1); }
-          .vtg-prog { background: rgba(255,255,255,0.1); }
+          .vtg-settings { background: #1e293b; border-color: rgba(255,255,255,0.07); }
+          .vtg-pill { border-color: #334155; background: #0f172a; color: #94a3b8; }
+          .vtg-pill:hover { border-color: #3b82f6; }
         }
       `}</style>
     </div>

@@ -95,7 +95,7 @@ function generatePageMetadata(action, format, intent) {
         title,
         description,
         h1,
-        canonical: `https://webpify.vercel.app/${action}-${format}-${intent.slug}`
+        canonical: `https://webpifyy.vercel.app/${action}-${format}-${intent.slug}`
     };
 }
 

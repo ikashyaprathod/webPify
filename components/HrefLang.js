@@ -5,7 +5,7 @@
  * Adds hreflang tags for English variants (en, en-US, en-GB, en-IN)
  */
 export default function HrefLang({ pathname = "" }) {
-    const baseUrl = "https://webpify.vercel.app";
+    const baseUrl = "https://webpifyy.vercel.app";
     const url = `${baseUrl}${pathname}`;
 
     return (

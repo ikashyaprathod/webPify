@@ -14,4 +14,4 @@ Allow: /_next/image/
 Disallow: /_next/data/
 
 # Sitemaps
-Sitemap: https://webpify.vercel.app/sitemap.xml
+Sitemap: https://webpifyy.vercel.app/sitemap.xml

@@ -1,6 +1,6 @@
 // SEO Configuration Utilities
 
-const BASE_URL = "https://webpify.vercel.app";
+const BASE_URL = "https://webpifyy.vercel.app";
 
 // List of all indexable pages
 const INDEXED_PATHS = [

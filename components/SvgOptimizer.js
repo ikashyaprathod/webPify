@@ -1,6 +1,9 @@
 "use client";
 
 import { useRef, useState, useEffect, useCallback } from "react";
+import { saveRecent, loadRecent, clearRecent } from "../utils/recent-files-db";
+
+const IDB_STORE = 'recent_svg';
 
 function formatBytes(b) {
   if (!b) return "0 B";
@@ -12,10 +15,32 @@ function formatBytes(b) {
 function newId() { return Math.random().toString(36).slice(2, 10); }
 
 export default function SvgOptimizer() {
-  const [files,   setFiles]   = useState([]);
-  const [working, setWorking] = useState(false);
-  const [error,   setError]   = useState("");
+  const [files,       setFiles]       = useState([]);
+  const [working,     setWorking]     = useState(false);
+  const [error,       setError]       = useState("");
+  const [recentFiles, setRecentFiles] = useState([]);
   const fileInputRef = useRef(null);
+
+  // Load from IndexedDB on mount
+  useEffect(() => {
+    loadRecent(IDB_STORE).then(items => {
+      if (!items.length) return;
+      setRecentFiles(items);
+    });
+  }, []);
+
+  // Save to IndexedDB whenever recentFiles changes
+  useEffect(() => {
+    if (recentFiles.length === 0) return;
+    saveRecent(IDB_STORE, recentFiles.map(f => ({
+      id: f.id,
+      name: f.name,
+      origSize: f.origSize,
+      outSize: f.outSize,
+      reduction: f.reduction,
+      outputUrl: f.outputUrl,
+    })));
+  }, [recentFiles]);
 
   const optimizeFile = async (file) => {
     const fd = new FormData();
@@ -25,12 +50,13 @@ export default function SvgOptimizer() {
       const err = await res.json();
       throw new Error(err.error || "Optimization failed");
     }
-    const text     = await res.text();
-    const origSz   = parseInt(res.headers.get("X-Original-Size")  || file.size);
-    const outSz    = parseInt(res.headers.get("X-Optimized-Size") || text.length);
-    const reduction= res.headers.get("X-Reduction") || "0";
-    const blob     = new Blob([text], { type: "image/svg+xml" });
-    return { outputBlob: blob, outputUrl: URL.createObjectURL(blob), origSize: origSz, outSize: outSz, reduction };
+    const text      = await res.text();
+    const origSz    = parseInt(res.headers.get("X-Original-Size")  || file.size);
+    const outSz     = parseInt(res.headers.get("X-Optimized-Size") || text.length);
+    const reduction = res.headers.get("X-Reduction") || "0";
+    // SVG is text — encode as data URL directly
+    const outputUrl = "data:image/svg+xml;base64," + btoa(unescape(encodeURIComponent(text)));
+    return { outputUrl, origSize: origSz, outSize: outSz, reduction };
   };
 
   const processFiles = useCallback(async (fileList) => {
@@ -50,7 +76,9 @@ export default function SvgOptimizer() {
       setFiles(prev => prev.map(it => it.id === pid ? { ...it, status: "optimizing" } : it));
       try {
         const result = await optimizeFile(file);
-        setFiles(prev => prev.map(it => it.id === pid ? { ...it, ...result, status: "done" } : it));
+        const entry = { id: pid, name: file.name, ...result, status: "done" };
+        setFiles(prev => prev.map(it => it.id === pid ? entry : it));
+        setRecentFiles(prev => [entry, ...prev].slice(0, 20));
       } catch (e) {
         setFiles(prev => prev.map(it => it.id === pid ? { ...it, status: "error", statusMsg: e.message } : it));
       }
@@ -81,123 +109,125 @@ export default function SvgOptimizer() {
   };
 
   const handleReset = () => {
-    setFiles([]); setError("");
+    setFiles([]); setError(""); setRecentFiles([]);
     if (fileInputRef.current) fileInputRef.current.value = "";
+    clearRecent(IDB_STORE);
   };
 
+  const doneFiles = files.filter(f => f.status === "done");
+
   return (
-    <div className="so-wrap">
+    <div className="tc-wrap">
+      <input ref={fileInputRef} type="file" accept=".svg,image/svg+xml" multiple style={{ display: "none" }} onChange={e => processFiles(e.target.files)} />
+
       {error && (
-        <div className="so-error">
-          {error}
-          <button onClick={() => setError("")} className="so-error-close">×</button>
+        <div className="tc-error">
+          <span>{error}</span>
+          <button onClick={() => setError("")} className="tc-error-close">×</button>
         </div>
       )}
 
       {files.length === 0 ? (
         <div
-          className="so-drop"
+          className="tc-drop-card"
           onClick={() => fileInputRef.current?.click()}
           onDrop={e => { e.preventDefault(); processFiles(e.dataTransfer.files); }}
           onDragOver={e => e.preventDefault()}
         >
-          <input
-            ref={fileInputRef}
-            type="file"
-            accept=".svg,image/svg+xml"
-            multiple
-            style={{ display: "none" }}
-            onChange={e => processFiles(e.target.files)}
-          />
-          <div style={{ fontSize: "3rem", marginBottom: "1rem" }}>📐</div>
-          <p className="so-drop-title">Drop SVG files here or click to select</p>
-          <p className="so-drop-hint">Removes metadata, minifies paths and styles • Max 5 MB per file</p>
+          <div className="tc-drop-icon">⚡</div>
+          <div>
+            <p className="tc-drop-title">Drag &amp; Drop SVG Files</p>
+            <p className="tc-drop-subtitle">Removes metadata, minifies paths and styles &nbsp;·&nbsp; Max 5MB per file</p>
+          </div>
+          <button className="tc-drop-btn" onClick={e => { e.stopPropagation(); fileInputRef.current?.click(); }} disabled={working}>
+            {working ? "Optimizing…" : "Select SVG Files"}
+          </button>
         </div>
       ) : (
-        <>
-          <div className="so-bar">
-            <button className="so-btn so-btn--blue" onClick={() => fileInputRef.current?.click()} disabled={working}>Add More SVGs</button>
-            {files.some(f => f.status === "done") && (
-              <button className="so-btn so-btn--green" onClick={() => files.filter(f => f.status === "done").forEach(handleDownload)}>
-                Download All
-              </button>
-            )}
-            <button className="so-btn so-btn--red" onClick={handleReset}>Reset</button>
+        <div className="tc-queue-card">
+          <div className="tc-queue-hd">
+            <div className="tc-queue-hd-left">
+              <div className="tc-queue-hd-icon">⚡</div>
+              <h3 className="tc-queue-hd-title">Optimization Queue</h3>
+            </div>
+            <div className="tc-queue-actions">
+              <button className="tc-queue-btn tc-queue-btn-primary" onClick={() => fileInputRef.current?.click()} disabled={working}>+ Add More</button>
+              <button className="tc-queue-btn tc-queue-btn-danger" onClick={handleReset}>Reset</button>
+            </div>
           </div>
 
-          <div className="so-list">
+          <div className="tc-queue-list">
             {files.map(item => (
-              <div key={item.id} className={`so-item so-item--${item.status}`}>
-                <div className="so-icon">
+              <div key={item.id} className={`tc-file-item${item.status !== "done" ? " tc-file-item--pending" : ""}`}>
+                <div className="tc-file-thumb-ph">
                   {item.outputUrl
-                    ? <img src={item.outputUrl} alt={item.name} className="so-preview" onError={e => { e.target.style.display="none"; }} />
+                    ? <img src={item.outputUrl} alt={item.name} style={{ width: "100%", height: "100%", objectFit: "contain", padding: "4px", borderRadius: "1rem" }} onError={e => { e.target.style.display="none"; }} />
                     : <span>⚡</span>
                   }
                 </div>
-                <div className="so-info">
-                  <p className="so-name">{item.name}</p>
-                  {item.status === "pending"   && <p className="so-sub">Waiting...</p>}
-                  {item.status === "optimizing"&& <p className="so-sub so-sub--blue">Optimizing...</p>}
+                <div className="tc-file-info">
+                  <p className="tc-file-name">{item.name}</p>
+                  {item.status === "pending"    && <p className="tc-file-status">Waiting...</p>}
+                  {item.status === "optimizing" && <p className="tc-file-status">Optimizing...</p>}
                   {item.status === "done" && (
-                    <p className="so-sub">
-                      {formatBytes(item.origSize)} → {formatBytes(item.outSize)}
-                      {parseFloat(item.reduction) > 0 && (
-                        <span className="so-saving"> {item.reduction}% smaller</span>
-                      )}
-                    </p>
+                    <>
+                      <p className="tc-file-sizes">
+                        {formatBytes(item.origSize)} → {formatBytes(item.outSize)}
+                        {parseFloat(item.reduction) > 0 && <span className="tc-file-reduction"> ({item.reduction}% smaller)</span>}
+                      </p>
+                      <p className="tc-file-status-ok">
+                        <span className="tc-file-status-dot" />
+                        OPTIMIZED
+                      </p>
+                    </>
                   )}
-                  {item.status === "error" && <p className="so-sub so-sub--red">{item.statusMsg}</p>}
+                  {item.status === "error" && <p className="tc-file-status" style={{ color: "#dc2626" }}>{item.statusMsg}</p>}
                 </div>
                 {item.status === "done" && (
-                  <button className="so-btn so-btn--blue so-btn--sm" onClick={() => handleDownload(item)}>Download</button>
+                  <div className="tc-file-btns">
+                    <button className="tc-file-dl-btn" onClick={() => handleDownload(item)}>Download</button>
+                  </div>
                 )}
               </div>
             ))}
           </div>
 
-          <input
-            ref={fileInputRef}
-            type="file"
-            accept=".svg,image/svg+xml"
-            multiple
-            style={{ display: "none" }}
-            onChange={e => processFiles(e.target.files)}
-          />
-        </>
+          <div className="tc-queue-ft">
+            <span className="tc-queue-ft-info">{doneFiles.length} of {files.length} optimized</span>
+            <button className="tc-queue-cta-btn" onClick={() => doneFiles.forEach(handleDownload)} disabled={doneFiles.length === 0 || working}>
+              ⚡ Download All ({doneFiles.length})
+            </button>
+            <button className="tc-queue-clear-btn" onClick={handleReset}>Clear Queue</button>
+          </div>
+        </div>
       )}
 
-      <style>{`
-        .so-wrap { max-width: 800px; margin: 0 auto; padding: 1.5rem; }
-        .so-error { display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 1rem; background: #fee; border: 1px solid #fcc; border-radius: 8px; color: #c00; margin-bottom: 1rem; font-size: 0.875rem; }
-        .so-error-close { background: none; border: none; color: #c00; cursor: pointer; font-size: 1.25rem; font-weight: bold; }
-        .so-drop { border: 2px dashed var(--primary,#0070f3); border-radius: 12px; padding: 4rem 2rem; text-align: center; cursor: pointer; }
-        .so-drop:hover { background: rgba(0,112,243,0.04); }
-        .so-drop-title { font-size: 1.125rem; font-weight: 600; margin-bottom: 0.5rem; }
-        .so-drop-hint { font-size: 0.875rem; opacity: 0.6; }
-        .so-bar { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem; }
-        .so-btn { padding: 0.5rem 1rem; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.875rem; }
-        .so-btn:disabled { opacity: 0.5; cursor: not-allowed; }
-        .so-btn--blue  { background: var(--primary,#0070f3); color: white; }
-        .so-btn--green { background: #22c55e; color: white; }
-        .so-btn--red   { background: #ef4444; color: white; }
-        .so-btn--sm    { padding: 0.375rem 0.75rem; font-size: 0.8125rem; }
-        .so-list { display: flex; flex-direction: column; gap: 0.75rem; }
-        .so-item { display: flex; align-items: center; gap: 1rem; padding: 1rem; border: 1.5px solid rgba(0,0,0,0.1); border-radius: 8px; }
-        .so-item--done  { border-color: rgba(34,197,94,0.4); }
-        .so-item--error { border-color: rgba(239,68,68,0.4); }
-        .so-icon { width: 56px; height: 56px; flex-shrink: 0; border-radius: 6px; overflow: hidden; background: rgba(0,112,243,0.06); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
-        .so-preview { width: 100%; height: 100%; object-fit: contain; padding: 4px; }
-        .so-info { flex: 1; min-width: 0; text-align: left; }
-        .so-name { font-weight: 600; font-size: 0.875rem; margin-bottom: 0.25rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .so-sub { font-size: 0.8125rem; opacity: 0.7; }
-        .so-sub--blue { color: var(--primary,#0070f3); opacity: 1; font-weight: 600; }
-        .so-sub--red  { color: #ef4444; opacity: 1; }
-        .so-saving { color: #22c55e; font-weight: 700; margin-left: 0.5rem; }
-        @media (prefers-color-scheme: dark) {
-          .so-item { border-color: rgba(255,255,255,0.1); }
-          .so-item--done { border-color: rgba(34,197,94,0.3); }
-        }
-      `}</style>
+      {recentFiles.length > 0 && (
+        <div className="tc-recent-card">
+          <div className="tc-recent-hd">
+            <div className="tc-recent-hd-left">
+              <div className="tc-recent-hd-icon">🕐</div>
+              <h3 className="tc-recent-hd-title">Recent Assets</h3>
+            </div>
+            <button className="tc-recent-view-all">View all {recentFiles.length} assets →</button>
+          </div>
+          <div className="tc-recent-scroll">
+            {recentFiles.map(item => (
+              <div key={item.id} className="tc-recent-item">
+                <div className="tc-recent-thumb">
+                  {item.outputUrl
+                    ? <img src={item.outputUrl} alt={item.name} style={{ objectFit: "contain", padding: "4px" }} />
+                    : <span>⚡</span>
+                  }
+                  <button className="tc-recent-dl-btn" onClick={() => handleDownload(item)} title="Download">↓</button>
+                </div>
+                <p className="tc-recent-name">{item.name.replace(/\.svg$/i, "")}</p>
+                <p className="tc-recent-sizes">{formatBytes(item.origSize)} → {formatBytes(item.outSize)}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

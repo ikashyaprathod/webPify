@@ -1,15 +1,14 @@
 import PageShell from "@/components/PageShell";
-import Breadcrumb from "@/components/Breadcrumb";
 import Link from "next/link";
 
 export const metadata = {
     title: "Image Tools – Compress, Convert & Resize PNG, JPEG, WebP",
     description: "Professional image compression, conversion, and resizing tools. Optimize images for SEO, speed, and Core Web Vitals.",
-    alternates: { canonical: "https://webpify.vercel.app/image" },
+    alternates: { canonical: "https://webpifyy.vercel.app/image" },
     openGraph: {
         title: "Image Tools – Compress, Convert & Resize PNG, JPEG, WebP",
         description: "Professional image compression, conversion, and resizing tools. Optimize images for SEO, speed, and Core Web Vitals.",
-        url: "https://webpify.vercel.app/image",
+        url: "https://webpifyy.vercel.app/image",
     },
 };
 
@@ -18,25 +17,25 @@ const cards = [
         href: "/image/compressor",
         icon: "⚡",
         title: "Image Compressor",
-        desc: "Compress PNG, JPEG, and WebP images without visible quality loss.",
-        accent: "linear-gradient(90deg,#0070f3,#38bdf8)",
-        iconBg: "rgba(0,112,243,0.08)",
+        desc: "Reduce file size by up to 90% without losing visual quality. Perfect for SEO and faster load times.",
+        gradient: "linear-gradient(135deg,#e0f2fe,#bae6fd)",
+        cta: "Compress now",
     },
     {
         href: "/image/converter",
         icon: "🔄",
-        title: "Image Converter",
-        desc: "Convert images between PNG, JPEG, and WebP formats.",
-        accent: "linear-gradient(90deg,#06b6d4,#67e8f9)",
-        iconBg: "rgba(6,182,212,0.08)",
+        title: "Format Converter",
+        desc: "Convert between WebP, PNG, and JPEG instantly. WebP delivers 25–35% smaller files for modern browsers.",
+        gradient: "linear-gradient(135deg,#f0fdf4,#dcfce7)",
+        cta: "Convert now",
     },
     {
         href: "/image/resizer",
         icon: "📐",
-        title: "Image Resizer",
-        desc: "Resize PNG, JPEG, and WebP images to exact dimensions.",
-        accent: "linear-gradient(90deg,#10b981,#34d399)",
-        iconBg: "rgba(16,185,129,0.08)",
+        title: "Smart Resizer",
+        desc: "Resize images to exact dimensions with 4 fit modes. Batch resize for social media and web platforms.",
+        gradient: "linear-gradient(135deg,#fffbeb,#fef3c7)",
+        cta: "Resize now",
     },
 ];
 
@@ -57,28 +56,28 @@ export default function ImageMasterHub() {
                             {
                                 "@type": "BreadcrumbList",
                                 "itemListElement": [
-                                    {
-                                        "@type": "ListItem",
-                                        "position": 1,
-                                        "name": "Home",
-                                        "item": "https://webpify.vercel.app/"
-                                    },
-                                    {
-                                        "@type": "ListItem",
-                                        "position": 2,
-                                        "name": "Image Tools"
-                                    }
+                                    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://webpifyy.vercel.app/" },
+                                    { "@type": "ListItem", "position": 2, "name": "Image Tools" }
                                 ]
                             },
                             {
-                                "@type": "SoftwareApplication",
+                                "@type": ["SoftwareApplication", "WebApplication"],
+                                "@id": "https://webpifyy.vercel.app/image#software",
                                 "name": "Image Compression & Conversion Tools",
-                                "applicationCategory": "ImageProcessing",
-                                "operatingSystem": "Web",
+                                "url": "https://webpifyy.vercel.app/image",
+                                "applicationCategory": "MultimediaApplication",
+                                "operatingSystem": "Any",
+                                "inLanguage": "en",
+                                "isAccessibleForFree": true,
                                 "offers": {
                                     "@type": "Offer",
-                                    "price": "0"
+                                    "price": "0",
+                                    "priceCurrency": "USD",
+                                    "availability": "https://schema.org/InStock",
+                                    "seller": { "@id": "https://webpifyy.vercel.app/#organization" }
                                 },
+                                "provider": { "@id": "https://webpifyy.vercel.app/#organization" },
+                                "author": { "@id": "https://webpifyy.vercel.app/#organization" },
                                 "description": "Professional image compression and conversion tools. Optimize images for SEO, speed, and Core Web Vitals."
                             }
                         ]
@@ -86,69 +85,136 @@ export default function ImageMasterHub() {
                 }}
             />
 
-            <PageShell blob1="#bfdbfe" blob2="#d1fae5">
-                <Breadcrumb items={breadcrumbItems} />
+            <PageShell>
 
-                <div className="page-hero">
-                    <div className="page-badge">Free · Browser-based · No Upload</div>
-                    <h1 className="page-title">Image Tools</h1>
-                    <p className="page-subtitle">
-                        Professional tools to compress, convert, and resize images. Optimize for SEO, speed, and Core Web Vitals.
+                {/* ── Hero ── */}
+                <div className="hubv2-hero">
+                    <span className="hubv2-hero-badge">Workspace</span>
+                    <h1 className="hubv2-hero-title">
+                        Image Optimization <span className="hubv2-hero-title-accent">Hub</span>
+                    </h1>
+                    <p className="hubv2-hero-subtitle">
+                        Professional-grade tools to compress, convert, and resize your images. Elevate web performance with our advanced processing engine.
                     </p>
+                    <a href="#tools" className="hubv2-hero-doc-btn">
+                        <span className="hubv2-hero-doc-btn-icon">📋</span>
+                        View All Tools
+                    </a>
                 </div>
 
-                <div className="hub-grid">
-                    {cards.map(card => (
-                        <a
-                            key={card.href}
-                            href={card.href}
-                            className="hub-card"
-                            style={{ "--hub-accent": card.accent, "--hub-icon-bg": card.iconBg }}
-                        >
-                            <div className="hub-card-icon">{card.icon}</div>
-                            <div className="hub-card-title">{card.title}</div>
-                            <div className="hub-card-desc">{card.desc}</div>
-                        </a>
-                    ))}
-                </div>
-
-                <div className="info-box" style={{ marginTop: "2rem" }}>
-                    <h2>Why Optimize Images?</h2>
-                    <div className="info-box-grid">
-                        <div>
-                            <strong>SEO Optimization</strong>
-                            <p>Smaller images improve page speed, a key Google ranking factor.</p>
+                {/* ── Core Tools ── */}
+                <section className="hubv2-section" id="tools">
+                    <div className="hubv2-section-hd">
+                        <div className="hubv2-section-hd-left">
+                            <span className="hubv2-section-hd-icon">⊞</span>
+                            <h2 className="hubv2-section-hd-title">Core Tools</h2>
                         </div>
-                        <div>
-                            <strong>Website Speed</strong>
-                            <p>Faster loading times reduce bounce rates and improve user experience.</p>
-                        </div>
-                        <div>
-                            <strong>Core Web Vitals</strong>
-                            <p>Optimized images improve LCP (Largest Contentful Paint) scores.</p>
-                        </div>
-                        <div>
-                            <strong>E-commerce</strong>
-                            <p>Fast product images improve conversion rates and sales.</p>
-                        </div>
-                        <div>
-                            <strong>Bandwidth Savings</strong>
-                            <p>Smaller file sizes reduce hosting and CDN bandwidth costs.</p>
-                        </div>
-                        <div>
-                            <strong>Mobile Experience</strong>
-                            <p>Smaller images load faster on cellular connections.</p>
+                        <div className="hubv2-section-hd-actions">
+                            <span className="hubv2-section-hd-btn">≡</span>
+                            <span className="hubv2-section-hd-btn">⊞</span>
                         </div>
                     </div>
-                </div>
+                    <div className="hubv2-grid">
+                        {cards.map(card => (
+                            <div key={card.href} className="hubv2-card" style={{ "--card-gradient": card.gradient }}>
+                                <div className="hubv2-card-header">
+                                    <div className="hubv2-card-icon-box">{card.icon}</div>
+                                </div>
+                                <div className="hubv2-card-body">
+                                    <h3 className="hubv2-card-title">{card.title}</h3>
+                                    <p className="hubv2-card-desc">{card.desc}</p>
+                                    <a href={card.href} className="hubv2-card-cta">{card.cta} →</a>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </section>
 
-                <h2 className="section-heading">Related Tools</h2>
-                <div className="tool-chips">
-                    <Link href="/image/compare" className="tool-chip">Compare Compressor vs Converter</Link>
-                    <Link href="/svg-optimizer" className="tool-chip">SVG Optimizer</Link>
-                    <Link href="/video/compressor" className="tool-chip">Video Compressor</Link>
-                    <Link href="/gif/compressor" className="tool-chip">GIF Compressor</Link>
-                </div>
+                {/* ── Stats ── */}
+                <section className="hubv2-section">
+                    <h2 className="hubv2-stats-hd">Optimization Statistics</h2>
+                    <div className="hubv2-stats-grid">
+                        <div className="hubv2-stat-card">
+                            <span className="hubv2-stat-ghost">📊</span>
+                            <p className="hubv2-stat-label">Max Size Reduction</p>
+                            <div className="hubv2-stat-row">
+                                <span className="hubv2-stat-value">90%</span>
+                                <span className="hubv2-stat-badge hubv2-stat-badge--blue">Best-in-class</span>
+                            </div>
+                            <div className="hubv2-stat-progress-track">
+                                <div className="hubv2-stat-progress-bar hubv2-stat-progress-bar--blue" style={{ "--prog": "90%" }}></div>
+                            </div>
+                        </div>
+                        <div className="hubv2-stat-card">
+                            <span className="hubv2-stat-ghost">⚡</span>
+                            <p className="hubv2-stat-label">Formats Supported</p>
+                            <div className="hubv2-stat-row">
+                                <span className="hubv2-stat-value">3</span>
+                                <span className="hubv2-stat-badge hubv2-stat-badge--green">PNG · JPEG · WebP</span>
+                            </div>
+                            <div className="hubv2-stat-progress-track">
+                                <div className="hubv2-stat-progress-bar hubv2-stat-progress-bar--green" style={{ "--prog": "100%" }}></div>
+                            </div>
+                        </div>
+                        <div className="hubv2-stat-card">
+                            <span className="hubv2-stat-ghost">🚀</span>
+                            <p className="hubv2-stat-label">Avg. Compression Rate</p>
+                            <div className="hubv2-stat-row">
+                                <span className="hubv2-stat-value">74%</span>
+                                <span className="hubv2-stat-badge hubv2-stat-badge--purple">Optimal</span>
+                            </div>
+                            <div className="hubv2-stat-progress-track">
+                                <div className="hubv2-stat-progress-bar hubv2-stat-progress-bar--amber" style={{ "--prog": "74%" }}></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                {/* ── Recent Assets ── */}
+                <section className="hubv2-recent">
+                    <div className="hubv2-recent-hd">
+                        <h2 className="hubv2-recent-hd-title">Recent Assets</h2>
+                        <a href="/image/compressor" className="hubv2-recent-view-all">View All Tools →</a>
+                    </div>
+                    <div className="hubv2-recent-card">
+                        <table className="hubv2-recent-table">
+                            <thead className="hubv2-recent-thead">
+                                <tr>
+                                    <th className="hubv2-recent-th">File Name</th>
+                                    <th className="hubv2-recent-th">Type</th>
+                                    <th className="hubv2-recent-th">Original</th>
+                                    <th className="hubv2-recent-th">Optimized</th>
+                                    <th className="hubv2-recent-th hubv2-recent-td-right">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr className="hubv2-recent-tr">
+                                    <td className="hubv2-recent-td"><div className="hubv2-recent-file"><div className="hubv2-recent-thumb">🖼️</div><span className="hubv2-recent-filename">hero-banner.jpg</span></div></td>
+                                    <td className="hubv2-recent-td">JPG → WebP</td>
+                                    <td className="hubv2-recent-td">2.4 MB</td>
+                                    <td className="hubv2-recent-td"><span className="hubv2-recent-badge">420 KB (-82%)</span></td>
+                                    <td className="hubv2-recent-td hubv2-recent-td-right"><a href="/image/compressor" className="hubv2-recent-dl">↓</a></td>
+                                </tr>
+                                <tr className="hubv2-recent-tr">
+                                    <td className="hubv2-recent-td"><div className="hubv2-recent-file"><div className="hubv2-recent-thumb">🏞️</div><span className="hubv2-recent-filename">product-shot-01.png</span></div></td>
+                                    <td className="hubv2-recent-td">PNG → PNG</td>
+                                    <td className="hubv2-recent-td">1.1 MB</td>
+                                    <td className="hubv2-recent-td"><span className="hubv2-recent-badge">310 KB (-71%)</span></td>
+                                    <td className="hubv2-recent-td hubv2-recent-td-right"><a href="/image/compressor" className="hubv2-recent-dl">↓</a></td>
+                                </tr>
+                                <tr className="hubv2-recent-tr">
+                                    <td className="hubv2-recent-td"><div className="hubv2-recent-file"><div className="hubv2-recent-thumb">🎨</div><span className="hubv2-recent-filename">logo-design.png</span></div></td>
+                                    <td className="hubv2-recent-td">PNG → WebP</td>
+                                    <td className="hubv2-recent-td">450 KB</td>
+                                    <td className="hubv2-recent-td"><span className="hubv2-recent-badge">95 KB (-79%)</span></td>
+                                    <td className="hubv2-recent-td hubv2-recent-td-right"><a href="/image/converter" className="hubv2-recent-dl">↓</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                {/* ── Related ── */}
             </PageShell>
         </>
     );

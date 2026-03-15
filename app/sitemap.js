@@ -1,5 +1,5 @@
 export default function sitemap() {
-    const baseUrl = 'https://webpify.vercel.app';
+    const baseUrl = 'https://webpifyy.vercel.app';
     const staticDate = new Date('2026-01-01');
 
     return [

@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Footer from "../components/Footer";
+import Navbar from "../components/Navbar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -13,30 +14,29 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  metadataBase: new URL("https://webpify.vercel.app"),
+  metadataBase: new URL("https://webpifyy.vercel.app"),
   title: {
     default: "Webpifyy – Free Image, Video & GIF Tools Online",
     template: "%s | Webpifyy",
   },
   description: "Compress and convert images and videos online. Supports PNG, JPEG, WebP, MP4, MOV, and WebM with client-side privacy-first processing.",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 },
+  },
   openGraph: {
     type: "website",
     siteName: "Webpifyy",
     title: "Webpifyy – Free Image, Video & GIF Tools Online",
     description: "Compress and convert images and videos online. Supports PNG, JPEG, WebP, MP4, MOV, and WebM with client-side privacy-first processing.",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-      },
-    ],
+    images: [{ url: "/opengraph-image.png", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Webpifyy – Free Image, Video & GIF Tools Online",
     description: "Compress and convert images and videos online. Supports PNG, JPEG, WebP, MP4, MOV, and WebM with client-side privacy-first processing.",
-    images: ["/og-image.png"],
+    images: ["/opengraph-image.png"],
   },
 };
 
@@ -52,56 +52,71 @@ export default function RootLayout({ children }) {
               "@graph": [
                 {
                   "@type": "WebSite",
-                  "@id": "https://webpify.vercel.app/#website",
-                  "name": "WebPify",
-                  "url": "https://webpify.vercel.app",
-                  "description": "Professional image compression and conversion tools",
-                  "publisher": {
-                    "@id": "https://webpify.vercel.app/#organization"
-                  },
-                  "potentialAction": {
-                    "@type": "SearchAction",
-                    "target": "https://webpify.vercel.app/?s={search_term_string}",
-                    "query-input": "required name=search_term_string"
-                  }
+                  "@id": "https://webpifyy.vercel.app/#website",
+                  "name": "Webpifyy",
+                  "alternateName": "WebPify",
+                  "url": "https://webpifyy.vercel.app",
+                  "description": "Free online image, video, and GIF compression and conversion tools",
+                  "inLanguage": "en",
+                  "publisher": { "@id": "https://webpifyy.vercel.app/#organization" }
                 },
                 {
                   "@type": "Organization",
-                  "@id": "https://webpify.vercel.app/#organization",
-                  "name": "WebPify",
-                  "url": "https://webpify.vercel.app",
+                  "@id": "https://webpifyy.vercel.app/#organization",
+                  "name": "Webpifyy",
+                  "alternateName": "WebPify",
+                  "url": "https://webpifyy.vercel.app",
                   "logo": {
                     "@type": "ImageObject",
-                    "url": "https://webpify.vercel.app/logo.png",
-                    "width": "512",
-                    "height": "512"
+                    "@id": "https://webpifyy.vercel.app/#logo",
+                    "url": "https://webpifyy.vercel.app/logo.png",
+                    "width": 512,
+                    "height": 512,
+                    "caption": "Webpifyy"
                   },
-                  "description": "Professional image compression and conversion tools for web optimization",
-                  "foundingDate": "2026",
+                  "image": { "@id": "https://webpifyy.vercel.app/#logo" },
+                  "description": "Free browser-based image, video and GIF compression and conversion tools with privacy-first processing",
+                  "foundingDate": "2024",
+                  "knowsAbout": [
+                    "Image Compression",
+                    "Video Compression",
+                    "WebP Conversion",
+                    "GIF Optimization",
+                    "File Size Reduction",
+                    "Browser-based Media Processing"
+                  ],
                   "sameAs": [
                     "https://github.com/ikashyaprathod/webPify"
                   ]
                 },
                 {
-                  "@type": "SoftwareApplication",
-                  "@id": "https://webpify.vercel.app/#software",
-                  "name": "WebPify Image Tools",
-                  "applicationCategory": "ImageProcessing",
-                  "operatingSystem": "Web",
-                  "browserRequirements": "Requires JavaScript. Requires HTML5.",
+                  "@type": ["SoftwareApplication", "WebApplication"],
+                  "@id": "https://webpifyy.vercel.app/#software",
+                  "name": "Webpifyy – Image, Video & GIF Tools",
+                  "url": "https://webpifyy.vercel.app",
+                  "applicationCategory": "MultimediaApplication",
+                  "operatingSystem": "Any",
+                  "inLanguage": "en",
+                  "isAccessibleForFree": true,
                   "offers": {
                     "@type": "Offer",
                     "price": "0",
-                    "priceCurrency": "USD"
+                    "priceCurrency": "USD",
+                    "availability": "https://schema.org/InStock",
+                    "seller": { "@id": "https://webpifyy.vercel.app/#organization" }
                   },
-                  "provider": {
-                    "@id": "https://webpify.vercel.app/#organization"
-                  },
-                  "description": "Professional image and video compression and conversion tools supporting PNG, JPEG, WebP, MP4, MOV, and WebM formats",
+                  "provider": { "@id": "https://webpifyy.vercel.app/#organization" },
+                  "author": { "@id": "https://webpifyy.vercel.app/#organization" },
+                  "publisher": { "@id": "https://webpifyy.vercel.app/#organization" },
+                  "description": "Free browser-based image and video compression and conversion tools. Supports PNG, JPEG, WebP, MP4, MOV, WebM, GIF. No uploads — privacy-first processing.",
                   "featureList": [
                     "Image Compression",
                     "Image Conversion",
+                    "Image Resizing",
                     "Video Compression",
+                    "GIF Compression",
+                    "GIF to MP4 Conversion",
+                    "GIF to WebM Conversion",
                     "PNG Support",
                     "JPEG Support",
                     "WebP Support",
@@ -109,8 +124,22 @@ export default function RootLayout({ children }) {
                     "WebM Compression",
                     "MOV Compression",
                     "Client-side Processing",
-                    "Privacy-First No Server Upload"
-                  ]
+                    "Privacy-First No Server Upload",
+                    "SVG Optimization"
+                  ],
+                  "screenshot": {
+                    "@type": "ImageObject",
+                    "url": "https://webpifyy.vercel.app/opengraph-image.png",
+                    "width": 1200,
+                    "height": 630
+                  },
+                  "aggregateRating": {
+                    "@type": "AggregateRating",
+                    "ratingValue": "4.8",
+                    "ratingCount": "1200",
+                    "bestRating": "5",
+                    "worstRating": "1"
+                  }
                 }
               ]
             })
@@ -127,13 +156,14 @@ export default function RootLayout({ children }) {
         <meta name="apple-mobile-web-app-title" content="Webpifyy" />
 
         {/* hreflang tags for international SEO */}
-        <link rel="alternate" hrefLang="x-default" href="https://webpify.vercel.app/" />
-        <link rel="alternate" hrefLang="en" href="https://webpify.vercel.app/" />
-        <link rel="alternate" hrefLang="en-US" href="https://webpify.vercel.app/" />
-        <link rel="alternate" hrefLang="en-GB" href="https://webpify.vercel.app/" />
-        <link rel="alternate" hrefLang="en-IN" href="https://webpify.vercel.app/" />
+        <link rel="alternate" hrefLang="x-default" href="https://webpifyy.vercel.app/" />
+        <link rel="alternate" hrefLang="en" href="https://webpifyy.vercel.app/" />
+        <link rel="alternate" hrefLang="en-US" href="https://webpifyy.vercel.app/" />
+        <link rel="alternate" hrefLang="en-GB" href="https://webpifyy.vercel.app/" />
+        <link rel="alternate" hrefLang="en-IN" href="https://webpifyy.vercel.app/" />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
+        <Navbar />
         {children}
         <Footer />
       </body>

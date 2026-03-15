@@ -16,18 +16,18 @@ export default function ArticleTemplate({
         "@context": "https://schema.org",
         "@type": "Article",
         "headline": title,
-        "image": "https://webpify.vercel.app/og-image.jpg", // Default OG
+        "image": "https://webpifyy.vercel.app/og-image.jpg", // Default OG
         "author": {
             "@type": "Organization",
             "name": author,
-            "url": "https://webpify.vercel.app"
+            "url": "https://webpifyy.vercel.app"
         },
         "publisher": {
             "@type": "Organization",
             "name": "WebPify",
             "logo": {
                 "@type": "ImageObject",
-                "url": "https://webpify.vercel.app/logo.png"
+                "url": "https://webpifyy.vercel.app/logo.png"
             }
         },
         "datePublished": lastUpdated || new Date().toISOString(),

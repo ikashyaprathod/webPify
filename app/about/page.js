@@ -1,17 +1,16 @@
 import Link from "next/link";
 import PageShell from "@/components/PageShell";
-import Breadcrumb from "@/components/Breadcrumb";
 
 export const metadata = {
     title: "About Webpifyy – Professional Image Optimization Tools",
     description: "Learn about Webpifyy, our mission to provide free professional image compression and conversion tools for web optimization and SEO.",
     alternates: {
-        canonical: 'https://webpify.vercel.app/about'
+        canonical: 'https://webpifyy.vercel.app/about'
     },
     openGraph: {
         title: "About Webpifyy – Professional Image Optimization Tools",
         description: "Learn about Webpifyy, our mission to provide free professional image compression and conversion tools for web optimization and SEO.",
-        url: "https://webpify.vercel.app/about",
+        url: "https://webpifyy.vercel.app/about",
     },
 };
 
@@ -36,7 +35,7 @@ export default function AboutPage() {
                                         "@type": "ListItem",
                                         "position": 1,
                                         "name": "Home",
-                                        "item": "https://webpify.vercel.app/"
+                                        "item": "https://webpifyy.vercel.app/"
                                     },
                                     {
                                         "@type": "ListItem",
@@ -47,9 +46,9 @@ export default function AboutPage() {
                             },
                             {
                                 "@type": "AboutPage",
-                                "@id": "https://webpify.vercel.app/about",
+                                "@id": "https://webpifyy.vercel.app/about",
                                 "mainEntity": {
-                                    "@id": "https://webpify.vercel.app/#organization"
+                                    "@id": "https://webpifyy.vercel.app/#organization"
                                 }
                             }
                         ]
@@ -58,7 +57,6 @@ export default function AboutPage() {
             />
 
             <PageShell blob1="#bfdbfe" blob2="#ddd6fe">
-                <Breadcrumb items={breadcrumbItems} />
 
                 <div className="page-hero">
                     <div className="page-badge">Free Tools · Privacy-First · Open Source</div>

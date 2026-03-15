@@ -5,8 +5,7 @@ import { useRef, useState, useCallback, useEffect } from "react";
 // ─────────────────────────────────────────────────────────────────────────────
 // CONSTANTS
 // ─────────────────────────────────────────────────────────────────────────────
-const MAX_FILE_SIZE  = 500  * 1024 * 1024;        // 500 MB per file
-const MAX_TOTAL_SIZE = 1.5  * 1024 * 1024 * 1024; // 1.5 GB per session
+// No hard file size limit — browser memory is the only constraint
 
 const SPEED_PRESETS = {
   ultrafast: { label: "Ultra Fast",      ffpreset: "ultrafast" },
@@ -212,8 +211,8 @@ function getMaxWorkers() {
 export default function VideoCompressor({
   allowedFormats = ["video/mp4", "video/webm", "video/quicktime"],
   formatName     = null,
-  title          = "Video Compressor – Reduce Video File Size Online",
-  description    = "Compress MP4, MOV, and WebM videos in your browser. Bulk upload, no server, 100% private.",
+  title          = "",
+  description    = "",
 }) {
   // ── Queue & settings ────────────────────────────────────────────────────
   const [queue, setQueue]             = useState([]);
@@ -288,8 +287,6 @@ export default function VideoCompressor({
           : `${file.name}: unsupported format`);
         continue;
       }
-      if (file.size > MAX_FILE_SIZE) { errs.push(`${file.name}: exceeds 500 MB`); continue; }
-
       items.push({
         id: uid(), file,
         status: "pending", progress: 0,
@@ -302,15 +299,7 @@ export default function VideoCompressor({
     if (errs.length) setGlobalErr(errs.join(" · "));
     if (!items.length) return;
 
-    setQueue(prev => {
-      const total = prev.reduce((s, i) => s + i.origSize, 0)
-                  + items.reduce((s, i) => s + i.origSize, 0);
-      if (total > MAX_TOTAL_SIZE) {
-        setGlobalErr("Total exceeds 1.5 GB session limit.");
-        return prev;
-      }
-      return [...prev, ...items];
-    });
+    setQueue(prev => [...prev, ...items]);
   }, [allowedFormats, formatName]);
 
   // ── Remove / Clear ───────────────────────────────────────────────────────
@@ -620,14 +609,14 @@ export default function VideoCompressor({
   return (
     <div className="vc-wrapper">
       <div className="vc-container">
-        <h1 className="vc-title">{title}</h1>
-        <p className="vc-subtitle">{description}</p>
+        {title ? <h1 className="vc-title">{title}</h1> : null}
+        {description ? <p className="vc-subtitle">{description}</p> : null}
 
         {/* Trust Strip */}
         <div className="vc-trust-strip">
           <span>🔒 Videos never leave your device.</span>
           <span>🎯 Smart Adaptive Mode – per-video bitrate targeting.</span>
-          <span>📦 Bulk: up to 20 files · 500 MB each · 1.5 GB total.</span>
+          <span>📦 Bulk: up to 20 files · No file size limit.</span>
         </div>
 
         {/* Error */}
@@ -654,10 +643,15 @@ export default function VideoCompressor({
             style={{ display: "none" }}
           />
           <div className="vc-dropzone-icon">🎬</div>
-          <p className="vc-dropzone-main">
-            {queue.length ? "Drop more videos or click to add" : "Drop videos here or click to select"}
-          </p>
-          <p className="vc-dropzone-sub">MP4 · MOV · WebM · Up to 20 files · 500 MB each</p>
+          <div>
+            <p className="vc-dropzone-main">
+              {queue.length ? "Add More Videos" : "Drag & Drop Videos"}
+            </p>
+            <p className="vc-dropzone-sub">MP4 · MOV · WebM · Up to 20 files · No size limit</p>
+          </div>
+          <button className="tc-drop-btn" onClick={e => { e.stopPropagation(); if (!processing) fileInput.current?.click(); }} disabled={processing}>
+            {processing ? "Processing…" : "Select Files"}
+          </button>
         </div>
 
         {/* Settings + Queue */}

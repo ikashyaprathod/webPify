@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState, useEffect, useCallback } from "react";
+import { saveRecent, loadRecent, clearRecent } from "../utils/recent-files-db";
 
 const TASKS = [
   { value: "gif-compress", label: "Compress GIF",   ext: "gif",  icon: "🗜️" },
@@ -11,6 +12,15 @@ const TASKS = [
 const FPS_OPTIONS   = [5, 10, 15, 20, 24];
 const SCALE_OPTIONS = [240, 320, 480, 640, 800];
 const QUALITY_MAP   = { high: 18, balanced: 23, max: 28 };
+const IDB_STORE     = 'recent_gif';
+
+function blobToDataUrl(blob) {
+  return new Promise(resolve => {
+    const reader = new FileReader();
+    reader.onloadend = () => resolve(reader.result);
+    reader.readAsDataURL(blob);
+  });
+}
 
 function formatBytes(b) {
   if (b === 0) return "0 B";
@@ -22,22 +32,45 @@ function formatBytes(b) {
 function newId() { return Math.random().toString(36).slice(2, 10); }
 
 export default function GifCompressor({ defaultTask = "gif-compress" }) {
-  const [items,     setItems]     = useState([]);
-  const [task,      setTask]      = useState(defaultTask);
-  const [fps,       setFps]       = useState(15);
-  const [scale,     setScale]     = useState(480);
-  const [quality,   setQuality]   = useState("balanced");
-  const [maxColors, setMaxColors] = useState(128);
-  const [working,   setWorking]   = useState(false);
+  const [items,       setItems]       = useState([]);
+  const [task,        setTask]        = useState(defaultTask);
+  const [fps,         setFps]         = useState(15);
+  const [scale,       setScale]       = useState(480);
+  const [quality,     setQuality]     = useState("balanced");
+  const [maxColors,   setMaxColors]   = useState(128);
+  const [working,     setWorking]     = useState(false);
+  const [recentFiles, setRecentFiles] = useState([]);
   const fileInputRef = useRef(null);
   const workerRef    = useRef(null);
   const pendingRef   = useRef([]);
+
+  // Load from IndexedDB on mount
+  useEffect(() => {
+    loadRecent(IDB_STORE).then(stored => {
+      if (!stored.length) return;
+      setRecentFiles(stored);
+    });
+  }, []);
+
+  // Save to IndexedDB whenever recentFiles changes
+  useEffect(() => {
+    if (recentFiles.length === 0) return;
+    saveRecent(IDB_STORE, recentFiles.map(f => ({
+      id: f.id,
+      name: f.name,
+      origSize: f.origSize,
+      outputSize: f.outputSize,
+      reduction: f.reduction,
+      outputFmt: f.outputFmt,
+      previewUrl: f.previewUrl,
+    })));
+  }, [recentFiles]);
 
   // Lazily init worker
   function getWorker() {
     if (!workerRef.current) {
       workerRef.current = new Worker(new URL("../workers/gifWorker.js", import.meta.url));
-      workerRef.current.onmessage = ({ data }) => {
+      workerRef.current.onmessage = async ({ data }) => {
         const { type, id, pct, buffer, fmt, alreadyOptimized, message } = data;
 
         if (type === "progress") {
@@ -51,18 +84,31 @@ export default function GifCompressor({ defaultTask = "gif-compress" }) {
               return { ...it, status: "already", pct: 100, statusMsg: "Already optimized — no smaller output possible" };
             }));
           } else {
-            const blob = new Blob([buffer], { type: fmt === "mp4" ? "video/mp4" : fmt === "webm" ? "video/webm" : "image/gif" });
-            const url  = URL.createObjectURL(blob);
+            const mimeType = fmt === "mp4" ? "video/mp4" : fmt === "webm" ? "video/webm" : "image/gif";
+            const blob = new Blob([buffer], { type: mimeType });
+            const outputUrl = URL.createObjectURL(blob);
+            // Only store data URL for GIF previews (MP4/WebM can be large)
+            const previewUrl = fmt === "gif" ? await blobToDataUrl(blob) : null;
+
             setItems(prev => prev.map(it => {
               if (it.id !== id) return it;
-              return {
+              const reduction = it.origSize > 0
+                ? ((it.origSize - buffer.byteLength) / it.origSize * 100).toFixed(1)
+                : "0";
+              const updated = {
                 ...it, status: "done", pct: 100,
-                outputBlob: blob, outputUrl: url, outputFmt: fmt,
-                outputSize: buffer.byteLength,
-                reduction: it.origSize > 0
-                  ? ((it.origSize - buffer.byteLength) / it.origSize * 100).toFixed(1)
-                  : "0",
+                outputBlob: blob, outputUrl, previewUrl, outputFmt: fmt,
+                outputSize: buffer.byteLength, reduction,
               };
+              // Add to recent (only if we have a preview)
+              if (previewUrl) {
+                setRecentFiles(prev2 => [{
+                  id: it.id, name: it.name,
+                  origSize: it.origSize, outputSize: buffer.byteLength,
+                  reduction, outputFmt: fmt, previewUrl,
+                }, ...prev2].slice(0, 20));
+              }
+              return updated;
             }));
           }
           processNext();
@@ -103,18 +149,13 @@ export default function GifCompressor({ defaultTask = "gif-compress" }) {
       statusMsg: "",
       outputBlob: null,
       outputUrl: null,
+      previewUrl: null,
       outputFmt: null,
       outputSize: 0,
       reduction: "0",
     }));
 
-    const settings = {
-      task,
-      fps,
-      scale,
-      maxColors,
-      quality: QUALITY_MAP[quality],
-    };
+    const settings = { task, fps, scale, maxColors, quality: QUALITY_MAP[quality] };
 
     setItems(prev => [...prev, ...newItems]);
     pendingRef.current.push(...newItems.map(it => ({ id: it.id, file: it.file, settings })));
@@ -136,33 +177,29 @@ export default function GifCompressor({ defaultTask = "gif-compress" }) {
     return () => window.removeEventListener("paste", handler);
   }, [processFiles]);
 
-  const handleDrop = (e) => {
-    e.preventDefault();
-    processFiles(e.dataTransfer.files);
-  };
+  const handleDrop = (e) => { e.preventDefault(); processFiles(e.dataTransfer.files); };
 
   const handleDownload = (item) => {
     const a = document.createElement("a");
-    a.href = item.outputUrl;
+    a.href = item.outputUrl || item.previewUrl;
     const baseName = item.name.replace(/\.[^.]+$/, "");
     a.download = `${baseName}-compressed.${item.outputFmt}`;
     a.click();
   };
 
   const handleReset = () => {
-    setItems([]);
+    setItems([]); setRecentFiles([]);
     pendingRef.current = [];
     setWorking(false);
-    if (workerRef.current) {
-      workerRef.current.terminate();
-      workerRef.current = null;
-    }
+    if (workerRef.current) { workerRef.current.terminate(); workerRef.current = null; }
+    clearRecent(IDB_STORE);
   };
 
   const allDone = items.length > 0 && items.every(it => ["done", "error", "already"].includes(it.status));
+  const doneItems = items.filter(it => it.status === "done");
 
   return (
-    <div className="gc-wrap">
+    <div className="tc-wrap">
       {/* Settings bar */}
       {items.length === 0 && (
         <div className="gc-settings">
@@ -224,126 +261,133 @@ export default function GifCompressor({ defaultTask = "gif-compress" }) {
       {/* Drop zone */}
       {items.length === 0 ? (
         <div
-          className="gc-dropzone"
+          className="tc-drop-card"
           onClick={() => fileInputRef.current?.click()}
           onDrop={handleDrop}
           onDragOver={e => e.preventDefault()}
         >
-          <input
-            ref={fileInputRef}
-            type="file"
-            accept="image/gif"
-            multiple
-            style={{ display: "none" }}
-            onChange={e => processFiles(e.target.files)}
-          />
-          <div className="gc-dropzone-icon">🎞️</div>
-          <p className="gc-dropzone-title">Drop GIF files here or click to select</p>
-          <p className="gc-dropzone-hint">Paste from clipboard also works • image/gif only</p>
+          <input ref={fileInputRef} type="file" accept="image/gif" multiple style={{ display: "none" }} onChange={e => processFiles(e.target.files)} />
+          <div className="tc-drop-icon">🎞️</div>
+          <div>
+            <p className="tc-drop-title">Drag &amp; Drop GIF Files</p>
+            <p className="tc-drop-subtitle">Paste from clipboard also works &nbsp;·&nbsp; image/gif only</p>
+          </div>
+          <button className="tc-drop-btn" onClick={e => { e.stopPropagation(); fileInputRef.current?.click(); }} disabled={working}>
+            {working ? "Compressing…" : "Select GIF Files"}
+          </button>
         </div>
       ) : (
-        <>
-          <div className="gc-toolbar">
-            <button className="gc-btn gc-btn--primary" onClick={() => fileInputRef.current?.click()} disabled={working}>
-              Add More GIFs
-            </button>
-            {allDone && (
-              <button className="gc-btn gc-btn--green" onClick={() => {
-                items.filter(it => it.status === "done").forEach(handleDownload);
-              }}>
-                Download All
-              </button>
-            )}
-            <button className="gc-btn gc-btn--red" onClick={handleReset}>Reset</button>
+        <div className="tc-queue-card">
+          <div className="tc-queue-hd">
+            <div className="tc-queue-hd-left">
+              <div className="tc-queue-hd-icon">🎞️</div>
+              <h3 className="tc-queue-hd-title">Batch Queue</h3>
+            </div>
+            <div className="tc-queue-actions">
+              <button className="tc-queue-btn tc-queue-btn-primary" onClick={() => fileInputRef.current?.click()} disabled={working}>+ Add More</button>
+              <button className="tc-queue-btn tc-queue-btn-danger" onClick={handleReset}>Reset</button>
+            </div>
           </div>
 
-          <div className="gc-list">
+          <div className="tc-queue-list">
             {items.map(item => (
-              <div key={item.id} className={`gc-item gc-item--${item.status}`}>
-                <div className="gc-item-preview">
-                  {item.origUrl && <img src={item.origUrl} alt={item.name} />}
+              <div key={item.id} className={`tc-file-item${item.status === "done" ? "" : " tc-file-item--pending"}`}>
+                <div className="tc-file-thumb-ph">
+                  {item.origUrl
+                    ? <img src={item.origUrl} alt={item.name} style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: "1rem" }} />
+                    : <span>🎞️</span>
+                  }
                 </div>
-                <div className="gc-item-info">
-                  <p className="gc-item-name">{item.name}</p>
-                  {item.status === "queued" && <p className="gc-item-sub">Waiting in queue...</p>}
+                <div className="tc-file-info">
+                  <p className="tc-file-name">{item.name}</p>
+                  {item.status === "queued" && <p className="tc-file-status">Waiting in queue...</p>}
                   {item.status === "processing" && (
                     <div>
-                      <p className="gc-item-sub gc-item-sub--blue">Processing… {item.pct}%</p>
-                      <div className="gc-progress"><div className="gc-progress-bar" style={{ width: item.pct + "%" }} /></div>
+                      <p className="tc-file-status">Processing… {item.pct}%</p>
+                      <div style={{ height: "4px", background: "#e2e8f0", borderRadius: "2px", marginTop: "0.375rem" }}>
+                        <div style={{ width: item.pct + "%", height: "100%", background: "#3b82f6", borderRadius: "2px", transition: "width 0.3s" }} />
+                      </div>
                     </div>
                   )}
                   {item.status === "done" && (
-                    <p className="gc-item-sub">
-                      {formatBytes(item.origSize)} → {formatBytes(item.outputSize)}
-                      {parseFloat(item.reduction) > 0 && (
-                        <span className="gc-saving"> {item.reduction}% smaller</span>
-                      )}
-                    </p>
+                    <>
+                      <p className="tc-file-sizes">
+                        {formatBytes(item.origSize)} → {formatBytes(item.outputSize)}
+                        {parseFloat(item.reduction) > 0 && <span className="tc-file-reduction"> ({item.reduction}% smaller)</span>}
+                      </p>
+                      <p className="tc-file-status-ok">
+                        <span className="tc-file-status-dot" />
+                        COMPRESSED
+                      </p>
+                    </>
                   )}
-                  {item.status === "already" && <p className="gc-item-sub">{item.statusMsg}</p>}
-                  {item.status === "error" && <p className="gc-item-sub gc-item-sub--red">{item.statusMsg}</p>}
+                  {item.status === "already" && <p className="tc-file-status-ok" style={{ color: "#64748b" }}>{item.statusMsg}</p>}
+                  {item.status === "error" && <p className="tc-file-status" style={{ color: "#dc2626" }}>{item.statusMsg}</p>}
                 </div>
                 {item.status === "done" && (
-                  <button className="gc-btn gc-btn--primary gc-btn--sm" onClick={() => handleDownload(item)}>
-                    Download
-                  </button>
+                  <div className="tc-file-btns">
+                    <button className="tc-file-dl-btn" onClick={() => handleDownload(item)}>Download</button>
+                  </div>
                 )}
               </div>
             ))}
           </div>
 
-          <input
-            ref={fileInputRef}
-            type="file"
-            accept="image/gif"
-            multiple
-            style={{ display: "none" }}
-            onChange={e => processFiles(e.target.files)}
-          />
-        </>
+          <div className="tc-queue-ft">
+            <span className="tc-queue-ft-info">{doneItems.length} of {items.length} compressed</span>
+            <button className="tc-queue-cta-btn" onClick={() => doneItems.forEach(handleDownload)} disabled={doneItems.length === 0 || working}>
+              ⚡ Download All ({doneItems.length})
+            </button>
+            <button className="tc-queue-clear-btn" onClick={handleReset}>Clear Queue</button>
+          </div>
+
+          <input ref={fileInputRef} type="file" accept="image/gif" multiple style={{ display: "none" }} onChange={e => processFiles(e.target.files)} />
+        </div>
+      )}
+
+      {recentFiles.length > 0 && (
+        <div className="tc-recent-card">
+          <div className="tc-recent-hd">
+            <div className="tc-recent-hd-left">
+              <div className="tc-recent-hd-icon">🕐</div>
+              <h3 className="tc-recent-hd-title">Recent Assets</h3>
+            </div>
+            <button className="tc-recent-view-all">View all {recentFiles.length} assets →</button>
+          </div>
+          <div className="tc-recent-scroll">
+            {recentFiles.map(item => (
+              <div key={item.id} className="tc-recent-item">
+                <div className="tc-recent-thumb">
+                  {item.previewUrl
+                    ? <img src={item.previewUrl} alt={item.name} />
+                    : <span>🎞️</span>
+                  }
+                  {item.previewUrl && (
+                    <button className="tc-recent-dl-btn" onClick={() => handleDownload(item)} title="Download">↓</button>
+                  )}
+                </div>
+                <p className="tc-recent-name">{item.name.replace(/\.[^/.]+$/, "")}</p>
+                <p className="tc-recent-sizes">{formatBytes(item.origSize)} → {formatBytes(item.outputSize)}</p>
+              </div>
+            ))}
+          </div>
+        </div>
       )}
 
       <style>{`
-        .gc-wrap { max-width: 800px; margin: 0 auto; padding: 1.5rem; }
-        .gc-settings { display: flex; flex-wrap: wrap; gap: 1.25rem; margin-bottom: 1.5rem; align-items: flex-end; }
+        .gc-settings { background: #fff; border-radius: 1.5rem; border: 1px solid rgba(255,255,255,0.8); box-shadow: 0 4px 12px -2px rgba(0,0,0,0.07), inset 0 1px 0 rgba(255,255,255,0.8); padding: 1.5rem 2rem; margin-bottom: 1.5rem; display: flex; flex-wrap: wrap; gap: 1.25rem; align-items: flex-end; }
         .gc-setting-group { display: flex; flex-direction: column; gap: 0.375rem; }
-        .gc-setting-group label { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; opacity: 0.6; }
+        .gc-setting-group label { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: #64748b; }
         .gc-tabs { display: flex; gap: 0.375rem; flex-wrap: wrap; }
-        .gc-tab { padding: 0.375rem 0.75rem; border: 1.5px solid rgba(0,0,0,0.15); border-radius: 6px; background: transparent; cursor: pointer; font-size: 0.875rem; color: inherit; transition: all 0.15s; }
-        .gc-tab--active { background: var(--primary, #0070f3); color: white; border-color: var(--primary, #0070f3); }
-        .gc-select { padding: 0.375rem 0.625rem; border: 1.5px solid rgba(0,0,0,0.15); border-radius: 6px; font-size: 0.875rem; background: transparent; color: inherit; cursor: pointer; }
-        .gc-dropzone { border: 2px dashed var(--primary, #0070f3); border-radius: 12px; padding: 4rem 2rem; text-align: center; cursor: pointer; transition: background 0.2s; }
-        .gc-dropzone:hover { background: rgba(0,112,243,0.04); }
-        .gc-dropzone-icon { font-size: 3rem; margin-bottom: 1rem; }
-        .gc-dropzone-title { font-size: 1.125rem; font-weight: 600; margin-bottom: 0.5rem; }
-        .gc-dropzone-hint { font-size: 0.875rem; opacity: 0.6; }
-        .gc-toolbar { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem; }
-        .gc-btn { padding: 0.5rem 1rem; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.875rem; transition: opacity 0.15s; }
-        .gc-btn:disabled { opacity: 0.5; cursor: not-allowed; }
-        .gc-btn--primary { background: var(--primary, #0070f3); color: white; }
-        .gc-btn--green   { background: #22c55e; color: white; }
-        .gc-btn--red     { background: #ef4444; color: white; }
-        .gc-btn--sm      { padding: 0.375rem 0.75rem; font-size: 0.8125rem; }
-        .gc-list { display: flex; flex-direction: column; gap: 0.75rem; }
-        .gc-item { display: flex; align-items: center; gap: 1rem; padding: 1rem; border: 1.5px solid rgba(0,0,0,0.1); border-radius: 8px; }
-        .gc-item--done { border-color: rgba(34,197,94,0.4); }
-        .gc-item--error { border-color: rgba(239,68,68,0.4); }
-        .gc-item-preview { width: 72px; height: 56px; flex-shrink: 0; border-radius: 6px; overflow: hidden; background: rgba(0,0,0,0.05); display: flex; align-items: center; justify-content: center; }
-        .gc-item-preview img { width: 100%; height: 100%; object-fit: cover; }
-        .gc-item-info { flex: 1; min-width: 0; text-align: left; }
-        .gc-item-name { font-weight: 600; font-size: 0.875rem; margin-bottom: 0.25rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .gc-item-sub { font-size: 0.8125rem; opacity: 0.7; }
-        .gc-item-sub--blue { color: var(--primary, #0070f3); opacity: 1; font-weight: 600; }
-        .gc-item-sub--red  { color: #ef4444; opacity: 1; }
-        .gc-saving { color: #22c55e; font-weight: 700; margin-left: 0.5rem; }
-        .gc-progress { height: 4px; background: rgba(0,0,0,0.08); border-radius: 2px; margin-top: 0.375rem; }
-        .gc-progress-bar { height: 100%; background: var(--primary, #0070f3); border-radius: 2px; transition: width 0.3s; }
+        .gc-tab { padding: 0.4rem 0.875rem; border: 1.5px solid #e2e8f0; border-radius: 0.625rem; background: #f8fafc; cursor: pointer; font-size: 0.8rem; font-weight: 600; color: #475569; transition: all 0.15s; }
+        .gc-tab:hover { border-color: #bfdbfe; background: #eff6ff; }
+        .gc-tab--active { background: linear-gradient(135deg,#3b82f6 0%,#6366f1 100%); color: white; border-color: transparent; box-shadow: 0 2px 8px -1px rgba(59,130,246,0.4); }
+        .gc-select { padding: 0.4rem 0.75rem; border: 1.5px solid #e2e8f0; border-radius: 0.625rem; font-size: 0.85rem; background: #f8fafc; color: inherit; cursor: pointer; font-weight: 600; }
         @media (prefers-color-scheme: dark) {
-          .gc-tab { border-color: rgba(255,255,255,0.2); }
-          .gc-select { border-color: rgba(255,255,255,0.2); }
-          .gc-item { border-color: rgba(255,255,255,0.1); }
-          .gc-item--done { border-color: rgba(34,197,94,0.3); }
-          .gc-progress { background: rgba(255,255,255,0.1); }
+          .gc-settings { background: #1e293b; border-color: rgba(255,255,255,0.07); }
+          .gc-tab { border-color: #334155; background: #0f172a; color: #94a3b8; }
+          .gc-tab:hover { border-color: #3b82f6; }
+          .gc-select { border-color: #334155; background: #0f172a; color: #f1f5f9; }
         }
       `}</style>
     </div>

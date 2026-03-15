@@ -1,15 +1,20 @@
 import PageShell from "@/components/PageShell";
-import Breadcrumb from "@/components/Breadcrumb";
 import Link from "next/link";
 
 export const metadata = {
     title: "Image Compressor vs Image Converter – What's the Difference?",
     description: "Compare image compression and image conversion tools. Learn which tool to use for PNG, JPEG, and WebP images.",
-    alternates: { canonical: "https://webpify.vercel.app/image/compare" },
+    alternates: { canonical: "https://webpifyy.vercel.app/image/compare" },
+    keywords: ["image compressor vs converter", "when to compress vs convert images", "image optimization guide"],
+    twitter: {
+        card: "summary_large_image",
+        title: "Image Compressor vs Image Converter – What's the Difference?",
+        description: "Not sure whether to compress or convert? Clear comparison to help you choose the right tool.",
+    },
     openGraph: {
         title: "Image Compressor vs Image Converter – What's the Difference?",
         description: "Compare image compression and image conversion tools. Learn which tool to use for PNG, JPEG, and WebP images.",
-        url: "https://webpify.vercel.app/image/compare",
+        url: "https://webpifyy.vercel.app/image/compare",
     },
 };
 
@@ -35,13 +40,13 @@ export default function ComparePage() {
                                         "@type": "ListItem",
                                         "position": 1,
                                         "name": "Home",
-                                        "item": "https://webpify.vercel.app/"
+                                        "item": "https://webpifyy.vercel.app/"
                                     },
                                     {
                                         "@type": "ListItem",
                                         "position": 2,
                                         "name": "Image",
-                                        "item": "https://webpify.vercel.app/"
+                                        "item": "https://webpifyy.vercel.app/image"
                                     },
                                     {
                                         "@type": "ListItem",
@@ -85,17 +90,22 @@ export default function ComparePage() {
             />
 
             <PageShell blob1="#bfdbfe" blob2="#99f6e4">
-                <Breadcrumb items={breadcrumbItems} />
 
-                <div className="page-hero">
-                    <div className="page-badge">Tool Guide</div>
-                    <h1 className="page-title">Compressor vs Converter</h1>
-                    <p className="page-subtitle">
-                        Not sure whether to compress or convert? Here's a clear breakdown to help you choose the right tool.
+                <div className="hubv2-hero">
+                    <span className="hubv2-hero-badge">Tool Guide</span>
+                    <h1 className="hubv2-hero-title">
+                        Compress vs <span className="hubv2-hero-title-accent">Convert</span>
+                    </h1>
+                    <p className="hubv2-hero-subtitle">
+                        Not sure whether to compress or convert? A clear side-by-side comparison to help you choose the right tool for the job.
                     </p>
+                    <a href="#compare" className="hubv2-hero-doc-btn">
+                        <span className="hubv2-hero-doc-btn-icon">📋</span>
+                        View Comparison
+                    </a>
                 </div>
 
-                <div className="comparison-table-wrapper">
+                <div className="comparison-table-wrapper" id="compare">
                     <table className="comparison-table">
                         <thead>
                             <tr>
@@ -160,14 +170,6 @@ export default function ComparePage() {
                         <summary className="faq-question">Can I compress and convert images at the same time?</summary>
                         <p className="faq-answer">Yes, if you use the Image Converter, the output is automatically compressed with professional-grade compression.</p>
                     </details>
-                </div>
-
-                <h2 className="section-heading">Related Tools</h2>
-                <div className="tool-chips">
-                    <Link href="/image/compressor" className="tool-chip">Image Compressor</Link>
-                    <Link href="/image/converter" className="tool-chip">Image Converter</Link>
-                    <Link href="/image/resizer" className="tool-chip">Image Resizer</Link>
-                    <Link href="/svg-optimizer" className="tool-chip">SVG Optimizer</Link>
                 </div>
             </PageShell>
         </>

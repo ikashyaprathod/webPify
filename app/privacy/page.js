@@ -1,18 +1,17 @@
 import Link from "next/link";
 import PageShell from "@/components/PageShell";
-import Breadcrumb from "@/components/Breadcrumb";
 
 export const metadata = {
     title: "Privacy Policy – WebPify",
     description: "WebPify Privacy Policy. We don't collect data, store files, or track users. All image processing happens client-side in your browser.",
     alternates: {
-        canonical: 'https://webpify.vercel.app/privacy'
+        canonical: 'https://webpifyy.vercel.app/privacy'
     },
     robots: 'index, follow',
     openGraph: {
         title: "Privacy Policy – WebPify",
         description: "WebPify Privacy Policy. We don't collect data, store files, or track users. All image processing happens client-side in your browser.",
-        url: "https://webpify.vercel.app/privacy",
+        url: "https://webpifyy.vercel.app/privacy",
     },
 };
 
@@ -35,7 +34,7 @@ export default function PrivacyPage() {
                                 "@type": "ListItem",
                                 "position": 1,
                                 "name": "Home",
-                                "item": "https://webpify.vercel.app/"
+                                "item": "https://webpifyy.vercel.app/"
                             },
                             {
                                 "@type": "ListItem",
@@ -48,7 +47,6 @@ export default function PrivacyPage() {
             />
 
             <PageShell blob1="#bbf7d0" blob2="#ddd6fe">
-                <Breadcrumb items={breadcrumbItems} />
 
                 <div className="page-hero">
                     <div className="page-badge">Privacy First</div>

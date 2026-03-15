@@ -1,6 +1,6 @@
 // Entity Schema Definitions
 
-const BASE_URL = "https://webpify.vercel.app";
+const BASE_URL = "https://webpifyy.vercel.app";
 
 /**
  * Organization schema for WebPify

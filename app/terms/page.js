@@ -1,18 +1,17 @@
 import Link from "next/link";
 import PageShell from "@/components/PageShell";
-import Breadcrumb from "@/components/Breadcrumb";
 
 export const metadata = {
     title: "Terms of Service – WebPify",
     description: "WebPify Terms of Service. Free image compression and conversion tools provided as-is.",
     alternates: {
-        canonical: 'https://webpify.vercel.app/terms'
+        canonical: 'https://webpifyy.vercel.app/terms'
     },
     robots: 'index, follow',
     openGraph: {
         title: "Terms of Service – WebPify",
         description: "WebPify Terms of Service. Free image compression and conversion tools provided as-is.",
-        url: "https://webpify.vercel.app/terms",
+        url: "https://webpifyy.vercel.app/terms",
     },
 };
 
@@ -35,7 +34,7 @@ export default function TermsPage() {
                                 "@type": "ListItem",
                                 "position": 1,
                                 "name": "Home",
-                                "item": "https://webpify.vercel.app/"
+                                "item": "https://webpifyy.vercel.app/"
                             },
                             {
                                 "@type": "ListItem",
@@ -48,7 +47,6 @@ export default function TermsPage() {
             />
 
             <PageShell blob1="#fef3c7" blob2="#ddd6fe">
-                <Breadcrumb items={breadcrumbItems} />
 
                 <div className="page-hero">
                     <div className="page-badge">Legal</div>
