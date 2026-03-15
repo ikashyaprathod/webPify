@@ -17,6 +17,9 @@ export const metadata = {
     title: "Image Compressor – Compress PNG, JPEG, WebP Online Free",
     description: "Reduce image file size by 60–90% without quality loss. Free, instant, no sign-up required.",
   },
+  other: {
+    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Image Tools","item":"https://webpifyy.vercel.app/image"},{"@type":"ListItem","position":3,"name":"Compress"}]})
+  },
 };
 
 const cards = [

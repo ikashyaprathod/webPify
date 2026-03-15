@@ -12,6 +12,9 @@ export const metadata = {
     description: "Compress WebM videos online using VP9 encoding. Client-side processing — your video never leaves your browser.",
     url: "https://webpifyy.vercel.app/video/compress/webm",
   },
+  other: {
+    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Video Tools","item":"https://webpifyy.vercel.app/video"},{"@type":"ListItem","position":3,"name":"Compress","item":"https://webpifyy.vercel.app/video/compress"},{"@type":"ListItem","position":4,"name":"WebM"}]})
+  },
 };
 
 const webmFaqs = [

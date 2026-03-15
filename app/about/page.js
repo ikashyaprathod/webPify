@@ -10,6 +10,9 @@ export const metadata = {
         description: "Learn about Webpifyy, our mission to provide free professional tools.",
         url: "https://webpifyy.vercel.app/about",
     },
+  other: {
+    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"About"}]})
+  },
 };
 
 export default function AboutPage() {

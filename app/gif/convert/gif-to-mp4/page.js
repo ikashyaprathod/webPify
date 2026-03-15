@@ -11,6 +11,9 @@ export const metadata = {
     description: "Convert animated GIF to MP4 video online. Up to 90% smaller file size. Free, fast, browser-based — your files never leave your device.",
     url: "https://webpifyy.vercel.app/gif/convert/gif-to-mp4",
   },
+  other: {
+    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"GIF Tools","item":"https://webpifyy.vercel.app/gif"},{"@type":"ListItem","position":3,"name":"Convert","item":"https://webpifyy.vercel.app/gif/convert"},{"@type":"ListItem","position":4,"name":"GIF to MP4"}]})
+  },
 };
 
 export default function GifToMp4Page() {

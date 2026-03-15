@@ -12,6 +12,9 @@ export const metadata = {
     description: "Compress MOV videos from iPhone online. Convert and compress to MP4 or WebM — client-side, no uploads.",
     url: "https://webpifyy.vercel.app/video/compress/mov",
   },
+  other: {
+    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Video Tools","item":"https://webpifyy.vercel.app/video"},{"@type":"ListItem","position":3,"name":"Compress","item":"https://webpifyy.vercel.app/video/compress"},{"@type":"ListItem","position":4,"name":"MOV"}]})
+  },
 };
 
 const movFaqs = [

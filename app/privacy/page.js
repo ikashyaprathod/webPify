@@ -11,6 +11,9 @@ export const metadata = {
         description: "Webpifyy Privacy Policy. We don't collect data, store files, or track users.",
         url: "https://webpifyy.vercel.app/privacy",
     },
+  other: {
+    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Privacy Policy"}]})
+  },
 };
 
 export default function PrivacyPage() {

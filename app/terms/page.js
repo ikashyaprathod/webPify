@@ -11,6 +11,9 @@ export const metadata = {
         description: "Webpifyy Terms of Service. Free tools provided as-is.",
         url: "https://webpifyy.vercel.app/terms",
     },
+  other: {
+    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Terms of Service"}]})
+  },
 };
 
 export default function TermsPage() {

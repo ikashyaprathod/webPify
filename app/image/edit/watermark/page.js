@@ -11,18 +11,143 @@ export const metadata = {
     description: "Add custom text watermarks to images. Choose position, opacity, font size. Zero uploads.",
     url: "https://webpifyy.vercel.app/image/edit/watermark",
   },
+  other: {
+    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Image Tools","item":"https://webpifyy.vercel.app/image"},{"@type":"ListItem","position":3,"name":"Edit","item":"https://webpifyy.vercel.app/image/edit"},{"@type":"ListItem","position":4,"name":"Watermark"}]})
+  },
 };
 
+const faqs = [
+  { q: "How do I add a watermark to an image?", a: "Upload your image, type your watermark text, choose position (corner, center, tiled), and adjust font size and opacity. Preview updates live, then click Download." },
+  { q: "Can I control the opacity of the watermark?", a: "Yes. The opacity slider lets you set transparency from fully visible to very subtle. A 30–50% opacity is common for non-intrusive watermarks." },
+  { q: "What watermark positions are available?", a: "You can place the watermark in any corner (top-left, top-right, bottom-left, bottom-right), at the center, or as a tiled pattern across the whole image." },
+  { q: "Is my image uploaded to a server?", a: "No. All watermarking happens in your browser using the Canvas API. Your images never leave your device." },
+  { q: "Can I watermark product photos for e-commerce?", a: "Yes. Watermarks are a common way to protect product images from being reused without permission. Our tool makes it easy to apply consistent branding across multiple photos." },
+];
+
 export default function WatermarkPage() {
+  const schema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: "https://webpifyy.vercel.app/" },
+          { "@type": "ListItem", position: 2, name: "Image Tools", item: "https://webpifyy.vercel.app/image" },
+          { "@type": "ListItem", position: 3, name: "Edit", item: "https://webpifyy.vercel.app/image/edit" },
+          { "@type": "ListItem", position: 4, name: "Watermark" },
+        ],
+      },
+      {
+        "@type": ["SoftwareApplication", "WebApplication"],
+        "@id": "https://webpifyy.vercel.app/image/edit/watermark#software",
+        name: "Image Watermark Tool",
+        url: "https://webpifyy.vercel.app/image/edit/watermark",
+        applicationCategory: "MultimediaApplication",
+        operatingSystem: "Any",
+        inLanguage: "en",
+        isAccessibleForFree: true,
+        offers: { "@type": "Offer", price: "0", priceCurrency: "USD", availability: "https://schema.org/InStock", seller: { "@id": "https://webpifyy.vercel.app/#organization" } },
+        provider: { "@id": "https://webpifyy.vercel.app/#organization" },
+        description: "Add text watermarks to images online. Control position, opacity, font size. Browser-based, no uploads.",
+      },
+      {
+        "@type": "FAQPage",
+        mainEntity: faqs.map(f => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+      },
+    ],
+  };
+
   return (
-    <PageShell>
-      <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Image", href: "/image" }, { label: "Edit", href: "/image/edit" }, { label: "Add Watermark" }]} />
-      <div className="page-hero">
-        <span className="page-badge">WATERMARK</span>
-        <h1 className="page-title">Add Watermark to Image</h1>
-        <p className="page-subtitle">Stamp a custom text watermark on any image. Control position, font size, opacity, and color. Instant live preview — all in your browser.</p>
-      </div>
-      <ImageWatermark />
-    </PageShell>
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      <PageShell>
+        <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Image Tools", href: "/image" }, { label: "Edit", href: "/image/edit" }, { label: "Add Watermark" }]} />
+        <div className="toolpg-hero">
+          <span className="toolpg-badge">WATERMARK</span>
+          <h1 className="toolpg-title">Add Watermark <span className="toolpg-title-accent">Online</span></h1>
+          <p className="toolpg-subtitle">Stamp a custom text watermark on any image. Control position, font size, opacity, and color. Instant live preview — all in your browser.</p>
+        </div>
+
+        <ImageWatermark />
+
+        <div className="tpg-stats-wrap">
+          <div className="tpg-glass tpg-lm-panel">
+            <div className="tpg-glow-1" />
+            <div className="tpg-glow-2" />
+            <div className="tpg-lm-head">
+              <h4 className="tpg-lm-label"><span className="tpg-dot-pulse" />Live Engine Monitoring</h4>
+              <span className="tpg-lm-badge">v2.4.0-Stable</span>
+            </div>
+            <div className="tpg-sc-grid">
+              <div className="tpg-sc">
+                <div className="tpg-sci tpg-sci-b">📊</div>
+                <div><p className="tpg-sv">1.2 TB</p><p className="tpg-sl">Bandwidth Saved Today</p></div>
+              </div>
+              <div className="tpg-sc">
+                <div className="tpg-sci tpg-sci-i">⚡</div>
+                <div><p className="tpg-sv">0.4s</p><p className="tpg-sl">Avg Process Time</p></div>
+              </div>
+              <div className="tpg-sc">
+                <div className="tpg-sci tpg-sci-e">✓</div>
+                <div><p className="tpg-sv">99.9%</p><p className="tpg-sl">Compression Fidelity</p></div>
+              </div>
+            </div>
+          </div>
+          <div className="tpg-tiles">
+            <div className="tpg-tile">
+              <div className="tpg-ti tpg-ti-b">🔒</div>
+              <h5 className="tpg-ttl">Military-Grade Privacy</h5>
+              <p className="tpg-tds">Auto-purge after 60m. Zero logs. Fully encrypted processing.</p>
+            </div>
+            <div className="tpg-tile">
+              <div className="tpg-ti tpg-ti-p">💧</div>
+              <h5 className="tpg-ttl">Live Preview</h5>
+              <p className="tpg-tds">See your watermark update in real-time as you adjust settings.</p>
+            </div>
+            <div className="tpg-tile">
+              <div className="tpg-ti tpg-ti-a">⚡</div>
+              <h5 className="tpg-ttl">No Registration</h5>
+              <p className="tpg-tds">Jump straight into processing without the sign-up friction.</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="tpg-world">
+          <div className="tpg-wmap" />
+          <div className="tpg-wping" style={{top:"30%",left:"20%"}} />
+          <div className="tpg-wping" style={{top:"40%",left:"45%"}} />
+          <div className="tpg-wping" style={{top:"35%",left:"75%"}} />
+          <div className="tpg-wping" style={{top:"65%",left:"30%"}} />
+          <div className="tpg-wping" style={{top:"20%",left:"85%"}} />
+          <div className="tpg-woverlay">
+            <h4 className="tpg-wtitle">Edge-First Processing</h4>
+            <p className="tpg-wdesc">Our global CDN ensures your files are optimized at the server nearest to you, reducing latency by up to 90%.</p>
+            <div className="tpg-wnodes">
+              <div className="tpg-wnode">US</div>
+              <div className="tpg-wnode">EU</div>
+              <div className="tpg-wnode">AS</div>
+              <div className="tpg-wnode tpg-wnode-b">+9</div>
+              <div className="tpg-wbar"><div className="tpg-wbar-fill" /></div>
+              <span className="tpg-wstatus">Global Status: Optimal</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="toolpg-faq">
+          <div className="toolpg-faq-hd">
+            <p className="toolpg-faq-badge">Knowledge Base</p>
+            <h2 className="toolpg-faq-title">Frequently Asked Questions</h2>
+          </div>
+          <div className="toolpg-faq-list">
+            {faqs.map((f, i) => (
+              <details key={i} className="toolpg-faq-item">
+                <summary>{f.q}<span className="toolpg-faq-toggle">↓</span></summary>
+                <p>{f.a}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </PageShell>
+    </>
   );
 }

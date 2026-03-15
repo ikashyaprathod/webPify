@@ -11,6 +11,9 @@ export const metadata = {
     description: "Optimize SVG files online. Removes metadata, minifies paths, merges styles. Powered by SVGO. Free, instant, no upload needed.",
     url: "https://webpifyy.vercel.app/svg/optimize",
   },
+  other: {
+    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"SVG Tools","item":"https://webpifyy.vercel.app/svg"},{"@type":"ListItem","position":3,"name":"Optimize"}]})
+  },
 };
 
 export default function SvgOptimizerPage() {

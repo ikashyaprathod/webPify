@@ -18,6 +18,9 @@ export const metadata = {
     title: "PNG Image Resizer – Resize PNG Online Free",
     description: "Resize PNG images to any dimension while preserving transparency. Free, instant, no sign-up.",
   },
+  other: {
+    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Image Tools","item":"https://webpifyy.vercel.app/image"},{"@type":"ListItem","position":3,"name":"Resize","item":"https://webpifyy.vercel.app/image/resize"},{"@type":"ListItem","position":4,"name":"PNG"}]})
+  },
 };
 
 const faqs = [

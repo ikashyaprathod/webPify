@@ -17,6 +17,9 @@ export const metadata = {
     title: "Image Resizer Online – Resize PNG, JPEG, WebP Free",
     description: "Resize images to any dimension with 4 fit modes. Free, instant, no sign-up required.",
   },
+  other: {
+    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Image Tools","item":"https://webpifyy.vercel.app/image"},{"@type":"ListItem","position":3,"name":"Resize"}]})
+  },
 };
 
 const cards = [

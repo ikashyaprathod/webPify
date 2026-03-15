@@ -18,6 +18,9 @@ export const metadata = {
     title: "Compress WebP Images Online – Free WebP Compressor",
     description: "Reduce WebP file size by 50–80% without visible quality loss. Free, instant, no sign-up.",
   },
+  other: {
+    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Image Tools","item":"https://webpifyy.vercel.app/image"},{"@type":"ListItem","position":3,"name":"Compress","item":"https://webpifyy.vercel.app/image/compress"},{"@type":"ListItem","position":4,"name":"WebP"}]})
+  },
 };
 
 const faqs = [

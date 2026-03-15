@@ -17,6 +17,9 @@ export const metadata = {
     title: "Compress GIF Online Free – GIF Compressor",
     description: "Reduce animated GIF file size by up to 60% without quality loss. Free, browser-based, no sign-up.",
   },
+  other: {
+    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"GIF Tools","item":"https://webpifyy.vercel.app/gif"},{"@type":"ListItem","position":3,"name":"Compress","item":"https://webpifyy.vercel.app/gif/compress"},{"@type":"ListItem","position":4,"name":"GIF"}]})
+  },
 };
 
 const faqs = [

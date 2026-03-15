@@ -10,6 +10,9 @@ export const metadata = {
     description: "Compress, convert, trim, mute, and screenshot video files. All client-side, no uploads.",
     url: "https://webpifyy.vercel.app/video",
   },
+  other: {
+    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Video Tools"}]})
+  },
 };
 
 const compressTools = [
@@ -75,7 +78,7 @@ export default function VideoHub() {
         <section className="hubv2-section" id="compress">
           <div className="hubv2-section-hd">
             <div className="hubv2-section-hd-left"><span className="hubv2-section-hd-icon">⊞</span><h2 className="hubv2-section-hd-title">Compress Video</h2></div>
-            <a href="/video/compress" className="hubv2-section-hd-link">View all →</a>
+            <a href="/video/compress" className="hubv2-section-view-all">View all →</a>
           </div>
           <div className="hubv2-grid">
             {compressTools.map(card => (
@@ -94,7 +97,7 @@ export default function VideoHub() {
         <section className="hubv2-section" id="convert">
           <div className="hubv2-section-hd">
             <div className="hubv2-section-hd-left"><span className="hubv2-section-hd-icon">⊞</span><h2 className="hubv2-section-hd-title">Convert Video</h2></div>
-            <a href="/video/convert" className="hubv2-section-hd-link">View all →</a>
+            <a href="/video/convert" className="hubv2-section-view-all">View all →</a>
           </div>
           <div className="hubv2-grid">
             {convertTools.map(card => (
@@ -113,7 +116,7 @@ export default function VideoHub() {
         <section className="hubv2-section" id="edit">
           <div className="hubv2-section-hd">
             <div className="hubv2-section-hd-left"><span className="hubv2-section-hd-icon">⊞</span><h2 className="hubv2-section-hd-title">Edit Video</h2></div>
-            <a href="/video/edit" className="hubv2-section-hd-link">View all →</a>
+            <a href="/video/edit" className="hubv2-section-view-all">View all →</a>
           </div>
           <div className="hubv2-grid">
             {editTools.map(card => (
@@ -138,16 +141,14 @@ export default function VideoHub() {
           </div>
         </section>
 
-        <section className="hubv2-section">
-          <h2 className="hubv2-stats-hd">Frequently Asked Questions</h2>
-          <div className="faq-list">
-            {faqs.map((faq,i) => (
-              <details key={i} className="faq-item">
-                <summary className="faq-question">{faq.q}</summary>
-                <p className="faq-answer">{faq.a}</p>
-              </details>
-            ))}
-          </div>
+        <section className="hubv2-faq">
+          <h2 className="hubv2-faq-title">Frequently Asked Questions</h2>
+          {faqs.map((f,i) => (
+            <details key={i} className="faq-details">
+              <summary className="faq-question">{f.q}</summary>
+              <p className="faq-answer">{f.a}</p>
+            </details>
+          ))}
         </section>
       </PageShell>
     </>

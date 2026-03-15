@@ -10,6 +10,9 @@ export const metadata = {
     description: "Favicon generator, OG image resizer, base64 encoder. Free developer tools.",
     url: "https://webpifyy.vercel.app/dev",
   },
+  other: {
+    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Developer Tools"}]})
+  },
 };
 
 const cards = [

@@ -10,6 +10,9 @@ export const metadata = {
     description: "Browser-based audio tools powered by FFmpeg.wasm. 100% private.",
     url: "https://webpifyy.vercel.app/audio",
   },
+  other: {
+    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Audio Tools"}]})
+  },
 };
 
 const compressCards = [

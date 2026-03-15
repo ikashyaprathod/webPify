@@ -17,6 +17,9 @@ export const metadata = {
     title: "GIF Compressor – Compress GIF & Convert to MP4/WebM Free",
     description: "Compress GIFs or convert to video for up to 90% smaller files. Free, browser-based, no sign-up.",
   },
+  other: {
+    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"GIF Tools","item":"https://webpifyy.vercel.app/gif"},{"@type":"ListItem","position":3,"name":"Compress"}]})
+  },
 };
 
 const cards = [

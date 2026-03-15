@@ -10,10 +10,20 @@ export const metadata = {
     description: "Trim audio clips in your browser. No uploads.",
     url: "https://webpifyy.vercel.app/audio/edit",
   },
+  other: {
+    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Audio Tools","item":"https://webpifyy.vercel.app/audio"},{"@type":"ListItem","position":3,"name":"Edit"}]})
+  },
 };
 
 const cards = [
   { href: "/audio/edit/trim", icon: "✂️", title: "Audio Trimmer", desc: "Cut and trim audio clips to exact start/end times. Perfect for ringtones and clips.", gradient: "linear-gradient(135deg,#fdf4ff,#fae8ff)", cta: "Trim Audio" },
+];
+
+const faqs = [
+  { q: "How do I trim an audio file?", a: "Upload your audio file, set the start and end times using the slider or by typing values, then click Trim. The trimmed file downloads automatically." },
+  { q: "Does trimming audio affect quality?", a: "No. Audio trimming uses stream-copy mode — no re-encoding. The output quality is identical to the source file." },
+  { q: "What formats can I trim?", a: "MP3, WAV, OGG, AAC, and FLAC formats are all supported. Output is in the same format as the input." },
+  { q: "Is my audio uploaded to a server?", a: "No. All processing runs entirely in your browser using FFmpeg.wasm. Files never leave your device." },
 ];
 
 export default function AudioEditHub() {
@@ -27,6 +37,26 @@ export default function AudioEditHub() {
           { "@type": "ListItem", position: 2, name: "Audio Tools", item: "https://webpifyy.vercel.app/audio" },
           { "@type": "ListItem", position: 3, name: "Audio Editor" },
         ],
+      },
+      {
+        "@type": ["SoftwareApplication", "WebApplication"],
+        "@id": "https://webpifyy.vercel.app/audio/edit#software",
+        name: "Audio Editor",
+        url: "https://webpifyy.vercel.app/audio/edit",
+        applicationCategory: "MultimediaApplication",
+        operatingSystem: "Any",
+        inLanguage: "en",
+        isAccessibleForFree: true,
+        offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+        description: "Free online audio editor. Trim audio clips to exact times. Browser-based using FFmpeg.wasm, no uploads.",
+      },
+      {
+        "@type": "FAQPage",
+        mainEntity: faqs.map(f => ({
+          "@type": "Question",
+          name: f.q,
+          acceptedAnswer: { "@type": "Answer", text: f.a },
+        })),
       },
     ],
   };
@@ -42,9 +72,14 @@ export default function AudioEditHub() {
           <p className="hubv2-hero-subtitle">Edit audio files in your browser. Trim, cut, and adjust audio clips. FFmpeg.wasm powered — 100% private.</p>
           <a href="#tools" className="hubv2-hero-doc-btn"><span className="hubv2-hero-doc-btn-icon">📋</span>View All</a>
         </div>
+
         <section className="hubv2-section" id="tools">
           <div className="hubv2-section-hd">
-            <div className="hubv2-section-hd-left"><span className="hubv2-section-hd-icon">⊞</span><h2 className="hubv2-section-hd-title">Edit Audio</h2></div>
+            <div className="hubv2-section-hd-left"><span className="hubv2-section-hd-icon">⊞</span><h2 className="hubv2-section-hd-title">Core Tools</h2></div>
+            <div className="hubv2-section-hd-actions">
+              <span className="hubv2-section-hd-btn">≡</span>
+              <span className="hubv2-section-hd-btn">⊞</span>
+            </div>
           </div>
           <div className="hubv2-grid">
             {cards.map(card => (
@@ -58,6 +93,25 @@ export default function AudioEditHub() {
               </div>
             ))}
           </div>
+        </section>
+
+        <section className="hubv2-section">
+          <h2 className="hubv2-stats-hd">Editor Capabilities</h2>
+          <div className="hubv2-stats-grid">
+            <div className="hubv2-stat-card"><span className="hubv2-stat-ghost">✂️</span><p className="hubv2-stat-label">Precision</p><div className="hubv2-stat-row"><span className="hubv2-stat-value">0.1s</span><span className="hubv2-stat-badge hubv2-stat-badge--blue">Accuracy</span></div><div className="hubv2-stat-progress-track"><div className="hubv2-stat-progress-bar hubv2-stat-progress-bar--blue" style={{ "--prog": "100%" }}></div></div></div>
+            <div className="hubv2-stat-card"><span className="hubv2-stat-ghost">⚡</span><p className="hubv2-stat-label">Quality Loss</p><div className="hubv2-stat-row"><span className="hubv2-stat-value">Zero</span><span className="hubv2-stat-badge hubv2-stat-badge--green">Stream Copy</span></div><div className="hubv2-stat-progress-track"><div className="hubv2-stat-progress-bar hubv2-stat-progress-bar--green" style={{ "--prog": "100%" }}></div></div></div>
+            <div className="hubv2-stat-card"><span className="hubv2-stat-ghost">🔒</span><p className="hubv2-stat-label">Privacy</p><div className="hubv2-stat-row"><span className="hubv2-stat-value">100%</span><span className="hubv2-stat-badge hubv2-stat-badge--purple">No Upload</span></div><div className="hubv2-stat-progress-track"><div className="hubv2-stat-progress-bar hubv2-stat-progress-bar--purple" style={{ "--prog": "100%" }}></div></div></div>
+          </div>
+        </section>
+
+        <section className="hubv2-faq">
+          <h2 className="hubv2-faq-title">Audio Editing FAQ</h2>
+          {faqs.map((f,i) => (
+            <details key={i} className="faq-details">
+              <summary className="faq-question">{f.q}</summary>
+              <p className="faq-answer">{f.a}</p>
+            </details>
+          ))}
         </section>
       </PageShell>
     </>

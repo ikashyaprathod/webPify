@@ -18,6 +18,9 @@ export const metadata = {
     title: "Convert Images to JPEG Online – Free JPG Converter",
     description: "Convert PNG/WebP to JPEG for maximum compatibility. Free, instant, no sign-up required.",
   },
+  other: {
+    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Image Tools","item":"https://webpifyy.vercel.app/image"},{"@type":"ListItem","position":3,"name":"Convert","item":"https://webpifyy.vercel.app/image/convert"},{"@type":"ListItem","position":4,"name":"to JPEG"}]})
+  },
 };
 
 const faqs = [

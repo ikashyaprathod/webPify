@@ -11,6 +11,9 @@ export const metadata = {
     description: "Convert PDF pages to JPG images instantly. Browser-based, no uploads.",
     url: "https://webpifyy.vercel.app/pdf",
   },
+  other: {
+    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"PDF Tools"}]})
+  },
 };
 
 const tools = [
@@ -87,16 +90,14 @@ export default function PDFHub() {
             <div className="hubv2-stat-card"><span className="hubv2-stat-ghost">💰</span><p className="hubv2-stat-label">Cost</p><div className="hubv2-stat-row"><span className="hubv2-stat-value">Free</span><span className="hubv2-stat-badge hubv2-stat-badge--purple">Always</span></div><div className="hubv2-stat-progress-track"><div className="hubv2-stat-progress-bar hubv2-stat-progress-bar--amber" style={{"--prog":"100%"}}></div></div></div>
           </div>
         </section>
-        <section className="hubv2-section">
-          <h2 className="hubv2-stats-hd">Frequently Asked Questions</h2>
-          <div className="faq-list">
-            {faqs.map((faq,i) => (
-              <details key={i} className="faq-item">
-                <summary className="faq-question">{faq.q}</summary>
-                <p className="faq-answer">{faq.a}</p>
-              </details>
-            ))}
-          </div>
+        <section className="hubv2-faq">
+          <h2 className="hubv2-faq-title">Frequently Asked Questions</h2>
+          {faqs.map((f,i) => (
+            <details key={i} className="faq-details">
+              <summary className="faq-question">{f.q}</summary>
+              <p className="faq-answer">{f.a}</p>
+            </details>
+          ))}
         </section>
       </PageShell>
     </>

@@ -17,6 +17,9 @@ export const metadata = {
     title: "PDF Compressor — Reduce PDF File Size Online Free",
     description: "Reduce PDF file size in your browser. No uploads, no sign-up.",
   },
+  other: {
+    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"PDF Tools","item":"https://webpifyy.vercel.app/pdf"},{"@type":"ListItem","position":3,"name":"Compress"}]})
+  },
 };
 
 const faqs = [
@@ -35,7 +38,7 @@ export default function PdfCompressPage() {
         itemListElement: [
           { "@type": "ListItem", position: 1, name: "Home", item: "https://webpifyy.vercel.app/" },
           { "@type": "ListItem", position: 2, name: "PDF Tools", item: "https://webpifyy.vercel.app/pdf" },
-          { "@type": "ListItem", position: 3, name: "PDF Compressor" },
+          { "@type": "ListItem", position: 3, name: "Compress" },
         ],
       },
       {

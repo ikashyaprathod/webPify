@@ -11,6 +11,9 @@ export const metadata = {
         description: "Professional image compression, conversion, and resizing tools. Optimize images for SEO, speed, and Core Web Vitals.",
         url: "https://webpifyy.vercel.app/image",
     },
+  other: {
+    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Image Tools"}]})
+  },
 };
 
 const compressCards = [

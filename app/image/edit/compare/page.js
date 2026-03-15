@@ -17,6 +17,9 @@ export const metadata = {
         description: "Compare image compression and image conversion tools. Learn which tool to use for PNG, JPEG, and WebP images.",
         url: "https://webpifyy.vercel.app/image/edit/compare",
     },
+  other: {
+    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Image Tools","item":"https://webpifyy.vercel.app/image"},{"@type":"ListItem","position":3,"name":"Edit","item":"https://webpifyy.vercel.app/image/edit"},{"@type":"ListItem","position":4,"name":"Compare"}]})
+  },
 };
 
 export default function ComparePage() {

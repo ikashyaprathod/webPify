@@ -10,6 +10,9 @@ export const metadata = {
     description: "Free online image editing tools. All run in your browser — no uploads needed.",
     url: "https://webpifyy.vercel.app/image/edit",
   },
+  other: {
+    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Image Tools","item":"https://webpifyy.vercel.app/image"},{"@type":"ListItem","position":3,"name":"Edit"}]})
+  },
 };
 
 const cards = [

@@ -11,6 +11,9 @@ export const metadata = {
     description: "Convert GIF to MP4 or WebM for dramatically smaller files. Browser-based, no uploads.",
     url: "https://webpifyy.vercel.app/gif/convert",
   },
+  other: {
+    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"GIF Tools","item":"https://webpifyy.vercel.app/gif"},{"@type":"ListItem","position":3,"name":"Convert"}]})
+  },
 };
 
 const tools = [
@@ -61,7 +64,11 @@ export default function GifConvertHub() {
         </div>
         <section className="hubv2-section" id="tools">
           <div className="hubv2-section-hd">
-            <div className="hubv2-section-hd-left"><span className="hubv2-section-hd-icon">⊞</span><h2 className="hubv2-section-hd-title">GIF Converter</h2></div>
+            <div className="hubv2-section-hd-left"><span className="hubv2-section-hd-icon">⊞</span><h2 className="hubv2-section-hd-title">Core Tools</h2></div>
+            <div className="hubv2-section-hd-actions">
+              <span className="hubv2-section-hd-btn">≡</span>
+              <span className="hubv2-section-hd-btn">⊞</span>
+            </div>
           </div>
           <div className="hubv2-grid">
             {tools.map(card => (
@@ -84,16 +91,14 @@ export default function GifConvertHub() {
             <div className="hubv2-stat-card"><span className="hubv2-stat-ghost">💰</span><p className="hubv2-stat-label">Cost</p><div className="hubv2-stat-row"><span className="hubv2-stat-value">Free</span><span className="hubv2-stat-badge hubv2-stat-badge--purple">Always</span></div><div className="hubv2-stat-progress-track"><div className="hubv2-stat-progress-bar hubv2-stat-progress-bar--amber" style={{"--prog":"100%"}}></div></div></div>
           </div>
         </section>
-        <section className="hubv2-section">
-          <h2 className="hubv2-stats-hd">Frequently Asked Questions</h2>
-          <div className="faq-list">
-            {faqs.map((faq,i) => (
-              <details key={i} className="faq-item">
-                <summary className="faq-question">{faq.q}</summary>
-                <p className="faq-answer">{faq.a}</p>
-              </details>
-            ))}
-          </div>
+        <section className="hubv2-faq">
+          <h2 className="hubv2-faq-title">GIF Conversion FAQ</h2>
+          {faqs.map((f,i) => (
+            <details key={i} className="faq-details">
+              <summary className="faq-question">{f.q}</summary>
+              <p className="faq-answer">{f.a}</p>
+            </details>
+          ))}
         </section>
       </PageShell>
     </>

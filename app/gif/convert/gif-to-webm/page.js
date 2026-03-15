@@ -17,6 +17,9 @@ export const metadata = {
     title: "GIF to WebM Converter – Free Online Tool",
     description: "Convert animated GIF to WebM for up to 90% smaller files. Free, browser-based, no sign-up.",
   },
+  other: {
+    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"GIF Tools","item":"https://webpifyy.vercel.app/gif"},{"@type":"ListItem","position":3,"name":"Convert","item":"https://webpifyy.vercel.app/gif/convert"},{"@type":"ListItem","position":4,"name":"GIF to WebM"}]})
+  },
 };
 
 const faqs = [
