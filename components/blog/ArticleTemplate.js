@@ -131,10 +131,10 @@ export default function ArticleTemplate({
                             Reduce file size by up to 90% without losing quality using our free tools.
                         </p>
                         <div className="flex flex-col space-y-2">
-                            <Link href="/image/compressor" className="bg-white text-blue-600 font-semibold py-2 px-4 rounded-lg text-center hover:bg-blue-50 transition">
+                            <Link href="/image/compress" className="bg-white text-blue-600 font-semibold py-2 px-4 rounded-lg text-center hover:bg-blue-50 transition">
                                 Compress Images
                             </Link>
-                            <Link href="/image/converter" className="bg-blue-800/30 text-white font-medium py-2 px-4 rounded-lg text-center hover:bg-blue-800/50 transition">
+                            <Link href="/image/convert" className="bg-blue-800/30 text-white font-medium py-2 px-4 rounded-lg text-center hover:bg-blue-800/50 transition">
                                 Convert Format
                             </Link>
                         </div>

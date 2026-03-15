@@ -7,19 +7,21 @@ const INDEXED_PATHS = [
     // Core pages
     '/',
     '/image',
-    '/image/compressor',
-    '/image/converter',
-    '/image/compare',
+    '/image/compress',
+    '/image/convert',
+    '/image/resize',
+    '/image/edit',
+    '/image/edit/compare',
 
     // Format pages - Compressor
-    '/image/compressor/png',
-    '/image/compressor/jpeg',
-    '/image/compressor/webp',
+    '/image/compress/png',
+    '/image/compress/jpeg',
+    '/image/compress/webp',
 
     // Format pages - Converter
-    '/image/converter/png',
-    '/image/converter/jpeg',
-    '/image/converter/webp',
+    '/image/convert/to-webp',
+    '/image/convert/to-png',
+    '/image/convert/to-jpeg',
 
     // Programmatic - Compression Pattern 1
     '/compress-png-online',

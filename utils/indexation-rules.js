@@ -9,7 +9,7 @@
 const indexationRules = {
     // Core pages - Always index, high priority
     core: {
-        paths: ['/', '/image', '/image/compressor', '/image/converter'],
+        paths: ['/', '/image', '/image/compress', '/image/convert'],
         shouldIndex: true,
         priority: 1.0,
         changefreq: 'weekly'
@@ -18,12 +18,12 @@ const indexationRules = {
     // Format pages - Always index, high priority
     formatPages: {
         paths: [
-            '/image/compressor/png',
-            '/image/compressor/jpeg',
-            '/image/compressor/webp',
-            '/image/converter/png',
-            '/image/converter/jpeg',
-            '/image/converter/webp'
+            '/image/compress/png',
+            '/image/compress/jpeg',
+            '/image/compress/webp',
+            '/image/convert/to-png',
+            '/image/convert/to-jpeg',
+            '/image/convert/to-webp'
         ],
         shouldIndex: true,
         priority: 0.9,

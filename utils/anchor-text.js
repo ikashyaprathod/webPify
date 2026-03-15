@@ -101,15 +101,15 @@ export function getAllAnchors(toolId) {
  * Tool ID mapping for URL to anchor lookup
  */
 export const urlToToolId = {
-    '/image/compressor/png': 'png-compressor',
-    '/image/compressor/jpeg': 'jpeg-compressor',
-    '/image/compressor/webp': 'webp-compressor',
-    '/image/converter/png': 'png-converter',
-    '/image/converter/jpeg': 'jpeg-converter',
-    '/image/converter/webp': 'webp-converter',
-    '/image/compressor': 'compressor-hub',
-    '/image/converter': 'converter-hub',
-    '/image/compare': 'tool-comparison'
+    '/image/compress/png': 'png-compressor',
+    '/image/compress/jpeg': 'jpeg-compressor',
+    '/image/compress/webp': 'webp-compressor',
+    '/image/convert/to-png': 'png-converter',
+    '/image/convert/to-jpeg': 'jpeg-converter',
+    '/image/convert/to-webp': 'webp-converter',
+    '/image/compress': 'compressor-hub',
+    '/image/convert': 'converter-hub',
+    '/image/edit/compare': 'tool-comparison'
 };
 
 /**

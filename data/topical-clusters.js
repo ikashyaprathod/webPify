@@ -23,7 +23,7 @@ export const topicalClusters = {
         parent: 'image-optimization',
         level: 1,
         children: ['png-compression', 'jpeg-compression', 'webp-compression', 'compression-types'],
-        pages: ['/image/compressor'],
+        pages: ['/image/compress'],
         targetQueries: ['image compression', 'compress images', 'image compressor']
     },
 
@@ -33,7 +33,7 @@ export const topicalClusters = {
         parent: 'image-optimization',
         level: 1,
         children: ['png-conversion', 'jpeg-conversion', 'webp-conversion', 'format-conversion'],
-        pages: ['/image/converter'],
+        pages: ['/image/convert'],
         targetQueries: ['image conversion', 'convert images', 'image converter']
     },
 
@@ -43,7 +43,7 @@ export const topicalClusters = {
         parent: 'image-optimization',
         level: 1,
         children: ['png-format', 'jpeg-format', 'webp-format', 'format-comparison'],
-        pages: ['/image/compare'],
+        pages: ['/image/edit/compare'],
         targetQueries: ['image formats', 'best image format', 'image format comparison']
     },
 
@@ -74,7 +74,7 @@ export const topicalClusters = {
         parent: 'image-compression',
         level: 2,
         children: [],
-        pages: ['/image/compressor/png'],
+        pages: ['/image/compress/png'],
         leafTopics: [
             'png compression online',
             'compress png without losing quality',
@@ -96,7 +96,7 @@ export const topicalClusters = {
         parent: 'image-compression',
         level: 2,
         children: [],
-        pages: ['/image/compressor/jpeg'],
+        pages: ['/image/compress/jpeg'],
         leafTopics: [
             'jpeg compression online',
             'compress jpeg images',
@@ -118,7 +118,7 @@ export const topicalClusters = {
         parent: 'image-compression',
         level: 2,
         children: [],
-        pages: ['/image/compressor/webp'],
+        pages: ['/image/compress/webp'],
         leafTopics: [
             'webp compression online',
             'compress webp images',
@@ -154,7 +154,7 @@ export const topicalClusters = {
         parent: 'image-conversion',
         level: 2,
         children: [],
-        pages: ['/image/converter/png'],
+        pages: ['/image/convert/to-png'],
         leafTopics: [
             'convert to png',
             'jpg to png converter',
@@ -170,7 +170,7 @@ export const topicalClusters = {
         parent: 'image-conversion',
         level: 2,
         children: [],
-        pages: ['/image/converter/jpeg'],
+        pages: ['/image/convert/to-jpeg'],
         leafTopics: [
             'convert to jpeg',
             'png to jpeg converter',
@@ -186,7 +186,7 @@ export const topicalClusters = {
         parent: 'image-conversion',
         level: 2,
         children: [],
-        pages: ['/image/converter/webp'],
+        pages: ['/image/convert/to-webp'],
         leafTopics: [
             'convert to webp',
             'png to webp converter',

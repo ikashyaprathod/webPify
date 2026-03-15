@@ -108,31 +108,29 @@ export default function Footer() {
         <div className="ft-nav-grid">
           <div className="ft-nav-col">
             <h4 className="ft-nav-heading">Image Tools</h4>
-            <Link href="/image/compressor" className="ft-nav-link">Image Compressor</Link>
-            <Link href="/image/converter" className="ft-nav-link">Image Converter</Link>
-            <Link href="/image/resizer" className="ft-nav-link">Image Resizer</Link>
-            <Link href="/image/crop" className="ft-nav-link">Crop Image</Link>
-            <Link href="/image/rotate" className="ft-nav-link">Rotate Image</Link>
-            <Link href="/image/watermark" className="ft-nav-link">Add Watermark</Link>
-            <Link href="/image/heic-to-jpg" className="ft-nav-link">HEIC to JPG</Link>
-            <Link href="/image/to-pdf" className="ft-nav-link">Image to PDF</Link>
-            <Link href="/pdf-to-jpg" className="ft-nav-link">PDF to JPG</Link>
-            <Link href="/image/remove-background" className="ft-nav-link">Remove Background</Link>
+            <Link href="/image/compress" className="ft-nav-link">Image Compressor</Link>
+            <Link href="/image/convert" className="ft-nav-link">Image Converter</Link>
+            <Link href="/image/resize" className="ft-nav-link">Image Resizer</Link>
+            <Link href="/image/edit" className="ft-nav-link">Image Editor</Link>
+            <Link href="/image/convert/heic-to-jpg" className="ft-nav-link">HEIC to JPG</Link>
+            <Link href="/image/convert/image-to-pdf" className="ft-nav-link">Image to PDF</Link>
+            <Link href="/image/edit/remove-background" className="ft-nav-link">Remove Background</Link>
           </div>
           <div className="ft-nav-col">
             <h4 className="ft-nav-heading">Video Tools</h4>
-            <Link href="/video/compressor" className="ft-nav-link">Video Compressor</Link>
-            <Link href="/video/compressor/mp4" className="ft-nav-link">MP4 Compressor</Link>
-            <Link href="/video/compressor/webm" className="ft-nav-link">WebM Compressor</Link>
-            <Link href="/video/compressor/mov" className="ft-nav-link">MOV Compressor</Link>
-            <Link href="/video/to-gif" className="ft-nav-link">Video → GIF</Link>
+            <Link href="/video/compress" className="ft-nav-link">Video Compressor</Link>
+            <Link href="/video/compress/mp4" className="ft-nav-link">MP4 Compressor</Link>
+            <Link href="/video/compress/webm" className="ft-nav-link">WebM Compressor</Link>
+            <Link href="/video/compress/mov" className="ft-nav-link">MOV Compressor</Link>
+            <Link href="/video/convert/video-to-gif" className="ft-nav-link">Video to GIF</Link>
           </div>
           <div className="ft-nav-col">
-            <h4 className="ft-nav-heading">GIF &amp; SVG</h4>
-            <Link href="/gif/compressor" className="ft-nav-link">GIF Compressor</Link>
-            <Link href="/gif/compressor/mp4" className="ft-nav-link">GIF → MP4</Link>
-            <Link href="/gif/compressor/webm" className="ft-nav-link">GIF → WebM</Link>
-            <Link href="/svg-optimizer" className="ft-nav-link">SVG Optimizer</Link>
+            <h4 className="ft-nav-heading">GIF, PDF &amp; SVG</h4>
+            <Link href="/gif/compress" className="ft-nav-link">GIF Compressor</Link>
+            <Link href="/gif/convert/gif-to-mp4" className="ft-nav-link">GIF to MP4</Link>
+            <Link href="/gif/convert/gif-to-webm" className="ft-nav-link">GIF to WebM</Link>
+            <Link href="/pdf/pdf-to-jpg" className="ft-nav-link">PDF to JPG</Link>
+            <Link href="/svg/optimize" className="ft-nav-link">SVG Optimizer</Link>
           </div>
           <div className="ft-nav-col">
             <h4 className="ft-nav-heading">Company</h4>

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Breadcrumb from "@/components/Breadcrumb";
 
 export const metadata = {
     title: "Terms of Service – Webpifyy",
@@ -24,6 +25,7 @@ export default function TermsPage() {
             })}} />
 
             <div className="lp-page">
+                <Breadcrumb items={[{label:'Home',href:'/'},{label:'Terms'}]} />
                 {/* Hero */}
                 <div className="lp-hero">
                     <div className="lp-hero-inner">

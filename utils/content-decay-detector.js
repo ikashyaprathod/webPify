@@ -244,10 +244,10 @@ function findBestMergeTarget(path) {
     const hub = extractHub(path);
 
     if (format && hub === 'compressor') {
-        return `/image/compressor/${format}`;
+        return `/image/compress/${format}`;
     }
     if (format && hub === 'converter') {
-        return `/image/converter/${format}`;
+        return `/image/convert/to-${format}`;
     }
 
     return hub ? `/image/${hub}` : '/image';

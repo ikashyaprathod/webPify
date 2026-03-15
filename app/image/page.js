@@ -1,4 +1,5 @@
 import PageShell from "@/components/PageShell";
+import Breadcrumb from "@/components/Breadcrumb";
 import Link from "next/link";
 
 export const metadata = {
@@ -12,95 +13,35 @@ export const metadata = {
     },
 };
 
-const cards = [
-    {
-        href: "/image/compressor",
-        icon: "⚡",
-        title: "Image Compressor",
-        desc: "Reduce file size by up to 90% without losing visual quality. Perfect for SEO and faster load times.",
-        gradient: "linear-gradient(135deg,#e0f2fe,#bae6fd)",
-        cta: "Compress now",
-    },
-    {
-        href: "/image/converter",
-        icon: "🔄",
-        title: "Format Converter",
-        desc: "Convert between WebP, PNG, and JPEG instantly. WebP delivers 25–35% smaller files for modern browsers.",
-        gradient: "linear-gradient(135deg,#f0fdf4,#dcfce7)",
-        cta: "Convert now",
-    },
-    {
-        href: "/image/resizer",
-        icon: "📐",
-        title: "Smart Resizer",
-        desc: "Resize images to exact dimensions with 4 fit modes. Batch resize for social media and web platforms.",
-        gradient: "linear-gradient(135deg,#fffbeb,#fef3c7)",
-        cta: "Resize now",
-    },
-    {
-        href: "/image/crop",
-        icon: "✂️",
-        title: "Crop Image",
-        desc: "Draw a selection on any image and crop it instantly. Download as PNG in one click.",
-        gradient: "linear-gradient(135deg,#fdf4ff,#fae8ff)",
-        cta: "Crop now",
-    },
-    {
-        href: "/image/rotate",
-        icon: "🔃",
-        title: "Rotate & Flip",
-        desc: "Rotate 90°, 180°, or flip horizontally/vertically. Before/after preview included.",
-        gradient: "linear-gradient(135deg,#f0f9ff,#e0f2fe)",
-        cta: "Rotate now",
-    },
-    {
-        href: "/image/watermark",
-        icon: "💧",
-        title: "Add Watermark",
-        desc: "Stamp a custom text watermark with full control over position, opacity, font size and color.",
-        gradient: "linear-gradient(135deg,#fff1f2,#ffe4e6)",
-        cta: "Add watermark",
-    },
-    {
-        href: "/image/heic-to-jpg",
-        icon: "📱",
-        title: "HEIC to JPG",
-        desc: "Convert iPhone HEIC/HEIF photos to JPG instantly. Batch convert with quality control.",
-        gradient: "linear-gradient(135deg,#f0fdf4,#dcfce7)",
-        cta: "Convert HEIC",
-    },
-    {
-        href: "/image/to-pdf",
-        icon: "📄",
-        title: "Image to PDF",
-        desc: "Combine multiple images into a single PDF. Choose page size and orientation per image.",
-        gradient: "linear-gradient(135deg,#fefce8,#fef9c3)",
-        cta: "Create PDF",
-    },
-    {
-        href: "/pdf-to-jpg",
-        icon: "📑",
-        title: "PDF to JPG",
-        desc: "Convert every page of a PDF to a high-quality JPG. Download individually or as a ZIP.",
-        gradient: "linear-gradient(135deg,#fff7ed,#fed7aa)",
-        cta: "Convert PDF",
-    },
-    {
-        href: "/image/remove-background",
-        icon: "✂️",
-        title: "Remove Background",
-        desc: "AI-powered background removal. Get a transparent PNG in seconds — runs entirely in your browser.",
-        gradient: "linear-gradient(135deg,#faf5ff,#f3e8ff)",
-        cta: "Remove BG",
-    },
+const compressCards = [
+    { href:'/image/compress/png', icon:'🖼️', title:'PNG Compressor', desc:'Lossless PNG compression. Reduce file size by up to 90% with pngquant.', gradient:'linear-gradient(135deg,#e0f2fe,#bae6fd)', cta:'Compress PNG' },
+    { href:'/image/compress/jpeg', icon:'📸', title:'JPEG Compressor', desc:'Lossy JPEG compression with mozjpeg. Optimal quality at minimal size.', gradient:'linear-gradient(135deg,#f0fdf4,#dcfce7)', cta:'Compress JPEG' },
+    { href:'/image/compress/webp', icon:'⚡', title:'WebP Compressor', desc:'Compress WebP images further. Smaller than PNG or JPEG.', gradient:'linear-gradient(135deg,#faf5ff,#f3e8ff)', cta:'Compress WebP' },
+];
+
+const convertCards = [
+    { href:'/image/convert/to-webp', icon:'🔄', title:'Convert to WebP', desc:'Convert PNG/JPEG to WebP. 25–35% smaller than PNG or JPEG.', gradient:'linear-gradient(135deg,#e0f2fe,#bae6fd)', cta:'Convert to WebP' },
+    { href:'/image/convert/to-png', icon:'🎨', title:'Convert to PNG', desc:'Convert any image to PNG format with lossless quality.', gradient:'linear-gradient(135deg,#f0fdf4,#dcfce7)', cta:'Convert to PNG' },
+    { href:'/image/convert/to-jpeg', icon:'📷', title:'Convert to JPEG', desc:'Convert images to JPEG for maximum compatibility.', gradient:'linear-gradient(135deg,#fffbeb,#fef3c7)', cta:'Convert to JPEG' },
+    { href:'/image/convert/heic-to-jpg', icon:'📱', title:'HEIC to JPG', desc:'Convert iPhone HEIC photos to JPG. Batch supported.', gradient:'linear-gradient(135deg,#f0fdf4,#dcfce7)', cta:'Convert HEIC' },
+    { href:'/image/convert/image-to-pdf', icon:'📄', title:'Image to PDF', desc:'Combine multiple images into a single PDF document.', gradient:'linear-gradient(135deg,#fefce8,#fef9c3)', cta:'Create PDF' },
+];
+
+const resizeCards = [
+    { href:'/image/resize/png', icon:'🖼️', title:'Resize PNG', desc:'Resize PNG images to exact dimensions with 4 fit modes.', gradient:'linear-gradient(135deg,#e0f2fe,#bae6fd)', cta:'Resize PNG' },
+    { href:'/image/resize/jpeg', icon:'📸', title:'Resize JPEG', desc:'Resize JPEG images. Instagram, web, and social media sizes.', gradient:'linear-gradient(135deg,#fffbeb,#fef3c7)', cta:'Resize JPEG' },
+    { href:'/image/resize/webp', icon:'⚡', title:'Resize WebP', desc:'Resize WebP images while preserving the modern format.', gradient:'linear-gradient(135deg,#faf5ff,#f3e8ff)', cta:'Resize WebP' },
+];
+
+const editCards = [
+    { href:'/image/edit/crop', icon:'✂️', title:'Crop Image', desc:'Draw a selection and crop any image. Download as PNG instantly.', gradient:'linear-gradient(135deg,#fdf4ff,#fae8ff)', cta:'Crop now' },
+    { href:'/image/edit/rotate', icon:'🔃', title:'Rotate & Flip', desc:'Rotate 90°, 180°, or flip horizontally/vertically.', gradient:'linear-gradient(135deg,#f0f9ff,#e0f2fe)', cta:'Rotate now' },
+    { href:'/image/edit/watermark', icon:'💧', title:'Add Watermark', desc:'Stamp text watermark with full control over position and opacity.', gradient:'linear-gradient(135deg,#fff1f2,#ffe4e6)', cta:'Add watermark' },
+    { href:'/image/edit/remove-background', icon:'✨', title:'Remove Background', desc:'AI-powered background removal. Transparent PNG in seconds.', gradient:'linear-gradient(135deg,#faf5ff,#f3e8ff)', cta:'Remove BG' },
+    { href:'/image/edit/compare', icon:'⚖️', title:'Compare Images', desc:'Side-by-side image comparison with a draggable slider.', gradient:'linear-gradient(135deg,#f0fdf4,#dcfce7)', cta:'Compare now' },
 ];
 
 export default function ImageMasterHub() {
-    const breadcrumbItems = [
-        { label: "Home", href: "/" },
-        { label: "Image", href: "/image" }
-    ];
-
     return (
         <>
             <script
@@ -142,10 +83,11 @@ export default function ImageMasterHub() {
             />
 
             <PageShell>
+                <Breadcrumb items={[{label:'Home',href:'/'},{label:'Image Tools'}]} />
 
                 {/* ── Hero ── */}
                 <div className="hubv2-hero">
-                    <span className="hubv2-hero-badge">Workspace</span>
+                    <span className="hubv2-hero-badge">IMAGE TOOLS</span>
                     <h1 className="hubv2-hero-title">
                         Image Optimization <span className="hubv2-hero-title-accent">Hub</span>
                     </h1>
@@ -158,24 +100,88 @@ export default function ImageMasterHub() {
                     </a>
                 </div>
 
-                {/* ── Core Tools ── */}
-                <section className="hubv2-section" id="tools">
+                {/* ── Compress Section ── */}
+                <section className="hubv2-section" id="compress">
                     <div className="hubv2-section-hd">
                         <div className="hubv2-section-hd-left">
-                            <span className="hubv2-section-hd-icon">⊞</span>
-                            <h2 className="hubv2-section-hd-title">Core Tools</h2>
+                            <span className="hubv2-section-hd-icon">⚡</span>
+                            <h2 className="hubv2-section-hd-title">Compress Images</h2>
                         </div>
-                        <div className="hubv2-section-hd-actions">
-                            <span className="hubv2-section-hd-btn">≡</span>
-                            <span className="hubv2-section-hd-btn">⊞</span>
-                        </div>
+                        <a href="/image/compress" className="hubv2-section-view-all">View all →</a>
                     </div>
                     <div className="hubv2-grid">
-                        {cards.map(card => (
+                        {compressCards.map(card => (
                             <div key={card.href} className="hubv2-card" style={{ "--card-gradient": card.gradient }}>
-                                <div className="hubv2-card-header">
-                                    <div className="hubv2-card-icon-box">{card.icon}</div>
+                                <div className="hubv2-card-header"><div className="hubv2-card-icon-box">{card.icon}</div></div>
+                                <div className="hubv2-card-body">
+                                    <h3 className="hubv2-card-title">{card.title}</h3>
+                                    <p className="hubv2-card-desc">{card.desc}</p>
+                                    <a href={card.href} className="hubv2-card-cta">{card.cta} →</a>
                                 </div>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+
+                {/* ── Convert Section ── */}
+                <section className="hubv2-section" id="convert">
+                    <div className="hubv2-section-hd">
+                        <div className="hubv2-section-hd-left">
+                            <span className="hubv2-section-hd-icon">🔄</span>
+                            <h2 className="hubv2-section-hd-title">Convert Images</h2>
+                        </div>
+                        <a href="/image/convert" className="hubv2-section-view-all">View all →</a>
+                    </div>
+                    <div className="hubv2-grid">
+                        {convertCards.map(card => (
+                            <div key={card.href} className="hubv2-card" style={{ "--card-gradient": card.gradient }}>
+                                <div className="hubv2-card-header"><div className="hubv2-card-icon-box">{card.icon}</div></div>
+                                <div className="hubv2-card-body">
+                                    <h3 className="hubv2-card-title">{card.title}</h3>
+                                    <p className="hubv2-card-desc">{card.desc}</p>
+                                    <a href={card.href} className="hubv2-card-cta">{card.cta} →</a>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+
+                {/* ── Resize Section ── */}
+                <section className="hubv2-section" id="resize">
+                    <div className="hubv2-section-hd">
+                        <div className="hubv2-section-hd-left">
+                            <span className="hubv2-section-hd-icon">📐</span>
+                            <h2 className="hubv2-section-hd-title">Resize Images</h2>
+                        </div>
+                        <a href="/image/resize" className="hubv2-section-view-all">View all →</a>
+                    </div>
+                    <div className="hubv2-grid">
+                        {resizeCards.map(card => (
+                            <div key={card.href} className="hubv2-card" style={{ "--card-gradient": card.gradient }}>
+                                <div className="hubv2-card-header"><div className="hubv2-card-icon-box">{card.icon}</div></div>
+                                <div className="hubv2-card-body">
+                                    <h3 className="hubv2-card-title">{card.title}</h3>
+                                    <p className="hubv2-card-desc">{card.desc}</p>
+                                    <a href={card.href} className="hubv2-card-cta">{card.cta} →</a>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+
+                {/* ── Edit Section ── */}
+                <section className="hubv2-section" id="edit">
+                    <div className="hubv2-section-hd">
+                        <div className="hubv2-section-hd-left">
+                            <span className="hubv2-section-hd-icon">✏️</span>
+                            <h2 className="hubv2-section-hd-title">Edit Images</h2>
+                        </div>
+                        <a href="/image/edit" className="hubv2-section-view-all">View all →</a>
+                    </div>
+                    <div className="hubv2-grid">
+                        {editCards.map(card => (
+                            <div key={card.href} className="hubv2-card" style={{ "--card-gradient": card.gradient }}>
+                                <div className="hubv2-card-header"><div className="hubv2-card-icon-box">{card.icon}</div></div>
                                 <div className="hubv2-card-body">
                                     <h3 className="hubv2-card-title">{card.title}</h3>
                                     <p className="hubv2-card-desc">{card.desc}</p>

@@ -79,7 +79,7 @@ function getPotentialPagesForIntent(intent) {
             // Check for programmatic pages with same format+action
             if (intent.format && intent.action) {
                 pages.push(
-                    `/image/compressor/${intent.format}`,
+                    `/image/compress/${intent.format}`,
                     `/compress-${intent.format}-online`,
                     `/compress-${intent.format}-for-seo`,
                     `/compress-${intent.format}-for-website`,
@@ -91,7 +91,7 @@ function getPotentialPagesForIntent(intent) {
         case 'conversion':
             if (intent.toFormat) {
                 pages.push(
-                    `/image/converter/${intent.toFormat}`,
+                    `/image/convert/to-${intent.toFormat}`,
                     `/convert-to-${intent.toFormat}`,
                     intent.fromFormat ? `/${intent.fromFormat}-to-${intent.toFormat}-converter` : null
                 );
@@ -104,13 +104,13 @@ function getPotentialPagesForIntent(intent) {
                 pages.push(
                     `/compare/${f1}-vs-${f2}`,
                     `/compare/${f2}-vs-${f1}`, // Reverse order
-                    '/image/compare'
+                    '/image/edit/compare'
                 );
             }
             break;
 
         case 'informational':
-            pages.push('/image', '/image/compressor', '/image/converter');
+            pages.push('/image', '/image/compress', '/image/convert');
             break;
     }
 

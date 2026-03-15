@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Breadcrumb from "@/components/Breadcrumb";
 
 export const metadata = {
     title: "About Webpifyy – Professional Image & Video Optimization Tools",
@@ -26,6 +27,7 @@ export default function AboutPage() {
             })}} />
 
             <div className="lp-page">
+                <Breadcrumb items={[{label:'Home',href:'/'},{label:'About'}]} />
                 {/* Hero */}
                 <div className="lp-hero lp-hero--about">
                     <div className="lp-hero-inner">
@@ -89,7 +91,7 @@ export default function AboutPage() {
                         <div className="lp-sidebar-cta">
                             <span className="lp-sidebar-cta-label">Get Started</span>
                             <h4 className="lp-sidebar-cta-title">Try our tools now</h4>
-                            <Link href="/image/compressor" className="lp-sidebar-cta-btn">Open Tools</Link>
+                            <Link href="/image/compress" className="lp-sidebar-cta-btn">Open Tools</Link>
                         </div>
                     </aside>
 
@@ -204,7 +206,7 @@ export default function AboutPage() {
                                 </div>
                                 <div className="lp-contact-actions">
                                     <a href="https://github.com/ikashyaprathod/webPify" target="_blank" rel="noopener noreferrer" className="lp-contact-btn">View on GitHub</a>
-                                    <Link href="/image/compressor" className="lp-contact-btn-outline">Try Tools</Link>
+                                    <Link href="/image/compress" className="lp-contact-btn-outline">Try Tools</Link>
                                 </div>
                             </div>
                         </section>

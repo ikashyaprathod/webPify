@@ -72,9 +72,9 @@ function extractIntent(path) {
     if (path === '/image') return 'image-tools-hub';
 
     // Tool hubs
-    if (path === '/image/compressor') return 'compression-hub';
-    if (path === '/image/converter') return 'conversion-hub';
-    if (path === '/image/compare') return 'comparison-hub';
+    if (path === '/image/compress') return 'compression-hub';
+    if (path === '/image/convert') return 'conversion-hub';
+    if (path === '/image/edit/compare') return 'comparison-hub';
 
     // Format-specific tool pages
     if (path.includes('/compressor/') || path.includes('/converter/')) {

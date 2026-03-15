@@ -156,12 +156,12 @@ function identifyStrongPages(authorityReport) {
  */
 function getPagePath(clusterId) {
     const pathMap = {
-        'png-compression': '/image/compressor/png',
-        'jpeg-compression': '/image/compressor/jpeg',
-        'webp-compression': '/image/compressor/webp',
-        'png-conversion': '/image/converter/png',
-        'jpeg-conversion': '/image/converter/jpeg',
-        'webp-conversion': '/image/converter/webp'
+        'png-compression': '/image/compress/png',
+        'jpeg-compression': '/image/compress/jpeg',
+        'webp-compression': '/image/compress/webp',
+        'png-conversion': '/image/convert/to-png',
+        'jpeg-conversion': '/image/convert/to-jpeg',
+        'webp-conversion': '/image/convert/to-webp'
     };
 
     return pathMap[clusterId] || null;

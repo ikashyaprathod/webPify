@@ -99,7 +99,7 @@ function matchesToolIntent(query) {
             action,
             format,
             query,
-            targetPage: `/image/compressor/${format}`,
+            targetPage: `/image/compress/${format}`,
             confidence: 0.9
         };
     }
@@ -111,7 +111,7 @@ function matchesToolIntent(query) {
             action,
             format: null,
             query,
-            targetPage: '/image/compressor',
+            targetPage: '/image/compress',
             confidence: 0.6
         };
     }
@@ -137,7 +137,7 @@ function matchesConversionIntent(query) {
                     fromFormat,
                     toFormat,
                     query,
-                    targetPage: `/image/converter/${toFormat}`,
+                    targetPage: `/image/convert/to-${toFormat}`,
                     confidence: 0.9
                 };
             }
@@ -149,7 +149,7 @@ function matchesConversionIntent(query) {
                     fromFormat: null,
                     toFormat,
                     query,
-                    targetPage: `/image/converter/${toFormat}`,
+                    targetPage: `/image/convert/to-${toFormat}`,
                     confidence: 0.7
                 };
             }
@@ -178,7 +178,7 @@ function matchesComparisonIntent(query) {
                     query,
                     targetPage: `/compare/${format1}-vs-${format2}`,
                     confidence: 0.8,
-                    alternativePage: '/image/compare'
+                    alternativePage: '/image/edit/compare'
                 };
             }
         }
@@ -204,8 +204,8 @@ function matchesInformationalIntent(query) {
             type: 'informational',
             topic: topic || 'general',
             query,
-            targetPage: topic === 'compression' ? '/image/compressor'
-                : topic === 'format' ? '/image/compare'
+            targetPage: topic === 'compression' ? '/image/compress'
+                : topic === 'format' ? '/image/edit/compare'
                     : '/image',
             confidence: 0.7
         };

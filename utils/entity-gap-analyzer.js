@@ -152,7 +152,7 @@ export function generateEntityFillingPlan(topN = 20) {
             targetPages,
             implementations: [
                 {
-                    page: targetPages[0] || '/image/compressor/png',
+                    page: targetPages[0] || '/image/compress/png',
                     changes: [
                         `Add H2: "Understanding ${gap.entity}"`,
                         `Add FAQ: "What is ${gap.entity}?"`,
@@ -173,15 +173,15 @@ function suggestTargetPages(entity) {
 
     // Map entities to likely pages
     if (entity.includes('png')) {
-        pages.push('/image/compressor/png', '/image/converter/png');
+        pages.push('/image/compress/png', '/image/convert/to-png');
     } else if (entity.includes('jpeg') || entity.includes('jpg')) {
-        pages.push('/image/compressor/jpeg', '/image/converter/jpeg');
+        pages.push('/image/compress/jpeg', '/image/convert/to-jpeg');
     } else if (entity.includes('webp')) {
-        pages.push('/image/compressor/webp', '/image/converter/webp');
+        pages.push('/image/compress/webp', '/image/convert/to-webp');
     } else if (entity.includes('compress') || entity.includes('lossy') || entity.includes('lossless')) {
-        pages.push('/image/compressor');
+        pages.push('/image/compress');
     } else if (entity.includes('convert')) {
-        pages.push('/image/converter');
+        pages.push('/image/convert');
     } else {
         // Default to master hub
         pages.push('/image');

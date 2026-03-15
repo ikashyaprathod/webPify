@@ -19,9 +19,9 @@ export async function POST(request) {
             );
         }
 
-        if (!targetFormat || !['webp', 'png', 'jpeg'].includes(targetFormat)) {
+        if (!targetFormat || !['webp', 'png', 'jpeg', 'avif'].includes(targetFormat)) {
             return NextResponse.json(
-                { error: 'Invalid target format. Use webp, png, or jpeg.' },
+                { error: 'Invalid target format. Use webp, png, jpeg, or avif.' },
                 { status: 400 }
             );
         }
@@ -70,6 +70,15 @@ export async function POST(request) {
                 })
                 .toBuffer();
             outputType = 'image/jpeg';
+        }
+        else if (targetFormat === 'avif') {
+            convertedBuffer = await sharp(buffer)
+                .avif({
+                    quality: 60,
+                    effort: 4,
+                })
+                .toBuffer();
+            outputType = 'image/avif';
         }
 
         // Return converted image

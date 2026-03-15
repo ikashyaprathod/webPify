@@ -62,12 +62,12 @@ export default function Home() {
         "description": "Professional online tools for image compression, conversion, video compression, GIF optimization, and SVG optimization.",
         "numberOfItems": 6,
         "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Image Compressor", "url": "https://webpifyy.vercel.app/image/compressor" },
-          { "@type": "ListItem", "position": 2, "name": "Image Converter", "url": "https://webpifyy.vercel.app/image/converter" },
-          { "@type": "ListItem", "position": 3, "name": "Image Resizer", "url": "https://webpifyy.vercel.app/image/resizer" },
-          { "@type": "ListItem", "position": 4, "name": "Video Compressor", "url": "https://webpifyy.vercel.app/video/compressor" },
-          { "@type": "ListItem", "position": 5, "name": "GIF Compressor", "url": "https://webpifyy.vercel.app/gif/compressor" },
-          { "@type": "ListItem", "position": 6, "name": "SVG Optimizer", "url": "https://webpifyy.vercel.app/svg-optimizer" },
+          { "@type": "ListItem", "position": 1, "name": "Image Compressor", "url": "https://webpifyy.vercel.app/image/compress" },
+          { "@type": "ListItem", "position": 2, "name": "Image Converter", "url": "https://webpifyy.vercel.app/image/convert" },
+          { "@type": "ListItem", "position": 3, "name": "Image Resizer", "url": "https://webpifyy.vercel.app/image/resize" },
+          { "@type": "ListItem", "position": 4, "name": "Video Compressor", "url": "https://webpifyy.vercel.app/video/compress" },
+          { "@type": "ListItem", "position": 5, "name": "GIF Compressor", "url": "https://webpifyy.vercel.app/gif/compress" },
+          { "@type": "ListItem", "position": 6, "name": "SVG Optimizer", "url": "https://webpifyy.vercel.app/svg/optimize" },
         ],
       },
       {

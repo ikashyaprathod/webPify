@@ -7,66 +7,66 @@ const TOOLS = [
     icon: "🔄",
     title: "Image Converter",
     desc: "Convert between WebP, PNG, and JPEG with zero quality loss. Batch processing supported.",
-    href: "/image/converter",
+    href: "/image/convert",
     headerGradient: "linear-gradient(135deg,#e0f2fe,#bae6fd)",
     links: [
-      { label: "Convert to WebP", href: "/image/converter/webp" },
-      { label: "Convert to PNG", href: "/image/converter/png" },
+      { label: "Convert to WebP", href: "/image/convert/to-webp" },
+      { label: "Convert to PNG", href: "/image/convert/to-png" },
     ],
   },
   {
     icon: "⚡",
     title: "Image Compressor",
     desc: "Compress PNG, JPEG, WebP & AVIF with before/after preview. Supports clipboard paste.",
-    href: "/image/compressor",
+    href: "/image/compress",
     headerGradient: "linear-gradient(135deg,#f0fdf4,#dcfce7)",
     links: [
-      { label: "Lossless JPEG", href: "/image/compressor/jpeg" },
-      { label: "Bulk Compression", href: "/image/compressor/png" },
+      { label: "Lossless JPEG", href: "/image/compress/jpeg" },
+      { label: "Bulk Compression", href: "/image/compress/png" },
     ],
   },
   {
     icon: "🎬",
     title: "Video Compressor",
     desc: "Compress MP4, MOV, WebM in your browser using WebAssembly. 100% private.",
-    href: "/video/compressor",
+    href: "/video/compress",
     headerGradient: "linear-gradient(135deg,#fef2f2,#fee2e2)",
     links: [
-      { label: "MP4 Optimization", href: "/video/compressor/mp4" },
-      { label: "Resize for WhatsApp", href: "/video/compressor/mp4" },
+      { label: "MP4 Optimization", href: "/video/compress/mp4" },
+      { label: "Resize for WhatsApp", href: "/video/compress/mp4" },
     ],
   },
   {
     icon: "🎞",
     title: "GIF Compressor",
     desc: "Compress GIFs or convert to MP4/WebM for up to 90% size reduction.",
-    href: "/gif/compressor",
+    href: "/gif/compress",
     headerGradient: "linear-gradient(135deg,#faf5ff,#f3e8ff)",
     links: [
-      { label: "GIF to MP4", href: "/gif/compressor/mp4" },
-      { label: "Loop Adjustment", href: "/gif/compressor/gif" },
+      { label: "GIF to MP4", href: "/gif/convert/gif-to-mp4" },
+      { label: "Loop Adjustment", href: "/gif/compress/gif" },
     ],
   },
   {
     icon: "📐",
     title: "Image Resizer",
     desc: "Resize PNG, JPEG, WebP & AVIF to any dimension. Four fit modes. Bulk processing.",
-    href: "/image/resizer",
+    href: "/image/resize",
     headerGradient: "linear-gradient(135deg,#fffbeb,#fef3c7)",
     links: [
-      { label: "Instagram Cropper", href: "/image/resizer/jpeg" },
-      { label: "Bulk Resizing", href: "/image/resizer/png" },
+      { label: "Instagram Cropper", href: "/image/resize/jpeg" },
+      { label: "Bulk Resizing", href: "/image/resize/png" },
     ],
   },
   {
     icon: "✨",
     title: "SVG Optimizer",
     desc: "Minify SVGs with SVGO. Strip metadata, merge styles, shrink path data.",
-    href: "/svg-optimizer",
+    href: "/svg/optimize",
     headerGradient: "linear-gradient(135deg,#f0f9ff,#e0f2fe)",
     links: [
-      { label: "XML Cleanup", href: "/svg-optimizer" },
-      { label: "Path Simplification", href: "/svg-optimizer" },
+      { label: "XML Cleanup", href: "/svg/optimize" },
+      { label: "Path Simplification", href: "/svg/optimize" },
     ],
   },
 ];
@@ -191,7 +191,7 @@ export default function HomeHero() {
         <section>
           <div className="hp2-section-header">
             <h2 className="hp2-section-title">Quick Actions</h2>
-            <Link href="/image/converter" className="hp2-section-link">
+            <Link href="/image/convert" className="hp2-section-link">
               View All Tools →
             </Link>
           </div>
