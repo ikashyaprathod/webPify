@@ -3,31 +3,31 @@ import Breadcrumb from "@/components/Breadcrumb";
 import GifCompressor from "@/components/GifCompressor";
 
 export const metadata = {
-  title: "Compress GIF Online Free – Reduce GIF File Size Without Quality Loss",
-  description: "Compress animated GIFs online with palettegen optimization. Reduce GIF file size by up to 60% while maintaining animation quality. Free, browser-based tool.",
+  title: "Compress GIF Online Free — Smaller GIF Files",
+  description: "Compress animated GIF files online free. Reduce GIF size while maintaining animation quality. Browser-based processing, no uploads needed.",
   alternates: { canonical: "https://webpifyy.vercel.app/gif/compress/gif" },
   keywords: ["compress gif online", "gif compressor", "reduce gif file size", "optimize gif", "compress animated gif free"],
   openGraph: {
-    title: "Compress GIF Online Free – Reduce GIF File Size Without Quality Loss",
-    description: "Compress animated GIFs online with palettegen optimization. Reduce file size by up to 60%. Free, browser-based.",
+    title: "Compress GIF Online Free — Smaller GIF Files | webpifyy",
+    description: "Compress animated GIF files online free. Reduce GIF size while maintaining animation quality. Browser-based processing, no uploads needed.",
     url: "https://webpifyy.vercel.app/gif/compress/gif",
+    type: "website",
+    siteName: "webpifyy",
+    images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Compress GIF Online Free – GIF Compressor",
-    description: "Reduce animated GIF file size by up to 60% without quality loss. Free, browser-based, no sign-up.",
-  },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"GIF Tools","item":"https://webpifyy.vercel.app/gif"},{"@type":"ListItem","position":3,"name":"Compress","item":"https://webpifyy.vercel.app/gif/compress"},{"@type":"ListItem","position":4,"name":"GIF"}]})
+    title: "Compress GIF Online Free — Smaller GIF Files | webpifyy",
+    description: "Compress animated GIF files online free. Reduce GIF size while maintaining animation quality. Browser-based processing, no uploads needed.",
+    images: ["https://webpifyy.vercel.app/opengraph-image"],
   },
 };
 
 const faqs = [
-  { q: "How do I compress a GIF without losing quality?", a: "Our GIF compressor uses FFmpeg's palettegen filter which generates an optimized color palette specific to your GIF. This reduces file size by 30–60% while maintaining smooth animation and color accuracy." },
-  { q: "How much can I compress a GIF file?", a: "Most GIF files compress 30–60% with palette optimization. Highly animated GIFs with many unique colors typically compress 30–40%. Static or simple-color animations can compress up to 60%." },
-  { q: "Should I convert GIF to MP4 instead of compressing?", a: "For maximum size reduction, yes. MP4 with H.264 encoding is typically 80–90% smaller than GIF at the same visual quality. GIF compression is best when you need to stay in GIF format for compatibility reasons." },
-  { q: "Is my GIF uploaded to a server?", a: "No. All processing happens entirely in your browser using FFmpeg.wasm. Your files never leave your device." },
-  { q: "Does compressing GIF affect animation speed?", a: "No. Compression only reduces file size — the frame timing, loop count, and animation speed are all preserved exactly as in the original GIF." },
+  { q: "How much can I compress a GIF file?", a: "GIF compression typically achieves 20-50% reduction while maintaining animation quality. For more aggressive compression, convert to MP4 which achieves 80-95% reduction." },
+  { q: "Why is GIF format inefficient?", a: "GIF uses an outdated LZW compression algorithm and is limited to 256 colors. Modern formats like MP4 and WebM are 10-20x more efficient for animation." },
+  { q: "Should I use GIF or MP4 for web animations?", a: "MP4 with autoplay and loop attributes is strongly preferred over GIF for web. MP4 files are 10-20x smaller, support more colors, and play more smoothly." },
+  { q: "Can I reduce GIF file size without losing frames?", a: "Yes. Our compressor reduces frame colors and applies dithering to reduce file size while preserving all frames and animation timing." },
 ];
 
 export default function CompressGifPage() {
@@ -60,7 +60,7 @@ export default function CompressGifPage() {
         },
         "provider": { "@id": "https://webpifyy.vercel.app/#organization" },
         "author": { "@id": "https://webpifyy.vercel.app/#organization" },
-        "description": "Compress animated GIF files online using FFmpeg palettegen optimization. Reduces file size by 30–60% while preserving animation quality.",
+        "description": "Compress animated GIF files online free. Reduce GIF size while maintaining animation quality. Browser-based processing, no uploads needed.",
         "featureList": ["GIF Compression", "Palette Optimization", "Animation Preserved", "Browser-based", "Free"]
       },
       {

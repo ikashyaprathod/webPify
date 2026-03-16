@@ -2,16 +2,22 @@ import PageShell from "@/components/PageShell";
 import Breadcrumb from "@/components/Breadcrumb";
 
 export const metadata = {
-  title: "Image Editor Online – Crop, Rotate, Watermark, Remove Background",
-  description: "Free online image editing tools. Crop, rotate, flip, add watermarks, or remove backgrounds instantly. All tools run in your browser — no uploads needed.",
+  title: "Free Online Image Editing Tools",
+  description: "Free image editing tools \u2014 crop, rotate, watermark, blur, grayscale, brightness, remove background and more. Browser-based, no uploads needed.",
   alternates: { canonical: "https://webpifyy.vercel.app/image/edit" },
   openGraph: {
-    title: "Image Editor Online – Crop, Rotate, Watermark, Remove Background",
-    description: "Free online image editing tools. All run in your browser — no uploads needed.",
+    title: "Free Online Image Editing Tools | webpifyy",
+    description: "Free image editing tools \u2014 crop, rotate, watermark, blur, grayscale, brightness, remove background and more. Browser-based, no uploads needed.",
     url: "https://webpifyy.vercel.app/image/edit",
+    type: "website",
+    siteName: "webpifyy",
+    images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Image Tools","item":"https://webpifyy.vercel.app/image"},{"@type":"ListItem","position":3,"name":"Edit"}]})
+  twitter: {
+    card: "summary_large_image",
+    title: "Free Online Image Editing Tools | webpifyy",
+    description: "Free image editing tools \u2014 crop, rotate, watermark, blur, grayscale, brightness, remove background and more. Browser-based, no uploads needed.",
+    images: ["https://webpifyy.vercel.app/opengraph-image"],
   },
 };
 

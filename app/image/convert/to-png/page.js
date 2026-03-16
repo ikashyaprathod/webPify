@@ -4,31 +4,31 @@ import ImageConverter from "@/components/ImageConverter";
 import Link from "next/link";
 
 export const metadata = {
-  title: "Convert Images to PNG Online – JPEG/WebP to PNG Free",
-  description: "Convert JPEG, WebP, and other images to PNG format online for free. Lossless quality, transparency support, universal compatibility. No sign-up required.",
+  title: "Convert Images to PNG Online Free",
+  description: "Convert JPEG, WebP, AVIF, HEIC and BMP images to PNG online free. Lossless conversion with transparency support. No uploads required.",
   alternates: { canonical: "https://webpifyy.vercel.app/image/convert/to-png" },
   keywords: ["convert to png", "jpeg to png", "webp to png", "image to png converter", "convert image to png online free"],
   openGraph: {
-    title: "Convert Images to PNG Online – JPEG/WebP to PNG Free",
-    description: "Convert JPEG, WebP, and other images to PNG format online. Lossless quality, transparency support. Free, no sign-up.",
+    title: "Convert Images to PNG Online Free | webpifyy",
+    description: "Convert JPEG, WebP, AVIF, HEIC and BMP images to PNG online free. Lossless conversion with transparency support. No uploads required.",
     url: "https://webpifyy.vercel.app/image/convert/to-png",
+    type: "website",
+    siteName: "webpifyy",
+    images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Convert Images to PNG Online – Free PNG Converter",
-    description: "Convert JPEG/WebP to PNG with lossless quality and transparency support. Free, instant, no sign-up.",
-  },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Image Tools","item":"https://webpifyy.vercel.app/image"},{"@type":"ListItem","position":3,"name":"Convert","item":"https://webpifyy.vercel.app/image/convert"},{"@type":"ListItem","position":4,"name":"to PNG"}]})
+    title: "Convert Images to PNG Online Free | webpifyy",
+    description: "Convert JPEG, WebP, AVIF, HEIC and BMP images to PNG online free. Lossless conversion with transparency support. No uploads required.",
+    images: ["https://webpifyy.vercel.app/opengraph-image"],
   },
 };
 
 const faqs = [
-  { q: "Why convert an image to PNG?", a: "PNG is ideal when you need lossless quality, transparency support, or universal compatibility. It's the best choice for logos, icons, graphics with text, and images that will be edited further." },
-  { q: "Is PNG better than JPEG for photos?", a: "For photos, JPEG is usually better because PNG files are much larger. PNG excels for graphics, logos, screenshots, and images with text or transparency. Use JPEG or WebP for photographic content." },
-  { q: "Does converting JPEG to PNG improve quality?", a: "No. Converting JPEG to PNG cannot recover quality lost during JPEG compression. The result will be a larger file with the same quality as the JPEG. PNG prevents further quality degradation on re-saves." },
-  { q: "Does PNG support transparency?", a: "Yes. PNG has full transparency support via the alpha channel. This makes it the standard format for logos, icons, and UI elements with transparent backgrounds." },
-  { q: "What is the difference between PNG-8 and PNG-24?", a: "PNG-8 supports up to 256 colors (indexed), making it smaller. PNG-24 supports millions of colors with full depth. Our converter produces PNG-24 for maximum quality and full color support." },
+  { q: "Why convert images to PNG?", a: "PNG uses lossless compression, making it ideal for images requiring transparency, sharp edges like logos, or when you need to preserve every pixel of quality." },
+  { q: "Does converting to PNG increase file size?", a: "PNG files are larger than JPEG and WebP because they use lossless compression. If file size matters more than quality, consider WebP or compressed JPEG instead." },
+  { q: "Can I convert a JPEG to PNG without quality loss?", a: "Converting JPEG to PNG will not add back quality lost during JPEG compression, but the PNG will be an exact lossless copy of what you uploaded." },
+  { q: "Is PNG better than JPEG for photos?", a: "For photos, JPEG or WebP are better because PNG files are much larger. PNG is best for graphics, logos, screenshots, and images needing transparency." },
 ];
 
 export default function PNGConverterPage() {
@@ -69,7 +69,7 @@ export default function PNGConverterPage() {
         },
         "provider": { "@id": "https://webpifyy.vercel.app/#organization" },
         "author": { "@id": "https://webpifyy.vercel.app/#organization" },
-        "description": "Convert JPEG, WebP, and other images to PNG format online for free. Lossless quality with full transparency support.",
+        "description": "Convert JPEG, WebP, AVIF, HEIC and BMP images to PNG online free. Lossless conversion with transparency support.",
         "featureList": ["JPEG to PNG", "WebP to PNG", "Transparency Support", "Lossless Quality", "Free"]
       },
       {

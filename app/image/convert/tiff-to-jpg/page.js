@@ -3,26 +3,31 @@ import Breadcrumb from "@/components/Breadcrumb";
 import ImageConverter from "@/components/ImageConverter";
 
 export const metadata = {
-  title: "TIFF to JPG Converter Online Free",
-  description: "Convert TIFF images to JPEG format online for free. Reduce large TIFF file sizes for sharing and web use. No sign-up required.",
+  title: "Convert TIFF to JPG Online Free",
+  description: "Convert TIFF images to JPG online free. Reduce large TIFF file sizes instantly. Browser-based, no uploads, no signup required.",
   alternates: { canonical: "https://webpifyy.vercel.app/image/convert/tiff-to-jpg" },
   keywords: ["tiff to jpg", "convert tiff to jpeg", "tiff jpg converter online", "tif to jpg"],
   openGraph: {
-    title: "TIFF to JPG Converter Online Free",
-    description: "Convert TIFF to JPG online. Much smaller files. No sign-up.",
+    title: "Convert TIFF to JPG Online Free | webpifyy",
+    description: "Convert TIFF images to JPG online free. Reduce large TIFF file sizes instantly. Browser-based, no uploads, no signup required.",
     url: "https://webpifyy.vercel.app/image/convert/tiff-to-jpg",
+    type: "website",
+    siteName: "webpifyy",
+    images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
-  twitter: { card: "summary_large_image", title: "TIFF to JPG Converter Online Free", description: "Convert TIFF to JPG. No sign-up." },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Image Tools","item":"https://webpifyy.vercel.app/image"},{"@type":"ListItem","position":3,"name":"Convert","item":"https://webpifyy.vercel.app/image/convert"},{"@type":"ListItem","position":4,"name":"TIFF to JPG"}]})
+  twitter: {
+    card: "summary_large_image",
+    title: "Convert TIFF to JPG Online Free | webpifyy",
+    description: "Convert TIFF images to JPG online free. Reduce large TIFF file sizes instantly. Browser-based, no uploads, no signup required.",
+    images: ["https://webpifyy.vercel.app/opengraph-image"],
   },
 };
 
 const faqs = [
-  { q: "Why convert TIFF to JPG?", a: "TIFF files are very large and not widely supported on the web or mobile devices. Converting to JPEG reduces file size by 80–95% and ensures universal compatibility." },
-  { q: "Will the conversion reduce quality?", a: "Yes, slightly. JPEG uses lossy compression. We use quality 85 with mozjpeg for optimal balance between size and quality. For photographic content, the difference is barely visible." },
-  { q: "How much smaller will the JPG be?", a: "Typically 80–95% smaller than the original TIFF. A 20MB TIFF scan often converts to 1–3MB JPG." },
-  { q: "Can I convert multi-page TIFF files?", a: "Our tool processes single-frame TIFF files. For multi-page TIFFs, only the first frame will be converted." },
+  { q: "Why convert TIFF to JPG?", a: "TIFF files are very large because they store uncompressed data. Converting to JPG reduces file size by 90%+, making images easy to share via email or web." },
+  { q: "Does converting TIFF to JPG lose quality?", a: "JPG uses lossy compression so some quality is reduced. Set quality to 90%+ to minimize visible quality loss. For lossless conversion, convert TIFF to PNG instead." },
+  { q: "What is TIFF format used for?", a: "TIFF is used in professional photography, scanning, printing and publishing where maximum quality is needed. Not suitable for web use due to large file sizes." },
+  { q: "Can I convert multi-page TIFF files?", a: "Our tool converts single-page TIFF files. For multi-page TIFF documents, each page will be extracted and converted to a separate JPG file." },
 ];
 
 export default function TiffToJpgPage() {
@@ -48,6 +53,7 @@ export default function TiffToJpgPage() {
         inLanguage: "en",
         isAccessibleForFree: true,
         offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+        description: "Convert TIFF images to JPG online free. Reduce large TIFF file sizes instantly.",
       },
       {
         "@type": "FAQPage",
@@ -69,7 +75,7 @@ export default function TiffToJpgPage() {
 
         <ImageConverter outputFormat="image/jpeg" outputFormatName="JPEG" />
 
-        
+
         <div className="tpg-stats-wrap">
           <div className="tpg-glass tpg-lm-panel">
             <div className="tpg-glow-1" />

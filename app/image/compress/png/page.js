@@ -4,31 +4,31 @@ import ImageCompressor from "@/components/ImageCompressor";
 import Link from "next/link";
 
 export const metadata = {
-  title: "Compress PNG Images Online – Reduce File Size Without Quality Loss",
-  description: "Compress PNG images online for free. Uses pngquant to reduce file size by 60–90% while preserving transparency and visual quality. No sign-up required.",
+  title: "Compress PNG Images Online Free \u2014 Up to 90% Smaller",
+  description: "Compress PNG files online free. Reduce PNG size 60-90% while preserving transparency and quality. No uploads, runs in your browser.",
   alternates: { canonical: "https://webpifyy.vercel.app/image/compress/png" },
   keywords: ["compress png", "png compressor online", "reduce png file size", "png optimizer", "compress png without quality loss"],
   openGraph: {
-    title: "Compress PNG Images Online – Reduce File Size Without Quality Loss",
-    description: "Compress PNG images online for free. Reduce file size by 60–90% while preserving transparency. No sign-up required.",
+    title: "Compress PNG Images Online Free \u2014 Up to 90% Smaller | webpifyy",
+    description: "Compress PNG files online free. Reduce PNG size 60-90% while preserving transparency and quality. No uploads, runs in your browser.",
     url: "https://webpifyy.vercel.app/image/compress/png",
+    type: "website",
+    siteName: "webpifyy",
+    images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Compress PNG Images Online – Free PNG Compressor",
-    description: "Reduce PNG file size by 60–90% without visible quality loss. Free, instant, no sign-up.",
-  },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Image Tools","item":"https://webpifyy.vercel.app/image"},{"@type":"ListItem","position":3,"name":"Compress","item":"https://webpifyy.vercel.app/image/compress"},{"@type":"ListItem","position":4,"name":"PNG"}]})
+    title: "Compress PNG Images Online Free \u2014 Up to 90% Smaller | webpifyy",
+    description: "Compress PNG files online free. Reduce PNG size 60-90% while preserving transparency and quality. No uploads, runs in your browser.",
+    images: ["https://webpifyy.vercel.app/opengraph-image"],
   },
 };
 
 const faqs = [
-  { q: "How do I compress a PNG without losing quality?", a: "Use lossless compression — our tool uses pngquant which reduces the color palette intelligently. You can achieve 60–80% size reduction without any visible difference at normal viewing distances." },
-  { q: "Does compressing PNG affect transparency?", a: "No. PNG compression preserves the alpha channel (transparency) fully. Your transparent backgrounds and edges will be maintained after compression." },
-  { q: "What is the best PNG compression method?", a: "pngquant-based lossy compression is the most effective for web use, typically reducing file size by 60–90%. It works by quantizing the color palette while maintaining visual fidelity." },
-  { q: "How much can I compress a PNG file?", a: "Most PNG files compress 60–90% with pngquant. Photographic PNGs may see slightly less reduction. Screenshots and graphics with flat colors typically see the highest compression ratios." },
-  { q: "Should I use PNG or WebP for web images?", a: "WebP is generally 25–35% smaller than PNG at the same quality. However, PNG is universally supported and essential when transparency or wide compatibility is required." },
+  { q: "How do I compress a PNG without losing quality?", a: "Upload your PNG and our tool uses pngquant-based compression to reduce file size by 60-90% while preserving visual quality and transparency. The original format is maintained." },
+  { q: "Does compressing PNG affect transparency?", a: "No. Our PNG compressor preserves the alpha channel, keeping transparency intact even after compression." },
+  { q: "What is the maximum PNG file size I can compress?", a: "You can compress PNG files up to 10MB. Batch processing is supported so you can compress multiple files at once." },
+  { q: "Is it safe to compress PNG images online?", a: "Yes. Files are processed entirely in your browser using WebAssembly. Nothing is uploaded to any server." },
 ];
 
 export default function PNGCompressorPage() {
@@ -69,8 +69,8 @@ export default function PNGCompressorPage() {
         },
         "provider": { "@id": "https://webpifyy.vercel.app/#organization" },
         "author": { "@id": "https://webpifyy.vercel.app/#organization" },
-        "description": "Compress PNG images online for free. Uses pngquant to reduce file size by 60–90% while preserving transparency.",
-        "featureList": ["PNG Compression", "Transparency Preserved", "60-90% Size Reduction", "Free", "pngquant Algorithm"]
+        "description": "Compress PNG files online free. Reduce PNG size 60-90% while preserving transparency and quality. No uploads, runs in your browser.",
+        "featureList": ["PNG Compression", "Transparency Preserved", "60-90% Size Reduction", "Free", "Browser-based"]
       },
       {
         "@type": "FAQPage",

@@ -3,22 +3,23 @@ import Breadcrumb from "@/components/Breadcrumb";
 import Link from "next/link";
 
 export const metadata = {
-  title: "GIF Compressor – Compress GIF & Convert to MP4/WebM Online Free",
-  description: "Compress animated GIFs or convert them to MP4/WebM for up to 90% smaller files. Free, fast, browser-based — your files never leave your device. No upload needed.",
+  title: "GIF Compressor Online Free — Reduce GIF Size",
+  description: "Compress GIF files online free. Reduce GIF file size up to 90% by converting to MP4 or WebM. Browser-based FFmpeg processing, no uploads.",
   alternates: { canonical: "https://webpifyy.vercel.app/gif/compress" },
   keywords: ["gif compressor", "compress gif online", "gif to mp4", "gif to webm", "reduce gif size free"],
   openGraph: {
-    title: "GIF Compressor – Compress GIF & Convert to MP4/WebM Online Free",
-    description: "Compress animated GIFs or convert to MP4/WebM for up to 90% smaller files. Free, browser-based.",
+    title: "GIF Compressor Online Free — Reduce GIF Size | webpifyy",
+    description: "Compress GIF files online free. Reduce GIF file size up to 90% by converting to MP4 or WebM. Browser-based FFmpeg processing, no uploads.",
     url: "https://webpifyy.vercel.app/gif/compress",
+    type: "website",
+    siteName: "webpifyy",
+    images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "GIF Compressor – Compress GIF & Convert to MP4/WebM Free",
-    description: "Compress GIFs or convert to video for up to 90% smaller files. Free, browser-based, no sign-up.",
-  },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"GIF Tools","item":"https://webpifyy.vercel.app/gif"},{"@type":"ListItem","position":3,"name":"Compress"}]})
+    title: "GIF Compressor Online Free — Reduce GIF Size | webpifyy",
+    description: "Compress GIF files online free. Reduce GIF file size up to 90% by converting to MP4 or WebM. Browser-based FFmpeg processing, no uploads.",
+    images: ["https://webpifyy.vercel.app/opengraph-image"],
   },
 };
 
@@ -77,35 +78,6 @@ export default function GifCompressorHubPage() {
           { "@type": "ListItem", "position": 3, "name": "GIF Compressor" },
         ]
       },
-      {
-        "@type": ["SoftwareApplication", "WebApplication"],
-        "@id": "https://webpifyy.vercel.app/gif/compress#software",
-        "name": "GIF Compressor",
-        "url": "https://webpifyy.vercel.app/gif/compress",
-        "applicationCategory": "MultimediaApplication",
-        "operatingSystem": "Any",
-        "inLanguage": "en",
-        "isAccessibleForFree": true,
-        "offers": {
-          "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "USD",
-          "availability": "https://schema.org/InStock",
-          "seller": { "@id": "https://webpifyy.vercel.app/#organization" }
-        },
-        "provider": { "@id": "https://webpifyy.vercel.app/#organization" },
-        "author": { "@id": "https://webpifyy.vercel.app/#organization" },
-        "description": "Compress GIF files or convert them to MP4/WebM for up to 90% smaller files. Free, browser-based, no uploads.",
-        "featureList": ["GIF Compression", "GIF to MP4", "GIF to WebM", "Video to GIF", "Browser-based", "Free"]
-      },
-      {
-        "@type": "FAQPage",
-        "mainEntity": faqs.map(f => ({
-          "@type": "Question",
-          "name": f.q,
-          "acceptedAnswer": { "@type": "Answer", "text": f.a }
-        }))
-      }
     ]
   };
 

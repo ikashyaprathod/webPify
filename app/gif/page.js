@@ -3,16 +3,22 @@ import Breadcrumb from "@/components/Breadcrumb";
 import Link from "next/link";
 
 export const metadata = {
-  title: "GIF Tools Online – Compress GIF & Convert to MP4/WebM Free",
-  description: "Free online GIF tools. Compress animated GIFs or convert them to MP4/WebM for up to 90% smaller files. All browser-based, no uploads.",
+  title: "Free GIF Tools Online — Compress & Convert GIFs",
+  description: "Free online GIF tools — compress GIFs, convert GIF to MP4 and WebM for up to 90% size reduction. Browser-based FFmpeg, no file uploads.",
   alternates: { canonical: "https://webpifyy.vercel.app/gif" },
   openGraph: {
-    title: "GIF Tools Online – Compress GIF & Convert to MP4/WebM Free",
-    description: "Compress GIFs or convert to video. All browser-based, no uploads.",
+    title: "Free GIF Tools Online — Compress & Convert GIFs | webpifyy",
+    description: "Free online GIF tools — compress GIFs, convert GIF to MP4 and WebM for up to 90% size reduction. Browser-based FFmpeg, no file uploads.",
     url: "https://webpifyy.vercel.app/gif",
+    type: "website",
+    siteName: "webpifyy",
+    images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"GIF Tools"}]})
+  twitter: {
+    card: "summary_large_image",
+    title: "Free GIF Tools Online — Compress & Convert GIFs | webpifyy",
+    description: "Free online GIF tools — compress GIFs, convert GIF to MP4 and WebM for up to 90% size reduction. Browser-based FFmpeg, no file uploads.",
+    images: ["https://webpifyy.vercel.app/opengraph-image"],
   },
 };
 
@@ -39,14 +45,6 @@ export default function GifHub() {
           { "@type": "ListItem", position: 1, name: "Home", item: "https://webpifyy.vercel.app/" },
           { "@type": "ListItem", position: 2, name: "GIF Tools" },
         ],
-      },
-      {
-        "@type": "FAQPage",
-        mainEntity: faqs.map(f => ({
-          "@type": "Question",
-          name: f.q,
-          acceptedAnswer: { "@type": "Answer", text: f.a },
-        })),
       },
     ],
   };

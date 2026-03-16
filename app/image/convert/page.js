@@ -3,22 +3,23 @@ import Breadcrumb from "@/components/Breadcrumb";
 import Link from "next/link";
 
 export const metadata = {
-  title: "Image Converter – Convert Images to PNG, JPEG, WebP Online Free",
-  description: "Convert images between PNG, JPEG, and WebP formats online. Free, high quality, no sign-up required. Powered by Sharp for professional format conversion.",
+  title: "Online Image Converter — WebP PNG JPEG AVIF Free",
+  description: "Convert images between WebP, PNG, JPEG, AVIF, HEIC, BMP and TIFF online free. Batch conversion supported. No uploads, browser-based.",
   alternates: { canonical: "https://webpifyy.vercel.app/image/convert" },
   keywords: ["image converter", "convert image online", "png to webp", "jpeg to png", "image format converter free"],
   openGraph: {
-    title: "Image Converter – Convert Images to PNG, JPEG, WebP Online Free",
-    description: "Convert images between PNG, JPEG, and WebP formats online. Free, high quality, no sign-up.",
+    title: "Online Image Converter — WebP PNG JPEG AVIF Free | webpifyy",
+    description: "Convert images between WebP, PNG, JPEG, AVIF, HEIC, BMP and TIFF online free. Batch conversion supported. No uploads, browser-based.",
     url: "https://webpifyy.vercel.app/image/convert",
+    type: "website",
+    siteName: "webpifyy",
+    images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Image Converter – Convert PNG, JPEG, WebP Online Free",
-    description: "Convert images between formats online. Free, instant, no sign-up required.",
-  },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Image Tools","item":"https://webpifyy.vercel.app/image"},{"@type":"ListItem","position":3,"name":"Convert"}]})
+    title: "Online Image Converter — WebP PNG JPEG AVIF Free | webpifyy",
+    description: "Convert images between WebP, PNG, JPEG, AVIF, HEIC, BMP and TIFF online free. Batch conversion supported. No uploads, browser-based.",
+    images: ["https://webpifyy.vercel.app/opengraph-image"],
   },
 };
 
@@ -90,44 +91,11 @@ export default function ConverterHubPage() {
 
   const schema = {
     "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://webpifyy.vercel.app/" },
-          { "@type": "ListItem", "position": 2, "name": "Image Tools", "item": "https://webpifyy.vercel.app/image" },
-          { "@type": "ListItem", "position": 3, "name": "Converter" }
-        ]
-      },
-      {
-        "@type": ["SoftwareApplication", "WebApplication"],
-        "@id": "https://webpifyy.vercel.app/image/convert#software",
-        "name": "Image Converter",
-        "url": "https://webpifyy.vercel.app/image/convert",
-        "applicationCategory": "MultimediaApplication",
-        "operatingSystem": "Any",
-        "inLanguage": "en",
-        "isAccessibleForFree": true,
-        "offers": {
-          "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "USD",
-          "availability": "https://schema.org/InStock",
-          "seller": { "@id": "https://webpifyy.vercel.app/#organization" }
-        },
-        "provider": { "@id": "https://webpifyy.vercel.app/#organization" },
-        "author": { "@id": "https://webpifyy.vercel.app/#organization" },
-        "description": "Convert images between PNG, JPEG, and WebP formats online. Free, high quality, no sign-up required.",
-        "featureList": ["PNG to WebP", "JPEG to WebP", "WebP to PNG", "WebP to JPEG", "Free"]
-      },
-      {
-        "@type": "FAQPage",
-        "mainEntity": faqs.map(f => ({
-          "@type": "Question",
-          "name": f.q,
-          "acceptedAnswer": { "@type": "Answer", "text": f.a }
-        }))
-      }
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://webpifyy.vercel.app/" },
+      { "@type": "ListItem", "position": 2, "name": "Image Tools", "item": "https://webpifyy.vercel.app/image" },
+      { "@type": "ListItem", "position": 3, "name": "Converter" }
     ]
   };
 

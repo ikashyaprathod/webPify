@@ -4,31 +4,31 @@ import ImageConverter from "@/components/ImageConverter";
 import Link from "next/link";
 
 export const metadata = {
-  title: "Convert Images to WebP Online – PNG/JPEG to WebP Free",
-  description: "Convert PNG and JPEG images to WebP format online for free. WebP is 25–35% smaller than PNG/JPEG at the same quality. Instant, no sign-up.",
+  title: "Convert Images to WebP Online Free",
+  description: "Convert PNG, JPEG, AVIF and other formats to WebP online free. Reduce file size by 25-35% vs JPEG. No signup, instant conversion.",
   alternates: { canonical: "https://webpifyy.vercel.app/image/convert/to-webp" },
   keywords: ["convert to webp", "png to webp", "jpeg to webp", "image to webp converter", "webp converter online free"],
   openGraph: {
-    title: "Convert Images to WebP Online – PNG/JPEG to WebP Free",
-    description: "Convert PNG and JPEG images to WebP format online for free. 25–35% smaller files. No sign-up.",
+    title: "Convert Images to WebP Online Free | webpifyy",
+    description: "Convert PNG, JPEG, AVIF and other formats to WebP online free. Reduce file size by 25-35% vs JPEG. No signup, instant conversion.",
     url: "https://webpifyy.vercel.app/image/convert/to-webp",
+    type: "website",
+    siteName: "webpifyy",
+    images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Convert Images to WebP Online – Free WebP Converter",
-    description: "Convert PNG/JPEG to WebP for 25–35% smaller files. Free, instant, no sign-up required.",
-  },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Image Tools","item":"https://webpifyy.vercel.app/image"},{"@type":"ListItem","position":3,"name":"Convert","item":"https://webpifyy.vercel.app/image/convert"},{"@type":"ListItem","position":4,"name":"to WebP"}]})
+    title: "Convert Images to WebP Online Free | webpifyy",
+    description: "Convert PNG, JPEG, AVIF and other formats to WebP online free. Reduce file size by 25-35% vs JPEG. No signup, instant conversion.",
+    images: ["https://webpifyy.vercel.app/opengraph-image"],
   },
 };
 
 const faqs = [
-  { q: "Why should I convert images to WebP?", a: "WebP is 25–35% smaller than PNG at the same quality, and 25–34% smaller than JPEG. Smaller images mean faster page loads, better Core Web Vitals scores, and improved SEO rankings." },
-  { q: "Will converting to WebP affect image quality?", a: "At quality 80+, the difference is imperceptible for most images. You can choose lossless WebP conversion which gives identical quality with moderate file size reduction." },
-  { q: "Does WebP support transparency?", a: "Yes. WebP supports full transparency (alpha channel), just like PNG. If your PNG has a transparent background, it will be preserved when converted to WebP." },
-  { q: "Is WebP supported by all browsers?", a: "Yes. WebP is supported by all modern browsers: Chrome, Firefox, Safari (since version 14, 2020), Edge, and Opera. Global support exceeds 96% as of 2024." },
-  { q: "Should I use WebP or AVIF?", a: "Both are excellent modern formats. AVIF achieves even better compression than WebP but has slightly lower browser support. WebP is the safer choice for production web use, while AVIF is ideal for future-proofing." },
+  { q: "Why convert images to WebP?", a: "WebP images are 25-35% smaller than JPEG and PNG at the same quality. Using WebP improves page speed, reduces bandwidth costs, and improves Core Web Vitals scores." },
+  { q: "Does converting to WebP lose quality?", a: "WebP supports both lossy and lossless compression. Our converter uses lossless by default, preserving full original quality while reducing file size." },
+  { q: "Can I convert multiple images to WebP at once?", a: "Yes. Drag and drop multiple files for batch conversion. Download results individually or all at once as a ZIP." },
+  { q: "Will WebP work on all websites?", a: "WebP works on all modern browsers. For older browsers, use the HTML picture element to provide a JPEG fallback." },
 ];
 
 export default function WebPConverterPage() {
@@ -69,7 +69,7 @@ export default function WebPConverterPage() {
         },
         "provider": { "@id": "https://webpifyy.vercel.app/#organization" },
         "author": { "@id": "https://webpifyy.vercel.app/#organization" },
-        "description": "Convert PNG and JPEG images to WebP format online for free. Produces 25–35% smaller files than PNG/JPEG.",
+        "description": "Convert PNG, JPEG, AVIF and other formats to WebP online free. Reduce file size by 25-35% vs JPEG.",
         "featureList": ["PNG to WebP", "JPEG to WebP", "Transparency Support", "Free", "No Sign-up"]
       },
       {

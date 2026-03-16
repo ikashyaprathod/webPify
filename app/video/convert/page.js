@@ -2,16 +2,22 @@ import PageShell from "@/components/PageShell";
 import Breadcrumb from "@/components/Breadcrumb";
 
 export const metadata = {
-  title: "Video Converter Online – MP4 to WebM, MP4 to MP3, Video to GIF",
-  description: "Free online video conversion tools. Convert MP4 to WebM, extract audio as MP3, or convert video to GIF. Browser-based, no uploads, powered by FFmpeg.wasm.",
+  title: "Online Video Converter — Free Format Conversion",
+  description: "Convert videos between MP4, WebM, MOV, GIF formats online free. FFmpeg WebAssembly processing. No uploads, no signup, completely private.",
   alternates: { canonical: "https://webpifyy.vercel.app/video/convert" },
   openGraph: {
-    title: "Video Converter Online – MP4 to WebM, MP4 to MP3, Video to GIF",
-    description: "Convert video files to WebM, MP3, or GIF. Browser-based, no uploads.",
+    type: "website",
+    siteName: "webpifyy",
+    title: "Online Video Converter — Free Format Conversion | webpifyy",
+    description: "Convert videos between MP4, WebM, MOV, GIF formats online free. FFmpeg WebAssembly processing. No uploads, no signup, completely private.",
     url: "https://webpifyy.vercel.app/video/convert",
+    images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Video Tools","item":"https://webpifyy.vercel.app/video"},{"@type":"ListItem","position":3,"name":"Convert"}]})
+  twitter: {
+    card: "summary_large_image",
+    title: "Online Video Converter — Free Format Conversion | webpifyy",
+    description: "Convert videos between MP4, WebM, MOV, GIF formats online free. FFmpeg WebAssembly processing. No uploads, no signup, completely private.",
+    images: ["https://webpifyy.vercel.app/opengraph-image"],
   },
 };
 
@@ -41,14 +47,6 @@ export default function VideoConvertHub() {
           { "@type": "ListItem", position: 2, name: "Video", item: "https://webpifyy.vercel.app/video" },
           { "@type": "ListItem", position: 3, name: "Video Converter" },
         ],
-      },
-      {
-        "@type": "FAQPage",
-        mainEntity: faqs.map(f => ({
-          "@type": "Question",
-          name: f.q,
-          acceptedAnswer: { "@type": "Answer", text: f.a },
-        })),
       },
     ],
   };

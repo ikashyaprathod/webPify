@@ -3,22 +3,23 @@ import Breadcrumb from "@/components/Breadcrumb";
 import Link from "next/link";
 
 export const metadata = {
-  title: "Image Resizer Online – Resize PNG, JPEG, WebP Free",
-  description: "Resize images to exact dimensions online. Supports PNG, JPEG, and WebP. Choose fit mode, width, height. Fast server-side processing with Sharp. Free, no sign-up.",
+  title: "Online Image Resizer \u2014 PNG JPEG WebP Free",
+  description: "Resize PNG, JPEG, WebP and AVIF images online free. Set exact dimensions, maintain aspect ratio. Four fit modes. Batch processing supported.",
   alternates: { canonical: "https://webpifyy.vercel.app/image/resize" },
   keywords: ["image resizer", "resize image online", "change image size", "resize png jpeg webp", "image dimensions changer free"],
   openGraph: {
-    title: "Image Resizer Online – Resize PNG, JPEG, WebP Free",
-    description: "Resize images to exact dimensions online. PNG, JPEG, WebP supported. 4 fit modes. Free, no sign-up.",
+    title: "Online Image Resizer \u2014 PNG JPEG WebP Free | webpifyy",
+    description: "Resize PNG, JPEG, WebP and AVIF images online free. Set exact dimensions, maintain aspect ratio. Four fit modes. Batch processing supported.",
     url: "https://webpifyy.vercel.app/image/resize",
+    type: "website",
+    siteName: "webpifyy",
+    images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Image Resizer Online – Resize PNG, JPEG, WebP Free",
-    description: "Resize images to any dimension with 4 fit modes. Free, instant, no sign-up required.",
-  },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Image Tools","item":"https://webpifyy.vercel.app/image"},{"@type":"ListItem","position":3,"name":"Resize"}]})
+    title: "Online Image Resizer \u2014 PNG JPEG WebP Free | webpifyy",
+    description: "Resize PNG, JPEG, WebP and AVIF images online free. Set exact dimensions, maintain aspect ratio. Four fit modes. Batch processing supported.",
+    images: ["https://webpifyy.vercel.app/opengraph-image"],
   },
 };
 

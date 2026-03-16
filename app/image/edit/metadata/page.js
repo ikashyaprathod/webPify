@@ -3,26 +3,31 @@ import Breadcrumb from "@/components/Breadcrumb";
 import ImageMetadata from "@/components/ImageMetadata";
 
 export const metadata = {
-  title: "Image Metadata Viewer — View EXIF Data Online Free",
-  description: "View image metadata and EXIF data online. Camera model, GPS location, ISO, focal length, and more. 100% browser-based, no uploads.",
+  title: "View Image Metadata Online Free \u2014 EXIF Data Viewer",
+  description: "View EXIF metadata from any image online free. See camera settings, GPS coordinates, dimensions, DPI and color profile. No uploads needed.",
   alternates: { canonical: "https://webpifyy.vercel.app/image/edit/metadata" },
   keywords: ["image metadata viewer", "exif data viewer", "view photo metadata online", "exif reader", "image info viewer"],
   openGraph: {
-    title: "Image Metadata Viewer — View EXIF Data Online Free",
-    description: "View EXIF and metadata from images. Camera, GPS, settings. Browser-based.",
+    title: "View Image Metadata Online Free \u2014 EXIF Data Viewer | webpifyy",
+    description: "View EXIF metadata from any image online free. See camera settings, GPS coordinates, dimensions, DPI and color profile. No uploads needed.",
     url: "https://webpifyy.vercel.app/image/edit/metadata",
+    type: "website",
+    siteName: "webpifyy",
+    images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
-  twitter: { card: "summary_large_image", title: "Image Metadata Viewer Online", description: "View EXIF data from photos. Camera, GPS, settings. No uploads." },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Image Tools","item":"https://webpifyy.vercel.app/image"},{"@type":"ListItem","position":3,"name":"Edit","item":"https://webpifyy.vercel.app/image/edit"},{"@type":"ListItem","position":4,"name":"Metadata"}]})
+  twitter: {
+    card: "summary_large_image",
+    title: "View Image Metadata Online Free \u2014 EXIF Data Viewer | webpifyy",
+    description: "View EXIF metadata from any image online free. See camera settings, GPS coordinates, dimensions, DPI and color profile. No uploads needed.",
+    images: ["https://webpifyy.vercel.app/opengraph-image"],
   },
 };
 
 const faqs = [
-  { q: "What is EXIF data?", a: "EXIF (Exchangeable Image File Format) data is metadata embedded in photos by cameras and smartphones. It includes camera model, GPS location, date taken, ISO, aperture, and more." },
-  { q: "Which image formats contain EXIF data?", a: "JPEG and TIFF images typically contain EXIF data. PNG and WebP images usually do not contain EXIF data." },
-  { q: "Can I see GPS location from photos?", a: "Yes, if the photo was taken with GPS enabled on your camera or phone, the viewer will show latitude and longitude coordinates." },
-  { q: "Is my image uploaded anywhere?", a: "No. All metadata reading happens in your browser using the exifr library. Your images never leave your device." },
+  { q: "What metadata can I see from an image?", a: "View camera make/model, lens, aperture, shutter speed, ISO, GPS coordinates, dimensions, DPI, color profile, creation date, and software used." },
+  { q: "Does viewing metadata upload my image?", a: "No. Metadata is read directly in your browser using the exifr JavaScript library. Your image never leaves your device." },
+  { q: "What image formats support EXIF metadata?", a: "JPEG and TIFF contain the most EXIF data from cameras. PNG and WebP store limited metadata. HEIC from iPhones contains full GPS and camera data." },
+  { q: "Can I remove metadata from images?", a: "Run your image through our compressor which removes all EXIF data as part of the optimization process." },
 ];
 
 export default function MetadataPage() {

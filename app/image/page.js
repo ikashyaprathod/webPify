@@ -3,17 +3,23 @@ import Breadcrumb from "@/components/Breadcrumb";
 import Link from "next/link";
 
 export const metadata = {
-    title: "Image Tools – Compress, Convert & Resize PNG, JPEG, WebP",
-    description: "Professional image compression, conversion, and resizing tools. Optimize images for SEO, speed, and Core Web Vitals.",
+    title: "Free Image Tools Online \u2014 Compress Convert Resize",
+    description: "Free online image tools \u2014 compress, convert, resize, crop, watermark, remove background and more. Browser-based, no uploads, works on any device.",
     alternates: { canonical: "https://webpifyy.vercel.app/image" },
     openGraph: {
-        title: "Image Tools – Compress, Convert & Resize PNG, JPEG, WebP",
-        description: "Professional image compression, conversion, and resizing tools. Optimize images for SEO, speed, and Core Web Vitals.",
+        title: "Free Image Tools Online \u2014 Compress Convert Resize | webpifyy",
+        description: "Free online image tools \u2014 compress, convert, resize, crop, watermark, remove background and more. Browser-based, no uploads, works on any device.",
         url: "https://webpifyy.vercel.app/image",
+        type: "website",
+        siteName: "webpifyy",
+        images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
     },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Image Tools"}]})
-  },
+    twitter: {
+        card: "summary_large_image",
+        title: "Free Image Tools Online \u2014 Compress Convert Resize | webpifyy",
+        description: "Free online image tools \u2014 compress, convert, resize, crop, watermark, remove background and more. Browser-based, no uploads, works on any device.",
+        images: ["https://webpifyy.vercel.app/opengraph-image"],
+    },
 };
 
 const compressCards = [
@@ -78,7 +84,7 @@ export default function ImageMasterHub() {
                                 },
                                 "provider": { "@id": "https://webpifyy.vercel.app/#organization" },
                                 "author": { "@id": "https://webpifyy.vercel.app/#organization" },
-                                "description": "Professional image compression and conversion tools. Optimize images for SEO, speed, and Core Web Vitals."
+                                "description": "Free online image tools \u2014 compress, convert, resize, crop, watermark, remove background and more. Browser-based, no uploads, works on any device."
                             }
                         ]
                     })

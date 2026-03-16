@@ -3,25 +3,30 @@ import ImageToPDF from "@/components/ImageToPDF";
 import Breadcrumb from "@/components/Breadcrumb";
 
 export const metadata = {
-  title: "Image to PDF Converter – Free Online, Multiple Images",
-  description: "Convert images to PDF online. Combine multiple JPG, PNG, WebP images into one PDF. Free, browser-based, no uploads.",
+  title: "Convert Images to PDF Online Free — JPG PNG to PDF",
+  description: "Convert JPG, PNG, WebP and other images to PDF online free. Combine multiple images into one PDF. Choose page size. No uploads required.",
   alternates: { canonical: "https://webpifyy.vercel.app/image/convert/image-to-pdf" },
   openGraph: {
-    title: "Image to PDF Converter – Free Online",
-    description: "Convert multiple images to a single PDF instantly. No uploads, free forever.",
+    title: "Convert Images to PDF Online Free — JPG PNG to PDF | webpifyy",
+    description: "Convert JPG, PNG, WebP and other images to PDF online free. Combine multiple images into one PDF. Choose page size. No uploads required.",
     url: "https://webpifyy.vercel.app/image/convert/image-to-pdf",
+    type: "website",
+    siteName: "webpifyy",
+    images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Image Tools","item":"https://webpifyy.vercel.app/image"},{"@type":"ListItem","position":3,"name":"Convert","item":"https://webpifyy.vercel.app/image/convert"},{"@type":"ListItem","position":4,"name":"Image to PDF"}]})
+  twitter: {
+    card: "summary_large_image",
+    title: "Convert Images to PDF Online Free — JPG PNG to PDF | webpifyy",
+    description: "Convert JPG, PNG, WebP and other images to PDF online free. Combine multiple images into one PDF. Choose page size. No uploads required.",
+    images: ["https://webpifyy.vercel.app/opengraph-image"],
   },
 };
 
 const faqs = [
-  { q: "Can I combine multiple images into one PDF?", a: "Yes. Upload multiple JPG, PNG, or WebP images and they will all be combined into a single PDF document. You can reorder pages before generating the PDF." },
-  { q: "What image formats are supported?", a: "JPG, PNG, and WebP images are fully supported. All images are embedded at full quality into the PDF." },
-  { q: "Is my image uploaded to a server?", a: "No. The entire conversion runs in your browser using PDF-lib. Your images never leave your device." },
-  { q: "What PDF page size options are available?", a: "You can choose A4, Letter, or fit-to-image sizing. Portrait and landscape orientations are both supported." },
-  { q: "Will the PDF be print-quality?", a: "Yes. Images are embedded at their native resolution. For best print results, use high-resolution source images (300 DPI or higher)." },
+  { q: "Can I combine multiple images into one PDF?", a: "Yes. Upload multiple images, reorder by drag and drop, choose your page size (A4, Letter, or fit to image) and convert all images into a single PDF document." },
+  { q: "What image formats can I convert to PDF?", a: "You can convert JPG, PNG, WebP, AVIF and most common image formats to PDF. All processing happens in your browser with no file size restrictions." },
+  { q: "Can I choose the page size for my PDF?", a: "Yes. Choose from A4, US Letter, or fit to image size. Fit to image creates a PDF page that matches each image's exact dimensions." },
+  { q: "Is image to PDF conversion private?", a: "Yes. All conversion happens in your browser using JavaScript. No files are uploaded to any server, ensuring complete privacy for your documents." },
 ];
 
 export default function ImageToPDFPage() {
@@ -48,7 +53,7 @@ export default function ImageToPDFPage() {
         isAccessibleForFree: true,
         offers: { "@type": "Offer", price: "0", priceCurrency: "USD", availability: "https://schema.org/InStock", seller: { "@id": "https://webpifyy.vercel.app/#organization" } },
         provider: { "@id": "https://webpifyy.vercel.app/#organization" },
-        description: "Convert multiple images into a single PDF. Browser-based, no uploads.",
+        description: "Convert JPG, PNG, WebP and other images to PDF online free. Combine multiple images into one PDF.",
       },
       {
         "@type": "FAQPage",

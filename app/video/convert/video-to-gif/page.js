@@ -3,18 +3,31 @@ import Breadcrumb from "@/components/Breadcrumb";
 import VideoToGif from "@/components/VideoToGif";
 
 export const metadata = {
-  title: "Video to GIF Converter – Convert MP4 to GIF Online Free",
-  description: "Convert MP4, WebM, or MOV videos to animated GIF online. Choose FPS, width, and color depth. Free, browser-based, no uploads.",
+  title: "Convert Video to GIF Online Free",
+  description: "Convert MP4, WebM and MOV videos to animated GIF online free. Control frame rate and dimensions. Browser-based FFmpeg, no uploads needed.",
   alternates: { canonical: "https://webpifyy.vercel.app/video/convert/video-to-gif" },
   openGraph: {
-    title: "Video to GIF Converter – Convert MP4 to GIF Online Free",
-    description: "Convert MP4, WebM, or MOV videos to animated GIF online. Choose FPS, width, and color depth. Free, browser-based, no uploads.",
+    type: "website",
+    siteName: "webpifyy",
+    title: "Convert Video to GIF Online Free | webpifyy",
+    description: "Convert MP4, WebM and MOV videos to animated GIF online free. Control frame rate and dimensions. Browser-based FFmpeg, no uploads needed.",
     url: "https://webpifyy.vercel.app/video/convert/video-to-gif",
+    images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Video Tools","item":"https://webpifyy.vercel.app/video"},{"@type":"ListItem","position":3,"name":"Convert","item":"https://webpifyy.vercel.app/video/convert"},{"@type":"ListItem","position":4,"name":"Video to GIF"}]})
+  twitter: {
+    card: "summary_large_image",
+    title: "Convert Video to GIF Online Free | webpifyy",
+    description: "Convert MP4, WebM and MOV videos to animated GIF online free. Control frame rate and dimensions. Browser-based FFmpeg, no uploads needed.",
+    images: ["https://webpifyy.vercel.app/opengraph-image"],
   },
 };
+
+const faqs = [
+  { q: "How do I convert a video clip to GIF?", a: "Upload your video, optionally trim to the section you want, set output dimensions and frame rate, then click convert. The GIF downloads instantly." },
+  { q: "Why is my GIF file larger than the original video?", a: "GIF is an inefficient format for video content. A 10-second GIF can be 5-10x larger than the same video in MP4. For web use, MP4 autoplay is preferred." },
+  { q: "What frame rate should I use for GIF conversion?", a: "15fps gives smooth motion with reasonable file size. 10fps is good for simple animations. 24fps looks smooth but creates very large files." },
+  { q: "What is the maximum video length for GIF conversion?", a: "Shorter clips (under 30 seconds) work best. Longer videos create very large GIF files. Trim before converting." },
+];
 
 export default function VideoToGifPage() {
   const schema = {
@@ -47,17 +60,18 @@ export default function VideoToGifPage() {
         },
         "provider": { "@id": "https://webpifyy.vercel.app/#organization" },
         "author": { "@id": "https://webpifyy.vercel.app/#organization" },
-        "description": "Convert MP4, WebM, and MOV videos to animated GIF in your browser. Powered by FFmpeg.wasm.",
+        "description": "Convert MP4, WebM and MOV videos to animated GIF online free. Control frame rate and dimensions. Browser-based FFmpeg, no uploads needed.",
+      },
+      {
+        "@type": "FAQPage",
+        mainEntity: faqs.map(f => ({
+          "@type": "Question",
+          name: f.q,
+          acceptedAnswer: { "@type": "Answer", text: f.a },
+        })),
       },
     ],
   };
-
-  const faqs = [
-    { q: "What video formats can I convert to GIF?", a: "MP4, WebM, and MOV are all supported." },
-    { q: "Will my video be uploaded to a server?", a: "No. All conversion happens in your browser using FFmpeg.wasm. Your files never leave your device." },
-    { q: "What's the best FPS setting for GIFs?", a: "15 fps is a good balance between smoothness and file size. 10 fps creates smaller files; 20–24 fps creates smoother but larger GIFs." },
-    { q: "What width should I choose?", a: "480px is the most common choice for web use. If you need a small sticker or icon, choose 240px." },
-  ];
 
   return (
     <>

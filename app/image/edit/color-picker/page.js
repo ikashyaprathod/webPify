@@ -3,26 +3,31 @@ import Breadcrumb from "@/components/Breadcrumb";
 import ImageColorPicker from "@/components/ImageColorPicker";
 
 export const metadata = {
-  title: "Image Color Picker — Extract Colors from Images Online",
-  description: "Pick colors from any image online. Get HEX, RGB, and HSL values instantly. Click any pixel to extract its exact color. Free, no sign-up.",
+  title: "Image Color Picker Online Free \u2014 Get HEX RGB HSL",
+  description: "Pick colors from any image online free. Click any pixel to get HEX, RGB, HSL and HSV values instantly. No uploads, browser canvas API.",
   alternates: { canonical: "https://webpifyy.vercel.app/image/edit/color-picker" },
   keywords: ["image color picker", "pick color from image", "color extractor online", "eyedropper tool", "get color from image"],
   openGraph: {
-    title: "Image Color Picker — Extract Colors from Images Online",
-    description: "Pick colors from any image. Get HEX, RGB, and HSL instantly.",
+    title: "Image Color Picker Online Free \u2014 Get HEX RGB HSL | webpifyy",
+    description: "Pick colors from any image online free. Click any pixel to get HEX, RGB, HSL and HSV values instantly. No uploads, browser canvas API.",
     url: "https://webpifyy.vercel.app/image/edit/color-picker",
+    type: "website",
+    siteName: "webpifyy",
+    images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
-  twitter: { card: "summary_large_image", title: "Image Color Picker Online", description: "Extract colors from images. HEX, RGB, HSL. No sign-up." },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Image Tools","item":"https://webpifyy.vercel.app/image"},{"@type":"ListItem","position":3,"name":"Edit","item":"https://webpifyy.vercel.app/image/edit"},{"@type":"ListItem","position":4,"name":"Color Picker"}]})
+  twitter: {
+    card: "summary_large_image",
+    title: "Image Color Picker Online Free \u2014 Get HEX RGB HSL | webpifyy",
+    description: "Pick colors from any image online free. Click any pixel to get HEX, RGB, HSL and HSV values instantly. No uploads, browser canvas API.",
+    images: ["https://webpifyy.vercel.app/opengraph-image"],
   },
 };
 
 const faqs = [
-  { q: "How do I pick a color from an image?", a: "Upload your image, then click anywhere on it. The exact color at that pixel is shown as HEX, RGB, and HSL values. Click Copy HEX to copy to clipboard." },
-  { q: "What color formats does the picker show?", a: "The picker shows three formats: HEX (#rrggbb), RGB (rgb(r, g, b)), and HSL (hsl(h, s%, l%))." },
-  { q: "How many colors can I save?", a: "The last 8 picked colors are shown in the history palette. Click any saved color to reselect it." },
-  { q: "Is my image uploaded anywhere?", a: "No. All color picking happens in your browser using the HTML5 canvas API. Your images never leave your device." },
+  { q: "How do I pick a color from an image?", a: "Upload your image, then click any pixel to instantly see its HEX, RGB, HSL and HSV color values. Hover to preview colors before clicking." },
+  { q: "Can I copy the color code directly?", a: "Yes. Click any color format (HEX, RGB, HSL) to copy it to your clipboard instantly. No manual typing needed." },
+  { q: "How accurate is the color picker?", a: "The picker reads the exact pixel color using Canvas API, giving you 100% accurate values for every pixel in the uploaded image." },
+  { q: "Can I use the color picker on a screenshot?", a: "Yes. Upload any image including screenshots. Paste from clipboard (Ctrl+V) is also supported for quick color picking from copied images." },
 ];
 
 export default function ColorPickerPage() {

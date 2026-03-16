@@ -4,31 +4,31 @@ import ImageCompressor from "@/components/ImageCompressor";
 import Link from "next/link";
 
 export const metadata = {
-  title: "Compress WebP Images Online – Reduce WebP File Size Free",
-  description: "Compress WebP images online for free. Uses Sharp to reduce WebP file size by 50–80% while preserving visual quality and transparency. No sign-up required.",
+  title: "Compress WebP Images Online Free",
+  description: "Compress WebP images online free. Reduce WebP file size while maintaining modern format advantages. Browser-based, no uploads needed.",
   alternates: { canonical: "https://webpifyy.vercel.app/image/compress/webp" },
   keywords: ["compress webp", "webp compressor online", "reduce webp file size", "webp optimizer", "compress webp images free"],
   openGraph: {
-    title: "Compress WebP Images Online – Reduce WebP File Size Free",
-    description: "Compress WebP images online for free. Reduce file size by 50–80% while preserving visual quality. No sign-up required.",
+    title: "Compress WebP Images Online Free | webpifyy",
+    description: "Compress WebP images online free. Reduce WebP file size while maintaining modern format advantages. Browser-based, no uploads needed.",
     url: "https://webpifyy.vercel.app/image/compress/webp",
+    type: "website",
+    siteName: "webpifyy",
+    images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Compress WebP Images Online – Free WebP Compressor",
-    description: "Reduce WebP file size by 50–80% without visible quality loss. Free, instant, no sign-up.",
-  },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Image Tools","item":"https://webpifyy.vercel.app/image"},{"@type":"ListItem","position":3,"name":"Compress","item":"https://webpifyy.vercel.app/image/compress"},{"@type":"ListItem","position":4,"name":"WebP"}]})
+    title: "Compress WebP Images Online Free | webpifyy",
+    description: "Compress WebP images online free. Reduce WebP file size while maintaining modern format advantages. Browser-based, no uploads needed.",
+    images: ["https://webpifyy.vercel.app/opengraph-image"],
   },
 };
 
 const faqs = [
-  { q: "Can you compress WebP images without quality loss?", a: "Yes, using Sharp's WebP compression you can reduce file size by 50–80% with minimal perceptible quality loss. The lossless option gives zero quality degradation at lower compression ratios." },
-  { q: "Is WebP better than PNG for compression?", a: "Yes, WebP is typically 25–35% smaller than PNG at the same visual quality. For photos, WebP is 25–34% smaller than JPEG. WebP is the recommended format for modern web images." },
-  { q: "Does WebP support transparency?", a: "Yes. WebP supports an alpha channel (transparency) just like PNG. Compressed WebP files retain transparency fully." },
-  { q: "Is WebP supported by all browsers?", a: "Yes, WebP is now supported by all modern browsers including Chrome, Firefox, Safari (since 2020), and Edge. Global browser support exceeds 96%." },
-  { q: "How do I know which quality to use for WebP?", a: "Quality 75–85 is the standard range for web-optimized WebP images. Quality 90+ is near-lossless and is suitable for product photography. Quality 60–70 works for thumbnails and low-priority images." },
+  { q: "Why should I compress WebP images?", a: "Even though WebP is already efficient, further compression reduces bandwidth and improves page load speed. Compressed WebP files load faster without visible quality loss." },
+  { q: "How does WebP compare to JPEG for compression?", a: "WebP typically achieves 25-35% smaller file sizes than JPEG at the same visual quality, making it ideal for web images and improving Core Web Vitals scores." },
+  { q: "Can I convert WebP to other formats after compressing?", a: "Yes. After compressing your WebP, use our Image Converter to convert it to PNG, JPEG or AVIF formats." },
+  { q: "Is WebP supported in all browsers?", a: "WebP is supported in all modern browsers including Chrome, Firefox, Safari 14+ and Edge. It covers over 97% of global browser usage." },
 ];
 
 export default function WebPCompressorPage() {
@@ -69,8 +69,8 @@ export default function WebPCompressorPage() {
         },
         "provider": { "@id": "https://webpifyy.vercel.app/#organization" },
         "author": { "@id": "https://webpifyy.vercel.app/#organization" },
-        "description": "Compress WebP images online for free. Uses Sharp to reduce file size by 50–80% while preserving visual quality and transparency.",
-        "featureList": ["WebP Compression", "Transparency Preserved", "50-80% Size Reduction", "Free", "No Sign-up"]
+        "description": "Compress WebP images online free. Reduce WebP file size while maintaining modern format advantages. Browser-based, no uploads needed.",
+        "featureList": ["WebP Compression", "Transparency Preserved", "Browser-based", "Free", "No Uploads"]
       },
       {
         "@type": "FAQPage",

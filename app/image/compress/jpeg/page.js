@@ -4,31 +4,31 @@ import ImageCompressor from "@/components/ImageCompressor";
 import Link from "next/link";
 
 export const metadata = {
-  title: "Compress JPEG Images Online – Reduce JPG File Size Free",
-  description: "Compress JPEG and JPG images online for free. Uses mozjpeg to reduce file size by 40–90% while maintaining visual quality. Instant, no sign-up required.",
+  title: "Compress JPEG Images Online Free \u2014 Reduce JPG Size",
+  description: "Compress JPEG and JPG images online free. Reduce file size up to 85% using mozjpeg. Before/after preview included. No signup required.",
   alternates: { canonical: "https://webpifyy.vercel.app/image/compress/jpeg" },
   keywords: ["compress jpeg", "compress jpg online", "reduce jpeg file size", "jpg compressor", "compress jpeg without quality loss"],
   openGraph: {
-    title: "Compress JPEG Images Online – Reduce JPG File Size Free",
-    description: "Compress JPEG images online for free. Reduce file size by 40–90% with mozjpeg. No sign-up required.",
+    title: "Compress JPEG Images Online Free \u2014 Reduce JPG Size | webpifyy",
+    description: "Compress JPEG and JPG images online free. Reduce file size up to 85% using mozjpeg. Before/after preview included. No signup required.",
     url: "https://webpifyy.vercel.app/image/compress/jpeg",
+    type: "website",
+    siteName: "webpifyy",
+    images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Compress JPEG Images Online – Free JPG Compressor",
-    description: "Reduce JPEG file size by 40–90% without visible quality loss. Free, instant, no sign-up.",
-  },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Image Tools","item":"https://webpifyy.vercel.app/image"},{"@type":"ListItem","position":3,"name":"Compress","item":"https://webpifyy.vercel.app/image/compress"},{"@type":"ListItem","position":4,"name":"JPEG"}]})
+    title: "Compress JPEG Images Online Free \u2014 Reduce JPG Size | webpifyy",
+    description: "Compress JPEG and JPG images online free. Reduce file size up to 85% using mozjpeg. Before/after preview included. No signup required.",
+    images: ["https://webpifyy.vercel.app/opengraph-image"],
   },
 };
 
 const faqs = [
-  { q: "How do I compress a JPEG without losing quality?", a: "Use quality settings between 75–85%. Our tool uses mozjpeg, an optimized JPEG encoder that produces smaller files at the same perceived quality compared to standard libjpeg. You can reduce file size by 40–70% with minimal visible difference." },
-  { q: "What is the best quality setting for JPEG compression?", a: "Quality 80–85 is the sweet spot for most web images — good visual quality with significant file size reduction. For photos where quality matters most, use 90+. For thumbnails or previews, 60–75 is usually sufficient." },
-  { q: "Is JPEG compression reversible?", a: "No. JPEG compression is lossy — each compression reduces quality slightly and cannot be undone. Always keep the original file. For repeated editing, use PNG which is lossless." },
-  { q: "How much can I compress a JPEG file?", a: "JPEG files typically compress 40–90% depending on the original quality and content. A 2MB photo can often be reduced to 200–400KB with no noticeable quality loss at screen viewing sizes." },
-  { q: "Should I use JPEG or WebP for photos?", a: "WebP provides 25–35% better compression than JPEG at the same quality. If you need broad browser compatibility, JPEG is safest. For modern websites targeting Chrome/Edge/Firefox, WebP is the better choice." },
+  { q: "How much can I compress a JPEG image?", a: "Typically 50-85% size reduction depending on image content. Photos compress more than graphics. Quality is preserved by controlling the compression level." },
+  { q: "Will JPEG compression affect image quality?", a: "JPEG uses lossy compression so some quality loss occurs. Our tool uses mozjpeg which provides better quality at smaller sizes than standard JPEG compression." },
+  { q: "What is the difference between JPEG and JPG?", a: "JPEG and JPG are the same format. JPG is a shorter extension used on older Windows systems. Both refer to the same lossy image compression standard." },
+  { q: "Can I compress multiple JPEG files at once?", a: "Yes. Batch compression lets you upload and compress multiple files simultaneously. Download results individually or as a ZIP file." },
 ];
 
 export default function JPEGCompressorPage() {
@@ -69,8 +69,8 @@ export default function JPEGCompressorPage() {
         },
         "provider": { "@id": "https://webpifyy.vercel.app/#organization" },
         "author": { "@id": "https://webpifyy.vercel.app/#organization" },
-        "description": "Compress JPEG images online for free. Uses mozjpeg to reduce file size by 40–90% while maintaining visual quality.",
-        "featureList": ["JPEG Compression", "mozjpeg Algorithm", "40-90% Size Reduction", "Free", "No Sign-up"]
+        "description": "Compress JPEG and JPG images online free. Reduce file size up to 85% using mozjpeg. Before/after preview included. No signup required.",
+        "featureList": ["JPEG Compression", "mozjpeg Algorithm", "Up to 85% Size Reduction", "Before/After Preview", "Free"]
       },
       {
         "@type": "FAQPage",

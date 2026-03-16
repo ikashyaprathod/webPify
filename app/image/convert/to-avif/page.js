@@ -4,25 +4,30 @@ import ImageConverter from "@/components/ImageConverter";
 
 export const metadata = {
   title: "Convert Images to AVIF Online Free",
-  description: "Convert PNG, JPEG, and WebP images to AVIF format online for free. AVIF offers the smallest file sizes of any modern image format. No sign-up.",
+  description: "Convert PNG, JPEG and WebP images to AVIF online free. AVIF offers the best compression of any image format. Browser-based, no file uploads.",
   alternates: { canonical: "https://webpifyy.vercel.app/image/convert/to-avif" },
   keywords: ["convert to avif", "image to avif", "jpeg to avif", "png to avif converter", "avif converter online"],
   openGraph: {
-    title: "Convert Images to AVIF Online Free",
-    description: "Convert images to AVIF format. Smallest modern image format. No sign-up.",
+    title: "Convert Images to AVIF Online Free | webpifyy",
+    description: "Convert PNG, JPEG and WebP images to AVIF online free. AVIF offers the best compression of any image format. Browser-based, no file uploads.",
     url: "https://webpifyy.vercel.app/image/convert/to-avif",
+    type: "website",
+    siteName: "webpifyy",
+    images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
-  twitter: { card: "summary_large_image", title: "Convert Images to AVIF Online Free", description: "Convert to AVIF. No sign-up, instant." },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Image Tools","item":"https://webpifyy.vercel.app/image"},{"@type":"ListItem","position":3,"name":"Convert","item":"https://webpifyy.vercel.app/image/convert"},{"@type":"ListItem","position":4,"name":"to AVIF"}]})
+  twitter: {
+    card: "summary_large_image",
+    title: "Convert Images to AVIF Online Free | webpifyy",
+    description: "Convert PNG, JPEG and WebP images to AVIF online free. AVIF offers the best compression of any image format. Browser-based, no file uploads.",
+    images: ["https://webpifyy.vercel.app/opengraph-image"],
   },
 };
 
 const faqs = [
-  { q: "What is AVIF and why should I use it?", a: "AVIF is a next-generation image format based on the AV1 codec. It achieves 50% smaller files than JPEG at the same visual quality, and outperforms WebP for most images." },
-  { q: "Which browsers support AVIF?", a: "AVIF is supported in Chrome 85+, Firefox 93+, Edge 121+, and Safari 16.4+. For older browsers, consider serving WebP as a fallback." },
-  { q: "How does conversion quality compare to WebP?", a: "AVIF typically achieves 20–30% better compression than WebP at the same visual quality, making it the most efficient format for web images." },
-  { q: "What files can I convert to AVIF?", a: "PNG, JPEG, and WebP files can all be converted to AVIF. HEIC conversion requires additional browser support." },
+  { q: "What is the advantage of converting to AVIF?", a: "AVIF is the most efficient image format available today, offering 50% smaller files than JPEG and 20% smaller than WebP at the same visual quality level." },
+  { q: "How long does AVIF conversion take?", a: "AVIF encoding is slower than JPEG or WebP. Small images convert in seconds but large images may take 10-30 seconds due to the complex compression algorithm." },
+  { q: "Can all websites use AVIF images?", a: "AVIF is supported in Chrome 85+, Firefox 93+, and Safari 16+. Use the picture element with JPEG fallback for maximum browser compatibility." },
+  { q: "Is AVIF conversion free on webpifyy?", a: "Yes, completely free. No account required, no file size limits enforced by registration, and files never leave your browser." },
 ];
 
 export default function ToAvifPage() {
@@ -48,7 +53,7 @@ export default function ToAvifPage() {
         inLanguage: "en",
         isAccessibleForFree: true,
         offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-        description: "Convert images to AVIF format online. Smallest modern image format.",
+        description: "Convert PNG, JPEG and WebP images to AVIF online free. AVIF offers the best compression of any image format.",
       },
       {
         "@type": "FAQPage",
@@ -70,7 +75,7 @@ export default function ToAvifPage() {
 
         <ImageConverter outputFormat="image/avif" outputFormatName="AVIF" />
 
-        
+
         <div className="tpg-stats-wrap">
           <div className="tpg-glass tpg-lm-panel">
             <div className="tpg-glow-1" />

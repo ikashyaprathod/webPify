@@ -3,25 +3,30 @@ import HEICConverter from "@/components/HEICConverter";
 import Breadcrumb from "@/components/Breadcrumb";
 
 export const metadata = {
-  title: "HEIC to JPG Converter – Free Online, No Upload",
-  description: "Convert iPhone HEIC photos to JPG instantly in your browser. No uploads, no signup, batch supported. Free forever.",
+  title: "HEIC to JPG Converter Online Free — iPhone Photos",
+  description: "Convert iPhone HEIC photos to JPG online free. Batch conversion supported. No uploads, converts instantly in your browser. No signup.",
   alternates: { canonical: "https://webpifyy.vercel.app/image/convert/heic-to-jpg" },
   openGraph: {
-    title: "HEIC to JPG Converter – Free Online",
-    description: "Convert iPhone HEIC photos to JPG instantly. Browser-based, zero uploads.",
+    title: "HEIC to JPG Converter Online Free — iPhone Photos | webpifyy",
+    description: "Convert iPhone HEIC photos to JPG online free. Batch conversion supported. No uploads, converts instantly in your browser. No signup.",
     url: "https://webpifyy.vercel.app/image/convert/heic-to-jpg",
+    type: "website",
+    siteName: "webpifyy",
+    images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Image Tools","item":"https://webpifyy.vercel.app/image"},{"@type":"ListItem","position":3,"name":"Convert","item":"https://webpifyy.vercel.app/image/convert"},{"@type":"ListItem","position":4,"name":"HEIC to JPG"}]})
+  twitter: {
+    card: "summary_large_image",
+    title: "HEIC to JPG Converter Online Free — iPhone Photos | webpifyy",
+    description: "Convert iPhone HEIC photos to JPG online free. Batch conversion supported. No uploads, converts instantly in your browser. No signup.",
+    images: ["https://webpifyy.vercel.app/opengraph-image"],
   },
 };
 
 const faqs = [
-  { q: "What is a HEIC file?", a: "HEIC (High Efficiency Image Container) is Apple's default photo format used on iPhone and iPad. It uses HEVC compression for excellent quality at half the file size of JPEG. However, it's not universally supported on Windows or older apps." },
-  { q: "Why convert HEIC to JPG?", a: "JPG is universally compatible with all platforms, apps, and websites. Converting HEIC to JPG ensures your photos can be opened, shared, and uploaded anywhere without compatibility issues." },
-  { q: "Does converting HEIC to JPG lose quality?", a: "Some quality may be lost since JPG is lossy. However, at 85+ quality settings the difference is imperceptible. The output is always a high-quality JPG suitable for sharing and printing." },
-  { q: "Is my HEIC file uploaded to a server?", a: "No. All conversion happens entirely in your browser. Your photos never leave your device — we use JavaScript-based HEIC decoding for 100% private, offline-capable conversion." },
-  { q: "Can I convert multiple HEIC files at once?", a: "Yes. You can drop multiple HEIC files and convert them all at once. Each file is converted and downloaded individually." },
+  { q: "What is HEIC format and why do iPhones use it?", a: "HEIC (High Efficiency Image Container) is Apple's format that stores photos at roughly half the size of JPEG while maintaining the same quality. iPhones use it to save storage space." },
+  { q: "Why do I need to convert HEIC to JPG?", a: "HEIC is not supported on Windows by default or on many websites and apps. Converting to JPG ensures your iPhone photos can be opened and shared anywhere." },
+  { q: "Is HEIC to JPG conversion free?", a: "Yes, completely free with no file size limits or signup required. Batch convert multiple HEIC files and download as individual JPGs or a ZIP." },
+  { q: "Does converting HEIC to JPG reduce quality?", a: "Minor quality loss may occur as HEIC supports higher bit depth than standard JPG. However the difference is virtually invisible in normal viewing conditions." },
 ];
 
 export default function HEICToJPGPage() {
@@ -48,7 +53,7 @@ export default function HEICToJPGPage() {
         isAccessibleForFree: true,
         offers: { "@type": "Offer", price: "0", priceCurrency: "USD", availability: "https://schema.org/InStock", seller: { "@id": "https://webpifyy.vercel.app/#organization" } },
         provider: { "@id": "https://webpifyy.vercel.app/#organization" },
-        description: "Convert iPhone HEIC photos to JPG instantly in your browser. No uploads, batch supported.",
+        description: "Convert iPhone HEIC photos to JPG online free. Batch conversion supported. No uploads, converts instantly in your browser.",
       },
       {
         "@type": "FAQPage",

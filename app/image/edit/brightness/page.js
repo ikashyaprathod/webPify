@@ -3,25 +3,30 @@ import Breadcrumb from "@/components/Breadcrumb";
 import ImageBrightness from "@/components/ImageBrightness";
 
 export const metadata = {
-  title: "Adjust Image Brightness Online Free — webpifyy",
-  description: "Adjust image brightness and saturation online for free. Lighten or darken any image with precision sliders. Powered by Sharp.",
+  title: "Adjust Image Brightness Contrast Online Free",
+  description: "Adjust image brightness, contrast and saturation online free. Real-time preview with sliders. Download in original format. No uploads needed.",
   alternates: { canonical: "https://webpifyy.vercel.app/image/edit/brightness" },
   openGraph: {
-    title: "Adjust Image Brightness Online Free — webpifyy",
-    description: "Adjust image brightness and saturation. Lighten or darken any image with precision sliders.",
+    title: "Adjust Image Brightness Contrast Online Free | webpifyy",
+    description: "Adjust image brightness, contrast and saturation online free. Real-time preview with sliders. Download in original format. No uploads needed.",
     url: "https://webpifyy.vercel.app/image/edit/brightness",
+    type: "website",
+    siteName: "webpifyy",
+    images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
-  twitter: { card: "summary_large_image", title: "Adjust Image Brightness Online Free — webpifyy", description: "Adjust image brightness and saturation. Precision sliders." },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Image Tools","item":"https://webpifyy.vercel.app/image"},{"@type":"ListItem","position":3,"name":"Edit","item":"https://webpifyy.vercel.app/image/edit"},{"@type":"ListItem","position":4,"name":"Brightness"}]})
+  twitter: {
+    card: "summary_large_image",
+    title: "Adjust Image Brightness Contrast Online Free | webpifyy",
+    description: "Adjust image brightness, contrast and saturation online free. Real-time preview with sliders. Download in original format. No uploads needed.",
+    images: ["https://webpifyy.vercel.app/opengraph-image"],
   },
 };
 
 const faqs = [
-  { q: "What does brightness adjustment do?", a: "Brightness adjustment multiplies the luminance of each pixel. A value of 100% leaves the image unchanged. Values below 100% darken the image; values above 100% lighten it." },
-  { q: "What is saturation and how does it affect my image?", a: "Saturation controls the intensity of colors. At 100% colors are unchanged. Lowering saturation moves towards grayscale. Increasing it makes colors more vibrant and vivid." },
-  { q: "Can I preview changes before downloading?", a: "Yes. A live CSS filter preview updates as you move the sliders, showing an approximation of the result. Click Apply to process the actual image with precise Sharp adjustments." },
-  { q: "What brightness range should I use for minor corrections?", a: "For subtle corrections, stay between 80%-120%. The 0.1-3.0 range (10%-300%) allows dramatic changes but extreme values will cause loss of detail." },
+  { q: "What adjustments can I make to my image?", a: "Adjust brightness (-100 to +100), contrast (-100 to +100), and saturation (-100 to +100). All adjustments show a live preview as you move sliders." },
+  { q: "Does adjusting brightness reduce image quality?", a: "Minor quality reduction may occur due to re-encoding. Set output quality to 90%+ to minimize any visible degradation in the final image." },
+  { q: "Can I reset adjustments to the original?", a: "Yes. Click Reset to return all sliders to zero and restore the original image appearance without needing to re-upload." },
+  { q: "What is the difference between brightness and contrast?", a: "Brightness makes all pixels uniformly lighter or darker. Contrast increases or decreases the difference between light and dark areas, affecting depth and detail." },
 ];
 
 export default function ImageBrightnessPage() {

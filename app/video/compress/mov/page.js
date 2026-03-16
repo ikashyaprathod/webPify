@@ -3,45 +3,46 @@ import Breadcrumb from "@/components/Breadcrumb";
 import VideoCompressor from "@/components/VideoCompressor";
 
 export const metadata = {
-  title: "Compress MOV Online – Reduce iPhone MOV File Size Free",
+  title: "Compress MOV Video Online Free — Reduce QuickTime Size",
   description:
-    "Compress MOV videos from iPhone online. Convert and compress to MP4 or WebM — client-side, no uploads.",
+    "Compress MOV QuickTime videos online free. Browser-based FFmpeg. Files never uploaded. Perfect for sharing large iPhone recordings.",
   alternates: { canonical: "https://webpifyy.vercel.app/video/compress/mov" },
   openGraph: {
-    title: "Compress MOV Online – Reduce iPhone MOV File Size Free",
-    description: "Compress MOV videos from iPhone online. Convert and compress to MP4 or WebM — client-side, no uploads.",
+    type: "website",
+    siteName: "webpifyy",
+    title: "Compress MOV Video Online Free — Reduce QuickTime Size | webpifyy",
+    description: "Compress MOV QuickTime videos online free. Browser-based FFmpeg. Files never uploaded. Perfect for sharing large iPhone recordings.",
     url: "https://webpifyy.vercel.app/video/compress/mov",
+    images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Video Tools","item":"https://webpifyy.vercel.app/video"},{"@type":"ListItem","position":3,"name":"Compress","item":"https://webpifyy.vercel.app/video/compress"},{"@type":"ListItem","position":4,"name":"MOV"}]})
+  twitter: {
+    card: "summary_large_image",
+    title: "Compress MOV Video Online Free — Reduce QuickTime Size | webpifyy",
+    description: "Compress MOV QuickTime videos online free. Browser-based FFmpeg. Files never uploaded. Perfect for sharing large iPhone recordings.",
+    images: ["https://webpifyy.vercel.app/opengraph-image"],
   },
 };
 
 const movFaqs = [
   {
-    question: "What is a MOV file?",
+    question: "Why are MOV files so large?",
     answer:
-      "MOV is Apple's QuickTime movie format. It's the default recording format on iPhones and Mac cameras. MOV files are often very large because they use high-quality HEVC or H.264 encoding at high bitrates.",
+      "MOV files from iPhones and cameras record at high quality with minimal compression. A 1-minute 4K MOV can be 300-500MB. Compression reduces this to a shareable size.",
   },
   {
-    question: "How do I reduce MOV file size from iPhone?",
+    question: "Can I compress iPhone MOV videos?",
     answer:
-      "Upload your MOV file and select MP4 as output format with 'Balanced' or 'Maximum Compression' preset. This re-encodes the video at lower bitrate, dramatically reducing file size while keeping good quality.",
+      "Yes. iPhone videos in MOV format are fully supported. Our compressor handles H.264 and HEVC (H.265) encoded MOV files from all iPhone models.",
   },
   {
-    question: "Can I convert MOV to MP4?",
+    question: "What compression settings work best for MOV?",
     answer:
-      "Yes. Upload your MOV file and select 'MP4' as output format. The tool will re-encode it using H.264, which is universally compatible with all devices, browsers, and platforms.",
+      "Use Balanced mode for a good quality/size ratio. For sharing via WhatsApp or email, use Max Compression to get under the 16MB and 25MB limits.",
   },
   {
-    question: "Why are iPhone MOV files so large?",
+    question: "Does compressing MOV maintain audio quality?",
     answer:
-      "iPhones record at very high bitrates (50–200 Mbps on newer models) to preserve maximum quality. While great for editing, these files are impractical for sharing. Compression reduces them to practical sizes.",
-  },
-  {
-    question: "Does compressing MOV affect quality?",
-    answer:
-      "Using our 'High Quality' preset, the visual difference is nearly imperceptible for screen viewing. File sizes can be reduced by 60–85% while maintaining excellent visual clarity.",
+      "Yes. Audio is preserved at high quality during compression. Only video bitrate is reduced unless you specifically select audio compression.",
   },
 ];
 
@@ -75,7 +76,7 @@ export default function MOVCompressorPage() {
         },
         "provider": { "@id": "https://webpifyy.vercel.app/#organization" },
         "author": { "@id": "https://webpifyy.vercel.app/#organization" },
-        "description": "Compress and convert MOV files from iPhone online. No server uploads — fully client-side.",
+        "description": "Compress MOV QuickTime videos online free. Browser-based FFmpeg. Files never uploaded. Perfect for sharing large iPhone recordings.",
       },
       {
         "@type": "FAQPage",

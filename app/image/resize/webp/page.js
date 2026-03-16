@@ -4,31 +4,31 @@ import ImageResizer from "@/components/ImageResizer";
 import Link from "next/link";
 
 export const metadata = {
-  title: "WebP Image Resizer – Resize WebP Images Online Free",
-  description: "Resize WebP images online to any dimension. Maintains WebP format with transparency and quality control. Fast, free, server-side processing with Sharp.",
+  title: "Resize WebP Images Online Free",
+  description: "Resize WebP images online free. Exact dimensions, aspect ratio lock, four fit modes. All processing in browser, no file uploads needed.",
   alternates: { canonical: "https://webpifyy.vercel.app/image/resize/webp" },
   keywords: ["resize webp online", "webp resizer", "change webp dimensions", "scale webp image", "webp image resizer free"],
   openGraph: {
-    title: "WebP Image Resizer – Resize WebP Images Online Free",
-    description: "Resize WebP images online to any dimension. Maintains WebP format with transparency. Free, no sign-up.",
+    title: "Resize WebP Images Online Free | webpifyy",
+    description: "Resize WebP images online free. Exact dimensions, aspect ratio lock, four fit modes. All processing in browser, no file uploads needed.",
     url: "https://webpifyy.vercel.app/image/resize/webp",
+    type: "website",
+    siteName: "webpifyy",
+    images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "WebP Image Resizer – Resize WebP Online Free",
-    description: "Resize WebP images to any dimension while preserving transparency. Free, instant, no sign-up.",
-  },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Image Tools","item":"https://webpifyy.vercel.app/image"},{"@type":"ListItem","position":3,"name":"Resize","item":"https://webpifyy.vercel.app/image/resize"},{"@type":"ListItem","position":4,"name":"WebP"}]})
+    title: "Resize WebP Images Online Free | webpifyy",
+    description: "Resize WebP images online free. Exact dimensions, aspect ratio lock, four fit modes. All processing in browser, no file uploads needed.",
+    images: ["https://webpifyy.vercel.app/opengraph-image"],
   },
 };
 
 const faqs = [
-  { q: "Does resizing WebP images preserve transparency?", a: "Yes. WebP supports full transparency (alpha channel), and our resizer preserves it completely. Your transparent areas will remain intact after resizing." },
-  { q: "Will the output stay in WebP format?", a: "Yes. When you resize a WebP image, the output is also in WebP format. The file size may change slightly due to re-encoding, but the format is maintained." },
-  { q: "What is the advantage of resizing WebP over PNG or JPEG?", a: "WebP produces smaller files than both PNG and JPEG at the same quality. Resizing and keeping the image in WebP format gives you the best of both worlds — exact dimensions and optimal file size for web use." },
-  { q: "Can I resize WebP for social media?", a: "Yes. WebP is accepted by most modern social platforms including Twitter/X, Discord, and many website CMSs. Set your target dimensions and use Cover fit mode for exact social media sizes." },
-  { q: "What fit modes are available?", a: "Fit Inside (maintains aspect ratio), Cover (fills exact dimensions, may crop), Contain (adds letterbox padding), and Fill (stretches to exact dimensions). Fit Inside is recommended for most use cases." },
+  { q: "Why resize WebP images specifically?", a: "WebP is the recommended format for web images. Resizing WebP to exact display dimensions reduces load time and improves Core Web Vitals without changing format." },
+  { q: "Can I resize WebP and keep the WebP format?", a: "Yes. Our resizer processes WebP and outputs WebP. The format is preserved throughout the process." },
+  { q: "What dimensions should I use for web images?", a: "Full-width hero images: 1920px. Blog images: 1200px. Thumbnails: 400px. Always match display size to avoid unnecessary data loading." },
+  { q: "Is there a file size limit for WebP resizing?", a: "We support WebP files up to 10MB. Most web WebP images are well under this limit. For very large files, compress first then resize." },
 ];
 
 export default function ResizeWebpPage() {

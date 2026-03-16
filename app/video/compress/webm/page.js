@@ -3,45 +3,46 @@ import Breadcrumb from "@/components/Breadcrumb";
 import VideoCompressor from "@/components/VideoCompressor";
 
 export const metadata = {
-  title: "Compress WebM Online – Reduce WebM File Size Free",
+  title: "Compress WebM Video Online Free",
   description:
-    "Compress WebM videos online using VP9 encoding. Client-side processing — your video never leaves your browser.",
+    "Compress WebM videos online free in your browser. Reduce WebM file size without uploading to servers. Free, private, no signup required.",
   alternates: { canonical: "https://webpifyy.vercel.app/video/compress/webm" },
   openGraph: {
-    title: "Compress WebM Online – Reduce WebM File Size Free",
-    description: "Compress WebM videos online using VP9 encoding. Client-side processing — your video never leaves your browser.",
+    type: "website",
+    siteName: "webpifyy",
+    title: "Compress WebM Video Online Free | webpifyy",
+    description: "Compress WebM videos online free in your browser. Reduce WebM file size without uploading to servers. Free, private, no signup required.",
     url: "https://webpifyy.vercel.app/video/compress/webm",
+    images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Video Tools","item":"https://webpifyy.vercel.app/video"},{"@type":"ListItem","position":3,"name":"Compress","item":"https://webpifyy.vercel.app/video/compress"},{"@type":"ListItem","position":4,"name":"WebM"}]})
+  twitter: {
+    card: "summary_large_image",
+    title: "Compress WebM Video Online Free | webpifyy",
+    description: "Compress WebM videos online free in your browser. Reduce WebM file size without uploading to servers. Free, private, no signup required.",
+    images: ["https://webpifyy.vercel.app/opengraph-image"],
   },
 };
 
 const webmFaqs = [
   {
-    question: "What is the WebM format?",
+    question: "What is WebM format?",
     answer:
-      "WebM is an open media format developed by Google, designed for web use. It uses VP8 or VP9 for video and Vorbis or Opus for audio. It's supported natively in Chrome, Firefox, and Edge.",
+      "WebM is an open-source video format developed by Google, designed for web use. It uses VP8 or VP9 video codecs and is natively supported in all modern browsers.",
   },
   {
-    question: "Is WebM better than MP4 for websites?",
+    question: "Why compress WebM files?",
     answer:
-      "WebM with VP9 generally achieves better compression than MP4 with H.264 at the same quality. However, MP4 has broader compatibility. Many sites serve both: WebM for modern browsers and MP4 as fallback.",
+      "Even though WebM is efficient, compressing further reduces bandwidth for streaming, storage costs, and improves load times on video-heavy web pages.",
   },
   {
-    question: "How do I compress a WebM video?",
+    question: "Can I convert WebM to MP4 after compressing?",
     answer:
-      "Upload your WebM file, choose your quality preset, and click Compress. The tool uses VP9 encoding with a constant rate factor to reduce file size while preserving quality.",
+      "Yes. After compression use our WebM to MP4 converter to change the format for broader device compatibility.",
   },
   {
-    question: "Can I convert WebM to MP4?",
+    question: "Is WebM compression free?",
     answer:
-      "Yes. Upload your WebM file and select 'MP4' as the output format. The tool will re-encode it using H.264, making it compatible with all devices.",
-  },
-  {
-    question: "Does WebM support transparency?",
-    answer:
-      "Yes, WebM supports an alpha channel (transparency) with VP8/VP9. If your WebM has a transparent background, it will be preserved when compressing to WebM output.",
+      "Completely free, unlimited, no signup required. Processing uses FFmpeg.wasm running in your browser so no files are ever uploaded.",
   },
 ];
 
@@ -75,7 +76,7 @@ export default function WebMCompressorPage() {
         },
         "provider": { "@id": "https://webpifyy.vercel.app/#organization" },
         "author": { "@id": "https://webpifyy.vercel.app/#organization" },
-        "description": "Compress WebM videos online with VP9 encoding. No server uploads — fully client-side.",
+        "description": "Compress WebM videos online free in your browser. Reduce WebM file size without uploading to servers. Free, private, no signup required.",
       },
       {
         "@type": "FAQPage",

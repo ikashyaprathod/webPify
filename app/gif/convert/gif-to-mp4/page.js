@@ -3,18 +3,31 @@ import Breadcrumb from "@/components/Breadcrumb";
 import GifCompressor from "@/components/GifCompressor";
 
 export const metadata = {
-  title: "GIF to MP4 Converter – Convert Animated GIF to MP4 Online Free",
-  description: "Convert animated GIF to MP4 video online. Up to 90% smaller file size. Free, fast, browser-based — your files never leave your device.",
+  title: "Convert GIF to MP4 Online Free — 95% Smaller",
+  description: "Convert animated GIF to MP4 video online free. Up to 95% file size reduction. Browser-based FFmpeg, files never uploaded. No signup needed.",
   alternates: { canonical: "https://webpifyy.vercel.app/gif/convert/gif-to-mp4" },
   openGraph: {
-    title: "GIF to MP4 Converter – Convert Animated GIF to MP4 Online Free",
-    description: "Convert animated GIF to MP4 video online. Up to 90% smaller file size. Free, fast, browser-based — your files never leave your device.",
+    title: "Convert GIF to MP4 Online Free — 95% Smaller | webpifyy",
+    description: "Convert animated GIF to MP4 video online free. Up to 95% file size reduction. Browser-based FFmpeg, files never uploaded. No signup needed.",
     url: "https://webpifyy.vercel.app/gif/convert/gif-to-mp4",
+    type: "website",
+    siteName: "webpifyy",
+    images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"GIF Tools","item":"https://webpifyy.vercel.app/gif"},{"@type":"ListItem","position":3,"name":"Convert","item":"https://webpifyy.vercel.app/gif/convert"},{"@type":"ListItem","position":4,"name":"GIF to MP4"}]})
+  twitter: {
+    card: "summary_large_image",
+    title: "Convert GIF to MP4 Online Free — 95% Smaller | webpifyy",
+    description: "Convert animated GIF to MP4 video online free. Up to 95% file size reduction. Browser-based FFmpeg, files never uploaded. No signup needed.",
+    images: ["https://webpifyy.vercel.app/opengraph-image"],
   },
 };
+
+const faqs = [
+  { q: "How much smaller is MP4 compared to GIF?", a: "MP4 is typically 80-95% smaller than the equivalent GIF. A 5MB GIF often converts to a 200-500KB MP4 at the same visual quality." },
+  { q: "Can I use MP4 instead of GIF on websites?", a: "Yes. Use video tag with autoplay, muted, loop, and playsinline attributes. This dramatically improves page performance vs GIF." },
+  { q: "Does GIF to MP4 conversion maintain animation timing?", a: "Yes. Frame timing is preserved exactly. The animation plays at the same speed as the original GIF after conversion to MP4." },
+  { q: "Can I convert GIF to MP4 for Instagram or TikTok?", a: "Yes. MP4 is the required format for both platforms. Convert your GIF to MP4 and upload directly to Instagram Reels, Stories, or TikTok." },
+];
 
 export default function GifToMp4Page() {
   const schema = {
@@ -47,8 +60,17 @@ export default function GifToMp4Page() {
         },
         "provider": { "@id": "https://webpifyy.vercel.app/#organization" },
         "author": { "@id": "https://webpifyy.vercel.app/#organization" },
-        "description": "Convert animated GIF files to MP4 video in your browser. No uploads. Powered by FFmpeg.wasm.",
+        "description": "Convert animated GIF to MP4 video online free. Up to 95% file size reduction. Browser-based FFmpeg, files never uploaded.",
+        "featureList": ["GIF to MP4", "H.264 Encoding", "95% Smaller Files", "Browser-based", "Free"]
       },
+      {
+        "@type": "FAQPage",
+        "mainEntity": faqs.map(f => ({
+          "@type": "Question",
+          "name": f.q,
+          "acceptedAnswer": { "@type": "Answer", "text": f.a }
+        }))
+      }
     ],
   };
 
@@ -127,6 +149,21 @@ export default function GifToMp4Page() {
               <div className="tpg-wbar"><div className="tpg-wbar-fill" /></div>
               <span className="tpg-wstatus">Global Status: Optimal</span>
             </div>
+          </div>
+        </div>
+
+        <div className="toolpg-faq">
+          <div className="toolpg-faq-hd">
+            <p className="toolpg-faq-badge">Knowledge Base</p>
+            <h2 className="toolpg-faq-title">Frequently Asked Questions</h2>
+          </div>
+          <div className="toolpg-faq-list">
+            {faqs.map((f, i) => (
+              <details key={i} className="toolpg-faq-item">
+                <summary>{f.q}<span className="toolpg-faq-toggle">↓</span></summary>
+                <p>{f.a}</p>
+              </details>
+            ))}
           </div>
         </div>
 

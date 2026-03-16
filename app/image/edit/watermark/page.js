@@ -3,25 +3,30 @@ import ImageWatermark from "@/components/ImageWatermark";
 import Breadcrumb from "@/components/Breadcrumb";
 
 export const metadata = {
-  title: "Add Watermark to Image Free Online – Text Watermark",
-  description: "Add a text watermark to any image online. Choose position, size, opacity, color. Free, browser-based, no uploads.",
+  title: "Add Watermark to Images Online Free",
+  description: "Add text watermarks to images online free. Control font, size, opacity, position and rotation. Batch watermarking supported. No uploads.",
   alternates: { canonical: "https://webpifyy.vercel.app/image/edit/watermark" },
   openGraph: {
-    title: "Add Watermark to Image Free Online",
-    description: "Add custom text watermarks to images. Choose position, opacity, font size. Zero uploads.",
+    title: "Add Watermark to Images Online Free | webpifyy",
+    description: "Add text watermarks to images online free. Control font, size, opacity, position and rotation. Batch watermarking supported. No uploads.",
     url: "https://webpifyy.vercel.app/image/edit/watermark",
+    type: "website",
+    siteName: "webpifyy",
+    images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Image Tools","item":"https://webpifyy.vercel.app/image"},{"@type":"ListItem","position":3,"name":"Edit","item":"https://webpifyy.vercel.app/image/edit"},{"@type":"ListItem","position":4,"name":"Watermark"}]})
+  twitter: {
+    card: "summary_large_image",
+    title: "Add Watermark to Images Online Free | webpifyy",
+    description: "Add text watermarks to images online free. Control font, size, opacity, position and rotation. Batch watermarking supported. No uploads.",
+    images: ["https://webpifyy.vercel.app/opengraph-image"],
   },
 };
 
 const faqs = [
-  { q: "How do I add a watermark to an image?", a: "Upload your image, type your watermark text, choose position (corner, center, tiled), and adjust font size and opacity. Preview updates live, then click Download." },
-  { q: "Can I control the opacity of the watermark?", a: "Yes. The opacity slider lets you set transparency from fully visible to very subtle. A 30–50% opacity is common for non-intrusive watermarks." },
-  { q: "What watermark positions are available?", a: "You can place the watermark in any corner (top-left, top-right, bottom-left, bottom-right), at the center, or as a tiled pattern across the whole image." },
-  { q: "Is my image uploaded to a server?", a: "No. All watermarking happens in your browser using the Canvas API. Your images never leave your device." },
-  { q: "Can I watermark product photos for e-commerce?", a: "Yes. Watermarks are a common way to protect product images from being reused without permission. Our tool makes it easy to apply consistent branding across multiple photos." },
+  { q: "Can I add a watermark to multiple images at once?", a: "Yes. Upload multiple images and apply the same watermark settings to all of them in one click. Download all watermarked images as a ZIP." },
+  { q: "Can I control the watermark transparency?", a: "Yes. The opacity slider lets you set transparency from 10% (nearly invisible) to 100% (fully opaque). Position and rotation are also adjustable." },
+  { q: "Can I use an image as a watermark instead of text?", a: "Currently text watermarks are supported. Image watermark support is planned for a future update." },
+  { q: "Does adding a watermark reduce image quality?", a: "No. The watermark is composited onto the image and the output is saved at full quality. The only change is the text overlay added." },
 ];
 
 export default function WatermarkPage() {

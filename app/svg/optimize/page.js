@@ -3,18 +3,31 @@ import Breadcrumb from "@/components/Breadcrumb";
 import SvgOptimizer from "@/components/SvgOptimizer";
 
 export const metadata = {
-  title: "SVG Optimizer Online – Optimize & Minify SVG Files Free",
-  description: "Optimize SVG files online. Removes metadata, minifies paths, merges styles. Powered by SVGO. Free, instant, no upload needed.",
+  title: "SVG Optimizer Online Free — Minify SVG Files",
+  description: "Optimize and minify SVG files online free using SVGO. Strip metadata, merge styles, shrink path data. Up to 80% smaller. No uploads needed.",
   alternates: { canonical: "https://webpifyy.vercel.app/svg/optimize" },
   openGraph: {
-    title: "SVG Optimizer Online – Optimize & Minify SVG Files Free",
-    description: "Optimize SVG files online. Removes metadata, minifies paths, merges styles. Powered by SVGO. Free, instant, no upload needed.",
+    title: "SVG Optimizer Online Free — Minify SVG Files | webpifyy",
+    description: "Optimize and minify SVG files online free using SVGO. Strip metadata, merge styles, shrink path data. Up to 80% smaller. No uploads needed.",
     url: "https://webpifyy.vercel.app/svg/optimize",
+    type: "website",
+    siteName: "webpifyy",
+    images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"SVG Tools","item":"https://webpifyy.vercel.app/svg"},{"@type":"ListItem","position":3,"name":"Optimize"}]})
+  twitter: {
+    card: "summary_large_image",
+    title: "SVG Optimizer Online Free — Minify SVG Files | webpifyy",
+    description: "Optimize and minify SVG files online free using SVGO. Strip metadata, merge styles, shrink path data. Up to 80% smaller. No uploads needed.",
+    images: ["https://webpifyy.vercel.app/opengraph-image"],
   },
 };
+
+const faqs = [
+  { q: "How much can SVG optimization reduce file size?", a: "SVGO typically achieves 20-80% size reduction depending on how the SVG was created. SVGs exported from Figma or Illustrator contain significant redundant data." },
+  { q: "Does SVG optimization affect how the image looks?", a: "No. SVGO removes metadata, comments, and redundant markup without changing visible rendering. The optimized SVG looks identical to the original." },
+  { q: "What does SVG optimization actually remove?", a: "SVGO removes editor metadata, comments, hidden layers, default values, empty groups, unnecessary namespaces, and merges redundant path data and styles." },
+  { q: "Should I optimize SVGs before putting them on a website?", a: "Yes. Optimized SVGs load faster, reduce bandwidth, and improve Core Web Vitals scores. Always optimize SVGs exported from design tools before deployment." },
+];
 
 export default function SvgOptimizerPage() {
   const schema = {
@@ -46,17 +59,19 @@ export default function SvgOptimizerPage() {
         },
         "provider": { "@id": "https://webpifyy.vercel.app/#organization" },
         "author": { "@id": "https://webpifyy.vercel.app/#organization" },
-        "description": "Optimize and minify SVG files online using SVGO. Removes unnecessary metadata, comments, and editor artifacts.",
+        "description": "Optimize and minify SVG files online free using SVGO. Strip metadata, merge styles, shrink path data. Up to 80% smaller.",
+        "featureList": ["SVG Optimization", "SVGO Powered", "Metadata Removal", "Path Minification", "Free"]
       },
+      {
+        "@type": "FAQPage",
+        "mainEntity": faqs.map(f => ({
+          "@type": "Question",
+          "name": f.q,
+          "acceptedAnswer": { "@type": "Answer", "text": f.a }
+        }))
+      }
     ],
   };
-
-  const faqs = [
-    { q: "What does SVG optimization do?", a: "It removes redundant attributes, comments, editor metadata (Inkscape, Adobe Illustrator), merges identical styles, minifies path data, and collapses unnecessary groups. The result is a smaller, cleaner SVG that loads faster." },
-    { q: "Will optimization break my SVG?", a: "For most SVGs, no. The optimizer uses safe, widely-tested SVGO plugins. Complex SVGs with animations, scripts, or external dependencies may need manual review." },
-    { q: "How much smaller will my SVG be?", a: "Typical savings range from 20–60%. SVGs exported from Illustrator or Inkscape with full metadata can see 60–80% reduction." },
-    { q: "Is my SVG uploaded to a server?", a: "The SVG is sent to our server for SVGO processing (a Node.js library), then immediately discarded. No files are stored." },
-  ];
 
   return (
     <>

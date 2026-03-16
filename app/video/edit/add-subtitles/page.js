@@ -3,25 +3,30 @@ import Breadcrumb from "@/components/Breadcrumb";
 import AddSubtitles from "@/components/AddSubtitles";
 
 export const metadata = {
-  title: "Add Subtitles to Video Online Free — webpifyy",
-  description: "Burn SRT subtitles into any video online for free. Upload video + SRT file, choose font size and color, download result. 100% browser-based.",
+  title: "Add Subtitles to Video Online Free — SRT Burn In",
+  description: "Add and burn subtitles into video online free. Upload SRT file, customize font and color. FFmpeg WebAssembly processing, no uploads needed.",
   alternates: { canonical: "https://webpifyy.vercel.app/video/edit/add-subtitles" },
   openGraph: {
-    title: "Add Subtitles to Video Online Free — webpifyy",
-    description: "Burn SRT subtitles into any video. Upload video + SRT file, choose font size and color, download result.",
+    type: "website",
+    siteName: "webpifyy",
+    title: "Add Subtitles to Video Online Free — SRT Burn In | webpifyy",
+    description: "Add and burn subtitles into video online free. Upload SRT file, customize font and color. FFmpeg WebAssembly processing, no uploads needed.",
     url: "https://webpifyy.vercel.app/video/edit/add-subtitles",
+    images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
-  twitter: { card: "summary_large_image", title: "Add Subtitles to Video Online Free — webpifyy", description: "Burn SRT subtitles into video. Browser-based, free." },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Video Tools","item":"https://webpifyy.vercel.app/video"},{"@type":"ListItem","position":3,"name":"Edit","item":"https://webpifyy.vercel.app/video/edit"},{"@type":"ListItem","position":4,"name":"Add Subtitles"}]})
+  twitter: {
+    card: "summary_large_image",
+    title: "Add Subtitles to Video Online Free — SRT Burn In | webpifyy",
+    description: "Add and burn subtitles into video online free. Upload SRT file, customize font and color. FFmpeg WebAssembly processing, no uploads needed.",
+    images: ["https://webpifyy.vercel.app/opengraph-image"],
   },
 };
 
 const faqs = [
-  { q: "What is subtitle burning?", a: "Burning (hardcoding) subtitles means the text is permanently rendered into the video frames. Unlike soft subtitles which can be toggled, burned subtitles are always visible regardless of the player used." },
-  { q: "What subtitle format does this tool support?", a: "This tool supports SRT (SubRip) files — the most widely used subtitle format. SRT files are plain text and contain timestamps and text for each subtitle line." },
-  { q: "Can I change the subtitle appearance?", a: "Yes. You can adjust the font size (12-32px) and subtitle text color before processing. For advanced styling, edit the SRT file or use a dedicated subtitling application." },
-  { q: "Does this work with any video format?", a: "This tool works with MP4, WebM, MOV and other common web video formats. The output format matches the input format." },
+  { q: "How do I add subtitles to a video?", a: "Upload your video and SRT subtitle file. Set font size and color, then click process. FFmpeg burns the subtitles permanently into the video." },
+  { q: "What subtitle format is supported?", a: "SRT (SubRip Text) is the supported format. It is the most universal subtitle format, supported by all major video players and editing software." },
+  { q: "Can I create an SRT file for my video?", a: "SRT files are plain text files with timestamp/text pairs. Use a text editor or auto-generate one using YouTube's auto-caption feature." },
+  { q: "Are subtitles burned in permanently?", a: "Yes. This tool burns subtitles directly into the video frames. They cannot be turned off after processing. This is called hardcoded subtitles." },
 ];
 
 export default function AddSubtitlesPage() {
@@ -47,6 +52,7 @@ export default function AddSubtitlesPage() {
         inLanguage: "en",
         isAccessibleForFree: true,
         offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+        description: "Add and burn subtitles into video online free. Upload SRT file, customize font and color. FFmpeg WebAssembly processing, no uploads needed.",
       },
       {
         "@type": "FAQPage",

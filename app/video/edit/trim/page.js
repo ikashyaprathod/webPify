@@ -3,26 +3,31 @@ import Breadcrumb from "@/components/Breadcrumb";
 import VideoTrimmer from "@/components/VideoTrimmer";
 
 export const metadata = {
-  title: "Video Trimmer Online Free — Cut & Trim Video",
-  description: "Trim and cut videos to exact start/end times online. Downloads as MP4 instantly. 100% browser-based using FFmpeg.wasm.",
+  title: "Trim Video Online Free — Cut MP4 WebM MOV",
+  description: "Trim and cut videos online free. Set start and end time to extract any clip. Browser-based FFmpeg, no uploads, supports MP4 WebM MOV.",
   alternates: { canonical: "https://webpifyy.vercel.app/video/edit/trim" },
   keywords: ["trim video online", "cut video free", "video trimmer", "cut mp4 online", "video cutter"],
   openGraph: {
-    title: "Video Trimmer Online Free — Cut & Trim Video",
-    description: "Trim videos to exact times. Browser-based, no uploads.",
+    type: "website",
+    siteName: "webpifyy",
+    title: "Trim Video Online Free — Cut MP4 WebM MOV | webpifyy",
+    description: "Trim and cut videos online free. Set start and end time to extract any clip. Browser-based FFmpeg, no uploads, supports MP4 WebM MOV.",
     url: "https://webpifyy.vercel.app/video/edit/trim",
+    images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
-  twitter: { card: "summary_large_image", title: "Video Trimmer Online Free", description: "Cut and trim videos. No uploads, no sign-up." },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Video Tools","item":"https://webpifyy.vercel.app/video"},{"@type":"ListItem","position":3,"name":"Edit","item":"https://webpifyy.vercel.app/video/edit"},{"@type":"ListItem","position":4,"name":"Trim"}]})
+  twitter: {
+    card: "summary_large_image",
+    title: "Trim Video Online Free — Cut MP4 WebM MOV | webpifyy",
+    description: "Trim and cut videos online free. Set start and end time to extract any clip. Browser-based FFmpeg, no uploads, supports MP4 WebM MOV.",
+    images: ["https://webpifyy.vercel.app/opengraph-image"],
   },
 };
 
 const faqs = [
-  { q: "How do I trim a video online?", a: "Upload your video, enter a start time and end time (in MM:SS or seconds format), and click Trim. Download the trimmed video as MP4." },
-  { q: "What time format should I use?", a: "You can use MM:SS format (e.g. 1:30 for 1 minute 30 seconds) or just seconds (e.g. 90). Both formats work." },
-  { q: "Does trimming affect video quality?", a: "No. We use the -c copy flag which copies the video stream without re-encoding. This is lossless and extremely fast." },
-  { q: "What video formats are supported?", a: "MP4, WebM, and MOV files are supported for trimming. The output is always saved as MP4." },
+  { q: "How do I trim a video to a specific time range?", a: "Upload your video, set start and end times using time inputs or drag the range slider, preview the selection, then click trim to download the clip." },
+  { q: "Is trimming a video lossless?", a: "Yes. We use stream copy mode (-c copy) which cuts the video without re-encoding, preserving original quality and processing in seconds." },
+  { q: "What is the maximum video size I can trim?", a: "Videos are processed in your browser memory. Files up to 2GB are supported depending on your device's available RAM." },
+  { q: "Can I trim a video to share on WhatsApp or Instagram?", a: "Yes. WhatsApp limits to 16MB and Instagram Reels to 90 seconds. Trim to the right length then compress to meet the file size requirement." },
 ];
 
 export default function VideoTrimPage() {
@@ -48,7 +53,7 @@ export default function VideoTrimPage() {
         inLanguage: "en",
         isAccessibleForFree: true,
         offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-        description: "Trim and cut videos to exact start/end times. 100% browser-based.",
+        description: "Trim and cut videos online free. Set start and end time to extract any clip. Browser-based FFmpeg, no uploads, supports MP4 WebM MOV.",
       },
       {
         "@type": "FAQPage",
@@ -70,7 +75,7 @@ export default function VideoTrimPage() {
 
         <VideoTrimmer />
 
-        
+
         <div className="tpg-stats-wrap">
           <div className="tpg-glass tpg-lm-panel">
             <div className="tpg-glow-1" />

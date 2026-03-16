@@ -3,23 +3,24 @@ import Breadcrumb from "@/components/Breadcrumb";
 import Link from "next/link";
 
 export const metadata = {
-    title: "Image Compressor vs Image Converter – What's the Difference?",
-    description: "Compare image compression and image conversion tools. Learn which tool to use for PNG, JPEG, and WebP images.",
+    title: "Image Comparison Tool Online Free \u2014 Side by Side",
+    description: "Compare two images side by side online free. Drag slider to reveal differences. Perfect for before/after comparisons. No uploads needed.",
     alternates: { canonical: "https://webpifyy.vercel.app/image/edit/compare" },
     keywords: ["image compressor vs converter", "when to compress vs convert images", "image optimization guide"],
+    openGraph: {
+        title: "Image Comparison Tool Online Free \u2014 Side by Side | webpifyy",
+        description: "Compare two images side by side online free. Drag slider to reveal differences. Perfect for before/after comparisons. No uploads needed.",
+        url: "https://webpifyy.vercel.app/image/edit/compare",
+        type: "website",
+        siteName: "webpifyy",
+        images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
+    },
     twitter: {
         card: "summary_large_image",
-        title: "Image Compressor vs Image Converter – What's the Difference?",
-        description: "Not sure whether to compress or convert? Clear comparison to help you choose the right tool.",
+        title: "Image Comparison Tool Online Free \u2014 Side by Side | webpifyy",
+        description: "Compare two images side by side online free. Drag slider to reveal differences. Perfect for before/after comparisons. No uploads needed.",
+        images: ["https://webpifyy.vercel.app/opengraph-image"],
     },
-    openGraph: {
-        title: "Image Compressor vs Image Converter – What's the Difference?",
-        description: "Compare image compression and image conversion tools. Learn which tool to use for PNG, JPEG, and WebP images.",
-        url: "https://webpifyy.vercel.app/image/edit/compare",
-    },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Image Tools","item":"https://webpifyy.vercel.app/image"},{"@type":"ListItem","position":3,"name":"Edit","item":"https://webpifyy.vercel.app/image/edit"},{"@type":"ListItem","position":4,"name":"Compare"}]})
-  },
 };
 
 export default function ComparePage() {

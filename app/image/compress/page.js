@@ -3,22 +3,23 @@ import Breadcrumb from "@/components/Breadcrumb";
 import Link from "next/link";
 
 export const metadata = {
-  title: "Image Compressor – Compress PNG, JPEG, WebP Online Free",
-  description: "Compress images online without visible quality loss. Supports PNG, JPEG, and WebP formats. Reduce file size by 60–90% using pngquant and mozjpeg. Free, no sign-up.",
+  title: "Online Image Compressor \u2014 PNG JPEG WebP AVIF Free",
+  description: "Compress PNG, JPEG, WebP and AVIF images online for free. Reduce file size by up to 90% without losing quality. No signup, browser-based.",
   alternates: { canonical: "https://webpifyy.vercel.app/image/compress" },
   keywords: ["image compressor", "compress images online", "reduce image size", "png compressor", "jpeg compressor", "webp compressor"],
   openGraph: {
-    title: "Image Compressor – Compress PNG, JPEG, WebP Online Free",
-    description: "Compress images online without visible quality loss. Reduce file size by 60–90%. Free, no sign-up.",
+    title: "Online Image Compressor \u2014 PNG JPEG WebP AVIF Free | webpifyy",
+    description: "Compress PNG, JPEG, WebP and AVIF images online for free. Reduce file size by up to 90% without losing quality. No signup, browser-based.",
     url: "https://webpifyy.vercel.app/image/compress",
+    type: "website",
+    siteName: "webpifyy",
+    images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Image Compressor – Compress PNG, JPEG, WebP Online Free",
-    description: "Reduce image file size by 60–90% without quality loss. Free, instant, no sign-up required.",
-  },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Image Tools","item":"https://webpifyy.vercel.app/image"},{"@type":"ListItem","position":3,"name":"Compress"}]})
+    title: "Online Image Compressor \u2014 PNG JPEG WebP AVIF Free | webpifyy",
+    description: "Compress PNG, JPEG, WebP and AVIF images online for free. Reduce file size by up to 90% without losing quality. No signup, browser-based.",
+    images: ["https://webpifyy.vercel.app/opengraph-image"],
   },
 };
 
@@ -101,8 +102,8 @@ export default function CompressorHubPage() {
         },
         "provider": { "@id": "https://webpifyy.vercel.app/#organization" },
         "author": { "@id": "https://webpifyy.vercel.app/#organization" },
-        "description": "Compress PNG, JPEG, and WebP images online without visible quality loss. Free, no sign-up required.",
-        "featureList": ["PNG Compression", "JPEG Compression", "WebP Compression", "60-90% Size Reduction", "Free"]
+        "description": "Compress PNG, JPEG, WebP and AVIF images online for free. Reduce file size by up to 90% without losing quality. No signup, browser-based.",
+        "featureList": ["PNG Compression", "JPEG Compression", "WebP Compression", "AVIF Compression", "Up to 90% Size Reduction", "Free"]
       },
       {
         "@type": "FAQPage",

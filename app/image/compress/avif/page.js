@@ -4,25 +4,30 @@ import ImageCompressor from "@/components/ImageCompressor";
 
 export const metadata = {
   title: "Compress AVIF Images Online Free",
-  description: "Compress AVIF images online for free. Reduce AVIF file size using Sharp's native AVIF encoder. No sign-up required.",
+  description: "Compress AVIF images online for free. AVIF offers superior compression compared to JPEG and WebP. Browser-based processing, no file uploads.",
   alternates: { canonical: "https://webpifyy.vercel.app/image/compress/avif" },
   keywords: ["compress avif", "avif compressor online", "reduce avif file size", "avif optimizer"],
   openGraph: {
-    title: "Compress AVIF Images Online Free",
-    description: "Compress AVIF images online. Reduce file size with quality 60 encoding.",
+    title: "Compress AVIF Images Online Free | webpifyy",
+    description: "Compress AVIF images online for free. AVIF offers superior compression compared to JPEG and WebP. Browser-based processing, no file uploads.",
     url: "https://webpifyy.vercel.app/image/compress/avif",
+    type: "website",
+    siteName: "webpifyy",
+    images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
-  twitter: { card: "summary_large_image", title: "AVIF Compressor Online Free", description: "Compress AVIF images. No sign-up." },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Image Tools","item":"https://webpifyy.vercel.app/image"},{"@type":"ListItem","position":3,"name":"Compress","item":"https://webpifyy.vercel.app/image/compress"},{"@type":"ListItem","position":4,"name":"AVIF"}]})
+  twitter: {
+    card: "summary_large_image",
+    title: "Compress AVIF Images Online Free | webpifyy",
+    description: "Compress AVIF images online for free. AVIF offers superior compression compared to JPEG and WebP. Browser-based processing, no file uploads.",
+    images: ["https://webpifyy.vercel.app/opengraph-image"],
   },
 };
 
 const faqs = [
-  { q: "What is AVIF?", a: "AVIF (AV1 Image File Format) is a modern image format based on the AV1 video codec. It typically achieves 50% smaller files than JPEG at the same visual quality." },
-  { q: "How does AVIF compression work?", a: "We use Sharp's built-in AVIF encoder with quality 60 and effort 6. This typically reduces AVIF files by 20–40% while maintaining good visual quality." },
-  { q: "Is AVIF widely supported?", a: "AVIF is supported in Chrome, Firefox, Edge, and Safari. For maximum compatibility, consider also keeping a WebP fallback." },
-  { q: "Is my image uploaded to a server?", a: "Images are sent to our Edge processing API, compressed server-side using Sharp, and returned immediately. Files are never stored." },
+  { q: "What is AVIF image format?", a: "AVIF (AV1 Image File Format) is a modern image format offering significantly better compression than JPEG and WebP. It supports HDR, wide color gamut, and transparency." },
+  { q: "How much smaller are AVIF files compared to JPEG?", a: "AVIF files are typically 50% smaller than JPEG and 20% smaller than WebP at the same visual quality, making it the most efficient format for web images." },
+  { q: "Is AVIF supported in all browsers?", a: "AVIF is supported in Chrome, Firefox, and Safari 16+. Check caniuse.com for the latest browser support data." },
+  { q: "Should I use AVIF or WebP for my website?", a: "AVIF offers better compression but slower encoding. WebP has broader browser support. For best results, serve AVIF with a WebP fallback using the picture element." },
 ];
 
 export default function AvifCompressorPage() {
@@ -48,7 +53,7 @@ export default function AvifCompressorPage() {
         inLanguage: "en",
         isAccessibleForFree: true,
         offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-        description: "Compress AVIF images online. Sharp native AVIF encoder.",
+        description: "Compress AVIF images online for free. AVIF offers superior compression compared to JPEG and WebP. Browser-based processing, no file uploads.",
       },
       {
         "@type": "FAQPage",

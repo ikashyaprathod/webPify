@@ -3,25 +3,30 @@ import ImageCrop from "@/components/ImageCrop";
 import Breadcrumb from "@/components/Breadcrumb";
 
 export const metadata = {
-  title: "Crop Image Free Online – PNG, JPEG, WebP",
-  description: "Crop images to any size online. Draw a selection, crop instantly, download PNG. Free, browser-based, no uploads.",
+  title: "Crop Images Online Free \u2014 Crop Any Format",
+  description: "Crop PNG, JPEG and WebP images online free. Draw selection, set exact dimensions, or choose preset aspect ratios. No uploads required.",
   alternates: { canonical: "https://webpifyy.vercel.app/image/edit/crop" },
   openGraph: {
-    title: "Crop Image Free Online",
-    description: "Draw a selection and crop any image instantly. Zero uploads.",
+    title: "Crop Images Online Free \u2014 Crop Any Format | webpifyy",
+    description: "Crop PNG, JPEG and WebP images online free. Draw selection, set exact dimensions, or choose preset aspect ratios. No uploads required.",
     url: "https://webpifyy.vercel.app/image/edit/crop",
+    type: "website",
+    siteName: "webpifyy",
+    images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Image Tools","item":"https://webpifyy.vercel.app/image"},{"@type":"ListItem","position":3,"name":"Edit","item":"https://webpifyy.vercel.app/image/edit"},{"@type":"ListItem","position":4,"name":"Crop"}]})
+  twitter: {
+    card: "summary_large_image",
+    title: "Crop Images Online Free \u2014 Crop Any Format | webpifyy",
+    description: "Crop PNG, JPEG and WebP images online free. Draw selection, set exact dimensions, or choose preset aspect ratios. No uploads required.",
+    images: ["https://webpifyy.vercel.app/opengraph-image"],
   },
 };
 
 const faqs = [
-  { q: "How do I crop an image online?", a: "Upload your image, draw a crop selection by clicking and dragging, preview the result, then click Download to save the cropped image as PNG." },
-  { q: "What image formats can I crop?", a: "PNG, JPEG, and WebP images are all supported. The output is always downloaded as PNG to preserve any transparency in the cropped area." },
-  { q: "Is my image uploaded to a server?", a: "No. All cropping happens in your browser using the Canvas API. Your images never leave your device." },
-  { q: "Can I crop to an exact size?", a: "Yes. You can enter exact pixel dimensions for the crop area. Alternatively, draw a freehand selection and adjust the handles precisely." },
-  { q: "Will cropping reduce image quality?", a: "No. Cropping only removes pixels outside the selection — no re-encoding occurs. The cropped output maintains the full quality of the original." },
+  { q: "How do I crop an image to a specific size?", a: "Upload your image, draw a crop selection or enter exact pixel dimensions, then click crop. The result downloads instantly in the original format." },
+  { q: "Can I crop to a specific aspect ratio?", a: "Yes. Choose from preset ratios like 1:1 (square), 16:9 (widescreen), 4:3, or 9:16 (portrait). The selection snaps to the chosen ratio." },
+  { q: "Does cropping reduce image quality?", a: "No. Cropping only removes pixels from the edges. The remaining pixels are untouched, preserving the full quality of the kept area." },
+  { q: "Can I undo a crop before downloading?", a: "Yes. Reset the selection and try a different crop. No changes are saved until you click download." },
 ];
 
 export default function ImageCropPage() {

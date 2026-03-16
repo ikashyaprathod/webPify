@@ -3,25 +3,30 @@ import Breadcrumb from "@/components/Breadcrumb";
 import ImageBlur from "@/components/ImageBlur";
 
 export const metadata = {
-  title: "Blur Image Online Free — webpifyy",
-  description: "Apply Gaussian blur to any image online for free. Adjust blur intensity from 1 to 20. Download instantly. Server-side Sharp processing.",
+  title: "Blur Images Online Free \u2014 Gaussian Blur Effect",
+  description: "Add blur effects to images online free. Gaussian blur with adjustable intensity. Perfect for privacy blurring and artistic effects. No uploads.",
   alternates: { canonical: "https://webpifyy.vercel.app/image/edit/blur" },
   openGraph: {
-    title: "Blur Image Online Free — webpifyy",
-    description: "Apply Gaussian blur to any image. Adjust blur intensity from 1 to 20. Download instantly.",
+    title: "Blur Images Online Free \u2014 Gaussian Blur Effect | webpifyy",
+    description: "Add blur effects to images online free. Gaussian blur with adjustable intensity. Perfect for privacy blurring and artistic effects. No uploads.",
     url: "https://webpifyy.vercel.app/image/edit/blur",
+    type: "website",
+    siteName: "webpifyy",
+    images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
-  twitter: { card: "summary_large_image", title: "Blur Image Online Free — webpifyy", description: "Apply Gaussian blur to images. Adjust intensity, download instantly." },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Image Tools","item":"https://webpifyy.vercel.app/image"},{"@type":"ListItem","position":3,"name":"Edit","item":"https://webpifyy.vercel.app/image/edit"},{"@type":"ListItem","position":4,"name":"Blur"}]})
+  twitter: {
+    card: "summary_large_image",
+    title: "Blur Images Online Free \u2014 Gaussian Blur Effect | webpifyy",
+    description: "Add blur effects to images online free. Gaussian blur with adjustable intensity. Perfect for privacy blurring and artistic effects. No uploads.",
+    images: ["https://webpifyy.vercel.app/opengraph-image"],
   },
 };
 
 const faqs = [
-  { q: "What is Gaussian blur?", a: "Gaussian blur is a smoothing filter that averages pixels with their neighbors using a Gaussian distribution. It creates a natural-looking soft blur effect widely used in photo editing and design." },
-  { q: "What does the blur intensity number mean?", a: "The sigma value controls the radius of the blur. A sigma of 1 produces subtle blurring. A sigma of 20 produces heavy, dramatic blurring. Higher values process slower." },
-  { q: "What image formats are supported?", a: "You can upload JPG, PNG, WebP, GIF, AVIF and other common image formats. The output is returned in the same format as the input." },
-  { q: "Is the blur applied on my device or a server?", a: "The blur is processed server-side using Sharp (a high-performance Node.js image library). Your image is sent securely and the result is returned immediately — no files are stored." },
+  { q: "What can I use image blurring for?", a: "Blur is used to obscure personal information in screenshots, create depth-of-field effects, add artistic bokeh, or prepare privacy-compliant images for social media." },
+  { q: "How do I control the blur intensity?", a: "Use the blur intensity slider from 1 (subtle) to 20 (heavy blur). Preview updates in real time so you can find the right level before downloading." },
+  { q: "Can I blur only part of an image?", a: "Currently the tool applies blur to the entire image. Selective blur for a specific region is planned for a future update." },
+  { q: "Does blurring reduce image file size?", a: "Yes. Blurred images compress better than sharp ones. Run through our compressor after blurring for maximum size reduction." },
 ];
 
 export default function ImageBlurPage() {

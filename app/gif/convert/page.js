@@ -3,16 +3,22 @@ import Breadcrumb from "@/components/Breadcrumb";
 import Link from "next/link";
 
 export const metadata = {
-  title: "GIF Converter Online – Convert GIF to MP4 or WebM Free",
-  description: "Convert animated GIFs to MP4 or WebM for up to 90% smaller files. Free, browser-based, no uploads. Powered by FFmpeg.wasm.",
+  title: "GIF Converter Online Free — GIF to MP4 WebM",
+  description: "Convert GIF to MP4 and WebM online free. Replace heavy GIFs with efficient video formats. Up to 95% smaller. Browser-based, no uploads.",
   alternates: { canonical: "https://webpifyy.vercel.app/gif/convert" },
   openGraph: {
-    title: "GIF Converter Online – Convert GIF to MP4 or WebM Free",
-    description: "Convert GIF to MP4 or WebM for dramatically smaller files. Browser-based, no uploads.",
+    title: "GIF Converter Online Free — GIF to MP4 WebM | webpifyy",
+    description: "Convert GIF to MP4 and WebM online free. Replace heavy GIFs with efficient video formats. Up to 95% smaller. Browser-based, no uploads.",
     url: "https://webpifyy.vercel.app/gif/convert",
+    type: "website",
+    siteName: "webpifyy",
+    images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"GIF Tools","item":"https://webpifyy.vercel.app/gif"},{"@type":"ListItem","position":3,"name":"Convert"}]})
+  twitter: {
+    card: "summary_large_image",
+    title: "GIF Converter Online Free — GIF to MP4 WebM | webpifyy",
+    description: "Convert GIF to MP4 and WebM online free. Replace heavy GIFs with efficient video formats. Up to 95% smaller. Browser-based, no uploads.",
+    images: ["https://webpifyy.vercel.app/opengraph-image"],
   },
 };
 
@@ -39,14 +45,6 @@ export default function GifConvertHub() {
           { "@type": "ListItem", position: 2, name: "GIF", item: "https://webpifyy.vercel.app/gif" },
           { "@type": "ListItem", position: 3, name: "GIF Converter" },
         ],
-      },
-      {
-        "@type": "FAQPage",
-        mainEntity: faqs.map(f => ({
-          "@type": "Question",
-          name: f.q,
-          acceptedAnswer: { "@type": "Answer", text: f.a },
-        })),
       },
     ],
   };

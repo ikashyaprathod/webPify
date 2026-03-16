@@ -3,17 +3,23 @@ import Breadcrumb from "@/components/Breadcrumb";
 import Link from "next/link";
 
 export const metadata = {
-  title: "Video Compressor Online – Reduce MP4 & MOV Size Without Losing Quality",
+  title: "Online Video Compressor — MP4 WebM MOV Free",
   description:
-    "Compress MP4, MOV, and WebM videos online using privacy-first compression. No server uploads. Client-side processing powered by FFmpeg.",
+    "Compress MP4, WebM and MOV videos online free using WebAssembly. Reduce video file size by up to 80%. 100% private, no file uploads.",
   alternates: { canonical: "https://webpifyy.vercel.app/video/compress" },
   openGraph: {
-    title: "Video Compressor Online – Reduce MP4 & MOV Size Without Losing Quality",
-    description: "Compress MP4, MOV, and WebM videos online using privacy-first compression. No server uploads. Client-side processing powered by FFmpeg.",
+    type: "website",
+    siteName: "webpifyy",
+    title: "Online Video Compressor — MP4 WebM MOV Free | webpifyy",
+    description: "Compress MP4, WebM and MOV videos online free using WebAssembly. Reduce video file size by up to 80%. 100% private, no file uploads.",
     url: "https://webpifyy.vercel.app/video/compress",
+    images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Video Tools","item":"https://webpifyy.vercel.app/video"},{"@type":"ListItem","position":3,"name":"Compress"}]})
+  twitter: {
+    card: "summary_large_image",
+    title: "Online Video Compressor — MP4 WebM MOV Free | webpifyy",
+    description: "Compress MP4, WebM and MOV videos online free using WebAssembly. Reduce video file size by up to 80%. 100% private, no file uploads.",
+    images: ["https://webpifyy.vercel.app/opengraph-image"],
   },
 };
 
@@ -70,35 +76,6 @@ export default function VideoCompressorHubPage() {
           { "@type": "ListItem", position: 2, name: "Video", item: "https://webpifyy.vercel.app/video" },
           { "@type": "ListItem", position: 3, name: "Video Compressor" },
         ],
-      },
-      {
-        "@type": ["SoftwareApplication", "WebApplication"],
-        "@id": "https://webpifyy.vercel.app/video/compress#software",
-        "name": "Video Compressor",
-        "url": "https://webpifyy.vercel.app/video/compress",
-        "applicationCategory": "MultimediaApplication",
-        "operatingSystem": "Any",
-        "inLanguage": "en",
-        "isAccessibleForFree": true,
-        "offers": {
-          "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "USD",
-          "availability": "https://schema.org/InStock",
-          "seller": { "@id": "https://webpifyy.vercel.app/#organization" }
-        },
-        "provider": { "@id": "https://webpifyy.vercel.app/#organization" },
-        "author": { "@id": "https://webpifyy.vercel.app/#organization" },
-        "description": "Compress MP4, MOV, and WebM videos online using privacy-first client-side compression. No server uploads.",
-        "featureList": ["MP4 Compression", "WebM Compression", "MOV Compression", "Client-side Processing", "No Uploads"],
-      },
-      {
-        "@type": "FAQPage",
-        mainEntity: videoFaqs.map((faq) => ({
-          "@type": "Question",
-          name: faq.question,
-          acceptedAnswer: { "@type": "Answer", text: faq.answer },
-        })),
       },
     ],
   };

@@ -4,31 +4,31 @@ import ImageConverter from "@/components/ImageConverter";
 import Link from "next/link";
 
 export const metadata = {
-  title: "Convert Images to JPEG Online – PNG/WebP to JPG Free",
-  description: "Convert PNG, WebP, and other images to JPEG/JPG format online for free. Maximum compatibility across all devices and platforms. No sign-up required.",
+  title: "Convert Images to JPEG Online Free",
+  description: "Convert PNG, WebP, AVIF and other formats to JPEG online free. Control quality settings. Smallest file size for photos. No signup needed.",
   alternates: { canonical: "https://webpifyy.vercel.app/image/convert/to-jpeg" },
   keywords: ["convert to jpeg", "png to jpeg", "webp to jpg", "image to jpg converter", "convert image to jpeg online free"],
   openGraph: {
-    title: "Convert Images to JPEG Online – PNG/WebP to JPG Free",
-    description: "Convert PNG, WebP, and other images to JPEG format online. Maximum compatibility. Free, no sign-up.",
+    title: "Convert Images to JPEG Online Free | webpifyy",
+    description: "Convert PNG, WebP, AVIF and other formats to JPEG online free. Control quality settings. Smallest file size for photos. No signup needed.",
     url: "https://webpifyy.vercel.app/image/convert/to-jpeg",
+    type: "website",
+    siteName: "webpifyy",
+    images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Convert Images to JPEG Online – Free JPG Converter",
-    description: "Convert PNG/WebP to JPEG for maximum compatibility. Free, instant, no sign-up required.",
-  },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Image Tools","item":"https://webpifyy.vercel.app/image"},{"@type":"ListItem","position":3,"name":"Convert","item":"https://webpifyy.vercel.app/image/convert"},{"@type":"ListItem","position":4,"name":"to JPEG"}]})
+    title: "Convert Images to JPEG Online Free | webpifyy",
+    description: "Convert PNG, WebP, AVIF and other formats to JPEG online free. Control quality settings. Smallest file size for photos. No signup needed.",
+    images: ["https://webpifyy.vercel.app/opengraph-image"],
   },
 };
 
 const faqs = [
-  { q: "When should I convert to JPEG?", a: "Use JPEG when you need the widest device compatibility (email clients, older software, social media), when file size matters more than transparency, or when sharing photographs where JPEG's compression is efficient." },
-  { q: "Does JPEG support transparency?", a: "No. JPEG does not support transparency. If you convert a PNG with transparent areas to JPEG, the transparent parts will be filled with white (or another background color). Use PNG or WebP if transparency is needed." },
-  { q: "Will converting PNG to JPEG lose quality?", a: "Yes, JPEG is a lossy format. Converting a PNG to JPEG will reduce quality slightly depending on the quality setting chosen. Quality 85–95 preserves excellent visual quality with moderate file size reduction." },
-  { q: "Is JPEG the same as JPG?", a: "Yes, JPEG and JPG are the same format. JPG was the filename extension used on older Windows systems (which required 3-character extensions). JPEG is the full format name. Both extensions refer to the same format." },
-  { q: "What quality should I use when converting to JPEG?", a: "For web images, quality 75–85 provides a good balance of size and quality. For print-ready images or high-quality photography, use 90–95. For very small thumbnails, 60–70 is acceptable." },
+  { q: "When should I convert images to JPEG?", a: "JPEG is best for photographs and complex images where small file size matters more than perfect quality. Not ideal for logos, text, or transparent images." },
+  { q: "What quality setting should I use when converting to JPEG?", a: "80-85% quality is the sweet spot for most web images. It offers a good balance between file size and visual quality that most viewers cannot distinguish from 100%." },
+  { q: "Does JPEG support transparency?", a: "No. JPEG does not support transparency. If your image has a transparent background, convert to PNG or WebP instead to preserve the transparency." },
+  { q: "How small will my JPEG file be after conversion?", a: "JPEG typically reduces file size by 60-80% compared to PNG. The exact reduction depends on image complexity and the quality level you choose." },
 ];
 
 export default function JPEGConverterPage() {
@@ -69,7 +69,7 @@ export default function JPEGConverterPage() {
         },
         "provider": { "@id": "https://webpifyy.vercel.app/#organization" },
         "author": { "@id": "https://webpifyy.vercel.app/#organization" },
-        "description": "Convert PNG, WebP, and other images to JPEG format online for free. Maximum compatibility across all devices and platforms.",
+        "description": "Convert PNG, WebP, AVIF and other formats to JPEG online free. Control quality settings. Smallest file size for photos.",
         "featureList": ["PNG to JPEG", "WebP to JPEG", "Quality Control", "Maximum Compatibility", "Free"]
       },
       {

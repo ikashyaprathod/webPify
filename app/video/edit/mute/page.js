@@ -4,25 +4,30 @@ import VideoMuter from "@/components/VideoMuter";
 
 export const metadata = {
   title: "Mute Video Online Free — Remove Audio from Video",
-  description: "Remove audio from any video file online. Lossless audio strip using FFmpeg.wasm — no video re-encoding. 100% browser-based.",
+  description: "Remove audio from any video online free. Mute MP4, WebM and MOV videos instantly. Browser-based, no uploads, no signup, completely private.",
   alternates: { canonical: "https://webpifyy.vercel.app/video/edit/mute" },
   keywords: ["mute video online", "remove audio from video", "silent video", "strip audio mp4", "mute mp4 free"],
   openGraph: {
-    title: "Mute Video Online Free — Remove Audio from Video",
-    description: "Strip audio from video files. Lossless, browser-based, no uploads.",
+    type: "website",
+    siteName: "webpifyy",
+    title: "Mute Video Online Free — Remove Audio from Video | webpifyy",
+    description: "Remove audio from any video online free. Mute MP4, WebM and MOV videos instantly. Browser-based, no uploads, no signup, completely private.",
     url: "https://webpifyy.vercel.app/video/edit/mute",
+    images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
-  twitter: { card: "summary_large_image", title: "Mute Video Online Free", description: "Remove audio from video. No re-encoding, no uploads." },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Video Tools","item":"https://webpifyy.vercel.app/video"},{"@type":"ListItem","position":3,"name":"Edit","item":"https://webpifyy.vercel.app/video/edit"},{"@type":"ListItem","position":4,"name":"Mute"}]})
+  twitter: {
+    card: "summary_large_image",
+    title: "Mute Video Online Free — Remove Audio from Video | webpifyy",
+    description: "Remove audio from any video online free. Mute MP4, WebM and MOV videos instantly. Browser-based, no uploads, no signup, completely private.",
+    images: ["https://webpifyy.vercel.app/opengraph-image"],
   },
 };
 
 const faqs = [
-  { q: "How do I remove audio from a video?", a: "Upload your video and click Remove Audio. We use FFmpeg with the -an flag to strip the audio stream without re-encoding the video." },
-  { q: "Does muting a video affect video quality?", a: "No. We use -c:v copy which copies the video stream without any re-encoding. Video quality is identical to the original." },
-  { q: "Will the muted video be smaller?", a: "Yes, slightly. Removing the audio track reduces file size by a small amount (typically 2–10% depending on audio bitrate)." },
-  { q: "What formats can I mute?", a: "MP4, WebM, and MOV files are supported. The output is saved as MP4." },
+  { q: "How do I remove audio from a video?", a: "Upload your video and click Mute. FFmpeg copies the video stream while discarding the audio track. The process is near-instant as no re-encoding occurs." },
+  { q: "Does muting a video reduce quality?", a: "No. The video is copied exactly without re-encoding. Only the audio track is removed. Video quality, resolution and bitrate remain identical." },
+  { q: "Can I add a different audio track after muting?", a: "After muting, use a video editor to add new audio. This tool focuses on audio removal only." },
+  { q: "Why would I want to mute a video?", a: "Common uses include removing background noise, removing copyrighted music before sharing, creating silent autoplay loops for websites, and preparing for voiceover." },
 ];
 
 export default function VideoMutePage() {
@@ -48,7 +53,7 @@ export default function VideoMutePage() {
         inLanguage: "en",
         isAccessibleForFree: true,
         offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-        description: "Remove audio from video files. Lossless. 100% browser-based.",
+        description: "Remove audio from any video online free. Mute MP4, WebM and MOV videos instantly. Browser-based, no uploads, no signup, completely private.",
       },
       {
         "@type": "FAQPage",
@@ -70,7 +75,7 @@ export default function VideoMutePage() {
 
         <VideoMuter />
 
-        
+
         <div className="tpg-stats-wrap">
           <div className="tpg-glass tpg-lm-panel">
             <div className="tpg-glow-1" />

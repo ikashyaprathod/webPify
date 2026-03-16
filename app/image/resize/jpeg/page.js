@@ -4,31 +4,31 @@ import ImageResizer from "@/components/ImageResizer";
 import Link from "next/link";
 
 export const metadata = {
-  title: "JPEG Image Resizer – Resize JPEG/JPG Online Free",
-  description: "Resize JPEG and JPG images online to exact dimensions. Quality control, aspect ratio options, 4 fit modes. Fast, free, server-side processing with Sharp.",
+  title: "Resize JPEG Images Online Free",
+  description: "Resize JPEG and JPG images to any size online free. Four fit modes, aspect ratio control, batch processing. No signup, browser-based.",
   alternates: { canonical: "https://webpifyy.vercel.app/image/resize/jpeg" },
   keywords: ["resize jpeg online", "jpeg resizer", "jpg resizer", "change jpeg dimensions", "resize jpg image free"],
   openGraph: {
-    title: "JPEG Image Resizer – Resize JPEG/JPG Online Free",
-    description: "Resize JPEG and JPG images to exact dimensions. Quality control, 4 fit modes. Free, no sign-up.",
+    title: "Resize JPEG Images Online Free | webpifyy",
+    description: "Resize JPEG and JPG images to any size online free. Four fit modes, aspect ratio control, batch processing. No signup, browser-based.",
     url: "https://webpifyy.vercel.app/image/resize/jpeg",
+    type: "website",
+    siteName: "webpifyy",
+    images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "JPEG Image Resizer – Resize JPG Online Free",
-    description: "Resize JPEG photos to any dimension with quality control. Free, instant, no sign-up.",
-  },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Image Tools","item":"https://webpifyy.vercel.app/image"},{"@type":"ListItem","position":3,"name":"Resize","item":"https://webpifyy.vercel.app/image/resize"},{"@type":"ListItem","position":4,"name":"JPEG"}]})
+    title: "Resize JPEG Images Online Free | webpifyy",
+    description: "Resize JPEG and JPG images to any size online free. Four fit modes, aspect ratio control, batch processing. No signup, browser-based.",
+    images: ["https://webpifyy.vercel.app/opengraph-image"],
   },
 };
 
 const faqs = [
-  { q: "Will resizing JPEG reduce quality?", a: "Re-encoding JPEG during resize applies lossy compression again. Our tool uses mozjpeg with quality 85 by default, providing excellent visual quality. Avoid repeatedly resizing the same JPEG file as each round adds slight quality loss." },
-  { q: "How do I resize a JPG without distortion?", a: "Use 'Fit Inside' mode which maintains the original aspect ratio. The image fits within your specified dimensions without stretching. If you need exact dimensions with cropping, use 'Cover' mode instead." },
-  { q: "Can I resize JPEG for social media?", a: "Yes. Common social media dimensions: Instagram square (1080×1080), Twitter/X header (1500×500), Facebook cover (851×315), LinkedIn post (1200×627). Set these dimensions and use Cover fit mode for pixel-perfect results." },
-  { q: "What is the difference between resize and crop?", a: "Resizing changes the overall image dimensions. Cropping removes parts of the image. 'Cover' fit mode combines both — it scales the image to fill your target dimensions and crops any overflow." },
-  { q: "Does JPEG support transparency after resizing?", a: "No. JPEG does not support transparency. If you need to resize an image with a transparent background, use the PNG or WebP resizer instead to preserve the transparent areas." },
+  { q: "What is the best way to resize a JPEG for social media?", a: "Use Cover fit mode and enter the platform's required dimensions. Instagram posts use 1080x1080, Twitter headers 1500x500, Facebook covers 820x312." },
+  { q: "Does resizing JPEG reduce quality?", a: "Slightly. JPEG is re-encoded when resized which may cause minor quality loss. Set quality to 90%+ to minimize any visible degradation." },
+  { q: "Can I resize a JPEG without changing aspect ratio?", a: "Yes. Enable the aspect ratio lock before entering dimensions. Change either width or height and the other value adjusts automatically." },
+  { q: "How do I make a JPEG smaller for email?", a: "Most email systems require images under 1MB. Resize to 1200px wide and use our compressor to reduce file size further if needed." },
 ];
 
 export default function ResizeJpegPage() {

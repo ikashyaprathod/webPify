@@ -3,31 +3,31 @@ import Breadcrumb from "@/components/Breadcrumb";
 import GifCompressor from "@/components/GifCompressor";
 
 export const metadata = {
-  title: "GIF to WebM Converter – Convert GIF to WebM Online Free",
-  description: "Convert animated GIF to WebM video online. VP9 encoding, excellent quality, tiny file size. No uploads — 100% browser-based. Up to 90% smaller than GIF.",
+  title: "Convert GIF to WebM Online Free",
+  description: "Convert GIF to WebM video online free. WebM offers excellent compression for web animations. Browser-based FFmpeg processing, no uploads.",
   alternates: { canonical: "https://webpifyy.vercel.app/gif/convert/gif-to-webm" },
   keywords: ["gif to webm", "convert gif to webm", "gif to webm converter online", "animated gif to webm", "gif webm free"],
   openGraph: {
-    title: "GIF to WebM Converter – Convert GIF to WebM Online Free",
-    description: "Convert animated GIF to WebM video online. VP9 encoding, up to 90% smaller. No uploads, 100% browser-based.",
+    title: "Convert GIF to WebM Online Free | webpifyy",
+    description: "Convert GIF to WebM video online free. WebM offers excellent compression for web animations. Browser-based FFmpeg processing, no uploads.",
     url: "https://webpifyy.vercel.app/gif/convert/gif-to-webm",
+    type: "website",
+    siteName: "webpifyy",
+    images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "GIF to WebM Converter – Free Online Tool",
-    description: "Convert animated GIF to WebM for up to 90% smaller files. Free, browser-based, no sign-up.",
-  },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"GIF Tools","item":"https://webpifyy.vercel.app/gif"},{"@type":"ListItem","position":3,"name":"Convert","item":"https://webpifyy.vercel.app/gif/convert"},{"@type":"ListItem","position":4,"name":"GIF to WebM"}]})
+    title: "Convert GIF to WebM Online Free | webpifyy",
+    description: "Convert GIF to WebM video online free. WebM offers excellent compression for web animations. Browser-based FFmpeg processing, no uploads.",
+    images: ["https://webpifyy.vercel.app/opengraph-image"],
   },
 };
 
 const faqs = [
-  { q: "Why convert GIF to WebM?", a: "WebM with VP9 encoding is typically 80–90% smaller than an equivalent GIF. It also supports millions of colors compared to GIF's 256-color limit, resulting in smoother gradients and better quality." },
-  { q: "Is WebM better than MP4 for GIF replacement?", a: "WebM is excellent for Chrome, Firefox, and Edge users. However, MP4 has broader compatibility including Safari and older iOS devices. For maximum compatibility, use MP4. For web-optimized use, WebM is slightly more efficient." },
-  { q: "Does WebM support looping like GIF?", a: "Yes. WebM can loop via the HTML video element using the `loop` attribute. Many platforms and chat apps that support WebM will also loop it automatically, just like a GIF." },
-  { q: "Is my GIF uploaded to a server?", a: "No. All processing happens entirely in your browser using FFmpeg.wasm. Your files never leave your device." },
-  { q: "Can Discord or Slack use WebM files?", a: "Discord supports WebM files and will play them inline. Slack's support depends on the version and platform. For maximum compatibility in messaging apps, GIF to MP4 is generally the safer choice." },
+  { q: "What is the advantage of WebM over MP4 for GIF replacement?", a: "WebM uses VP9 codec which often achieves slightly better compression than MP4's H.264 at the same quality. It is also fully open-source with no patents." },
+  { q: "Is WebM supported in all browsers?", a: "WebM is supported in all modern browsers but not in Safari on older iOS. Provide both WebM and MP4 sources using video tag for maximum compatibility." },
+  { q: "How do I embed a WebM as a looping animation?", a: "Use video tag with autoplay, muted, loop, and playsinline attributes. Add MP4 as a fallback source for Safari compatibility." },
+  { q: "Is GIF to WebM conversion free?", a: "Yes, completely free. All processing uses FFmpeg.wasm running in your browser. No files are uploaded and there are no usage limits." },
 ];
 
 export default function GifToWebmPage() {
@@ -61,7 +61,7 @@ export default function GifToWebmPage() {
         },
         "provider": { "@id": "https://webpifyy.vercel.app/#organization" },
         "author": { "@id": "https://webpifyy.vercel.app/#organization" },
-        "description": "Convert animated GIF to WebM video in your browser. VP9 encoding, up to 90% smaller than GIF. No uploads.",
+        "description": "Convert GIF to WebM video online free. WebM offers excellent compression for web animations. Browser-based FFmpeg processing, no uploads.",
         "featureList": ["GIF to WebM", "VP9 Encoding", "90% Smaller Files", "Browser-based", "Free"]
       },
       {

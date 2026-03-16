@@ -1,26 +1,30 @@
 import HomeHero from "@/components/HomeHero";
 
 export const metadata = {
-  title: "Webpifyy – Free Image, Video & GIF Tools Online",
+  title: "Free Online Media & Utility Tools — webpifyy",
   description:
-    "Compress, convert and optimize images, videos and GIFs entirely in your browser. WebP, PNG, JPEG, MP4, MOV, SVG — all free, instant and 100% private.",
-  alternates: { canonical: "https://webpifyy.vercel.app/" },
+    "Free browser-based tools for images, video, audio, PDF, color, text and more. No signup, no uploads, no limits. 100+ tools, all free forever.",
+  alternates: { canonical: "https://webpifyy.vercel.app" },
   keywords: [
     "image compressor", "compress images online", "convert to webp",
     "video compressor", "compress mp4", "gif compressor", "svg optimizer",
     "image resizer", "free image tools", "webpify",
   ],
   openGraph: {
-    title: "Webpifyy – Free Image, Video & GIF Tools Online",
+    title: "Free Online Media & Utility Tools — webpifyy",
     description:
-      "Compress, convert and optimize images, videos and GIFs entirely in your browser. WebP, PNG, JPEG, MP4, MOV, SVG — all free, instant and 100% private.",
-    url: "https://webpifyy.vercel.app/",
+      "Free browser-based tools for images, video, audio, PDF, color, text and more. No signup, no uploads, no limits. 100+ tools, all free forever.",
+    url: "https://webpifyy.vercel.app",
+    type: "website",
+    siteName: "webpifyy",
+    images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Webpifyy – Free Image, Video & GIF Tools Online",
+    title: "Free Online Media & Utility Tools — webpifyy",
     description:
-      "Compress, convert and optimize images, videos and GIFs entirely in your browser. Free, instant, 100% private.",
+      "Free browser-based tools for images, video, audio, PDF, color, text and more. No signup, no uploads, no limits. 100+ tools, all free forever.",
+    images: ["https://webpifyy.vercel.app/opengraph-image"],
   },
 };
 

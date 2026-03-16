@@ -3,25 +3,30 @@ import Breadcrumb from "@/components/Breadcrumb";
 import ImageGrayscale from "@/components/ImageGrayscale";
 
 export const metadata = {
-  title: "Image to Grayscale Online Free — webpifyy",
-  description: "Convert any image to black and white grayscale online for free. Instant conversion, free download. Powered by Sharp.",
+  title: "Convert Image to Grayscale Online Free",
+  description: "Convert any image to black and white grayscale online free. Instant conversion with before/after preview. No uploads, browser-based.",
   alternates: { canonical: "https://webpifyy.vercel.app/image/edit/grayscale" },
   openGraph: {
-    title: "Image to Grayscale Online Free — webpifyy",
-    description: "Convert any image to black and white grayscale. Instant conversion, free download.",
+    title: "Convert Image to Grayscale Online Free | webpifyy",
+    description: "Convert any image to black and white grayscale online free. Instant conversion with before/after preview. No uploads, browser-based.",
     url: "https://webpifyy.vercel.app/image/edit/grayscale",
+    type: "website",
+    siteName: "webpifyy",
+    images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
-  twitter: { card: "summary_large_image", title: "Image to Grayscale Online Free — webpifyy", description: "Convert images to grayscale. Instant, free." },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Image Tools","item":"https://webpifyy.vercel.app/image"},{"@type":"ListItem","position":3,"name":"Edit","item":"https://webpifyy.vercel.app/image/edit"},{"@type":"ListItem","position":4,"name":"Grayscale"}]})
+  twitter: {
+    card: "summary_large_image",
+    title: "Convert Image to Grayscale Online Free | webpifyy",
+    description: "Convert any image to black and white grayscale online free. Instant conversion with before/after preview. No uploads, browser-based.",
+    images: ["https://webpifyy.vercel.app/opengraph-image"],
   },
 };
 
 const faqs = [
-  { q: "How does grayscale conversion work?", a: "Grayscale conversion removes all color information from an image, leaving only luminance values. Each pixel's color is converted to a shade of gray based on human perception weighting (more green, less blue)." },
-  { q: "Can I convert a PNG with transparency to grayscale?", a: "Yes. The grayscale conversion preserves any transparency (alpha channel) present in the original image." },
-  { q: "What is the difference between grayscale and black and white?", a: "Grayscale images contain a full range of gray shades between black and white. Black and white (1-bit) images contain only pure black and pure white pixels. This tool produces true grayscale output." },
-  { q: "What image formats are supported?", a: "You can upload JPG, PNG, WebP, AVIF, GIF and other common formats. The output matches the input format." },
+  { q: "What is grayscale conversion?", a: "Grayscale conversion removes color information, converting each pixel to a shade of gray based on its luminance. The result is a black and white image." },
+  { q: "Does converting to grayscale reduce file size?", a: "Yes. Grayscale images contain less color data so they compress more efficiently. Run through our compressor after conversion for maximum size savings." },
+  { q: "Can I convert a color image to grayscale without quality loss?", a: "The spatial resolution is fully preserved. Grayscale only removes hue and saturation. The output has the same sharpness and detail as the original." },
+  { q: "What image formats support grayscale output?", a: "All formats are supported: PNG, JPEG, WebP and AVIF. PNG and WebP produce the best grayscale results due to lossless or near-lossless compression." },
 ];
 
 export default function ImageGrayscalePage() {

@@ -3,25 +3,30 @@ import RemoveBackground from "@/components/RemoveBackground";
 import Breadcrumb from "@/components/Breadcrumb";
 
 export const metadata = {
-  title: "Remove Background from Image Free – AI Online Tool",
-  description: "Remove image background instantly with AI. Get a transparent PNG in seconds. Free, browser-based, no uploads — powered by WebAssembly.",
+  title: "Remove Background from Images Free \u2014 AI Powered",
+  description: "Remove image backgrounds online free using AI. Get transparent PNG in seconds. No uploads, runs in your browser with WebAssembly AI model.",
   alternates: { canonical: "https://webpifyy.vercel.app/image/edit/remove-background" },
   openGraph: {
-    title: "Remove Background from Image Free – AI Online",
-    description: "AI-powered background removal. Get transparent PNG instantly. Zero uploads.",
+    title: "Remove Background from Images Free \u2014 AI Powered | webpifyy",
+    description: "Remove image backgrounds online free using AI. Get transparent PNG in seconds. No uploads, runs in your browser with WebAssembly AI model.",
     url: "https://webpifyy.vercel.app/image/edit/remove-background",
+    type: "website",
+    siteName: "webpifyy",
+    images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Image Tools","item":"https://webpifyy.vercel.app/image"},{"@type":"ListItem","position":3,"name":"Edit","item":"https://webpifyy.vercel.app/image/edit"},{"@type":"ListItem","position":4,"name":"Remove Background"}]})
+  twitter: {
+    card: "summary_large_image",
+    title: "Remove Background from Images Free \u2014 AI Powered | webpifyy",
+    description: "Remove image backgrounds online free using AI. Get transparent PNG in seconds. No uploads, runs in your browser with WebAssembly AI model.",
+    images: ["https://webpifyy.vercel.app/opengraph-image"],
   },
 };
 
 const faqs = [
-  { q: "How does AI background removal work?", a: "Our tool uses a machine learning segmentation model (running in-browser via WebAssembly) to detect the subject of the photo and separate it from the background, outputting a transparent PNG." },
-  { q: "What types of images work best?", a: "Photos with a clear subject against a contrasting background work best — portraits, product photos, logos, and animals. Complex scenes with multiple subjects may have less precise edges." },
-  { q: "Is my photo uploaded to a server?", a: "No. The AI model runs entirely in your browser using WebAssembly. Your images never leave your device." },
-  { q: "What format is the output?", a: "The output is always a transparent PNG file. The background is removed (replaced with transparency) and the subject is preserved at full quality." },
-  { q: "Can I remove the background from product photos?", a: "Yes. This is one of the most common use cases. Upload your product photo and the tool will isolate the product on a transparent background, perfect for e-commerce listings." },
+  { q: "How does AI background removal work?", a: "Our tool uses @imgly/background-removal, a WebAssembly AI model that runs entirely in your browser. It detects subjects and removes backgrounds without uploading your image." },
+  { q: "What types of images work best for background removal?", a: "Images with clear subjects against distinct backgrounds work best \u2014 portraits, product photos, logos. Complex backgrounds with similar colors may be less accurate." },
+  { q: "What format does the background-removed image download as?", a: "The result downloads as a PNG with a transparent background. PNG is the only format that supports transparency." },
+  { q: "Is background removal free on webpifyy?", a: "Yes, completely free. The AI model runs in your browser using WebAssembly so there are no server costs, allowing unlimited free usage." },
 ];
 
 export default function RemoveBackgroundPage() {

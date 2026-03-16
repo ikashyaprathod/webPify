@@ -3,26 +3,31 @@ import Breadcrumb from "@/components/Breadcrumb";
 import VideoScreenshot from "@/components/VideoScreenshot";
 
 export const metadata = {
-  title: "Video Screenshot Tool — Capture Video Frame Online",
-  description: "Capture any frame from a video as a PNG image. Seek to exact position and download. No FFmpeg needed — pure browser canvas.",
+  title: "Video Screenshot Tool Online Free — Capture Frame",
+  description: "Capture any frame from a video as an image online free. Scrub to exact timestamp and download as PNG or JPG. No uploads, browser-based.",
   alternates: { canonical: "https://webpifyy.vercel.app/video/edit/screenshot" },
   keywords: ["video screenshot", "capture video frame", "video to image", "screenshot from video", "grab frame from video"],
   openGraph: {
-    title: "Video Screenshot Tool — Capture Video Frame Online",
-    description: "Capture frames from video as PNG. No uploads, instant download.",
+    type: "website",
+    siteName: "webpifyy",
+    title: "Video Screenshot Tool Online Free — Capture Frame | webpifyy",
+    description: "Capture any frame from a video as an image online free. Scrub to exact timestamp and download as PNG or JPG. No uploads, browser-based.",
     url: "https://webpifyy.vercel.app/video/edit/screenshot",
+    images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
-  twitter: { card: "summary_large_image", title: "Video Screenshot Tool Online", description: "Capture video frames as PNG. Instant, no uploads." },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Video Tools","item":"https://webpifyy.vercel.app/video"},{"@type":"ListItem","position":3,"name":"Edit","item":"https://webpifyy.vercel.app/video/edit"},{"@type":"ListItem","position":4,"name":"Screenshot"}]})
+  twitter: {
+    card: "summary_large_image",
+    title: "Video Screenshot Tool Online Free — Capture Frame | webpifyy",
+    description: "Capture any frame from a video as an image online free. Scrub to exact timestamp and download as PNG or JPG. No uploads, browser-based.",
+    images: ["https://webpifyy.vercel.app/opengraph-image"],
   },
 };
 
 const faqs = [
-  { q: "How do I capture a frame from a video?", a: "Upload your video, use the player controls to seek to the exact moment you want, then click Capture Frame. The frame is saved as a PNG." },
-  { q: "What resolution is the captured frame?", a: "The frame is captured at the video's native resolution using HTML5 canvas, so the PNG matches the original video dimensions." },
-  { q: "Does this use FFmpeg?", a: "No. Frame capture uses the browser's native HTML5 video and canvas APIs, making it instant and available on all devices." },
-  { q: "What formats are supported?", a: "MP4, WebM, and MOV files are supported for frame capture in most modern browsers." },
+  { q: "How do I capture a frame from a video?", a: "Upload your video, use the scrubber to navigate to the exact frame you want, then click Capture Frame. The frame downloads as a high-quality PNG or JPG." },
+  { q: "What resolution will the captured frame be?", a: "The frame is captured at the video's full resolution. A 1080p video captures a 1920x1080 pixel image. Quality matches the original video exactly." },
+  { q: "Can I capture multiple frames from one video?", a: "Yes. Navigate to each frame and click capture. Each frame downloads separately. There is no limit to how many frames you can capture." },
+  { q: "What image format does the captured frame download as?", a: "Choose PNG for lossless quality or JPG for smaller file size. PNG is recommended for frames with text or fine details." },
 ];
 
 export default function VideoScreenshotPage() {
@@ -48,7 +53,7 @@ export default function VideoScreenshotPage() {
         inLanguage: "en",
         isAccessibleForFree: true,
         offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-        description: "Capture any frame from a video as PNG. Browser canvas API, no FFmpeg.",
+        description: "Capture any frame from a video as an image online free. Scrub to exact timestamp and download as PNG or JPG. No uploads, browser-based.",
       },
       {
         "@type": "FAQPage",
@@ -70,7 +75,7 @@ export default function VideoScreenshotPage() {
 
         <VideoScreenshot />
 
-        
+
         <div className="tpg-stats-wrap">
           <div className="tpg-glass tpg-lm-panel">
             <div className="tpg-glow-1" />

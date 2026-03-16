@@ -3,25 +3,30 @@ import ImageRotate from "@/components/ImageRotate";
 import Breadcrumb from "@/components/Breadcrumb";
 
 export const metadata = {
-  title: "Rotate & Flip Image Free Online – PNG, JPEG, WebP",
-  description: "Rotate images 90°, 180°, 270° or flip horizontally/vertically. Free, instant, browser-based. No uploads needed.",
+  title: "Rotate & Flip Images Online Free",
+  description: "Rotate images 90, 180 or 270 degrees and flip horizontally or vertically online free. Instant preview, no uploads, supports all formats.",
   alternates: { canonical: "https://webpifyy.vercel.app/image/edit/rotate" },
   openGraph: {
-    title: "Rotate & Flip Image Free Online",
-    description: "Rotate 90°/180° or flip any image instantly in your browser.",
+    title: "Rotate & Flip Images Online Free | webpifyy",
+    description: "Rotate images 90, 180 or 270 degrees and flip horizontally or vertically online free. Instant preview, no uploads, supports all formats.",
     url: "https://webpifyy.vercel.app/image/edit/rotate",
+    type: "website",
+    siteName: "webpifyy",
+    images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Image Tools","item":"https://webpifyy.vercel.app/image"},{"@type":"ListItem","position":3,"name":"Edit","item":"https://webpifyy.vercel.app/image/edit"},{"@type":"ListItem","position":4,"name":"Rotate"}]})
+  twitter: {
+    card: "summary_large_image",
+    title: "Rotate & Flip Images Online Free | webpifyy",
+    description: "Rotate images 90, 180 or 270 degrees and flip horizontally or vertically online free. Instant preview, no uploads, supports all formats.",
+    images: ["https://webpifyy.vercel.app/opengraph-image"],
   },
 };
 
 const faqs = [
-  { q: "How do I rotate an image online?", a: "Upload your image and click the rotation buttons — 90° clockwise, 90° counter-clockwise, or 180°. Preview the result and click Download to save." },
-  { q: "Can I flip an image horizontally or vertically?", a: "Yes. The tool supports horizontal flip (mirror left-right) and vertical flip (mirror top-bottom) in addition to rotation." },
-  { q: "Will rotating my image reduce quality?", a: "No. Rotation is applied using the Canvas API without any re-encoding. The output PNG has the same quality as the original." },
-  { q: "What output format does the rotated image use?", a: "The rotated image is always downloaded as PNG, which preserves full quality and any transparency in the original." },
-  { q: "Is my image uploaded to a server?", a: "No. All rotation happens in your browser using the Canvas API. Your images never leave your device." },
+  { q: "Can I rotate an image by a custom angle?", a: "Yes. In addition to 90/180/270 degree presets, you can enter any custom rotation angle. Background fill color can be set for corners." },
+  { q: "Does rotating an image reduce quality?", a: "90/180/270 degree rotations are lossless for PNG. For JPEG, lossless rotation is used when available. Custom angles require re-encoding with minimal loss." },
+  { q: "Can I flip an image horizontally and vertically?", a: "Yes. Horizontal flip creates a mirror image. Vertical flip turns it upside down. Both can be combined with rotation in one operation." },
+  { q: "What image formats support rotation?", a: "All common formats are supported: PNG, JPEG, WebP, AVIF, BMP and TIFF. Output format matches input." },
 ];
 
 export default function ImageRotatePage() {

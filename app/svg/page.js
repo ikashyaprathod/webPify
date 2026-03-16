@@ -3,16 +3,22 @@ import Breadcrumb from "@/components/Breadcrumb";
 import Link from "next/link";
 
 export const metadata = {
-  title: "SVG Tools Online – Optimize & Minify SVG Free",
-  description: "Free online SVG tools. Optimize and minify SVG files using SVGO. Remove metadata, optimize paths. Free, instant.",
+  title: "Free SVG Tools Online",
+  description: "Free online SVG tools — optimize and minify SVG files using SVGO. Strip metadata, merge styles, reduce file size. Browser-based, no uploads.",
   alternates: { canonical: "https://webpifyy.vercel.app/svg" },
   openGraph: {
-    title: "SVG Tools Online – Optimize & Minify SVG Free",
-    description: "Optimize and minify SVG files using SVGO. Remove metadata, optimize paths.",
+    title: "Free SVG Tools Online | webpifyy",
+    description: "Free online SVG tools — optimize and minify SVG files using SVGO. Strip metadata, merge styles, reduce file size. Browser-based, no uploads.",
     url: "https://webpifyy.vercel.app/svg",
+    type: "website",
+    siteName: "webpifyy",
+    images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"SVG Tools"}]})
+  twitter: {
+    card: "summary_large_image",
+    title: "Free SVG Tools Online | webpifyy",
+    description: "Free online SVG tools — optimize and minify SVG files using SVGO. Strip metadata, merge styles, reduce file size. Browser-based, no uploads.",
+    images: ["https://webpifyy.vercel.app/opengraph-image"],
   },
 };
 
@@ -37,14 +43,6 @@ export default function SVGHub() {
           { "@type": "ListItem", position: 1, name: "Home", item: "https://webpifyy.vercel.app/" },
           { "@type": "ListItem", position: 2, name: "SVG Tools" },
         ],
-      },
-      {
-        "@type": "FAQPage",
-        mainEntity: faqs.map(f => ({
-          "@type": "Question",
-          name: f.q,
-          acceptedAnswer: { "@type": "Answer", text: f.a },
-        })),
       },
     ],
   };

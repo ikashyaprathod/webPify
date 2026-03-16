@@ -3,26 +3,31 @@ import Breadcrumb from "@/components/Breadcrumb";
 import VideoConverter from "@/components/VideoConverter";
 
 export const metadata = {
-  title: "MP4 to WebM Converter Online Free",
-  description: "Convert MP4 videos to WebM format online for free. VP9 encoding, smaller files for web use. 100% browser-based using FFmpeg.wasm.",
+  title: "Convert MP4 to WebM Online Free",
+  description: "Convert MP4 videos to WebM format online free. Browser-based FFmpeg conversion. Files never uploaded. Fast, private, no signup required.",
   alternates: { canonical: "https://webpifyy.vercel.app/video/convert/mp4-to-webm" },
   keywords: ["mp4 to webm", "convert mp4 to webm", "webm converter online", "mp4 webm converter"],
   openGraph: {
-    title: "MP4 to WebM Converter Online Free",
-    description: "Convert MP4 to WebM in your browser. VP9 encoding. No uploads.",
+    type: "website",
+    siteName: "webpifyy",
+    title: "Convert MP4 to WebM Online Free | webpifyy",
+    description: "Convert MP4 videos to WebM format online free. Browser-based FFmpeg conversion. Files never uploaded. Fast, private, no signup required.",
     url: "https://webpifyy.vercel.app/video/convert/mp4-to-webm",
+    images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
-  twitter: { card: "summary_large_image", title: "MP4 to WebM Converter Online Free", description: "Convert MP4 to WebM. No uploads, no sign-up." },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Video Tools","item":"https://webpifyy.vercel.app/video"},{"@type":"ListItem","position":3,"name":"Convert","item":"https://webpifyy.vercel.app/video/convert"},{"@type":"ListItem","position":4,"name":"MP4 to WebM"}]})
+  twitter: {
+    card: "summary_large_image",
+    title: "Convert MP4 to WebM Online Free | webpifyy",
+    description: "Convert MP4 videos to WebM format online free. Browser-based FFmpeg conversion. Files never uploaded. Fast, private, no signup required.",
+    images: ["https://webpifyy.vercel.app/opengraph-image"],
   },
 };
 
 const faqs = [
-  { q: "Why convert MP4 to WebM?", a: "WebM with VP9 encoding produces smaller files than MP4 with H.264, making it ideal for web use. It is also open-source and royalty-free." },
-  { q: "Does conversion affect video quality?", a: "We use CRF 30 with libvpx-vp9 which gives excellent quality at small file sizes. The conversion may slightly reduce quality compared to the original." },
-  { q: "Is my video uploaded to a server?", a: "No. All conversion happens in your browser using FFmpeg.wasm. Your files never leave your device." },
-  { q: "How long does conversion take?", a: "Conversion time depends on your device's CPU and the video length. A 1-minute video typically takes 30–90 seconds." },
+  { q: "Why convert MP4 to WebM?", a: "WebM is the preferred format for web video. It is open-source, has better compression than MP4 at the same quality, and is required for some HTML5 video implementations." },
+  { q: "Does MP4 to WebM conversion reduce quality?", a: "Minor quality reduction may occur during transcoding. Set quality to High to minimize visible differences. For lossless-equivalent conversion use CRF 18-20." },
+  { q: "How long does MP4 to WebM conversion take?", a: "A 1-minute 1080p video typically converts in 2-3 minutes in the browser using WebAssembly." },
+  { q: "What codecs does the WebM output use?", a: "Output uses VP9 video codec and Opus audio codec, which are the most efficient and widely supported codecs for the WebM container format." },
 ];
 
 export default function Mp4ToWebmPage() {
@@ -48,7 +53,7 @@ export default function Mp4ToWebmPage() {
         inLanguage: "en",
         isAccessibleForFree: true,
         offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-        description: "Convert MP4 to WebM online. VP9 encoding. 100% browser-based.",
+        description: "Convert MP4 videos to WebM format online free. Browser-based FFmpeg conversion. Files never uploaded. Fast, private, no signup required.",
       },
       {
         "@type": "FAQPage",
@@ -70,7 +75,7 @@ export default function Mp4ToWebmPage() {
 
         <VideoConverter />
 
-        
+
         <div className="tpg-stats-wrap">
           <div className="tpg-glass tpg-lm-panel">
             <div className="tpg-glow-1" />

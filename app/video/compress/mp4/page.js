@@ -3,45 +3,46 @@ import Breadcrumb from "@/components/Breadcrumb";
 import VideoCompressor from "@/components/VideoCompressor";
 
 export const metadata = {
-  title: "Compress MP4 Online – Reduce MP4 File Size Without Losing Quality",
+  title: "Compress MP4 Video Online Free — Reduce MP4 Size",
   description:
-    "Compress MP4 videos online for free. Client-side H.264 compression — no uploads, no server, 100% private.",
+    "Compress MP4 videos online free. Uses FFmpeg WebAssembly for browser-based processing. Files never leave your device. No signup needed.",
   alternates: { canonical: "https://webpifyy.vercel.app/video/compress/mp4" },
   openGraph: {
-    title: "Compress MP4 Online – Reduce MP4 File Size Without Losing Quality",
-    description: "Compress MP4 videos online for free. Client-side H.264 compression — no uploads, no server, 100% private.",
+    type: "website",
+    siteName: "webpifyy",
+    title: "Compress MP4 Video Online Free — Reduce MP4 Size | webpifyy",
+    description: "Compress MP4 videos online free. Uses FFmpeg WebAssembly for browser-based processing. Files never leave your device. No signup needed.",
     url: "https://webpifyy.vercel.app/video/compress/mp4",
+    images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Video Tools","item":"https://webpifyy.vercel.app/video"},{"@type":"ListItem","position":3,"name":"Compress","item":"https://webpifyy.vercel.app/video/compress"},{"@type":"ListItem","position":4,"name":"MP4"}]})
+  twitter: {
+    card: "summary_large_image",
+    title: "Compress MP4 Video Online Free — Reduce MP4 Size | webpifyy",
+    description: "Compress MP4 videos online free. Uses FFmpeg WebAssembly for browser-based processing. Files never leave your device. No signup needed.",
+    images: ["https://webpifyy.vercel.app/opengraph-image"],
   },
 };
 
 const mp4Faqs = [
   {
-    question: "How do I compress an MP4 file without losing quality?",
+    question: "How much can I compress an MP4 video?",
     answer:
-      "Use our 'High Quality' preset which applies CRF 18 — a near-lossless setting. You can reduce file size by 20–40% without any visible difference at normal viewing distances.",
+      "Typically 50-80% size reduction depending on source quality and settings. Use Max Compression for smallest file size or High Quality for best visual results.",
   },
   {
-    question: "What codec does MP4 use?",
+    question: "Does compressing MP4 reduce video quality?",
     answer:
-      "MP4 is a container format that typically uses H.264 (AVC) video codec and AAC audio codec. H.264 is the most widely supported codec for web, mobile, and social media.",
-  },
-  {
-    question: "Can I compress MP4 for WhatsApp or Instagram?",
-    answer:
-      "Yes. Use 'Balanced' or 'Maximum Compression' preset, set resolution to 720p, and frame rate to 30fps. This produces files well within platform limits.",
-  },
-  {
-    question: "Is my MP4 file uploaded to a server?",
-    answer:
-      "No. Compression runs entirely in your browser using FFmpeg.wasm. Your video never leaves your device.",
+      "Yes, compression reduces quality. Our tool uses CRF encoding which preserves quality in motion-rich scenes better than fixed bitrate compression.",
   },
   {
     question: "How long does MP4 compression take?",
     answer:
-      "It depends on file size and your device's CPU. A 100MB file typically takes 30–90 seconds in the browser. Performance-intensive devices will be faster.",
+      "Processing happens in your browser using WebAssembly. A 100MB video typically takes 2-5 minutes. Speed depends on your device and settings chosen.",
+  },
+  {
+    question: "Is MP4 compression private?",
+    answer:
+      "Yes. Files are processed entirely in your browser using FFmpeg.wasm. Nothing is uploaded to any server. Your videos remain completely private.",
   },
 ];
 
@@ -75,7 +76,7 @@ export default function MP4CompressorPage() {
         },
         "provider": { "@id": "https://webpifyy.vercel.app/#organization" },
         "author": { "@id": "https://webpifyy.vercel.app/#organization" },
-        "description": "Compress MP4 videos online with H.264 encoding. No server uploads — fully client-side.",
+        "description": "Compress MP4 videos online free. Uses FFmpeg WebAssembly for browser-based processing. Files never leave your device. No signup needed.",
       },
       {
         "@type": "FAQPage",

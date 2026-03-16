@@ -4,31 +4,31 @@ import ImageResizer from "@/components/ImageResizer";
 import Link from "next/link";
 
 export const metadata = {
-  title: "PNG Image Resizer – Resize PNG Online Free",
-  description: "Resize PNG images online to exact dimensions. Preserve transparency, maintain aspect ratio. Choose from 4 fit modes. Fast, free, server-side processing with Sharp.",
+  title: "Resize PNG Images Online Free \u2014 Exact Dimensions",
+  description: "Resize PNG images to any dimension online free. Maintain aspect ratio or set custom width and height. No uploads, browser-based processing.",
   alternates: { canonical: "https://webpifyy.vercel.app/image/resize/png" },
   keywords: ["resize png online", "png resizer", "change png dimensions", "scale png image", "png image resizer free"],
   openGraph: {
-    title: "PNG Image Resizer – Resize PNG Online Free",
-    description: "Resize PNG images to exact dimensions. Preserve transparency, 4 fit modes. Free, no sign-up.",
+    title: "Resize PNG Images Online Free \u2014 Exact Dimensions | webpifyy",
+    description: "Resize PNG images to any dimension online free. Maintain aspect ratio or set custom width and height. No uploads, browser-based processing.",
     url: "https://webpifyy.vercel.app/image/resize/png",
+    type: "website",
+    siteName: "webpifyy",
+    images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "PNG Image Resizer – Resize PNG Online Free",
-    description: "Resize PNG images to any dimension while preserving transparency. Free, instant, no sign-up.",
-  },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Image Tools","item":"https://webpifyy.vercel.app/image"},{"@type":"ListItem","position":3,"name":"Resize","item":"https://webpifyy.vercel.app/image/resize"},{"@type":"ListItem","position":4,"name":"PNG"}]})
+    title: "Resize PNG Images Online Free \u2014 Exact Dimensions | webpifyy",
+    description: "Resize PNG images to any dimension online free. Maintain aspect ratio or set custom width and height. No uploads, browser-based processing.",
+    images: ["https://webpifyy.vercel.app/opengraph-image"],
   },
 };
 
 const faqs = [
-  { q: "Does resizing PNG images preserve transparency?", a: "Yes. Our PNG resizer uses Sharp which fully preserves the alpha channel (transparency) when resizing. Your transparent backgrounds and edges will remain intact." },
-  { q: "What fit modes are available for PNG resizing?", a: "We offer four modes: Fit Inside (maintains aspect ratio within bounds), Cover (fills dimensions, may crop), Contain (adds letterbox), and Fill (stretches to exact dimensions). For most uses, Fit Inside is recommended." },
-  { q: "Will resizing PNG reduce quality?", a: "PNG uses lossless compression, so the resized output maintains full quality. Downscaling generally looks good. Upscaling may cause some blurriness as the algorithm interpolates pixels." },
-  { q: "Can I resize multiple PNG images at once?", a: "Yes. You can upload multiple PNG files and they will all be resized to the same target dimensions. Download them individually or use the batch download option." },
-  { q: "What is the maximum image size supported?", a: "Our server-side resizer handles most standard image sizes. For typical web and social media images, there are no practical limits. Very large images above 50MP may have processing limits." },
+  { q: "How do I resize a PNG to specific dimensions?", a: "Upload your PNG, enter your target width and height, choose a fit mode (contain, cover, fill or thumb), and click resize. The result downloads instantly." },
+  { q: "Will resizing a PNG reduce its quality?", a: "Enlarging a PNG can cause pixelation. Reducing size is lossless. Use contain or cover mode to avoid distortion when changing the aspect ratio." },
+  { q: "What fit modes are available for resizing?", a: "Four modes: Contain (fit within dimensions preserving ratio), Cover (fill dimensions cropping if needed), Fill (stretch to exact size), Thumb (smart crop)." },
+  { q: "Can I resize multiple PNG files at once?", a: "Yes. Batch processing lets you upload and resize multiple PNG files to the same dimensions simultaneously. Download all results as a ZIP file." },
 ];
 
 export default function ResizePngPage() {

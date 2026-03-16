@@ -2,16 +2,22 @@ import PageShell from "@/components/PageShell";
 import Breadcrumb from "@/components/Breadcrumb";
 
 export const metadata = {
-  title: "Video Tools Online – Compress, Convert & Edit Videos Free",
-  description: "Free online video tools. Compress MP4, WebM, MOV, convert to GIF or WebM, extract MP3, trim, mute, and take screenshots. All tools run client-side — your files never leave your browser.",
+  title: "Free Video Tools Online — Compress Convert Edit",
+  description: "Free online video tools — compress MP4 MOV WebM, convert formats, trim, mute, extract audio, add subtitles. Browser-based, no file uploads.",
   alternates: { canonical: "https://webpifyy.vercel.app/video" },
   openGraph: {
-    title: "Video Tools Online – Compress, Convert & Edit Videos Free",
-    description: "Compress, convert, trim, mute, and screenshot video files. All client-side, no uploads.",
+    type: "website",
+    siteName: "webpifyy",
+    title: "Free Video Tools Online — Compress Convert Edit | webpifyy",
+    description: "Free online video tools — compress MP4 MOV WebM, convert formats, trim, mute, extract audio, add subtitles. Browser-based, no file uploads.",
     url: "https://webpifyy.vercel.app/video",
+    images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Video Tools"}]})
+  twitter: {
+    card: "summary_large_image",
+    title: "Free Video Tools Online — Compress Convert Edit | webpifyy",
+    description: "Free online video tools — compress MP4 MOV WebM, convert formats, trim, mute, extract audio, add subtitles. Browser-based, no file uploads.",
+    images: ["https://webpifyy.vercel.app/opengraph-image"],
   },
 };
 
@@ -51,14 +57,6 @@ export default function VideoHub() {
           { "@type": "ListItem", position: 1, name: "Home", item: "https://webpifyy.vercel.app/" },
           { "@type": "ListItem", position: 2, name: "Video Tools" },
         ],
-      },
-      {
-        "@type": "FAQPage",
-        mainEntity: faqs.map(f => ({
-          "@type": "Question",
-          name: f.q,
-          acceptedAnswer: { "@type": "Answer", text: f.a },
-        })),
       },
     ],
   };

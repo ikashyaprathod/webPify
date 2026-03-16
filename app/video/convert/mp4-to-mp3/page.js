@@ -3,26 +3,31 @@ import Breadcrumb from "@/components/Breadcrumb";
 import VideoToMp3 from "@/components/VideoToMp3";
 
 export const metadata = {
-  title: "MP4 to MP3 Converter Online Free — Extract Audio",
-  description: "Extract audio from MP4, MOV, and WebM videos and save as MP3. 100% browser-based using FFmpeg.wasm. No uploads.",
+  title: "Extract Audio from MP4 Free — MP4 to MP3 Online",
+  description: "Extract MP3 audio from MP4 videos online free. Browser-based FFmpeg, no uploads. Get audio from any MP4 video instantly. No signup needed.",
   alternates: { canonical: "https://webpifyy.vercel.app/video/convert/mp4-to-mp3" },
   keywords: ["mp4 to mp3", "extract audio from video", "video to mp3 converter", "mp4 audio extractor"],
   openGraph: {
-    title: "MP4 to MP3 Converter Online Free — Extract Audio",
-    description: "Extract audio from MP4 as MP3. Browser-based, no uploads.",
+    type: "website",
+    siteName: "webpifyy",
+    title: "Extract Audio from MP4 Free — MP4 to MP3 Online | webpifyy",
+    description: "Extract MP3 audio from MP4 videos online free. Browser-based FFmpeg, no uploads. Get audio from any MP4 video instantly. No signup needed.",
     url: "https://webpifyy.vercel.app/video/convert/mp4-to-mp3",
+    images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
-  twitter: { card: "summary_large_image", title: "MP4 to MP3 Converter Online Free", description: "Extract MP3 from MP4. No uploads." },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Video Tools","item":"https://webpifyy.vercel.app/video"},{"@type":"ListItem","position":3,"name":"Convert","item":"https://webpifyy.vercel.app/video/convert"},{"@type":"ListItem","position":4,"name":"MP4 to MP3"}]})
+  twitter: {
+    card: "summary_large_image",
+    title: "Extract Audio from MP4 Free — MP4 to MP3 Online | webpifyy",
+    description: "Extract MP3 audio from MP4 videos online free. Browser-based FFmpeg, no uploads. Get audio from any MP4 video instantly. No signup needed.",
+    images: ["https://webpifyy.vercel.app/opengraph-image"],
   },
 };
 
 const faqs = [
-  { q: "What video formats can I extract audio from?", a: "You can extract audio from MP4, MOV, and WebM files. The output is always an MP3 file." },
-  { q: "What quality is the extracted MP3?", a: "We use libmp3lame with -q:a 2 which produces Variable Bitrate (VBR) MP3 at approximately 190 kbps — high quality." },
-  { q: "Is the video uploaded anywhere?", a: "No. All processing happens in your browser using FFmpeg.wasm. Your files never leave your device." },
-  { q: "Why is my extracted MP3 much smaller than the video?", a: "This is expected. Audio-only files are far smaller than video files since all the video frames are discarded." },
+  { q: "How do I extract audio from a video?", a: "Upload your MP4 and click convert. FFmpeg extracts the audio track and saves it as an MP3 file. No video re-encoding means fast conversion." },
+  { q: "Does extracting audio reduce audio quality?", a: "No. The audio track is copied directly from the video without re-encoding at the default setting, preserving original audio quality." },
+  { q: "Can I extract audio from YouTube videos?", a: "This tool only processes files from your device. We do not support downloading from YouTube or other streaming platforms." },
+  { q: "What audio quality does the extracted MP3 have?", a: "The output quality matches the source video audio. For higher quality, choose 320kbps output. For smaller files, 128kbps is sufficient for voice." },
 ];
 
 export default function Mp4ToMp3Page() {
@@ -48,7 +53,7 @@ export default function Mp4ToMp3Page() {
         inLanguage: "en",
         isAccessibleForFree: true,
         offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-        description: "Extract audio from MP4, MOV, WebM and save as MP3. 100% browser-based.",
+        description: "Extract MP3 audio from MP4 videos online free. Browser-based FFmpeg, no uploads. Get audio from any MP4 video instantly. No signup needed.",
       },
       {
         "@type": "FAQPage",
@@ -70,7 +75,7 @@ export default function Mp4ToMp3Page() {
 
         <VideoToMp3 />
 
-        
+
         <div className="tpg-stats-wrap">
           <div className="tpg-glass tpg-lm-panel">
             <div className="tpg-glow-1" />

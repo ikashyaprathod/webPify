@@ -3,25 +3,30 @@ import Breadcrumb from "@/components/Breadcrumb";
 import WebmToMp4 from "@/components/WebmToMp4";
 
 export const metadata = {
-  title: "WebM to MP4 Converter Free Online — webpifyy",
-  description: "Convert WebM videos to MP4 format for maximum compatibility. H.264 + AAC output online for free. 100% browser-based — no uploads.",
+  title: "Convert WebM to MP4 Online Free",
+  description: "Convert WebM videos to MP4 format online free. Browser-based FFmpeg, no uploads. Broad device compatibility. Fast, private, no signup required.",
   alternates: { canonical: "https://webpifyy.vercel.app/video/convert/webm-to-mp4" },
   openGraph: {
-    title: "WebM to MP4 Converter Free Online — webpifyy",
-    description: "Convert WebM videos to MP4 format for maximum compatibility. H.264 + AAC output. 100% browser-based.",
+    type: "website",
+    siteName: "webpifyy",
+    title: "Convert WebM to MP4 Online Free | webpifyy",
+    description: "Convert WebM videos to MP4 format online free. Browser-based FFmpeg, no uploads. Broad device compatibility. Fast, private, no signup required.",
     url: "https://webpifyy.vercel.app/video/convert/webm-to-mp4",
+    images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
-  twitter: { card: "summary_large_image", title: "WebM to MP4 Converter Free Online — webpifyy", description: "Convert WebM to MP4. H.264 + AAC. Browser-based." },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Video Tools","item":"https://webpifyy.vercel.app/video"},{"@type":"ListItem","position":3,"name":"Convert","item":"https://webpifyy.vercel.app/video/convert"},{"@type":"ListItem","position":4,"name":"WebM to MP4"}]})
+  twitter: {
+    card: "summary_large_image",
+    title: "Convert WebM to MP4 Online Free | webpifyy",
+    description: "Convert WebM videos to MP4 format online free. Browser-based FFmpeg, no uploads. Broad device compatibility. Fast, private, no signup required.",
+    images: ["https://webpifyy.vercel.app/opengraph-image"],
   },
 };
 
 const faqs = [
-  { q: "Why convert WebM to MP4?", a: "WebM is primarily supported by web browsers but lacks compatibility with many video players, mobile devices, and editing software. MP4 (H.264) has near-universal support." },
-  { q: "What codecs are used in the output MP4?", a: "The output uses H.264 for video and AAC for audio — the most compatible codec combination for MP4 files, supported by virtually all devices and platforms." },
-  { q: "How long does conversion take?", a: "Conversion time depends on your device and file size. WebM to MP4 requires full re-encoding, so large files may take several minutes. Progress is shown in real time." },
-  { q: "Is my video kept private?", a: "Yes. All conversion runs entirely in your browser using FFmpeg.wasm. No data is sent to any server." },
+  { q: "Why convert WebM to MP4?", a: "MP4 has broader device compatibility than WebM. It plays natively on all phones, tablets, smart TVs, and media players without additional codec support." },
+  { q: "Does WebM to MP4 conversion reduce quality?", a: "Minor quality reduction occurs during transcoding. Set quality to High to minimize visible differences from the original WebM." },
+  { q: "How long does WebM to MP4 conversion take?", a: "A 1-minute 1080p WebM typically converts in 2-3 minutes in the browser using WebAssembly." },
+  { q: "What codec does the MP4 output use?", a: "Output uses H.264 video codec and AAC audio codec, the most widely supported combination for MP4 files across all devices and platforms." },
 ];
 
 export default function WebmToMp4Page() {
@@ -47,6 +52,7 @@ export default function WebmToMp4Page() {
         inLanguage: "en",
         isAccessibleForFree: true,
         offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+        description: "Convert WebM videos to MP4 format online free. Browser-based FFmpeg, no uploads. Broad device compatibility. Fast, private, no signup required.",
       },
       {
         "@type": "FAQPage",

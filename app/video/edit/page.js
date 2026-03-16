@@ -2,16 +2,22 @@ import PageShell from "@/components/PageShell";
 import Breadcrumb from "@/components/Breadcrumb";
 
 export const metadata = {
-  title: "Video Editor Online Free — Trim, Mute & Screenshot",
-  description: "Free browser-based video editing tools. Trim videos, remove audio, and capture screenshots. FFmpeg.wasm powered, no uploads.",
+  title: "Free Online Video Editing Tools",
+  description: "Free video editing tools — trim, mute, take screenshots, add subtitles and more. Browser-based FFmpeg processing. No uploads, completely private.",
   alternates: { canonical: "https://webpifyy.vercel.app/video/edit" },
   openGraph: {
-    title: "Video Editor Online Free — Trim, Mute & Screenshot",
-    description: "Browser-based video editing. Trim, mute, screenshot. No uploads.",
+    type: "website",
+    siteName: "webpifyy",
+    title: "Free Online Video Editing Tools | webpifyy",
+    description: "Free video editing tools — trim, mute, take screenshots, add subtitles and more. Browser-based FFmpeg processing. No uploads, completely private.",
     url: "https://webpifyy.vercel.app/video/edit",
+    images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Video Tools","item":"https://webpifyy.vercel.app/video"},{"@type":"ListItem","position":3,"name":"Edit"}]})
+  twitter: {
+    card: "summary_large_image",
+    title: "Free Online Video Editing Tools | webpifyy",
+    description: "Free video editing tools — trim, mute, take screenshots, add subtitles and more. Browser-based FFmpeg processing. No uploads, completely private.",
+    images: ["https://webpifyy.vercel.app/opengraph-image"],
   },
 };
 
@@ -40,18 +46,6 @@ export default function VideoEditHub() {
           { "@type": "ListItem", position: 2, name: "Video Tools", item: "https://webpifyy.vercel.app/video" },
           { "@type": "ListItem", position: 3, name: "Video Editor" },
         ],
-      },
-      {
-        "@type": ["SoftwareApplication", "WebApplication"],
-        "@id": "https://webpifyy.vercel.app/video/edit#software",
-        name: "Video Editor",
-        url: "https://webpifyy.vercel.app/video/edit",
-        applicationCategory: "MultimediaApplication",
-        operatingSystem: "Any",
-        inLanguage: "en",
-        isAccessibleForFree: true,
-        offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-        description: "Free browser-based video editing tools. Trim, mute, screenshot.",
       },
     ],
   };

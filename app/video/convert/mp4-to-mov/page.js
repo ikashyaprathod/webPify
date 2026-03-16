@@ -3,25 +3,30 @@ import Breadcrumb from "@/components/Breadcrumb";
 import Mp4ToMov from "@/components/Mp4ToMov";
 
 export const metadata = {
-  title: "MP4 to MOV Converter Free Online — webpifyy",
-  description: "Convert MP4 videos to MOV format for Apple devices and Final Cut Pro online for free. No re-encoding — instant conversion. 100% browser-based.",
+  title: "Convert MP4 to MOV Online Free",
+  description: "Convert MP4 videos to MOV QuickTime format online free. Browser-based FFmpeg, no uploads. Compatible with Apple devices and Final Cut Pro.",
   alternates: { canonical: "https://webpifyy.vercel.app/video/convert/mp4-to-mov" },
   openGraph: {
-    title: "MP4 to MOV Converter Free Online — webpifyy",
-    description: "Convert MP4 videos to MOV format for Apple devices and Final Cut Pro. No re-encoding — instant conversion.",
+    type: "website",
+    siteName: "webpifyy",
+    title: "Convert MP4 to MOV Online Free | webpifyy",
+    description: "Convert MP4 videos to MOV QuickTime format online free. Browser-based FFmpeg, no uploads. Compatible with Apple devices and Final Cut Pro.",
     url: "https://webpifyy.vercel.app/video/convert/mp4-to-mov",
+    images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
-  twitter: { card: "summary_large_image", title: "MP4 to MOV Converter Free Online — webpifyy", description: "Convert MP4 to MOV. No re-encoding, instant." },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Video Tools","item":"https://webpifyy.vercel.app/video"},{"@type":"ListItem","position":3,"name":"Convert","item":"https://webpifyy.vercel.app/video/convert"},{"@type":"ListItem","position":4,"name":"MP4 to MOV"}]})
+  twitter: {
+    card: "summary_large_image",
+    title: "Convert MP4 to MOV Online Free | webpifyy",
+    description: "Convert MP4 videos to MOV QuickTime format online free. Browser-based FFmpeg, no uploads. Compatible with Apple devices and Final Cut Pro.",
+    images: ["https://webpifyy.vercel.app/opengraph-image"],
   },
 };
 
 const faqs = [
-  { q: "Why convert MP4 to MOV?", a: "MOV is Apple's QuickTime format, preferred by iMovie, Final Cut Pro, and many iOS/macOS applications. Converting to MOV ensures compatibility with Apple's ecosystem." },
-  { q: "Will converting MP4 to MOV re-encode the video?", a: "No. This converter uses stream copy mode (-c copy), which moves the video and audio streams into the new container without re-encoding. Conversion is instant and quality is preserved." },
-  { q: "Will the MOV file be larger than MP4?", a: "With stream copy mode the file sizes are nearly identical since the video data itself is not changed — only the container format changes." },
-  { q: "Is my video file uploaded anywhere?", a: "No. All conversion happens in your browser using FFmpeg.wasm. Your videos never leave your device." },
+  { q: "Why convert MP4 to MOV?", a: "MOV is Apple's native format and works best with Final Cut Pro, iMovie, and other Apple applications. Some older Apple devices also prefer MOV over MP4." },
+  { q: "Does MP4 to MOV conversion lose quality?", a: "Using stream copy mode (-c copy), conversion is lossless and near-instant. Quality and file size remain identical to the source MP4." },
+  { q: "How long does MP4 to MOV conversion take?", a: "With stream copy, conversion is near-instant regardless of video length. A 1GB MP4 converts in seconds without re-encoding." },
+  { q: "Is MOV compatible with Windows?", a: "MOV requires QuickTime on Windows or a compatible player like VLC. For broad compatibility, MP4 is better. Use MOV when working with Apple tools." },
 ];
 
 export default function Mp4ToMovPage() {
@@ -47,6 +52,7 @@ export default function Mp4ToMovPage() {
         inLanguage: "en",
         isAccessibleForFree: true,
         offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+        description: "Convert MP4 videos to MOV QuickTime format online free. Browser-based FFmpeg, no uploads. Compatible with Apple devices and Final Cut Pro.",
       },
       {
         "@type": "FAQPage",

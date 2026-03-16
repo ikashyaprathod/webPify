@@ -3,26 +3,31 @@ import Breadcrumb from "@/components/Breadcrumb";
 import ImageConverter from "@/components/ImageConverter";
 
 export const metadata = {
-  title: "BMP to PNG Converter Online Free",
-  description: "Convert BMP images to PNG format online for free. PNG is smaller, widely supported, and preserves transparency. No sign-up.",
+  title: "Convert BMP to PNG Online Free",
+  description: "Convert BMP images to PNG online free. BMP to PNG conversion preserves full quality. Instant browser-based conversion, no uploads needed.",
   alternates: { canonical: "https://webpifyy.vercel.app/image/convert/bmp-to-png" },
   keywords: ["bmp to png", "convert bmp to png", "bmp png converter online", "bitmap to png"],
   openGraph: {
-    title: "BMP to PNG Converter Online Free",
-    description: "Convert BMP to PNG online. Smaller files with full quality. No sign-up.",
+    title: "Convert BMP to PNG Online Free | webpifyy",
+    description: "Convert BMP images to PNG online free. BMP to PNG conversion preserves full quality. Instant browser-based conversion, no uploads needed.",
     url: "https://webpifyy.vercel.app/image/convert/bmp-to-png",
+    type: "website",
+    siteName: "webpifyy",
+    images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
-  twitter: { card: "summary_large_image", title: "BMP to PNG Converter Online Free", description: "Convert BMP to PNG. No sign-up." },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Image Tools","item":"https://webpifyy.vercel.app/image"},{"@type":"ListItem","position":3,"name":"Convert","item":"https://webpifyy.vercel.app/image/convert"},{"@type":"ListItem","position":4,"name":"BMP to PNG"}]})
+  twitter: {
+    card: "summary_large_image",
+    title: "Convert BMP to PNG Online Free | webpifyy",
+    description: "Convert BMP images to PNG online free. BMP to PNG conversion preserves full quality. Instant browser-based conversion, no uploads needed.",
+    images: ["https://webpifyy.vercel.app/opengraph-image"],
   },
 };
 
 const faqs = [
-  { q: "Why convert BMP to PNG?", a: "BMP files are uncompressed and extremely large. Converting to PNG reduces file size by 70–90% while maintaining full lossless quality and transparency support." },
-  { q: "Is PNG better than BMP?", a: "Yes. PNG uses lossless compression to achieve much smaller file sizes while preserving identical image quality. PNG also supports transparency which BMP does not." },
-  { q: "Will the image quality change?", a: "No. PNG uses lossless compression so there is no quality loss compared to BMP. Every pixel is preserved exactly." },
-  { q: "Can I convert multiple BMP files?", a: "Yes. You can upload multiple BMP files and they will all be converted to PNG in sequence." },
+  { q: "Why convert BMP to PNG?", a: "BMP files are uncompressed and very large. Converting to PNG reduces file size significantly through lossless compression while maintaining identical visual quality." },
+  { q: "How much smaller will my PNG be compared to BMP?", a: "PNG files are typically 60-80% smaller than BMP for the same image. Compression ratio depends on image content — solid colors compress more than photos." },
+  { q: "Does BMP to PNG conversion lose quality?", a: "No. Both BMP and PNG store pixel data losslessly. Converting between them is a lossless operation with zero quality loss guaranteed." },
+  { q: "What is BMP format used for?", a: "BMP is a legacy Windows format that stores raw uncompressed pixel data. It is mainly used in legacy applications. PNG is a better modern alternative." },
 ];
 
 export default function BmpToPngPage() {
@@ -48,6 +53,7 @@ export default function BmpToPngPage() {
         inLanguage: "en",
         isAccessibleForFree: true,
         offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+        description: "Convert BMP images to PNG online free. BMP to PNG conversion preserves full quality.",
       },
       {
         "@type": "FAQPage",
@@ -69,7 +75,7 @@ export default function BmpToPngPage() {
 
         <ImageConverter outputFormat="image/png" outputFormatName="PNG" />
 
-        
+
         <div className="tpg-stats-wrap">
           <div className="tpg-glass tpg-lm-panel">
             <div className="tpg-glow-1" />
