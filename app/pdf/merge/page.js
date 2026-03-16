@@ -3,26 +3,31 @@ import Breadcrumb from "@/components/Breadcrumb";
 import PdfMerger from "@/components/PdfMerger";
 
 export const metadata = {
-  title: "Merge PDF Files Online Free — Combine PDFs Instantly",
-  description: "Merge multiple PDF files into one document online. Drag to reorder pages. 100% browser-based, no uploads, no sign-up.",
+  title: "Merge PDF Files Online Free \u2014 Combine PDFs",
+  description: "Merge multiple PDF files into one online free. Drag to reorder, then combine. Browser-based pdf-lib processing, no file uploads. No signup.",
   alternates: { canonical: "https://webpifyy.vercel.app/pdf/merge" },
   keywords: ["merge pdf", "combine pdf", "join pdf files", "pdf merger online", "merge pdf free"],
   openGraph: {
-    title: "Merge PDF Files Online Free — Combine PDFs Instantly",
-    description: "Merge multiple PDFs into one document. Drag to reorder. 100% browser-based.",
+    title: "Merge PDF Files Online Free \u2014 Combine PDFs | webpifyy",
+    description: "Merge multiple PDF files into one online free. Drag to reorder, then combine. Browser-based pdf-lib processing, no file uploads. No signup.",
     url: "https://webpifyy.vercel.app/pdf/merge",
+    type: "website",
+    siteName: "webpifyy",
+    images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
-  twitter: { card: "summary_large_image", title: "Merge PDF Files Online Free", description: "Combine multiple PDFs instantly. No uploads, no sign-up." },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"PDF Tools","item":"https://webpifyy.vercel.app/pdf"},{"@type":"ListItem","position":3,"name":"Merge"}]})
+  twitter: {
+    card: "summary_large_image",
+    title: "Merge PDF Files Online Free \u2014 Combine PDFs | webpifyy",
+    description: "Merge multiple PDF files into one online free. Drag to reorder, then combine. Browser-based pdf-lib processing, no file uploads. No signup.",
+    images: ["https://webpifyy.vercel.app/opengraph-image"],
   },
 };
 
 const faqs = [
-  { q: "How many PDF files can I merge?", a: "You can merge up to 10 PDF files at a time. Simply upload them and drag to reorder before merging." },
-  { q: "Can I reorder pages before merging?", a: "Yes. After uploading, use the up/down buttons to change the order of each PDF file. The final PDF will follow your custom order." },
-  { q: "Does merging affect PDF quality?", a: "No. All text, images, and formatting are preserved exactly. We only combine the page streams — no re-encoding." },
-  { q: "Is the merged PDF secure?", a: "Yes. Everything runs in your browser using pdf-lib. No file is ever uploaded to any server." },
+  { q: "How many PDF files can I merge at once?", a: "There is no hard limit. You can merge as many PDFs as your browser memory supports. Most users merge 2-20 files without issues." },
+  { q: "Can I reorder pages before merging?", a: "Yes. Drag and drop files to change the merge order. The final PDF will contain pages in the order you arranged the files." },
+  { q: "Is merging PDFs free and private?", a: "Yes. Merging uses pdf-lib running in your browser. Files never leave your device. No signup required and no limits on file size or document count." },
+  { q: "Can I merge password-protected PDFs?", a: "Password-protected PDFs need to be unlocked before merging. Remove the password protection first then merge the unlocked files." },
 ];
 
 export default function PdfMergePage() {

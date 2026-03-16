@@ -3,16 +3,22 @@ import Breadcrumb from "@/components/Breadcrumb";
 import Link from "next/link";
 
 export const metadata = {
-  title: "PDF Tools Online – PDF to JPG Converter Free",
-  description: "Free online PDF tools. Convert PDF pages to JPG images. Browser-based, no server uploads.",
+  title: "Free PDF Tools Online \u2014 Merge Split Compress",
+  description: "Free online PDF tools \u2014 merge, split, compress, rotate, add watermark, add password, reorder pages. Browser-based pdf-lib, no file uploads.",
   alternates: { canonical: "https://webpifyy.vercel.app/pdf" },
   openGraph: {
-    title: "PDF Tools Online – PDF to JPG Converter Free",
-    description: "Convert PDF pages to JPG images instantly. Browser-based, no uploads.",
+    title: "Free PDF Tools Online \u2014 Merge Split Compress | webpifyy",
+    description: "Free online PDF tools \u2014 merge, split, compress, rotate, add watermark, add password, reorder pages. Browser-based pdf-lib, no file uploads.",
     url: "https://webpifyy.vercel.app/pdf",
+    type: "website",
+    siteName: "webpifyy",
+    images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"PDF Tools"}]})
+  twitter: {
+    card: "summary_large_image",
+    title: "Free PDF Tools Online \u2014 Merge Split Compress | webpifyy",
+    description: "Free online PDF tools \u2014 merge, split, compress, rotate, add watermark, add password, reorder pages. Browser-based pdf-lib, no file uploads.",
+    images: ["https://webpifyy.vercel.app/opengraph-image"],
   },
 };
 

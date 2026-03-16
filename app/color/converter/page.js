@@ -3,18 +3,18 @@ import Breadcrumb from "@/components/Breadcrumb";
 import ColorConverter from "@/components/ColorConverter";
 
 export const metadata = {
-  title: "Color Converter Online Free — HEX RGB HSL CMYK",
-  description: "Convert colors between HEX, RGB, HSL, and CMYK formats instantly. Type a named color like 'coral' or 'indigo' for automatic lookup. Free, no sign-up.",
+  title: "Color Converter Online Free \u2014 HEX RGB HSL CMYK",
+  description: "Convert colors between HEX, RGB, HSL, HSV and CMYK online free. Instant conversion, color preview, copy all formats. Browser-based, no signup.",
   alternates: { canonical: "https://webpifyy.vercel.app/color/converter" },
-  openGraph: { title: "Color Converter Online Free — HEX RGB HSL CMYK", description: "Convert HEX, RGB, HSL, and CMYK color values instantly.", url: "https://webpifyy.vercel.app/color/converter" },
-  twitter: { card: "summary_large_image", title: "Color Converter Online Free — HEX RGB HSL CMYK", description: "Instant color format conversion with live preview." },
+  openGraph: { title: "Color Converter Online Free \u2014 HEX RGB HSL CMYK | webpifyy", description: "Convert colors between HEX, RGB, HSL, HSV and CMYK online free. Instant conversion, color preview, copy all formats. Browser-based, no signup.", url: "https://webpifyy.vercel.app/color/converter", type: "website", siteName: "webpifyy", images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }] },
+  twitter: { card: "summary_large_image", title: "Color Converter Online Free \u2014 HEX RGB HSL CMYK | webpifyy", description: "Convert colors between HEX, RGB, HSL, HSV and CMYK online free. Instant conversion, color preview, copy all formats. Browser-based, no signup.", images: ["https://webpifyy.vercel.app/opengraph-image"] },
 };
 
 const faqs = [
-  { q: "Which color formats can I convert?", a: "You can convert between HEX (#rrggbb), RGB (0-255 each channel), HSL (hue 0-360, saturation/lightness 0-100%), and CMYK (0-100% each channel)." },
-  { q: "Can I type a color name like 'red' or 'coral'?", a: "Yes. Use the Named Color field to type any CSS named color (e.g., 'coral', 'indigo', 'teal'). The tool will automatically resolve it to HEX and update all other formats." },
-  { q: "Are all inputs synchronized in real time?", a: "Yes. Changing any input (HEX, R, G, B, H, S, or L) immediately updates all other fields so all formats stay in sync." },
-  { q: "Is CMYK editable?", a: "CMYK is displayed for reference only and is not an editable input, as CMYK is a derived approximation from the RGB values." },
+  { q: "How do I convert a hex color to RGB?", a: "Enter your hex code in the HEX field and all other formats (RGB, HSL, HSV, CMYK) update instantly. Click any format to copy its value." },
+  { q: "Can I enter named colors like red or blue?", a: "Yes. Type any CSS named color (red, blue, tomato, cornflowerblue etc.) and it converts to all numeric formats instantly." },
+  { q: "What is the difference between HSL and HSV?", a: "HSL (Hue, Saturation, Lightness) and HSV (Hue, Saturation, Value) differ in how lightness is calculated. HSL is more intuitive for CSS, HSV is common in design applications." },
+  { q: "Can I convert CMYK to hex?", a: "Yes. Enter CMYK values (0-100%) and the converter outputs the equivalent HEX, RGB and HSL values. CMYK to screen conversion assumes sRGB color space." },
 ];
 
 export default function ColorConverterPage() {

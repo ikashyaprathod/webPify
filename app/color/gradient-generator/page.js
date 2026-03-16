@@ -3,18 +3,18 @@ import Breadcrumb from "@/components/Breadcrumb";
 import GradientGenerator from "@/components/GradientGenerator";
 
 export const metadata = {
-  title: "CSS Gradient Generator Free Online — webpifyy",
-  description: "Build beautiful CSS gradients visually. Linear, radial, and conic gradients with custom color stops, angle control, and 6 built-in presets. Copy CSS or download as PNG.",
+  title: "CSS Gradient Generator Online Free",
+  description: "Generate CSS gradients online free. Linear, radial and conic gradients. Add color stops, copy CSS code, download as PNG. No signup needed.",
   alternates: { canonical: "https://webpifyy.vercel.app/color/gradient-generator" },
-  openGraph: { title: "CSS Gradient Generator Free Online — webpifyy", description: "Build linear, radial and conic CSS gradients visually.", url: "https://webpifyy.vercel.app/color/gradient-generator" },
-  twitter: { card: "summary_large_image", title: "CSS Gradient Generator Free Online — webpifyy", description: "Visual CSS gradient builder with color stops, angle control, and presets." },
+  openGraph: { title: "CSS Gradient Generator Online Free | webpifyy", description: "Generate CSS gradients online free. Linear, radial and conic gradients. Add color stops, copy CSS code, download as PNG. No signup needed.", url: "https://webpifyy.vercel.app/color/gradient-generator", type: "website", siteName: "webpifyy", images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }] },
+  twitter: { card: "summary_large_image", title: "CSS Gradient Generator Online Free | webpifyy", description: "Generate CSS gradients online free. Linear, radial and conic gradients. Add color stops, copy CSS code, download as PNG. No signup needed.", images: ["https://webpifyy.vercel.app/opengraph-image"] },
 };
 
 const faqs = [
-  { q: "What gradient types are supported?", a: "The generator supports linear (directional), radial (circular from center outward), and conic (angular sweep) gradient types." },
-  { q: "How do I add more color stops?", a: "Click '+ Add Stop' to insert a new color stop. You can then adjust its color and position with the sliders. At least 2 stops are always required." },
-  { q: "How do I use the generated CSS?", a: "The CSS Output box shows the complete 'background:' declaration. Click 'Copy CSS' to copy it directly to your clipboard, then paste it into your stylesheet." },
-  { q: "Can I download the gradient as an image?", a: "Yes. Click 'Download PNG' to save an 800×400px PNG of your current gradient, useful for design mockups or presentations." },
+  { q: "What types of CSS gradients can I create?", a: "Linear gradients (directional), radial gradients (circular from center), and conic gradients (rotating around a point). All support multiple color stops." },
+  { q: "How do I add multiple colors to my gradient?", a: "Click Add Color Stop to add new stops. Drag stops to position them. Click a stop to change its color. Gradients update live as you make changes." },
+  { q: "Can I copy the CSS gradient code?", a: "Yes. Click Copy CSS to get the complete background gradient property ready to use in your stylesheet. Includes browser prefixes." },
+  { q: "Can I download the gradient as an image?", a: "Yes. Download as PNG at any resolution. Useful for backgrounds, design mockups, or when you need a gradient as an image rather than CSS." },
 ];
 
 export default function GradientGeneratorPage() {

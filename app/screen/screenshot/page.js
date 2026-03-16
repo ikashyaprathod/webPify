@@ -3,18 +3,18 @@ import Breadcrumb from "@/components/Breadcrumb";
 import ScreenshotCapture from "@/components/ScreenshotCapture";
 
 export const metadata = {
-  title: "Screenshot Tool Online Free — Capture & Annotate",
-  description: "Paste, drag-and-drop, or upload screenshots. Draw rectangles, add text annotations, and download as PNG or JPG. Works entirely in your browser.",
+  title: "Screenshot Tool Online Free \u2014 Capture & Annotate",
+  description: "Capture and annotate screenshots online free. Paste from clipboard, add annotations, download as PNG or JPG. Browser-based, no uploads.",
   alternates: { canonical: "https://webpifyy.vercel.app/screen/screenshot" },
-  openGraph: { title: "Screenshot Tool Online Free — Capture & Annotate", description: "Annotate screenshots with rectangles and text. Download as PNG or JPG.", url: "https://webpifyy.vercel.app/screen/screenshot" },
-  twitter: { card: "summary_large_image", title: "Screenshot Tool Online Free — Capture & Annotate", description: "Paste or drag screenshots, annotate, and download. Fully browser-based." },
+  openGraph: { title: "Screenshot Tool Online Free \u2014 Capture & Annotate | webpifyy", description: "Capture and annotate screenshots online free. Paste from clipboard, add annotations, download as PNG or JPG. Browser-based, no uploads.", url: "https://webpifyy.vercel.app/screen/screenshot", type: "website", siteName: "webpifyy", images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }] },
+  twitter: { card: "summary_large_image", title: "Screenshot Tool Online Free \u2014 Capture & Annotate | webpifyy", description: "Capture and annotate screenshots online free. Paste from clipboard, add annotations, download as PNG or JPG. Browser-based, no uploads.", images: ["https://webpifyy.vercel.app/opengraph-image"] },
 };
 
 const faqs = [
-  { q: "How do I add a screenshot to the tool?", a: "You can paste (Ctrl+V / Cmd+V) any image from your clipboard, drag and drop an image file onto the drop zone, or click 'Or browse file' to select a file." },
-  { q: "What annotation tools are available?", a: "You can draw rectangle outlines on the screenshot and add text labels. Select the tool from the toolbar, then click or drag on the canvas." },
-  { q: "Can I copy the annotated screenshot back to my clipboard?", a: "Yes. Click 'Copy to Clipboard' to write the annotated canvas as a PNG directly to your clipboard, ready to paste anywhere." },
-  { q: "Is the image uploaded to a server?", a: "No. All processing happens in your browser using HTML5 Canvas. No image data leaves your device at any point." },
+  { q: "How do I use the screenshot tool?", a: "Take a screenshot with your OS (Win+Shift+S on Windows, Cmd+Shift+4 on Mac), then paste it directly into the tool with Ctrl+V or Cmd+V." },
+  { q: "Can I annotate my screenshot?", a: "Yes. Add text labels, arrows, and rectangles to highlight areas of your screenshot. Useful for bug reports, documentation, and tutorials." },
+  { q: "Can I crop the screenshot after pasting?", a: "Yes. Use the crop tool to select the exact area you want before downloading. Remove unnecessary parts for cleaner images." },
+  { q: "What format can I download the screenshot as?", a: "Download as PNG (lossless, best quality) or JPG (smaller file size). PNG is recommended for screenshots containing text or UI elements." },
 ];
 
 export default function ScreenshotPage() {

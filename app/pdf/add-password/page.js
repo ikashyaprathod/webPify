@@ -3,25 +3,30 @@ import Breadcrumb from "@/components/Breadcrumb";
 import PdfPassword from "@/components/PdfPassword";
 
 export const metadata = {
-  title: "PDF Password Protect Online Free — webpifyy",
-  description: "Add password protection to PDF files online for free. Set user and owner passwords with permission controls. Browser-based pdf-lib processing.",
+  title: "Add Password to PDF Online Free \u2014 Protect PDF",
+  description: "Protect PDF files with a password online free. Set open and owner passwords. Control permissions. Browser-based pdf-lib, no uploads needed.",
   alternates: { canonical: "https://webpifyy.vercel.app/pdf/add-password" },
   openGraph: {
-    title: "PDF Password Protect Online Free — webpifyy",
-    description: "Add password protection to PDF files. Set user and owner passwords with permission controls.",
+    title: "Add Password to PDF Online Free \u2014 Protect PDF | webpifyy",
+    description: "Protect PDF files with a password online free. Set open and owner passwords. Control permissions. Browser-based pdf-lib, no uploads needed.",
     url: "https://webpifyy.vercel.app/pdf/add-password",
+    type: "website",
+    siteName: "webpifyy",
+    images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
-  twitter: { card: "summary_large_image", title: "PDF Password Protect Online Free — webpifyy", description: "Password protect PDF files. Set permissions." },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"PDF Tools","item":"https://webpifyy.vercel.app/pdf"},{"@type":"ListItem","position":3,"name":"Add Password"}]})
+  twitter: {
+    card: "summary_large_image",
+    title: "Add Password to PDF Online Free \u2014 Protect PDF | webpifyy",
+    description: "Protect PDF files with a password online free. Set open and owner passwords. Control permissions. Browser-based pdf-lib, no uploads needed.",
+    images: ["https://webpifyy.vercel.app/opengraph-image"],
   },
 };
 
 const faqs = [
-  { q: "What is the difference between user and owner passwords?", a: "The user password (also called open password) is required to open and view the PDF. The owner password controls editing permissions such as printing and copying text." },
-  { q: "Is this tool's encryption secure?", a: "This browser-based tool uses pdf-lib for PDF metadata protection. For strong AES-256 encryption that will be enforced by PDF readers, use a desktop tool such as Adobe Acrobat or qpdf." },
-  { q: "What permissions can I control?", a: "You can toggle whether the document allows printing and whether text copying is permitted. These permissions are set alongside the password metadata." },
-  { q: "Is my PDF uploaded to a server?", a: "No. All processing happens in your browser using pdf-lib. Your PDF never leaves your device." },
+  { q: "What types of passwords can I set on a PDF?", a: "Set a user password (required to open the document) and an owner password (required to edit, print or copy content). Both can be set independently." },
+  { q: "What permissions can I restrict?", a: "Restrict printing, copying text, editing content, and adding annotations. Permissions are enforced by PDF reader software that respects PDF standards." },
+  { q: "Is password-protected PDF secure?", a: "PDF password protection uses AES-256 encryption. It is secure against casual access. For highly sensitive documents, consider additional security measures." },
+  { q: "Can I remove a PDF password later?", a: "Without the password, removal is not possible. With the correct password, any PDF tool that supports decryption can remove the protection." },
 ];
 
 export default function PdfAddPasswordPage() {

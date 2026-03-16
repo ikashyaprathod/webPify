@@ -2,16 +2,22 @@ import PageShell from "@/components/PageShell";
 import Breadcrumb from "@/components/Breadcrumb";
 
 export const metadata = {
-  title: "Audio Compressor Online Free — Reduce Audio File Size",
-  description: "Compress audio files online. Reduce MP3, WAV, AAC, OGG, and FLAC file sizes. Browser-based using FFmpeg.wasm.",
+  title: "Online Audio Compressor \u2014 Reduce Audio File Size",
+  description: "Compress audio files online free. Reduce MP3, WAV, AAC file size. Browser-based FFmpeg processing. No uploads, no signup required.",
   alternates: { canonical: "https://webpifyy.vercel.app/audio/compress" },
   openGraph: {
-    title: "Audio Compressor Online Free",
-    description: "Compress audio files in your browser. No uploads.",
+    title: "Online Audio Compressor \u2014 Reduce Audio File Size | webpifyy",
+    description: "Compress audio files online free. Reduce MP3, WAV, AAC file size. Browser-based FFmpeg processing. No uploads, no signup required.",
     url: "https://webpifyy.vercel.app/audio/compress",
+    type: "website",
+    siteName: "webpifyy",
+    images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Audio Tools","item":"https://webpifyy.vercel.app/audio"},{"@type":"ListItem","position":3,"name":"Compress"}]})
+  twitter: {
+    card: "summary_large_image",
+    title: "Online Audio Compressor \u2014 Reduce Audio File Size | webpifyy",
+    description: "Compress audio files online free. Reduce MP3, WAV, AAC file size. Browser-based FFmpeg processing. No uploads, no signup required.",
+    images: ["https://webpifyy.vercel.app/opengraph-image"],
   },
 };
 

@@ -3,26 +3,31 @@ import Breadcrumb from "@/components/Breadcrumb";
 import AudioCompressor from "@/components/AudioCompressor";
 
 export const metadata = {
-  title: "MP3 Compressor Online Free — Reduce MP3 File Size",
-  description: "Compress MP3 audio files online for free. Reduce file size with 128kbps encoding. Browser-based using FFmpeg.wasm — no uploads.",
+  title: "Compress MP3 Online Free \u2014 Reduce MP3 File Size",
+  description: "Compress MP3 files online free. Reduce MP3 size by lowering bitrate. 128kbps for streaming, 320kbps for quality. Browser-based, no uploads.",
   alternates: { canonical: "https://webpifyy.vercel.app/audio/compress/mp3" },
   keywords: ["mp3 compressor", "compress mp3 online", "reduce mp3 file size", "mp3 optimizer", "shrink mp3"],
   openGraph: {
-    title: "MP3 Compressor Online Free — Reduce MP3 File Size",
-    description: "Compress MP3 files in your browser. 128kbps output, no uploads.",
+    title: "Compress MP3 Online Free \u2014 Reduce MP3 File Size | webpifyy",
+    description: "Compress MP3 files online free. Reduce MP3 size by lowering bitrate. 128kbps for streaming, 320kbps for quality. Browser-based, no uploads.",
     url: "https://webpifyy.vercel.app/audio/compress/mp3",
+    type: "website",
+    siteName: "webpifyy",
+    images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
-  twitter: { card: "summary_large_image", title: "MP3 Compressor Online Free", description: "Compress MP3 files. No uploads, no sign-up." },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Audio Tools","item":"https://webpifyy.vercel.app/audio"},{"@type":"ListItem","position":3,"name":"Compress","item":"https://webpifyy.vercel.app/audio/compress"},{"@type":"ListItem","position":4,"name":"MP3"}]})
+  twitter: {
+    card: "summary_large_image",
+    title: "Compress MP3 Online Free \u2014 Reduce MP3 File Size | webpifyy",
+    description: "Compress MP3 files online free. Reduce MP3 size by lowering bitrate. 128kbps for streaming, 320kbps for quality. Browser-based, no uploads.",
+    images: ["https://webpifyy.vercel.app/opengraph-image"],
   },
 };
 
 const faqs = [
-  { q: "How does MP3 compression work?", a: "We use FFmpeg's libmp3lame encoder at 128kbps. Higher source bitrates (e.g. 320kbps) will be reduced to 128kbps, significantly reducing file size while maintaining acceptable quality." },
-  { q: "Will compression reduce audio quality?", a: "Yes, slightly. Reducing from 320kbps to 128kbps is noticeable on high-end audio equipment. For casual listening and web use, 128kbps is perfectly adequate." },
-  { q: "What formats can I compress?", a: "You can compress MP3, WAV, AAC, OGG, and FLAC files. All outputs are saved as 128kbps MP3." },
-  { q: "Is my audio uploaded to a server?", a: "No. All compression happens in your browser using FFmpeg.wasm. Your audio files never leave your device." },
+  { q: "How do I reduce MP3 file size?", a: "Upload your MP3 and select an output bitrate. 128kbps is good for voice and streaming. 192kbps balances quality and size for music. 320kbps preserves near-original quality." },
+  { q: "What bitrate should I use for my MP3?", a: "For podcasts and voice: 64-96kbps. For music streaming: 128-192kbps. For archival quality: 320kbps. Higher bitrate means larger file size but better audio quality." },
+  { q: "Does compressing MP3 reduce audio quality?", a: "Yes. MP3 compression is lossy. Reducing bitrate reduces quality. Going from 320kbps to 128kbps reduces quality but is usually acceptable for casual listening." },
+  { q: "Is MP3 compression free and private?", a: "Yes. FFmpeg.wasm processes files in your browser. Nothing is uploaded. Free, unlimited, no signup." },
 ];
 
 export default function Mp3CompressorPage() {

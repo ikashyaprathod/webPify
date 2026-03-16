@@ -3,30 +3,31 @@ import Breadcrumb from "@/components/Breadcrumb";
 import PdfCompressor from "@/components/PdfCompressor";
 
 export const metadata = {
-  title: "PDF Compressor — Reduce PDF File Size Online Free",
-  description: "Reduce PDF file size without re-printing. Remove metadata and optimize streams — 100% in your browser. No uploads, no sign-up.",
+  title: "Compress PDF Online Free \u2014 Reduce PDF Size",
+  description: "Compress PDF files online free. Reduce PDF file size by removing metadata and optimizing streams. Browser-based pdf-lib, no uploads needed.",
   alternates: { canonical: "https://webpifyy.vercel.app/pdf/compress" },
   keywords: ["compress pdf", "reduce pdf size", "pdf compressor online", "pdf optimizer", "shrink pdf"],
   openGraph: {
-    title: "PDF Compressor — Reduce PDF File Size Online Free",
-    description: "Reduce PDF file size without re-printing. 100% browser-based, no uploads.",
+    title: "Compress PDF Online Free \u2014 Reduce PDF Size | webpifyy",
+    description: "Compress PDF files online free. Reduce PDF file size by removing metadata and optimizing streams. Browser-based pdf-lib, no uploads needed.",
     url: "https://webpifyy.vercel.app/pdf/compress",
+    type: "website",
+    siteName: "webpifyy",
+    images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "PDF Compressor — Reduce PDF File Size Online Free",
-    description: "Reduce PDF file size in your browser. No uploads, no sign-up.",
-  },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"PDF Tools","item":"https://webpifyy.vercel.app/pdf"},{"@type":"ListItem","position":3,"name":"Compress"}]})
+    title: "Compress PDF Online Free \u2014 Reduce PDF Size | webpifyy",
+    description: "Compress PDF files online free. Reduce PDF file size by removing metadata and optimizing streams. Browser-based pdf-lib, no uploads needed.",
+    images: ["https://webpifyy.vercel.app/opengraph-image"],
   },
 };
 
 const faqs = [
-  { q: "How does browser-based PDF compression work?", a: "We use pdf-lib to reload your PDF and re-save it with object streams enabled. This removes redundant metadata and optimizes internal structure, reducing file size by 10–40% for most PDFs." },
-  { q: "Does compression affect PDF quality?", a: "No visual quality is lost. We only optimize the file structure and remove metadata — all text, images, and formatting remain intact." },
-  { q: "Is my PDF uploaded to a server?", a: "Never. All processing happens entirely in your browser using JavaScript. Your files never leave your device." },
-  { q: "What is the maximum PDF file size?", a: "There is no hard server limit since processing is client-side. Very large PDFs (100MB+) may be slow depending on your device's memory." },
+  { q: "How much can I compress a PDF?", a: "Compression is most effective on PDFs with embedded images. Text-only PDFs may only reduce by 5-10%. Image-heavy PDFs can reduce by 30-60%." },
+  { q: "Does PDF compression reduce document quality?", a: "Metadata removal and stream optimization are lossless. Image compression within PDFs reduces visual quality slightly depending on compression level." },
+  { q: "Why is my PDF still large after compression?", a: "PDFs with scanned images, embedded fonts, or CAD drawings cannot compress as efficiently. Consider reducing image resolution before creating the PDF." },
+  { q: "Is PDF compression free with no file size limits?", a: "Yes, completely free. Processing uses pdf-lib running in your browser. No files are uploaded and there are no file size restrictions." },
 ];
 
 export default function PdfCompressPage() {

@@ -2,11 +2,11 @@ import PageShell from "@/components/PageShell";
 import Breadcrumb from "@/components/Breadcrumb";
 
 export const metadata = {
-  title: "Free Screen Tools Online — webpifyy",
-  description: "Free browser-based screen tools: record your screen without installing software, and capture & annotate screenshots. 100% private — nothing is uploaded.",
+  title: "Free Screen Tools Online \u2014 Recorder & Screenshot",
+  description: "Free browser-based screen tools \u2014 record your screen, capture screenshots and annotate. No downloads, no uploads, completely private.",
   alternates: { canonical: "https://webpifyy.vercel.app/screen" },
-  openGraph: { title: "Free Screen Tools Online — webpifyy", description: "Screen recorder and screenshot tool. No install, no sign-up.", url: "https://webpifyy.vercel.app/screen" },
-  twitter: { card: "summary_large_image", title: "Free Screen Tools Online — webpifyy", description: "Record your screen and capture screenshots entirely in your browser." },
+  openGraph: { title: "Free Screen Tools Online \u2014 Recorder & Screenshot | webpifyy", description: "Free browser-based screen tools \u2014 record your screen, capture screenshots and annotate. No downloads, no uploads, completely private.", url: "https://webpifyy.vercel.app/screen", type: "website", siteName: "webpifyy", images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }] },
+  twitter: { card: "summary_large_image", title: "Free Screen Tools Online \u2014 Recorder & Screenshot | webpifyy", description: "Free browser-based screen tools \u2014 record your screen, capture screenshots and annotate. No downloads, no uploads, completely private.", images: ["https://webpifyy.vercel.app/opengraph-image"] },
 };
 
 const toolCards = [

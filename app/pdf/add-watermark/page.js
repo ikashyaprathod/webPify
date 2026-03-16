@@ -3,25 +3,30 @@ import Breadcrumb from "@/components/Breadcrumb";
 import PdfWatermark from "@/components/PdfWatermark";
 
 export const metadata = {
-  title: "Add Watermark to PDF Online Free — webpifyy",
-  description: "Add text watermarks to every page of a PDF online for free. Control font, size, opacity, rotation and position. 100% browser-based using pdf-lib.",
+  title: "Add Watermark to PDF Online Free",
+  description: "Add text watermarks to PDF files online free. Control font, size, opacity, rotation and position. Browser-based pdf-lib, no uploads needed.",
   alternates: { canonical: "https://webpifyy.vercel.app/pdf/add-watermark" },
   openGraph: {
-    title: "Add Watermark to PDF Online Free — webpifyy",
-    description: "Add text watermarks to every page of a PDF. Control font, size, opacity, rotation and position. 100% browser-based.",
+    title: "Add Watermark to PDF Online Free | webpifyy",
+    description: "Add text watermarks to PDF files online free. Control font, size, opacity, rotation and position. Browser-based pdf-lib, no uploads needed.",
     url: "https://webpifyy.vercel.app/pdf/add-watermark",
+    type: "website",
+    siteName: "webpifyy",
+    images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
-  twitter: { card: "summary_large_image", title: "Add Watermark to PDF Online Free — webpifyy", description: "Add text watermarks to PDF. Customizable, browser-based." },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"PDF Tools","item":"https://webpifyy.vercel.app/pdf"},{"@type":"ListItem","position":3,"name":"Add Watermark"}]})
+  twitter: {
+    card: "summary_large_image",
+    title: "Add Watermark to PDF Online Free | webpifyy",
+    description: "Add text watermarks to PDF files online free. Control font, size, opacity, rotation and position. Browser-based pdf-lib, no uploads needed.",
+    images: ["https://webpifyy.vercel.app/opengraph-image"],
   },
 };
 
 const faqs = [
-  { q: "What types of watermarks can I add?", a: "This tool adds text watermarks. You can customize the text, font size, opacity, rotation angle, color, and position (center, diagonal, or tiled across all pages)." },
-  { q: "Will the watermark be added to every page?", a: "Yes. The watermark is applied to every page of the PDF document automatically." },
-  { q: "Can someone remove the watermark?", a: "Text watermarks added via pdf-lib are embedded as PDF content elements. They can be removed using PDF editing software. For tamper-proof watermarking, consider using dedicated enterprise tools." },
-  { q: "Is my PDF uploaded anywhere?", a: "No. All watermarking happens entirely in your browser using pdf-lib. Your PDF never leaves your device." },
+  { q: "Can I add a watermark to every page of a PDF?", a: "Yes. The watermark applies to all pages by default. Customize text, font size, opacity, rotation angle and position for each placement." },
+  { q: "Can I make a watermark semi-transparent?", a: "Yes. The opacity slider from 10% to 100% controls transparency. 20-30% opacity is typical for watermarks that are visible but not distracting." },
+  { q: "Can I position the watermark anywhere on the page?", a: "Yes. Choose center, diagonal (across the full page), or specific corner positions. Diagonal placement is the most tamper-resistant option." },
+  { q: "Is adding a PDF watermark free?", a: "Yes, completely free. pdf-lib runs in your browser with no file size limits or signup requirements." },
 ];
 
 export default function PdfAddWatermarkPage() {

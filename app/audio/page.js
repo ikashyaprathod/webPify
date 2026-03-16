@@ -2,16 +2,22 @@ import PageShell from "@/components/PageShell";
 import Breadcrumb from "@/components/Breadcrumb";
 
 export const metadata = {
-  title: "Audio Tools Online Free — Compress, Convert & Trim",
-  description: "Free browser-based audio tools. Compress MP3, convert audio formats, trim audio clips. FFmpeg.wasm powered — files never leave your device.",
+  title: "Free Audio Tools Online \u2014 Compress Convert Edit",
+  description: "Free online audio tools \u2014 compress MP3, convert between formats, trim audio, adjust volume. Browser-based FFmpeg, files never uploaded.",
   alternates: { canonical: "https://webpifyy.vercel.app/audio" },
   openGraph: {
-    title: "Audio Tools Online Free — Compress, Convert & Trim",
-    description: "Browser-based audio tools powered by FFmpeg.wasm. 100% private.",
+    title: "Free Audio Tools Online \u2014 Compress Convert Edit | webpifyy",
+    description: "Free online audio tools \u2014 compress MP3, convert between formats, trim audio, adjust volume. Browser-based FFmpeg, files never uploaded.",
     url: "https://webpifyy.vercel.app/audio",
+    type: "website",
+    siteName: "webpifyy",
+    images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Audio Tools"}]})
+  twitter: {
+    card: "summary_large_image",
+    title: "Free Audio Tools Online \u2014 Compress Convert Edit | webpifyy",
+    description: "Free online audio tools \u2014 compress MP3, convert between formats, trim audio, adjust volume. Browser-based FFmpeg, files never uploaded.",
+    images: ["https://webpifyy.vercel.app/opengraph-image"],
   },
 };
 

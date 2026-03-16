@@ -3,26 +3,31 @@ import Breadcrumb from "@/components/Breadcrumb";
 import AudioConverter from "@/components/AudioConverter";
 
 export const metadata = {
-  title: "WAV to MP3 Converter Online Free",
-  description: "Convert WAV audio to compressed MP3 format online for free. Browser-based using FFmpeg.wasm — no uploads, no sign-up.",
+  title: "Convert WAV to MP3 Online Free \u2014 Reduce Audio Size",
+  description: "Convert WAV audio files to MP3 online free. Choose bitrate from 128kbps to 320kbps. Browser-based FFmpeg, no uploads, no signup needed.",
   alternates: { canonical: "https://webpifyy.vercel.app/audio/convert/wav-to-mp3" },
   keywords: ["wav to mp3", "convert wav to mp3", "wav mp3 converter online", "audio compressor online"],
   openGraph: {
-    title: "WAV to MP3 Converter Online Free",
-    description: "Convert WAV to MP3 in your browser. No uploads.",
+    title: "Convert WAV to MP3 Online Free \u2014 Reduce Audio Size | webpifyy",
+    description: "Convert WAV audio files to MP3 online free. Choose bitrate from 128kbps to 320kbps. Browser-based FFmpeg, no uploads, no signup needed.",
     url: "https://webpifyy.vercel.app/audio/convert/wav-to-mp3",
+    type: "website",
+    siteName: "webpifyy",
+    images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
-  twitter: { card: "summary_large_image", title: "WAV to MP3 Converter Online Free", description: "Convert WAV to MP3. No uploads." },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Audio Tools","item":"https://webpifyy.vercel.app/audio"},{"@type":"ListItem","position":3,"name":"Convert","item":"https://webpifyy.vercel.app/audio/convert"},{"@type":"ListItem","position":4,"name":"WAV to MP3"}]})
+  twitter: {
+    card: "summary_large_image",
+    title: "Convert WAV to MP3 Online Free \u2014 Reduce Audio Size | webpifyy",
+    description: "Convert WAV audio files to MP3 online free. Choose bitrate from 128kbps to 320kbps. Browser-based FFmpeg, no uploads, no signup needed.",
+    images: ["https://webpifyy.vercel.app/opengraph-image"],
   },
 };
 
 const faqs = [
-  { q: "Why convert WAV to MP3?", a: "WAV files are very large. Converting to MP3 reduces file size by 90% or more, making audio easier to share, stream, and store." },
-  { q: "What quality is the output MP3?", a: "We use libmp3lame with -q:a 2 which produces high-quality Variable Bitrate MP3 at approximately 190 kbps." },
-  { q: "How much smaller is MP3 than WAV?", a: "Significantly smaller. A 40MB WAV file typically becomes 3–5MB as MP3, a reduction of 85–93%." },
-  { q: "Is my audio private?", a: "Yes. All conversion happens in your browser using FFmpeg.wasm. Your files never leave your device." },
+  { q: "Why convert WAV to MP3?", a: "WAV files are very large. A 3-minute song in WAV is 30MB vs 3-5MB as MP3. Converting to MP3 makes files easy to share via email and messaging apps." },
+  { q: "What bitrate should I choose for WAV to MP3?", a: "192kbps is a good balance for music. 128kbps suits podcasts and voice recordings. 320kbps gives the best quality closest to the original WAV." },
+  { q: "Does WAV to MP3 conversion reduce audio quality?", a: "Yes. MP3 uses lossy compression. Some high-frequency audio detail is lost. At 192kbps or above, most listeners cannot distinguish from the original." },
+  { q: "Can I convert WAV to MP3 without software?", a: "Yes. Our browser-based converter uses FFmpeg.wasm so no software installation is needed. Works on Windows, Mac, Linux, iOS and Android." },
 ];
 
 export default function WavToMp3Page() {

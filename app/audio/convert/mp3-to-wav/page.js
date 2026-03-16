@@ -3,26 +3,31 @@ import Breadcrumb from "@/components/Breadcrumb";
 import AudioConverter from "@/components/AudioConverter";
 
 export const metadata = {
-  title: "MP3 to WAV Converter Online Free",
-  description: "Convert MP3 audio to uncompressed WAV format online for free. Browser-based using FFmpeg.wasm — no uploads, no sign-up.",
+  title: "Convert MP3 to WAV Online Free",
+  description: "Convert MP3 audio to uncompressed WAV format online free. Ideal for audio editing and production. Browser-based FFmpeg, no uploads needed.",
   alternates: { canonical: "https://webpifyy.vercel.app/audio/convert/mp3-to-wav" },
   keywords: ["mp3 to wav", "convert mp3 to wav", "mp3 wav converter online", "audio converter free"],
   openGraph: {
-    title: "MP3 to WAV Converter Online Free",
-    description: "Convert MP3 to WAV in your browser. No uploads.",
+    title: "Convert MP3 to WAV Online Free | webpifyy",
+    description: "Convert MP3 audio to uncompressed WAV format online free. Ideal for audio editing and production. Browser-based FFmpeg, no uploads needed.",
     url: "https://webpifyy.vercel.app/audio/convert/mp3-to-wav",
+    type: "website",
+    siteName: "webpifyy",
+    images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
-  twitter: { card: "summary_large_image", title: "MP3 to WAV Converter Online Free", description: "Convert MP3 to WAV. No uploads." },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Audio Tools","item":"https://webpifyy.vercel.app/audio"},{"@type":"ListItem","position":3,"name":"Convert","item":"https://webpifyy.vercel.app/audio/convert"},{"@type":"ListItem","position":4,"name":"MP3 to WAV"}]})
+  twitter: {
+    card: "summary_large_image",
+    title: "Convert MP3 to WAV Online Free | webpifyy",
+    description: "Convert MP3 audio to uncompressed WAV format online free. Ideal for audio editing and production. Browser-based FFmpeg, no uploads needed.",
+    images: ["https://webpifyy.vercel.app/opengraph-image"],
   },
 };
 
 const faqs = [
-  { q: "Why convert MP3 to WAV?", a: "WAV is uncompressed audio, making it ideal for audio editing, music production, and applications that require the highest quality source files." },
-  { q: "Will converting MP3 to WAV improve quality?", a: "No. MP3 uses lossy compression so quality information is already discarded. Converting to WAV will not restore lost quality — it just changes the container format." },
-  { q: "Why is the WAV file so much larger?", a: "WAV stores uncompressed audio samples, which requires much more storage. A 4MB MP3 may become a 40MB WAV file." },
-  { q: "Is my audio safe?", a: "Yes. All conversion happens in your browser using FFmpeg.wasm. Your files never leave your device." },
+  { q: "Why convert MP3 to WAV?", a: "WAV is an uncompressed format required by many audio editors and production tools. Converting MP3 to WAV allows editing without further generation loss from repeated lossy compression." },
+  { q: "Will converting MP3 to WAV improve quality?", a: "No. Converting lossy MP3 to lossless WAV does not recover lost quality. The WAV file will be larger but sound identical to the source MP3." },
+  { q: "How much larger is WAV compared to MP3?", a: "A 1-minute 128kbps MP3 is about 1MB. The same audio as WAV at 44.1kHz 16-bit is about 10MB. WAV files are 8-10x larger than equivalent MP3." },
+  { q: "Is MP3 to WAV conversion private?", a: "Yes. FFmpeg.wasm processes everything in your browser. No audio files are uploaded to any server." },
 ];
 
 export default function Mp3ToWavPage() {

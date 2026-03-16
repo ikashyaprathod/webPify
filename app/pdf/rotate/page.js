@@ -4,25 +4,30 @@ import PdfRotator from "@/components/PdfRotator";
 
 export const metadata = {
   title: "Rotate PDF Pages Online Free",
-  description: "Rotate all pages in a PDF by 90°, 180°, or 270°. Instant, browser-based, no uploads.",
+  description: "Rotate PDF pages online free. Rotate all pages or select individual pages. 90, 180 or 270 degrees. Browser-based pdf-lib, no uploads needed.",
   alternates: { canonical: "https://webpifyy.vercel.app/pdf/rotate" },
   keywords: ["rotate pdf", "pdf rotator online", "rotate pdf pages", "flip pdf", "rotate pdf free"],
   openGraph: {
-    title: "Rotate PDF Pages Online Free",
-    description: "Rotate all PDF pages 90°, 180°, or 270°. Browser-based, no uploads.",
+    title: "Rotate PDF Pages Online Free | webpifyy",
+    description: "Rotate PDF pages online free. Rotate all pages or select individual pages. 90, 180 or 270 degrees. Browser-based pdf-lib, no uploads needed.",
     url: "https://webpifyy.vercel.app/pdf/rotate",
+    type: "website",
+    siteName: "webpifyy",
+    images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
-  twitter: { card: "summary_large_image", title: "Rotate PDF Pages Online Free", description: "Rotate PDF pages instantly. No uploads." },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"PDF Tools","item":"https://webpifyy.vercel.app/pdf"},{"@type":"ListItem","position":3,"name":"Rotate"}]})
+  twitter: {
+    card: "summary_large_image",
+    title: "Rotate PDF Pages Online Free | webpifyy",
+    description: "Rotate PDF pages online free. Rotate all pages or select individual pages. 90, 180 or 270 degrees. Browser-based pdf-lib, no uploads needed.",
+    images: ["https://webpifyy.vercel.app/opengraph-image"],
   },
 };
 
 const faqs = [
-  { q: "How do I rotate a PDF?", a: "Upload your PDF, choose a rotation direction (90° CW, 90° CCW, or 180°), and download the rotated PDF." },
-  { q: "Does rotation change file size?", a: "Minimal change. Rotation is stored as metadata in the PDF rather than re-encoding all pages, so file size impact is negligible." },
-  { q: "Can I rotate only specific pages?", a: "Currently the tool rotates all pages uniformly. For selective rotation, use our Split PDF tool first to extract the pages you need." },
-  { q: "Will my PDF quality change after rotation?", a: "No. Rotation is a lossless operation — all text, images, and formatting remain at full quality." },
+  { q: "Can I rotate only specific pages in a PDF?", a: "Yes. View page thumbnails, select individual pages or all pages, then choose 90, 180 or 270 degree rotation before downloading." },
+  { q: "Why would I need to rotate PDF pages?", a: "Scanned documents often have incorrectly oriented pages. Landscape pages in portrait documents or mixed orientations from different scanners are common reasons." },
+  { q: "Is PDF rotation lossless?", a: "Yes. pdf-lib rotates pages by updating the rotation value in PDF metadata without re-rendering. This is a completely lossless operation." },
+  { q: "Can I rotate pages in a password-protected PDF?", a: "No. Remove password protection first, then rotate pages in the unlocked document." },
 ];
 
 export default function PdfRotatePage() {

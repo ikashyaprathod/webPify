@@ -3,26 +3,24 @@ import Breadcrumb from "@/components/Breadcrumb";
 import AudioTrimmer from "@/components/AudioTrimmer";
 
 export const metadata = {
-  title: "Audio Trimmer Online Free — Cut & Trim Audio",
-  description: "Trim and cut audio clips to exact start/end times online for free. Browser-based using FFmpeg.wasm — no uploads, no sign-up.",
+  title: "Trim Audio Online Free \u2014 Cut MP3 WAV OGG",
+  description: "Trim and cut audio files online free. Set start and end times to extract any clip. Browser-based FFmpeg, supports MP3 WAV OGG. No uploads.",
   alternates: { canonical: "https://webpifyy.vercel.app/audio/edit/trim" },
   keywords: ["audio trimmer online", "trim audio free", "cut audio online", "audio cutter", "mp3 trimmer"],
   openGraph: {
-    title: "Audio Trimmer Online Free — Cut & Trim Audio",
-    description: "Trim audio to exact times. Browser-based, no uploads.",
+    title: "Trim Audio Online Free \u2014 Cut MP3 WAV OGG | webpifyy",
+    description: "Trim and cut audio files online free. Set start and end times to extract any clip. Browser-based FFmpeg, supports MP3 WAV OGG. No uploads.",
     url: "https://webpifyy.vercel.app/audio/edit/trim",
+    type: "website", siteName: "webpifyy", images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
-  twitter: { card: "summary_large_image", title: "Audio Trimmer Online Free", description: "Cut and trim audio. No uploads." },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Audio Tools","item":"https://webpifyy.vercel.app/audio"},{"@type":"ListItem","position":3,"name":"Edit","item":"https://webpifyy.vercel.app/audio/edit"},{"@type":"ListItem","position":4,"name":"Trim"}]})
-  },
+  twitter: { card: "summary_large_image", title: "Trim Audio Online Free \u2014 Cut MP3 WAV OGG | webpifyy", description: "Trim and cut audio files online free. Set start and end times to extract any clip. Browser-based FFmpeg, supports MP3 WAV OGG. No uploads.", images: ["https://webpifyy.vercel.app/opengraph-image"] },
 };
 
 const faqs = [
-  { q: "How do I trim an audio file?", a: "Upload your audio, enter a start time and end time (in MM:SS or seconds format), and click Trim. Download the trimmed audio as MP3." },
-  { q: "What time format should I use?", a: "You can use MM:SS format (e.g. 1:30 for 1 minute 30 seconds) or just seconds (e.g. 90). Both formats work correctly." },
-  { q: "What audio formats are supported?", a: "MP3, WAV, OGG, AAC, and FLAC files are all supported. The output is saved as MP3." },
-  { q: "Is my audio uploaded to a server?", a: "No. All trimming happens in your browser using FFmpeg.wasm. Your audio files never leave your device." },
+  { q: "How do I trim an audio file?", a: "Upload your audio, set start and end times using the inputs or drag the range handles, preview the selection, then click trim to download the clip." },
+  { q: "Is audio trimming lossless?", a: "Yes for WAV and OGG. For MP3, stream copy mode is used which may have small frame boundary inaccuracies of 26ms or less at cut points." },
+  { q: "Can I trim multiple sections from one audio file?", a: "Currently one trim operation per upload. For multiple clips, trim and download each section separately." },
+  { q: "What audio formats can I trim?", a: "MP3, WAV, OGG, AAC and FLAC are all supported. Output format matches the input format." },
 ];
 
 export default function AudioTrimPage() {

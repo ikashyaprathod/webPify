@@ -3,26 +3,31 @@ import Breadcrumb from "@/components/Breadcrumb";
 import PdfSplitter from "@/components/PdfSplitter";
 
 export const metadata = {
-  title: "Split PDF Online Free — Extract PDF Pages",
-  description: "Split a PDF and extract specific pages or page ranges. Enter ranges like 1-3, 5, 7-9. 100% browser-based, no uploads.",
+  title: "Split PDF Online Free \u2014 Extract PDF Pages",
+  description: "Split PDF files and extract pages online free. Select page ranges or individual pages. Browser-based pdf-lib, no uploads. No signup needed.",
   alternates: { canonical: "https://webpifyy.vercel.app/pdf/split" },
   keywords: ["split pdf", "extract pdf pages", "pdf splitter online", "pdf page extractor", "split pdf free"],
   openGraph: {
-    title: "Split PDF Online Free — Extract PDF Pages",
-    description: "Extract specific pages from a PDF. Enter page ranges. 100% browser-based.",
+    title: "Split PDF Online Free \u2014 Extract PDF Pages | webpifyy",
+    description: "Split PDF files and extract pages online free. Select page ranges or individual pages. Browser-based pdf-lib, no uploads. No signup needed.",
     url: "https://webpifyy.vercel.app/pdf/split",
+    type: "website",
+    siteName: "webpifyy",
+    images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
-  twitter: { card: "summary_large_image", title: "Split PDF Online Free", description: "Extract PDF pages by range. No uploads, no sign-up." },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"PDF Tools","item":"https://webpifyy.vercel.app/pdf"},{"@type":"ListItem","position":3,"name":"Split"}]})
+  twitter: {
+    card: "summary_large_image",
+    title: "Split PDF Online Free \u2014 Extract PDF Pages | webpifyy",
+    description: "Split PDF files and extract pages online free. Select page ranges or individual pages. Browser-based pdf-lib, no uploads. No signup needed.",
+    images: ["https://webpifyy.vercel.app/opengraph-image"],
   },
 };
 
 const faqs = [
-  { q: "How do I extract specific pages from a PDF?", a: "Upload your PDF, then enter a page range like '1-3, 5, 7-9'. Click Extract to download a new PDF with only those pages." },
-  { q: "What page range formats are supported?", a: "You can use single pages (e.g. 5), ranges (e.g. 2-8), or a combination separated by commas (e.g. 1-3, 5, 8-10)." },
-  { q: "Does splitting change the page quality?", a: "No. Pages are copied exactly from the source PDF without any re-encoding or quality loss." },
-  { q: "Is the PDF processed on a server?", a: "No. All splitting happens in your browser using pdf-lib. Your files never leave your device." },
+  { q: "How do I split a PDF into individual pages?", a: "Upload your PDF and select Split All Pages to extract every page as a separate PDF. Or enter a page range to extract specific pages into one PDF." },
+  { q: "Can I extract specific pages from a PDF?", a: "Yes. Enter page numbers or ranges (e.g. 1-3, 5, 7-10) to extract exactly the pages you need into a new PDF document." },
+  { q: "Is split PDF free and unlimited?", a: "Yes, completely free with no page count limits. pdf-lib processes everything in your browser so there are no server restrictions." },
+  { q: "Can I split a PDF into two separate files?", a: "Yes. Extract pages 1 to N as one file, then extract the remaining pages as a second file. Repeat splitting as many times as needed." },
 ];
 
 export default function PdfSplitPage() {

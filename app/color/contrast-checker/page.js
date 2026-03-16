@@ -3,18 +3,18 @@ import Breadcrumb from "@/components/Breadcrumb";
 import ContrastChecker from "@/components/ContrastChecker";
 
 export const metadata = {
-  title: "Color Contrast Checker Free — WCAG AA AAA",
-  description: "Check WCAG AA and AAA accessibility contrast ratios for any foreground and background color combination. Shows pass/fail for normal and large text thresholds.",
+  title: "Color Contrast Checker WCAG Free Online",
+  description: "Check color contrast ratio online free. WCAG AA and AAA compliance testing. Live preview, accessibility rating, color suggestions. No signup.",
   alternates: { canonical: "https://webpifyy.vercel.app/color/contrast-checker" },
-  openGraph: { title: "Color Contrast Checker Free — WCAG AA AAA", description: "Verify WCAG accessibility contrast ratios instantly.", url: "https://webpifyy.vercel.app/color/contrast-checker" },
-  twitter: { card: "summary_large_image", title: "Color Contrast Checker Free — WCAG AA AAA", description: "Check WCAG AA and AAA contrast pass/fail for any color pair." },
+  openGraph: { title: "Color Contrast Checker WCAG Free Online | webpifyy", description: "Check color contrast ratio online free. WCAG AA and AAA compliance testing. Live preview, accessibility rating, color suggestions. No signup.", url: "https://webpifyy.vercel.app/color/contrast-checker", type: "website", siteName: "webpifyy", images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }] },
+  twitter: { card: "summary_large_image", title: "Color Contrast Checker WCAG Free Online | webpifyy", description: "Check color contrast ratio online free. WCAG AA and AAA compliance testing. Live preview, accessibility rating, color suggestions. No signup.", images: ["https://webpifyy.vercel.app/opengraph-image"] },
 };
 
 const faqs = [
-  { q: "What is WCAG contrast ratio?", a: "WCAG (Web Content Accessibility Guidelines) defines minimum contrast ratios between text and background to ensure readability for people with visual impairments. AA requires 4.5:1 for normal text; AAA requires 7:1." },
-  { q: "What is the difference between AA and AAA?", a: "WCAG AA is the standard compliance level (4.5:1 for normal text, 3:1 for large text). WCAG AAA is the enhanced level offering better accessibility (7:1 for normal text, 4.5:1 for large text)." },
-  { q: "What counts as 'large text'?", a: "WCAG defines large text as 18pt (24px) or larger for regular weight, or 14pt (approximately 18.67px) or larger for bold text." },
-  { q: "How is the contrast ratio calculated?", a: "The ratio is calculated using relative luminance values from the WCAG formula: (L1+0.05)/(L2+0.05), where L1 is the lighter color's luminance and L2 is the darker one's." },
+  { q: "What is WCAG contrast ratio?", a: "WCAG requires minimum contrast ratios for readable text. AA requires 4.5:1 for normal text and 3:1 for large text. AAA requires 7:1 for normal text." },
+  { q: "How do I use the contrast checker?", a: "Enter foreground (text) and background colors. The checker instantly shows the contrast ratio and whether it passes WCAG AA and AAA standards." },
+  { q: "What contrast ratio do I need to pass WCAG AA?", a: "Normal text (under 18px): 4.5:1 minimum. Large text (18px+ or 14px+ bold): 3:1 minimum. These are the legal accessibility requirements in many countries." },
+  { q: "Can the tool suggest accessible color alternatives?", a: "Yes. If your colors fail the contrast check, the tool suggests the nearest colors that pass AA standards while staying close to your original choices." },
 ];
 
 export default function ContrastCheckerPage() {

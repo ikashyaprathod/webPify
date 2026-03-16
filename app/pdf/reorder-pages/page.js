@@ -3,25 +3,30 @@ import Breadcrumb from "@/components/Breadcrumb";
 import PdfReorderPages from "@/components/PdfReorderPages";
 
 export const metadata = {
-  title: "Reorder PDF Pages Online Free — webpifyy",
-  description: "Rearrange, reorder, and delete pages from any PDF online for free. Enter custom page order. 100% browser-based using pdf-lib.",
+  title: "Reorder PDF Pages Online Free \u2014 Drag to Sort",
+  description: "Reorder and rearrange PDF pages online free. Drag thumbnails to sort, delete or duplicate pages. Browser-based pdf-lib, no file uploads.",
   alternates: { canonical: "https://webpifyy.vercel.app/pdf/reorder-pages" },
   openGraph: {
-    title: "Reorder PDF Pages Online Free — webpifyy",
-    description: "Rearrange, reorder, and delete pages from any PDF. Enter custom page order. 100% browser-based.",
+    title: "Reorder PDF Pages Online Free \u2014 Drag to Sort | webpifyy",
+    description: "Reorder and rearrange PDF pages online free. Drag thumbnails to sort, delete or duplicate pages. Browser-based pdf-lib, no file uploads.",
     url: "https://webpifyy.vercel.app/pdf/reorder-pages",
+    type: "website",
+    siteName: "webpifyy",
+    images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
-  twitter: { card: "summary_large_image", title: "Reorder PDF Pages Online Free — webpifyy", description: "Reorder and delete PDF pages. Browser-based, free." },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"PDF Tools","item":"https://webpifyy.vercel.app/pdf"},{"@type":"ListItem","position":3,"name":"Reorder Pages"}]})
+  twitter: {
+    card: "summary_large_image",
+    title: "Reorder PDF Pages Online Free \u2014 Drag to Sort | webpifyy",
+    description: "Reorder and rearrange PDF pages online free. Drag thumbnails to sort, delete or duplicate pages. Browser-based pdf-lib, no file uploads.",
+    images: ["https://webpifyy.vercel.app/opengraph-image"],
   },
 };
 
 const faqs = [
-  { q: "How do I specify a custom page order?", a: 'Enter page numbers separated by commas. Use ranges like 4-6 for consecutive pages. Example: entering "3,1,2" will put page 3 first, then page 1, then page 2.' },
-  { q: "Can I delete pages from a PDF?", a: 'Yes. Enter the page numbers you want to remove in the "Delete Pages" field, separated by commas. You can use ranges like 5-8 to delete multiple consecutive pages.' },
-  { q: "What happens if I enter an invalid page number?", a: "Page numbers outside the valid range (1 to total pages) are silently ignored. The tool will process only valid page numbers." },
-  { q: "Is my PDF uploaded to a server?", a: "No. All reordering happens entirely in your browser using pdf-lib. Your PDF never leaves your device." },
+  { q: "How do I reorder pages in a PDF?", a: "Upload your PDF and see thumbnail previews of all pages. Drag pages to your desired order, delete unwanted pages, then download the reordered PDF." },
+  { q: "Can I delete pages from a PDF while reordering?", a: "Yes. Click the delete button on any page thumbnail to remove it from the document. Changes preview in real time before downloading." },
+  { q: "Can I duplicate a page in the PDF?", a: "Yes. Click duplicate on any page thumbnail to add a copy of that page to the document. Useful for templates and repeated content." },
+  { q: "Is there a page limit for reordering?", a: "No. pdf-lib handles PDFs of any page count in your browser. Large documents may require more memory depending on your device." },
 ];
 
 export default function PdfReorderPagesPage() {

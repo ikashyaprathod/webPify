@@ -2,17 +2,16 @@ import PageShell from "@/components/PageShell";
 import Breadcrumb from "@/components/Breadcrumb";
 
 export const metadata = {
-  title: "Audio Editor Online Free — Trim & Cut Audio",
-  description: "Free online audio editing tools. Trim audio clips, cut to specific times. Browser-based using FFmpeg.wasm.",
+  title: "Free Online Audio Editing Tools",
+  description: "Free audio editing tools \u2014 trim audio clips, adjust volume. Browser-based FFmpeg, files never uploaded. No signup, completely private.",
   alternates: { canonical: "https://webpifyy.vercel.app/audio/edit" },
   openGraph: {
-    title: "Audio Editor Online Free",
-    description: "Trim audio clips in your browser. No uploads.",
+    title: "Free Online Audio Editing Tools | webpifyy",
+    description: "Free audio editing tools \u2014 trim audio clips, adjust volume. Browser-based FFmpeg, files never uploaded. No signup, completely private.",
     url: "https://webpifyy.vercel.app/audio/edit",
+    type: "website", siteName: "webpifyy", images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Audio Tools","item":"https://webpifyy.vercel.app/audio"},{"@type":"ListItem","position":3,"name":"Edit"}]})
-  },
+  twitter: { card: "summary_large_image", title: "Free Online Audio Editing Tools | webpifyy", description: "Free audio editing tools \u2014 trim audio clips, adjust volume. Browser-based FFmpeg, files never uploaded. No signup, completely private.", images: ["https://webpifyy.vercel.app/opengraph-image"] },
 };
 
 const cards = [

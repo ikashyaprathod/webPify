@@ -2,16 +2,22 @@ import PageShell from "@/components/PageShell";
 import Breadcrumb from "@/components/Breadcrumb";
 
 export const metadata = {
-  title: "Audio Converter Online Free — MP3, WAV, OGG, AAC, FLAC",
-  description: "Convert audio files between formats online. MP3, WAV, OGG, AAC, FLAC. Browser-based using FFmpeg.wasm — no uploads.",
+  title: "Online Audio Converter \u2014 MP3 WAV OGG AAC Free",
+  description: "Convert audio between MP3, WAV, OGG and AAC formats online free. Browser-based FFmpeg processing. No uploads, no signup, completely private.",
   alternates: { canonical: "https://webpifyy.vercel.app/audio/convert" },
   openGraph: {
-    title: "Audio Converter Online Free",
-    description: "Convert audio between MP3, WAV, OGG, AAC, FLAC. Browser-based.",
+    title: "Online Audio Converter \u2014 MP3 WAV OGG AAC Free | webpifyy",
+    description: "Convert audio between MP3, WAV, OGG and AAC formats online free. Browser-based FFmpeg processing. No uploads, no signup, completely private.",
     url: "https://webpifyy.vercel.app/audio/convert",
+    type: "website",
+    siteName: "webpifyy",
+    images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Audio Tools","item":"https://webpifyy.vercel.app/audio"},{"@type":"ListItem","position":3,"name":"Convert"}]})
+  twitter: {
+    card: "summary_large_image",
+    title: "Online Audio Converter \u2014 MP3 WAV OGG AAC Free | webpifyy",
+    description: "Convert audio between MP3, WAV, OGG and AAC formats online free. Browser-based FFmpeg processing. No uploads, no signup, completely private.",
+    images: ["https://webpifyy.vercel.app/opengraph-image"],
   },
 };
 

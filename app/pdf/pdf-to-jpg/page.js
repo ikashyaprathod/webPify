@@ -3,25 +3,30 @@ import PDFToJPG from "@/components/PDFToJPG";
 import Breadcrumb from "@/components/Breadcrumb";
 
 export const metadata = {
-  title: "PDF to JPG Converter – Free Online, No Upload",
-  description: "Convert PDF pages to JPG images online. Each page becomes a separate high-quality JPG. Free, browser-based, no uploads.",
+  title: "PDF to JPG Converter Online Free",
+  description: "Convert PDF pages to JPG images online free. Download individually or as ZIP. Browser-based pdfjs-dist processing, no uploads required.",
   alternates: { canonical: "https://webpifyy.vercel.app/pdf/pdf-to-jpg" },
   openGraph: {
-    title: "PDF to JPG Converter – Free Online",
-    description: "Convert every PDF page to a JPG image instantly. No uploads, free forever.",
+    title: "PDF to JPG Converter Online Free | webpifyy",
+    description: "Convert PDF pages to JPG images online free. Download individually or as ZIP. Browser-based pdfjs-dist processing, no uploads required.",
     url: "https://webpifyy.vercel.app/pdf/pdf-to-jpg",
+    type: "website",
+    siteName: "webpifyy",
+    images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"PDF Tools","item":"https://webpifyy.vercel.app/pdf"},{"@type":"ListItem","position":3,"name":"PDF to JPG"}]})
+  twitter: {
+    card: "summary_large_image",
+    title: "PDF to JPG Converter Online Free | webpifyy",
+    description: "Convert PDF pages to JPG images online free. Download individually or as ZIP. Browser-based pdfjs-dist processing, no uploads required.",
+    images: ["https://webpifyy.vercel.app/opengraph-image"],
   },
 };
 
 const faqs = [
-  { q: "How do I convert a PDF to JPG?", a: "Upload your PDF file, choose the output quality and resolution settings, then click Convert. Each page of the PDF is rendered as a separate JPG image. Download individually or as a ZIP." },
-  { q: "Will each PDF page become a separate image?", a: "Yes. Each page of the PDF is converted to its own JPG file. A 10-page PDF produces 10 JPG images. You can download all at once as a ZIP file." },
-  { q: "What resolution can I choose?", a: "Output resolution is configurable — higher DPI gives sharper images for print use. 150 DPI is suitable for screen viewing; 300 DPI is standard for print quality." },
-  { q: "Is my PDF uploaded to a server?", a: "No. All conversion happens in your browser using PDF.js and the Canvas API. Your files never leave your device." },
-  { q: "Can I convert a password-protected PDF?", a: "Password-protected PDFs must be unlocked before conversion. The tool will prompt you to enter the PDF password if one is set." },
+  { q: "How do I convert a PDF to JPG images?", a: "Upload your PDF and click Convert. Each page renders as a high-resolution JPG. Download pages individually or all at once as a ZIP file." },
+  { q: "What resolution are the converted JPG images?", a: "Pages render at 150 DPI by default, suitable for screen viewing. Increase to 300 DPI for print quality. Higher DPI produces larger file sizes." },
+  { q: "Can I convert a specific page from a PDF?", a: "Yes. After upload, select which pages to convert. Convert all pages or select individual pages using the page thumbnail view." },
+  { q: "Is PDF to JPG conversion private?", a: "Yes. Conversion uses pdfjs-dist running entirely in your browser. No files are uploaded to any server ensuring complete document privacy." },
 ];
 
 export default function PDFToJPGPage() {

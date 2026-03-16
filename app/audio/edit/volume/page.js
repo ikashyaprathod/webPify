@@ -3,25 +3,23 @@ import Breadcrumb from "@/components/Breadcrumb";
 import AudioVolumeAdjuster from "@/components/AudioVolumeAdjuster";
 
 export const metadata = {
-  title: "Audio Volume Adjuster Online Free — webpifyy",
-  description: "Increase or decrease audio volume from 0% to 200%. Process MP3, WAV, and OGG files online for free. 100% browser-based — no uploads.",
+  title: "Adjust Audio Volume Online Free",
+  description: "Increase or decrease audio volume online free. Adjust from 0% to 200% volume. Browser-based FFmpeg, no uploads, supports MP3 WAV OGG.",
   alternates: { canonical: "https://webpifyy.vercel.app/audio/edit/volume" },
   openGraph: {
-    title: "Audio Volume Adjuster Online Free — webpifyy",
-    description: "Increase or decrease audio volume from 0% to 200%. Process MP3, WAV, and OGG files. 100% browser-based.",
+    title: "Adjust Audio Volume Online Free | webpifyy",
+    description: "Increase or decrease audio volume online free. Adjust from 0% to 200% volume. Browser-based FFmpeg, no uploads, supports MP3 WAV OGG.",
     url: "https://webpifyy.vercel.app/audio/edit/volume",
+    type: "website", siteName: "webpifyy", images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
-  twitter: { card: "summary_large_image", title: "Audio Volume Adjuster Online Free — webpifyy", description: "Adjust audio volume 0-200%. Browser-based, no uploads." },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Audio Tools","item":"https://webpifyy.vercel.app/audio"},{"@type":"ListItem","position":3,"name":"Edit","item":"https://webpifyy.vercel.app/audio/edit"},{"@type":"ListItem","position":4,"name":"Volume Adjuster"}]})
-  },
+  twitter: { card: "summary_large_image", title: "Adjust Audio Volume Online Free | webpifyy", description: "Increase or decrease audio volume online free. Adjust from 0% to 200% volume. Browser-based FFmpeg, no uploads, supports MP3 WAV OGG.", images: ["https://webpifyy.vercel.app/opengraph-image"] },
 };
 
 const faqs = [
-  { q: "Can I boost audio volume beyond 100%?", a: "Yes. You can increase volume up to 200% using FFmpeg's volume filter. Be aware that boosting beyond 100% may introduce audio clipping if the original audio is already at maximum loudness." },
-  { q: "What happens when audio clips?", a: "Clipping occurs when the audio signal exceeds the maximum digital level, causing distortion. If you hear crackling or distortion after boosting, try a lower volume setting." },
-  { q: "Which audio formats are supported?", a: "This tool supports MP3, WAV, and OGG audio files. The output format matches the input format." },
-  { q: "Does volume adjustment affect audio quality?", a: "Re-encoding any audio causes minor quality loss. For MP3 files this is minimal at standard bitrates. For lossless preservation, consider working with WAV files." },
+  { q: "How much can I increase audio volume?", a: "Volume can be increased up to 200% of original level. Be careful \u2014 excessive volume increase causes clipping distortion. Use 110-150% for subtle boosts." },
+  { q: "Can I reduce volume to make audio quieter?", a: "Yes. Set volume below 100% to reduce loudness. 50% makes it half as loud. 0% produces silence. Useful for mixing audio at different levels." },
+  { q: "Does adjusting volume reduce audio quality?", a: "Minor quality reduction occurs due to FFmpeg re-encoding. Use WAV input for best results if quality preservation is critical." },
+  { q: "What formats are supported for volume adjustment?", a: "MP3, WAV, OGG, AAC and FLAC. Output format matches the input file format automatically." },
 ];
 
 export default function AudioVolumePage() {

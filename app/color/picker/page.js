@@ -3,18 +3,18 @@ import Breadcrumb from "@/components/Breadcrumb";
 import ColorPickerTool from "@/components/ColorPickerTool";
 
 export const metadata = {
-  title: "Color Picker Online Free — HEX RGB HSL",
-  description: "Free online color picker with full spectrum canvas, hue and alpha sliders. Get HEX, RGB, HSL, and HSV values instantly. Supports EyeDropper API and recent color history.",
+  title: "Color Picker Online Free \u2014 HEX RGB HSL HSV",
+  description: "Pick any color online free. Get HEX, RGB, HSL, HSV and CMYK values instantly. Color history, eyedropper support. No signup, browser-based.",
   alternates: { canonical: "https://webpifyy.vercel.app/color/picker" },
-  openGraph: { title: "Color Picker Online Free — HEX RGB HSL", description: "Pick any color and get HEX, RGB, HSL, HSV values instantly.", url: "https://webpifyy.vercel.app/color/picker" },
-  twitter: { card: "summary_large_image", title: "Color Picker Online Free — HEX RGB HSL", description: "Full spectrum color picker with HEX, RGB, HSL, HSV and eyedropper." },
+  openGraph: { title: "Color Picker Online Free \u2014 HEX RGB HSL HSV | webpifyy", description: "Pick any color online free. Get HEX, RGB, HSL, HSV and CMYK values instantly. Color history, eyedropper support. No signup, browser-based.", url: "https://webpifyy.vercel.app/color/picker", type: "website", siteName: "webpifyy", images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }] },
+  twitter: { card: "summary_large_image", title: "Color Picker Online Free \u2014 HEX RGB HSL HSV | webpifyy", description: "Pick any color online free. Get HEX, RGB, HSL, HSV and CMYK values instantly. Color history, eyedropper support. No signup, browser-based.", images: ["https://webpifyy.vercel.app/opengraph-image"] },
 };
 
 const faqs = [
-  { q: "What color formats does the picker output?", a: "The picker outputs HEX, RGB, HSL, and HSV formats simultaneously. All values update in real-time as you move the selector." },
-  { q: "What is the EyeDropper tool?", a: "The EyeDropper button lets you sample any color from your screen. It uses the native browser EyeDropper API and is available in Chrome, Edge, and other Chromium-based browsers." },
-  { q: "Does the picker support transparency?", a: "Yes. Use the Alpha slider to set opacity from 0% to 100%. The HEX output will include an alpha channel (8-digit hex) when alpha is below 100%." },
-  { q: "How does the recent colors history work?", a: "The last 8 colors you copied are saved as swatches below the picker. Click any swatch to restore that color. History is stored in your browser's memory during the session." },
+  { q: "What color formats does the picker show?", a: "All major formats: HEX (#FF5733), RGB (255, 87, 51), HSL (11\u00b0, 100%, 60%), HSV (11\u00b0, 80%, 100%), and CMYK (0%, 66%, 80%, 0%). All update together." },
+  { q: "Can I pick a color from my screen?", a: "Yes, if your browser supports the EyeDropper API (Chrome 95+). Click the eyedropper icon to pick any color visible on your screen." },
+  { q: "Does the picker save my recent colors?", a: "Yes. Recently picked colors are saved in your browser locally. They persist between sessions so you can reference past color choices." },
+  { q: "Can I enter a hex code to start with a specific color?", a: "Yes. Type any valid hex code in the HEX input field and the picker updates to that color immediately. Also accepts RGB and HSL values." },
 ];
 
 export default function ColorPickerPage() {

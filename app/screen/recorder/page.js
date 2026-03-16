@@ -3,18 +3,18 @@ import Breadcrumb from "@/components/Breadcrumb";
 import ScreenRecorder from "@/components/ScreenRecorder";
 
 export const metadata = {
-  title: "Screen Recorder Online Free — No Install Required",
-  description: "Record your screen, window, or browser tab directly in your browser. No software to install. Includes audio, pause/resume, and WebM download. 100% private.",
+  title: "Screen Recorder Online Free \u2014 No Install Required",
+  description: "Record your screen online free directly in the browser. No software install. Audio support, instant download as WebM. Private, no uploads.",
   alternates: { canonical: "https://webpifyy.vercel.app/screen/recorder" },
-  openGraph: { title: "Screen Recorder Online Free — No Install Required", description: "Record your screen in the browser with audio. Download as WebM.", url: "https://webpifyy.vercel.app/screen/recorder" },
-  twitter: { card: "summary_large_image", title: "Screen Recorder Online Free — No Install Required", description: "Browser-based screen recorder with audio and no install required." },
+  openGraph: { title: "Screen Recorder Online Free \u2014 No Install Required | webpifyy", description: "Record your screen online free directly in the browser. No software install. Audio support, instant download as WebM. Private, no uploads.", url: "https://webpifyy.vercel.app/screen/recorder", type: "website", siteName: "webpifyy", images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }] },
+  twitter: { card: "summary_large_image", title: "Screen Recorder Online Free \u2014 No Install Required | webpifyy", description: "Record your screen online free directly in the browser. No software install. Audio support, instant download as WebM. Private, no uploads.", images: ["https://webpifyy.vercel.app/opengraph-image"] },
 };
 
 const faqs = [
-  { q: "Does the screen recorder require any software installation?", a: "No. It runs entirely in your browser using the Screen Capture API and MediaRecorder API. Chrome, Edge, and Firefox are all supported." },
-  { q: "Can I record audio along with my screen?", a: "Yes. The recorder requests both display and system audio when you start. You can toggle audio off with the checkbox before starting." },
-  { q: "What format is the recording saved in?", a: "Recordings are saved as WebM (VP9/Opus), which is the native format supported by all major browsers for MediaRecorder." },
-  { q: "Is my recording uploaded anywhere?", a: "No. Everything happens entirely within your browser. No data is transmitted to any server. The recording blob is stored in memory until you download it." },
+  { q: "How do I record my screen without software?", a: "Click Start Recording and grant screen share permission when prompted. Choose window, tab, or full screen. Click Stop to end and download as WebM." },
+  { q: "Can I record audio along with my screen?", a: "Yes. Toggle microphone and system audio options before recording. Audio is captured alongside video in the output file." },
+  { q: "Is screen recording private?", a: "Yes. Recording uses the browser's MediaRecorder API. The video is never uploaded anywhere. It is processed and downloaded entirely locally." },
+  { q: "What format does the screen recording save as?", a: "WebM is the default browser recording format. Use our Video Converter to convert to MP4 for broader compatibility with video editors." },
 ];
 
 export default function ScreenRecorderPage() {

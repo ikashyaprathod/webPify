@@ -3,26 +3,31 @@ import Breadcrumb from "@/components/Breadcrumb";
 import JpgToPdf from "@/components/JpgToPdf";
 
 export const metadata = {
-  title: "JPG to PDF Converter Online Free — Images to PDF",
-  description: "Convert JPG, PNG, and WebP images to a PDF document online. Reorder pages, choose page size. 100% browser-based, no uploads.",
+  title: "JPG to PDF Converter Online Free \u2014 Images to PDF",
+  description: "Convert JPG, PNG and WebP images to PDF online free. Combine multiple images. Choose page size. Browser-based pdf-lib, no uploads. No signup.",
   alternates: { canonical: "https://webpifyy.vercel.app/pdf/jpg-to-pdf" },
   keywords: ["jpg to pdf", "image to pdf", "convert jpg to pdf", "png to pdf", "photos to pdf"],
   openGraph: {
-    title: "JPG to PDF Converter Online Free — Images to PDF",
-    description: "Convert JPG, PNG, WebP images to PDF. Reorder pages freely. No uploads.",
+    title: "JPG to PDF Converter Online Free \u2014 Images to PDF | webpifyy",
+    description: "Convert JPG, PNG and WebP images to PDF online free. Combine multiple images. Choose page size. Browser-based pdf-lib, no uploads. No signup.",
     url: "https://webpifyy.vercel.app/pdf/jpg-to-pdf",
+    type: "website",
+    siteName: "webpifyy",
+    images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
-  twitter: { card: "summary_large_image", title: "JPG to PDF Converter Online Free", description: "Convert images to PDF. No uploads, no sign-up." },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"PDF Tools","item":"https://webpifyy.vercel.app/pdf"},{"@type":"ListItem","position":3,"name":"JPG to PDF"}]})
+  twitter: {
+    card: "summary_large_image",
+    title: "JPG to PDF Converter Online Free \u2014 Images to PDF | webpifyy",
+    description: "Convert JPG, PNG and WebP images to PDF online free. Combine multiple images. Choose page size. Browser-based pdf-lib, no uploads. No signup.",
+    images: ["https://webpifyy.vercel.app/opengraph-image"],
   },
 };
 
 const faqs = [
-  { q: "What image formats can I convert to PDF?", a: "You can convert JPG, PNG, and WebP images. HEIC and other formats may also work depending on your browser's image support." },
-  { q: "Can I set the page size?", a: "Yes. Choose from A4 (595×842pt), US Letter (612×792pt), or Fit to image (each page matches the image dimensions)." },
-  { q: "Can I reorder images before creating the PDF?", a: "Yes. After uploading, use the up/down buttons to arrange images in any order. Each image becomes one page in the PDF." },
-  { q: "Is my data private?", a: "Completely. All conversion happens in your browser using pdf-lib. No images are ever uploaded to any server." },
+  { q: "Can I convert multiple JPG images to one PDF?", a: "Yes. Upload multiple images, drag to reorder them, choose your page size, and convert. All images combine into a single PDF in your chosen order." },
+  { q: "What page sizes are available?", a: "Choose from A4, US Letter, or Fit to Image. Fit to Image creates pages that match each image's exact dimensions." },
+  { q: "What image formats can I convert to PDF?", a: "JPG, JPEG, PNG, WebP, and most common formats. All images are embedded at their original quality into the PDF document." },
+  { q: "Is JPG to PDF conversion private?", a: "Yes. pdf-lib processes everything in your browser. No files leave your device and no server is involved in the conversion." },
 ];
 
 export default function JpgToPdfPage() {

@@ -3,25 +3,23 @@ import Breadcrumb from "@/components/Breadcrumb";
 import WavToOgg from "@/components/WavToOgg";
 
 export const metadata = {
-  title: "WAV to OGG Converter Free Online — webpifyy",
-  description: "Convert WAV audio to OGG Vorbis format online for free. Smaller file sizes for web streaming. 100% browser-based using FFmpeg.wasm — no uploads.",
+  title: "Convert WAV to OGG Online Free",
+  description: "Convert WAV audio files to OGG Vorbis format online free. Browser-based FFmpeg, no uploads. Open-source format for web audio. No signup.",
   alternates: { canonical: "https://webpifyy.vercel.app/audio/convert/wav-to-ogg" },
   openGraph: {
-    title: "WAV to OGG Converter Free Online — webpifyy",
-    description: "Convert WAV audio to OGG Vorbis format. Smaller file sizes for web streaming. 100% browser-based.",
+    title: "Convert WAV to OGG Online Free | webpifyy",
+    description: "Convert WAV audio files to OGG Vorbis format online free. Browser-based FFmpeg, no uploads. Open-source format for web audio. No signup.",
     url: "https://webpifyy.vercel.app/audio/convert/wav-to-ogg",
+    type: "website", siteName: "webpifyy", images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
-  twitter: { card: "summary_large_image", title: "WAV to OGG Converter Free Online — webpifyy", description: "Convert WAV to OGG. Browser-based, no uploads." },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Audio Tools","item":"https://webpifyy.vercel.app/audio"},{"@type":"ListItem","position":3,"name":"Convert","item":"https://webpifyy.vercel.app/audio/convert"},{"@type":"ListItem","position":4,"name":"WAV to OGG"}]})
-  },
+  twitter: { card: "summary_large_image", title: "Convert WAV to OGG Online Free | webpifyy", description: "Convert WAV audio files to OGG Vorbis format online free. Browser-based FFmpeg, no uploads. Open-source format for web audio. No signup.", images: ["https://webpifyy.vercel.app/opengraph-image"] },
 };
 
 const faqs = [
-  { q: "Why convert WAV to OGG?", a: "OGG Vorbis is an open, royalty-free audio format that produces significantly smaller files than WAV while maintaining good quality. It is ideal for web streaming and HTML5 audio." },
-  { q: "Will OGG sound worse than WAV?", a: "OGG uses lossy compression, so some quality is discarded during encoding. However, at standard bitrates OGG is virtually indistinguishable from the original WAV for most listeners." },
-  { q: "How much smaller will the OGG file be?", a: "Typically 5x to 10x smaller than WAV. A 50MB WAV file may compress to 5-10MB as OGG depending on the audio content and bitrate." },
-  { q: "Is my audio file uploaded anywhere?", a: "No. All conversion happens entirely in your browser using FFmpeg.wasm. Your files never leave your device and nothing is sent to any server." },
+  { q: "What is OGG format?", a: "OGG Vorbis is a free open-source audio format. It offers better quality than MP3 at the same bitrate and is used in games, web apps and platforms that prefer open formats." },
+  { q: "Is OGG better than MP3?", a: "OGG Vorbis typically offers better audio quality than MP3 at equivalent bitrates, especially at lower bitrates. It is fully patent-free making it preferred for open-source projects." },
+  { q: "Does all software support OGG files?", a: "OGG is supported in most modern browsers, VLC, and many media players. Windows Media Player and iTunes require a codec plugin for OGG playback." },
+  { q: "How do I play OGG files?", a: "VLC Media Player plays OGG on all platforms. Chrome, Firefox, and Edge support OGG natively in HTML5 audio elements." },
 ];
 
 export default function WavToOggPage() {

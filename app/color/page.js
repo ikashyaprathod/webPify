@@ -3,11 +3,11 @@ import Breadcrumb from "@/components/Breadcrumb";
 import Link from "next/link";
 
 export const metadata = {
-  title: "Free Color Tools Online — webpifyy",
-  description: "Free online color tools: palette generator, color picker, hex/rgb/hsl converter, CSS gradient generator, and WCAG contrast checker. No sign-up needed.",
+  title: "Free Color Tools Online \u2014 Picker Palette Gradient",
+  description: "Free online color tools \u2014 color picker, palette generator, color converter, gradient generator, contrast checker. All browser-based, no signup.",
   alternates: { canonical: "https://webpifyy.vercel.app/color" },
-  openGraph: { title: "Free Color Tools Online — webpifyy", description: "Free online color tools for designers and developers.", url: "https://webpifyy.vercel.app/color" },
-  twitter: { card: "summary_large_image", title: "Free Color Tools Online — webpifyy", description: "Palette generator, color picker, converter, gradient builder and contrast checker." },
+  openGraph: { title: "Free Color Tools Online \u2014 Picker Palette Gradient | webpifyy", description: "Free online color tools \u2014 color picker, palette generator, color converter, gradient generator, contrast checker. All browser-based, no signup.", url: "https://webpifyy.vercel.app/color", type: "website", siteName: "webpifyy", images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }] },
+  twitter: { card: "summary_large_image", title: "Free Color Tools Online \u2014 Picker Palette Gradient | webpifyy", description: "Free online color tools \u2014 color picker, palette generator, color converter, gradient generator, contrast checker. All browser-based, no signup.", images: ["https://webpifyy.vercel.app/opengraph-image"] },
 };
 
 const toolCards = [

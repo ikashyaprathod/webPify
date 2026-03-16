@@ -3,18 +3,18 @@ import Breadcrumb from "@/components/Breadcrumb";
 import ColorPaletteGenerator from "@/components/ColorPaletteGenerator";
 
 export const metadata = {
-  title: "Color Palette Generator Free Online — webpifyy",
-  description: "Generate beautiful color palettes from any base color. Choose complementary, analogous, triadic, split-complementary or monochromatic schemes. Copy CSS variables or download as PNG.",
+  title: "Color Palette Generator Online Free",
+  description: "Generate color palettes online free. Complementary, analogous, triadic schemes. Get HEX RGB HSL values. Copy CSS variables. No signup needed.",
   alternates: { canonical: "https://webpifyy.vercel.app/color/palette-generator" },
-  openGraph: { title: "Color Palette Generator Free Online — webpifyy", description: "Create harmonious color palettes instantly.", url: "https://webpifyy.vercel.app/color/palette-generator" },
-  twitter: { card: "summary_large_image", title: "Color Palette Generator Free Online — webpifyy", description: "Generate complementary, analogous, and triadic palettes from any base color." },
+  openGraph: { title: "Color Palette Generator Online Free | webpifyy", description: "Generate color palettes online free. Complementary, analogous, triadic schemes. Get HEX RGB HSL values. Copy CSS variables. No signup needed.", url: "https://webpifyy.vercel.app/color/palette-generator", type: "website", siteName: "webpifyy", images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }] },
+  twitter: { card: "summary_large_image", title: "Color Palette Generator Online Free | webpifyy", description: "Generate color palettes online free. Complementary, analogous, triadic schemes. Get HEX RGB HSL values. Copy CSS variables. No signup needed.", images: ["https://webpifyy.vercel.app/opengraph-image"] },
 };
 
 const faqs = [
-  { q: "What color harmony types are available?", a: "The generator supports complementary, analogous, triadic, split-complementary, and monochromatic harmonies — covering all standard color theory schemes." },
-  { q: "How do I copy the palette as CSS variables?", a: "Click 'Copy as CSS Variables' to copy a ready-to-paste :root {} block with --color-1 through --color-5 variables to your clipboard." },
-  { q: "Can I download the palette as an image?", a: "Yes. Click 'Download PNG' to save a 500×200px palette strip showing all 5 swatches with their hex codes." },
-  { q: "What color information is shown per swatch?", a: "Each swatch shows the HEX code, RGB value, and HSL value. Click any swatch to copy its hex code instantly." },
+  { q: "How do I generate a color palette?", a: "Pick a base color, choose a palette type (complementary, analogous, triadic, split-complementary, or monochromatic), and click generate to get 5 harmonious colors." },
+  { q: "What color harmony schemes are available?", a: "Complementary (opposite on color wheel), Analogous (adjacent colors), Triadic (evenly spaced thirds), Split-complementary, and Monochromatic (tints/shades)." },
+  { q: "Can I copy the palette as CSS variables?", a: "Yes. Click Copy CSS to get all colors as CSS custom properties. Example: --color-1: #FF5733; Ready to paste into your stylesheet." },
+  { q: "Can I download the color palette as an image?", a: "Yes. Download as a PNG swatch image showing all 5 colors with their HEX values labeled. Useful for design documentation and presentations." },
 ];
 
 export default function PaletteGeneratorPage() {

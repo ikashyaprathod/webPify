@@ -3,25 +3,23 @@ import Breadcrumb from "@/components/Breadcrumb";
 import Mp3ToOgg from "@/components/Mp3ToOgg";
 
 export const metadata = {
-  title: "MP3 to OGG Converter Free Online — webpifyy",
-  description: "Convert MP3 audio files to OGG Vorbis format online for free. Open-source, royalty-free audio. 100% browser-based — no uploads.",
+  title: "Convert MP3 to OGG Online Free",
+  description: "Convert MP3 audio to OGG Vorbis format online free. Browser-based FFmpeg processing. No uploads needed. Free open-source audio format.",
   alternates: { canonical: "https://webpifyy.vercel.app/audio/convert/mp3-to-ogg" },
   openGraph: {
-    title: "MP3 to OGG Converter Free Online — webpifyy",
-    description: "Convert MP3 audio files to OGG Vorbis format. Open-source, royalty-free audio. 100% browser-based.",
+    title: "Convert MP3 to OGG Online Free | webpifyy",
+    description: "Convert MP3 audio to OGG Vorbis format online free. Browser-based FFmpeg processing. No uploads needed. Free open-source audio format.",
     url: "https://webpifyy.vercel.app/audio/convert/mp3-to-ogg",
+    type: "website", siteName: "webpifyy", images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
   },
-  twitter: { card: "summary_large_image", title: "MP3 to OGG Converter Free Online — webpifyy", description: "Convert MP3 to OGG Vorbis. Browser-based, no uploads." },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Audio Tools","item":"https://webpifyy.vercel.app/audio"},{"@type":"ListItem","position":3,"name":"Convert","item":"https://webpifyy.vercel.app/audio/convert"},{"@type":"ListItem","position":4,"name":"MP3 to OGG"}]})
-  },
+  twitter: { card: "summary_large_image", title: "Convert MP3 to OGG Online Free | webpifyy", description: "Convert MP3 audio to OGG Vorbis format online free. Browser-based FFmpeg processing. No uploads needed. Free open-source audio format.", images: ["https://webpifyy.vercel.app/opengraph-image"] },
 };
 
 const faqs = [
-  { q: "What is OGG Vorbis?", a: "OGG Vorbis is a free, open-source, royalty-free audio compression format. It offers similar quality to MP3 and AAC but without any patent or licensing restrictions." },
-  { q: "Is OGG better quality than MP3?", a: "At the same bitrate, OGG Vorbis generally achieves slightly better quality than MP3 due to its more advanced encoding algorithm. However, the difference is subtle for casual listening." },
-  { q: "Which browsers support OGG audio?", a: "OGG is natively supported in Chrome, Firefox, and Opera. Safari and Edge also support it in modern versions. It is widely used for HTML5 audio in web games and applications." },
-  { q: "Does the converter keep my files private?", a: "Yes. The entire conversion runs in your browser using FFmpeg.wasm. No data is sent to any server and your files stay completely private." },
+  { q: "Why convert MP3 to OGG?", a: "OGG is preferred for web games and HTML5 audio because it is patent-free and often produces smaller files than MP3 at the same quality level." },
+  { q: "Will converting MP3 to OGG improve quality?", a: "No. MP3 is lossy so converting to OGG does not recover lost quality. For best results start from an uncompressed WAV source." },
+  { q: "Is OGG supported in all browsers?", a: "OGG is supported in Chrome, Firefox and Edge but not in Safari. Always provide an MP3 fallback using the HTML5 audio source element." },
+  { q: "Is MP3 to OGG conversion free?", a: "Yes. FFmpeg.wasm converts in your browser. No files are uploaded, completely free with no signup or file size limits." },
 ];
 
 export default function Mp3ToOggPage() {
