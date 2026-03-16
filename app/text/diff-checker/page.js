@@ -3,18 +3,18 @@ import Breadcrumb from "@/components/Breadcrumb";
 import DiffChecker from "@/components/DiffChecker";
 
 export const metadata = {
-  title: "Text Diff Checker Online Free — Compare Two Texts",
-  description: "Compare two text blocks side by side with highlighted line-by-line and word-level differences. Shows added lines in green and removed lines in red. Free, browser-based.",
+  title: "Text Diff Checker Online Free \u2014 Compare Two Texts",
+  description: "Compare two texts and highlight differences online free. Line-by-line diff with additions in green and deletions in red. No uploads, no signup.",
   alternates: { canonical: "https://webpifyy.vercel.app/text/diff-checker" },
-  openGraph: { title: "Text Diff Checker Online Free — Compare Two Texts", description: "Side-by-side text comparison with line and word level diff highlighting.", url: "https://webpifyy.vercel.app/text/diff-checker" },
-  twitter: { card: "summary_large_image", title: "Text Diff Checker Online Free — Compare Two Texts", description: "Compare text blocks with green/red diff highlighting. Free and browser-based." },
+  openGraph: { title: "Text Diff Checker Online Free \u2014 Compare Two Texts | webpifyy", description: "Compare two texts and highlight differences online free. Line-by-line diff with additions in green and deletions in red. No uploads, no signup.", url: "https://webpifyy.vercel.app/text/diff-checker", type: "website", siteName: "webpifyy", images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }] },
+  twitter: { card: "summary_large_image", title: "Text Diff Checker Online Free \u2014 Compare Two Texts | webpifyy", description: "Compare two texts and highlight differences online free. Line-by-line diff with additions in green and deletions in red. No uploads, no signup.", images: ["https://webpifyy.vercel.app/opengraph-image"] },
 };
 
 const faqs = [
-  { q: "How does the line-by-line diff work?", a: "The tool uses a Longest Common Subsequence (LCS) algorithm to identify which lines are shared between the two texts, then highlights additions in green and deletions in red." },
-  { q: "What is word-level diff mode?", a: "Enabling word-level diff shows which specific words changed within each modified line, not just which lines changed. This is useful for spotting small edits." },
-  { q: "How many lines can I compare?", a: "The diff checker handles any amount of text entirely in your browser. Very large texts (thousands of lines) may be slower due to the LCS computation." },
-  { q: "Is my text sent to a server?", a: "No. All comparison logic runs in JavaScript in your browser. Your text is never transmitted anywhere." },
+  { q: "How do I compare two texts?", a: "Paste text into the left and right panels then click Compare. Additions show in green, deletions in red, and unchanged lines in white." },
+  { q: "Can I compare code files?", a: "Yes. Paste code into both panels for a line-by-line code diff. Useful for reviewing changes between two versions of a file." },
+  { q: "Is word-by-word diff available?", a: "Yes. Toggle between line diff and word diff modes. Word diff shows changes at word granularity within lines for more precise change identification." },
+  { q: "Is text comparison private?", a: "Yes. All comparison happens in your browser using JavaScript. No text is sent to any server or stored anywhere." },
 ];
 
 export default function DiffCheckerPage() {

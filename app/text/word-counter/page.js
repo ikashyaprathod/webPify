@@ -3,18 +3,18 @@ import Breadcrumb from "@/components/Breadcrumb";
 import WordCounter from "@/components/WordCounter";
 
 export const metadata = {
-  title: "Word Counter Online Free — Count Words & Characters",
-  description: "Count words, characters, sentences, paragraphs, reading time, and speaking time instantly. Also shows top 10 most frequent words. Free, no sign-up.",
+  title: "Word Counter Online Free \u2014 Count Words Characters",
+  description: "Count words, characters, sentences, paragraphs and reading time online free. Live stats as you type. No signup, no data stored. Browser-based.",
   alternates: { canonical: "https://webpifyy.vercel.app/text/word-counter" },
-  openGraph: { title: "Word Counter Online Free — Count Words & Characters", description: "Live word, character, and sentence counter with reading time estimate.", url: "https://webpifyy.vercel.app/text/word-counter" },
-  twitter: { card: "summary_large_image", title: "Word Counter Online Free — Count Words & Characters", description: "Instant word count with reading time, top words, and more." },
+  openGraph: { title: "Word Counter Online Free \u2014 Count Words Characters | webpifyy", description: "Count words, characters, sentences, paragraphs and reading time online free. Live stats as you type. No signup, no data stored. Browser-based.", url: "https://webpifyy.vercel.app/text/word-counter", type: "website", siteName: "webpifyy", images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }] },
+  twitter: { card: "summary_large_image", title: "Word Counter Online Free \u2014 Count Words Characters | webpifyy", description: "Count words, characters, sentences, paragraphs and reading time online free. Live stats as you type. No signup, no data stored. Browser-based.", images: ["https://webpifyy.vercel.app/opengraph-image"] },
 };
 
 const faqs = [
-  { q: "How is word count calculated?", a: "Words are counted by splitting the text on whitespace. Any sequence of non-whitespace characters counts as one word." },
-  { q: "How is reading time estimated?", a: "Reading time is estimated at 200 words per minute, the average adult silent reading speed. Speaking time uses 130 words per minute." },
-  { q: "What does 'Top 10 Words' show?", a: "The tool counts each unique word (ignoring punctuation and case, and excluding words under 3 characters) and lists the 10 most frequently occurring ones." },
-  { q: "Does the counter work offline?", a: "Yes. All processing is done in JavaScript in your browser. No internet connection is needed once the page is loaded." },
+  { q: "What does the word counter measure?", a: "Words, characters (with and without spaces), sentences, paragraphs, reading time at 200 words per minute, and speaking time at 130 words per minute. All update live." },
+  { q: "Is there a word count limit?", a: "No. Paste as much text as needed. The counter handles entire documents, essays, and long-form content without performance issues." },
+  { q: "Does the word counter store my text?", a: "No. All processing happens in your browser using JavaScript. Text is never sent to any server or stored anywhere." },
+  { q: "Can I count words in multiple languages?", a: "Yes. The counter detects word boundaries for Latin-script languages accurately. CJK languages use character count as the primary metric." },
 ];
 
 export default function WordCounterPage() {

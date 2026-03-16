@@ -3,18 +3,11 @@ import Breadcrumb from "@/components/Breadcrumb";
 import RegexTester from "@/components/RegexTester";
 
 export const metadata = {
-  title: "Regex Tester Online Free — Test Regular Expressions",
-  description: "Test regular expressions against any text. See all matches, capture groups, and indexes live as you type. Supports g, i, m, s flags. Free, browser-based.",
+  title: "Regex Tester Online Free \u2014 Test Regular Expressions",
+  description: "Test and debug regular expressions online free. Live match highlighting, capture groups, match count. Common patterns library. Browser-based.",
   alternates: { canonical: "https://webpifyy.vercel.app/dev/regex-tester" },
-  openGraph: {
-    title: "Regex Tester Online Free — Test Regular Expressions",
-    description: "Test regular expressions against any text. See all matches, capture groups, and indexes live as you type.",
-    url: "https://webpifyy.vercel.app/dev/regex-tester",
-  },
-  twitter: { card: "summary_large_image", title: "Regex Tester Online Free", description: "Test regex patterns live. See matches, groups, and indexes instantly." },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Developer Tools","item":"https://webpifyy.vercel.app/dev"},{"@type":"ListItem","position":3,"name":"Regex Tester"}]})
-  },
+  openGraph: { title: "Regex Tester Online Free \u2014 Test Regular Expressions | webpifyy", description: "Test and debug regular expressions online free. Live match highlighting, capture groups, match count. Common patterns library. Browser-based.", url: "https://webpifyy.vercel.app/dev/regex-tester", type: "website", siteName: "webpifyy", images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }] },
+  twitter: { card: "summary_large_image", title: "Regex Tester Online Free \u2014 Test Regular Expressions | webpifyy", description: "Test and debug regular expressions online free. Live match highlighting, capture groups, match count. Common patterns library. Browser-based.", images: ["https://webpifyy.vercel.app/opengraph-image"] },
 };
 
 const faqs = [

@@ -2,13 +2,13 @@ import Link from "next/link";
 import Breadcrumb from "@/components/Breadcrumb";
 
 export const metadata = {
-    title: "Terms of Service – Webpifyy",
-    description: "Webpifyy Terms of Service. Free image, video, and GIF tools provided as-is.",
+    title: "Terms of Service",
+    description: "webpifyy terms of service. Free to use, no account required. Read our terms before using our browser-based media and utility tools.",
     alternates: { canonical: 'https://webpifyy.vercel.app/terms' },
     robots: 'index, follow',
     openGraph: {
-        title: "Terms of Service – Webpifyy",
-        description: "Webpifyy Terms of Service. Free tools provided as-is.",
+        title: "Terms of Service | webpifyy",
+        description: "webpifyy terms of service. Free to use, no account required. Read our terms before using our browser-based media and utility tools.",
         url: "https://webpifyy.vercel.app/terms",
     },
   other: {

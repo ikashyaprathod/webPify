@@ -3,18 +3,11 @@ import Breadcrumb from "@/components/Breadcrumb";
 import HtmlMinifier from "@/components/HtmlMinifier";
 
 export const metadata = {
-  title: "HTML Minifier Online Free — webpifyy",
-  description: "Minify HTML by removing whitespace and comments. Get faster page loads and smaller HTML file sizes. Free, instant, browser-based — no upload needed.",
+  title: "HTML Minifier Online Free \u2014 Compress HTML Code",
+  description: "Minify and compress HTML code online free. Remove whitespace and comments, reduce page size. Copy or download. Browser-based, no uploads.",
   alternates: { canonical: "https://webpifyy.vercel.app/dev/html-minifier" },
-  openGraph: {
-    title: "HTML Minifier Online Free — webpifyy",
-    description: "Minify HTML by removing whitespace and comments. Faster page loads, smaller file sizes.",
-    url: "https://webpifyy.vercel.app/dev/html-minifier",
-  },
-  twitter: { card: "summary_large_image", title: "HTML Minifier Online Free", description: "Remove whitespace and comments from HTML for faster page loads." },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Developer Tools","item":"https://webpifyy.vercel.app/dev"},{"@type":"ListItem","position":3,"name":"HTML Minifier"}]})
-  },
+  openGraph: { title: "HTML Minifier Online Free \u2014 Compress HTML Code | webpifyy", description: "Minify and compress HTML code online free. Remove whitespace and comments, reduce page size. Copy or download. Browser-based, no uploads.", url: "https://webpifyy.vercel.app/dev/html-minifier", type: "website", siteName: "webpifyy", images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }] },
+  twitter: { card: "summary_large_image", title: "HTML Minifier Online Free \u2014 Compress HTML Code | webpifyy", description: "Minify and compress HTML code online free. Remove whitespace and comments, reduce page size. Copy or download. Browser-based, no uploads.", images: ["https://webpifyy.vercel.app/opengraph-image"] },
 };
 
 const faqs = [

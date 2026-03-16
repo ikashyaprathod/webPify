@@ -3,18 +3,18 @@ import Breadcrumb from "@/components/Breadcrumb";
 import TextToSpeech from "@/components/TextToSpeech";
 
 export const metadata = {
-  title: "Text to Speech Online Free — TTS Voice Reader",
-  description: "Convert any text to speech in your browser using your system's voices. Control speed, pitch, and voice. Live word highlighting shows the current word being spoken.",
+  title: "Text to Speech Online Free \u2014 TTS Voice Reader",
+  description: "Convert text to speech online free using Web Speech API. Multiple voices, speed and pitch control. Play text aloud instantly. No uploads needed.",
   alternates: { canonical: "https://webpifyy.vercel.app/text/text-to-speech" },
-  openGraph: { title: "Text to Speech Online Free — TTS Voice Reader", description: "Read any text aloud with controllable speed, pitch, and voice selection.", url: "https://webpifyy.vercel.app/text/text-to-speech" },
-  twitter: { card: "summary_large_image", title: "Text to Speech Online Free — TTS Voice Reader", description: "Free browser-based TTS with live word highlighting, speed, and pitch control." },
+  openGraph: { title: "Text to Speech Online Free \u2014 TTS Voice Reader | webpifyy", description: "Convert text to speech online free using Web Speech API. Multiple voices, speed and pitch control. Play text aloud instantly. No uploads needed.", url: "https://webpifyy.vercel.app/text/text-to-speech", type: "website", siteName: "webpifyy", images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }] },
+  twitter: { card: "summary_large_image", title: "Text to Speech Online Free \u2014 TTS Voice Reader | webpifyy", description: "Convert text to speech online free using Web Speech API. Multiple voices, speed and pitch control. Play text aloud instantly. No uploads needed.", images: ["https://webpifyy.vercel.app/opengraph-image"] },
 };
 
 const faqs = [
-  { q: "Which voices are available?", a: "Available voices depend on your operating system and browser. Windows typically includes Microsoft voices, macOS includes Siri/Alex voices, and Chrome adds Google voices. The voice selector shows all available options." },
-  { q: "Can I control reading speed?", a: "Yes. The Speed slider ranges from 0.5x (half speed) to 2x (double speed). The default is 1x normal speed." },
-  { q: "What is word highlighting?", a: "As the text is read, the current word is highlighted in the preview area below the text box, so you can follow along visually." },
-  { q: "Can I download the audio?", a: "No. The Web Speech API used by browsers does not provide a way to export or download the generated audio. For audio download, a server-side TTS service would be required." },
+  { q: "How do I use the text to speech tool?", a: "Paste or type your text, select a voice from the available options, adjust speed and pitch, then click Play. The text reads aloud instantly." },
+  { q: "What voices are available?", a: "Voices depend on your operating system. Windows, Mac, and mobile devices include different voice options. Chrome and Edge typically have the most voice choices." },
+  { q: "Can I download the audio as an MP3?", a: "The Web Speech API does not support audio download. This tool is for live playback only. For downloadable TTS audio, use a dedicated TTS service." },
+  { q: "What languages are supported?", a: "Language support depends on your device's installed voices. Most devices include English, Spanish, French, German, and other major languages." },
 ];
 
 export default function TextToSpeechPage() {

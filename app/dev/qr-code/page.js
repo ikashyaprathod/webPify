@@ -3,18 +3,11 @@ import Breadcrumb from "@/components/Breadcrumb";
 import QrCodeGenerator from "@/components/QrCodeGenerator";
 
 export const metadata = {
-  title: "QR Code Generator Free Online — webpifyy",
-  description: "Create QR codes for any URL, text, or data. Download as PNG or SVG instantly. Free, browser-based, no sign-up required.",
+  title: "QR Code Generator Online Free \u2014 Custom QR Codes",
+  description: "Generate QR codes online free. Enter any URL or text. Choose size and format PNG or SVG. Instant download. No signup, browser-based qrcode.js.",
   alternates: { canonical: "https://webpifyy.vercel.app/dev/qr-code" },
-  openGraph: {
-    title: "QR Code Generator Free Online — webpifyy",
-    description: "Create QR codes for any URL, text, or data. Download as PNG or SVG. Free, instant, no sign-up.",
-    url: "https://webpifyy.vercel.app/dev/qr-code",
-  },
-  twitter: { card: "summary_large_image", title: "QR Code Generator Free Online — webpifyy", description: "Create QR codes for any URL or text. Download PNG or SVG instantly." },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Developer Tools","item":"https://webpifyy.vercel.app/dev"},{"@type":"ListItem","position":3,"name":"QR Code Generator"}]})
-  },
+  openGraph: { title: "QR Code Generator Online Free \u2014 Custom QR Codes | webpifyy", description: "Generate QR codes online free. Enter any URL or text. Choose size and format PNG or SVG. Instant download. No signup, browser-based qrcode.js.", url: "https://webpifyy.vercel.app/dev/qr-code", type: "website", siteName: "webpifyy", images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }] },
+  twitter: { card: "summary_large_image", title: "QR Code Generator Online Free \u2014 Custom QR Codes | webpifyy", description: "Generate QR codes online free. Enter any URL or text. Choose size and format PNG or SVG. Instant download. No signup, browser-based qrcode.js.", images: ["https://webpifyy.vercel.app/opengraph-image"] },
 };
 
 const faqs = [

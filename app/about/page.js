@@ -2,12 +2,12 @@ import Link from "next/link";
 import Breadcrumb from "@/components/Breadcrumb";
 
 export const metadata = {
-    title: "About Webpifyy – Professional Image & Video Optimization Tools",
-    description: "Learn about Webpifyy, our mission to provide free professional image compression and conversion tools for web optimization and SEO.",
+    title: "About webpifyy \u2014 Free Browser-Based Media Tools",
+    description: "webpifyy is a free browser-based toolkit for images, video, audio, PDF and developer tools. 100+ tools, no signup, no uploads, 100% private.",
     alternates: { canonical: 'https://webpifyy.vercel.app/about' },
     openGraph: {
-        title: "About Webpifyy – Professional Image & Video Optimization Tools",
-        description: "Learn about Webpifyy, our mission to provide free professional tools.",
+        title: "About webpifyy \u2014 Free Browser-Based Media Tools | webpifyy",
+        description: "webpifyy is a free browser-based toolkit for images, video, audio, PDF and developer tools. 100+ tools, no signup, no uploads, 100% private.",
         url: "https://webpifyy.vercel.app/about",
     },
   other: {

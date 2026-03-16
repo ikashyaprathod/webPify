@@ -3,19 +3,12 @@ import Breadcrumb from "@/components/Breadcrumb";
 import FaviconGenerator from "@/components/FaviconGenerator";
 
 export const metadata = {
-  title: "Favicon Generator Online Free — All Sizes",
-  description: "Generate all favicon sizes from any image. 16×16, 32×32, 48×48, apple-touch-icon (180×180), and PWA icons (192×512). Download as ZIP with favicon.ico.",
+  title: "Favicon Generator Online Free \u2014 All Sizes",
+  description: "Generate favicons in all sizes from any image online free. Creates 16x16 to 512x512 PNG and ICO files. Download as ZIP. No signup needed.",
   alternates: { canonical: "https://webpifyy.vercel.app/dev/favicon-generator" },
   keywords: ["favicon generator", "create favicon online", "favicon maker free", "favicon all sizes", "website icon generator"],
-  openGraph: {
-    title: "Favicon Generator Online Free — All Sizes",
-    description: "Generate favicon in all sizes from any image. Download as ZIP.",
-    url: "https://webpifyy.vercel.app/dev/favicon-generator",
-  },
-  twitter: { card: "summary_large_image", title: "Favicon Generator Online Free", description: "Generate all favicon sizes. Download as ZIP." },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Developer Tools","item":"https://webpifyy.vercel.app/dev"},{"@type":"ListItem","position":3,"name":"Favicon Generator"}]})
-  },
+  openGraph: { title: "Favicon Generator Online Free \u2014 All Sizes | webpifyy", description: "Generate favicons in all sizes from any image online free. Creates 16x16 to 512x512 PNG and ICO files. Download as ZIP. No signup needed.", url: "https://webpifyy.vercel.app/dev/favicon-generator", type: "website", siteName: "webpifyy", images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }] },
+  twitter: { card: "summary_large_image", title: "Favicon Generator Online Free \u2014 All Sizes | webpifyy", description: "Generate favicons in all sizes from any image online free. Creates 16x16 to 512x512 PNG and ICO files. Download as ZIP. No signup needed.", images: ["https://webpifyy.vercel.app/opengraph-image"] },
 };
 
 const faqs = [

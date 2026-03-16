@@ -2,11 +2,11 @@ import PageShell from "@/components/PageShell";
 import Breadcrumb from "@/components/Breadcrumb";
 
 export const metadata = {
-  title: "Free Text Tools Online — webpifyy",
-  description: "Free online text tools: word counter, case converter, lorem ipsum generator, diff checker, and text-to-speech. No sign-up, fully browser-based.",
+  title: "Free Text Tools Online \u2014 Counter Converter Editor",
+  description: "Free online text tools \u2014 word counter, case converter, lorem ipsum generator, diff checker, text to speech. Browser-based, no data stored.",
   alternates: { canonical: "https://webpifyy.vercel.app/text" },
-  openGraph: { title: "Free Text Tools Online — webpifyy", description: "Word counter, case converter, lorem ipsum, diff checker, and TTS tools.", url: "https://webpifyy.vercel.app/text" },
-  twitter: { card: "summary_large_image", title: "Free Text Tools Online — webpifyy", description: "5 free text tools for writers, developers, and designers." },
+  openGraph: { title: "Free Text Tools Online \u2014 Counter Converter Editor | webpifyy", description: "Free online text tools \u2014 word counter, case converter, lorem ipsum generator, diff checker, text to speech. Browser-based, no data stored.", url: "https://webpifyy.vercel.app/text", type: "website", siteName: "webpifyy", images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }] },
+  twitter: { card: "summary_large_image", title: "Free Text Tools Online \u2014 Counter Converter Editor | webpifyy", description: "Free online text tools \u2014 word counter, case converter, lorem ipsum generator, diff checker, text to speech. Browser-based, no data stored.", images: ["https://webpifyy.vercel.app/opengraph-image"] },
 };
 
 const toolCards = [

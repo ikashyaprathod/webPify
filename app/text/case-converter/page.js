@@ -3,18 +3,18 @@ import Breadcrumb from "@/components/Breadcrumb";
 import CaseConverter from "@/components/CaseConverter";
 
 export const metadata = {
-  title: "Case Converter Online Free — Text Case Changer",
-  description: "Convert text to UPPERCASE, lowercase, Title Case, Sentence case, camelCase, PascalCase, snake_case, kebab-case, and alternating case instantly. Free online tool.",
+  title: "Text Case Converter Online Free",
+  description: "Convert text between UPPERCASE, lowercase, Title Case, camelCase, snake_case, kebab-case and more online free. Instant conversion, copy output.",
   alternates: { canonical: "https://webpifyy.vercel.app/text/case-converter" },
-  openGraph: { title: "Case Converter Online Free — Text Case Changer", description: "Convert text case: UPPERCASE, camelCase, snake_case, kebab-case, and more.", url: "https://webpifyy.vercel.app/text/case-converter" },
-  twitter: { card: "summary_large_image", title: "Case Converter Online Free — Text Case Changer", description: "9 case conversion modes for any text. Instant, free, browser-based." },
+  openGraph: { title: "Text Case Converter Online Free | webpifyy", description: "Convert text between UPPERCASE, lowercase, Title Case, camelCase, snake_case, kebab-case and more online free. Instant conversion, copy output.", url: "https://webpifyy.vercel.app/text/case-converter", type: "website", siteName: "webpifyy", images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }] },
+  twitter: { card: "summary_large_image", title: "Text Case Converter Online Free | webpifyy", description: "Convert text between UPPERCASE, lowercase, Title Case, camelCase, snake_case, kebab-case and more online free. Instant conversion, copy output.", images: ["https://webpifyy.vercel.app/opengraph-image"] },
 };
 
 const faqs = [
-  { q: "How many case conversion types are available?", a: "The tool supports 9 case types: UPPERCASE, lowercase, Title Case, Sentence case, camelCase, PascalCase, snake_case, kebab-case, and aLtErNaTiNg case." },
-  { q: "What is camelCase vs PascalCase?", a: "camelCase starts with a lowercase letter and capitalizes each subsequent word (e.g., 'myVariableName'). PascalCase capitalizes every word including the first (e.g., 'MyVariableName')." },
-  { q: "What is snake_case used for?", a: "snake_case uses underscores between words and all lowercase. It is commonly used for variable names in Python, Ruby, and database column names." },
-  { q: "Can I convert a long paragraph?", a: "Yes. The converter handles text of any length. Paste your entire paragraph or document and click the desired case button to convert it all at once." },
+  { q: "What case formats can I convert to?", a: "UPPERCASE, lowercase, Title Case, Sentence case, camelCase, PascalCase, snake_case, kebab-case, and aLtErNaTiNg case. All formats available simultaneously." },
+  { q: "Is case conversion instant?", a: "Yes. All formats update in real time as you type. No button press needed. Copy any format with a single click." },
+  { q: "What is camelCase vs PascalCase?", a: "camelCase starts with a lowercase letter (myVariable). PascalCase starts with uppercase (MyComponent). camelCase is used in JavaScript variables, PascalCase in React components." },
+  { q: "Is my text stored when I use the case converter?", a: "No. All conversion happens in your browser. Nothing is sent to any server or saved anywhere." },
 ];
 
 export default function CaseConverterPage() {

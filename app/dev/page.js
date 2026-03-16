@@ -2,17 +2,11 @@ import PageShell from "@/components/PageShell";
 import Breadcrumb from "@/components/Breadcrumb";
 
 export const metadata = {
-  title: "Developer Tools Online Free — Favicons, OG Images, Base64",
-  description: "Free developer tools. Generate favicons, create OG images, encode/decode base64. Client-side, no sign-up required.",
+  title: "Free Developer Tools Online \u2014 JSON QR Code Regex",
+  description: "Free browser-based developer tools \u2014 JSON formatter, regex tester, CSS/HTML/JS minifier, QR code generator, password generator, markdown editor.",
   alternates: { canonical: "https://webpifyy.vercel.app/dev" },
-  openGraph: {
-    title: "Developer Tools Online Free",
-    description: "Favicon generator, OG image resizer, base64 encoder. Free developer tools.",
-    url: "https://webpifyy.vercel.app/dev",
-  },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Developer Tools"}]})
-  },
+  openGraph: { title: "Free Developer Tools Online \u2014 JSON QR Code Regex | webpifyy", description: "Free browser-based developer tools \u2014 JSON formatter, regex tester, CSS/HTML/JS minifier, QR code generator, password generator, markdown editor.", url: "https://webpifyy.vercel.app/dev", type: "website", siteName: "webpifyy", images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }] },
+  twitter: { card: "summary_large_image", title: "Free Developer Tools Online \u2014 JSON QR Code Regex | webpifyy", description: "Free browser-based developer tools \u2014 JSON formatter, regex tester, CSS/HTML/JS minifier, QR code generator, password generator, markdown editor.", images: ["https://webpifyy.vercel.app/opengraph-image"] },
 };
 
 const codeCards = [

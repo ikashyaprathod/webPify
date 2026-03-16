@@ -3,18 +3,11 @@ import Breadcrumb from "@/components/Breadcrumb";
 import CssMinifier from "@/components/CssMinifier";
 
 export const metadata = {
-  title: "CSS Minifier Online Free — Minify CSS Instantly",
-  description: "Minify CSS by removing whitespace, comments, and redundant code. Reduce CSS file size by up to 80%. Free, instant, browser-based — no upload needed.",
+  title: "CSS Minifier Online Free \u2014 Minify CSS Instantly",
+  description: "Minify and compress CSS code online free. Remove whitespace and comments, reduce file size. Copy or download. Browser-based, no uploads needed.",
   alternates: { canonical: "https://webpifyy.vercel.app/dev/css-minifier" },
-  openGraph: {
-    title: "CSS Minifier Online Free — Minify CSS Instantly",
-    description: "Minify CSS by removing whitespace and comments. Reduce CSS file size by up to 80%. Free and instant.",
-    url: "https://webpifyy.vercel.app/dev/css-minifier",
-  },
-  twitter: { card: "summary_large_image", title: "CSS Minifier Online Free", description: "Minify CSS instantly. Remove whitespace and comments for smaller file sizes." },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Developer Tools","item":"https://webpifyy.vercel.app/dev"},{"@type":"ListItem","position":3,"name":"CSS Minifier"}]})
-  },
+  openGraph: { title: "CSS Minifier Online Free \u2014 Minify CSS Instantly | webpifyy", description: "Minify and compress CSS code online free. Remove whitespace and comments, reduce file size. Copy or download. Browser-based, no uploads needed.", url: "https://webpifyy.vercel.app/dev/css-minifier", type: "website", siteName: "webpifyy", images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }] },
+  twitter: { card: "summary_large_image", title: "CSS Minifier Online Free \u2014 Minify CSS Instantly | webpifyy", description: "Minify and compress CSS code online free. Remove whitespace and comments, reduce file size. Copy or download. Browser-based, no uploads needed.", images: ["https://webpifyy.vercel.app/opengraph-image"] },
 };
 
 const faqs = [

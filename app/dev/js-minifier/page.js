@@ -3,18 +3,11 @@ import Breadcrumb from "@/components/Breadcrumb";
 import JsMinifier from "@/components/JsMinifier";
 
 export const metadata = {
-  title: "JavaScript Minifier Online Free — webpifyy",
-  description: "Minify JavaScript using Terser. Remove whitespace, shorten variables, and reduce JS bundle size by up to 80%. Free, browser-based, no upload needed.",
+  title: "JavaScript Minifier Online Free \u2014 Minify JS",
+  description: "Minify JavaScript code online free using Terser. Remove whitespace, shorten variable names, reduce bundle size. Copy or download. No uploads.",
   alternates: { canonical: "https://webpifyy.vercel.app/dev/js-minifier" },
-  openGraph: {
-    title: "JavaScript Minifier Online Free — webpifyy",
-    description: "Minify JavaScript using Terser. Remove whitespace, shorten variables, and reduce JS file size by up to 80%.",
-    url: "https://webpifyy.vercel.app/dev/js-minifier",
-  },
-  twitter: { card: "summary_large_image", title: "JavaScript Minifier Online Free", description: "Minify JS with Terser. Shorten variables and strip whitespace instantly." },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Developer Tools","item":"https://webpifyy.vercel.app/dev"},{"@type":"ListItem","position":3,"name":"JS Minifier"}]})
-  },
+  openGraph: { title: "JavaScript Minifier Online Free \u2014 Minify JS | webpifyy", description: "Minify JavaScript code online free using Terser. Remove whitespace, shorten variable names, reduce bundle size. Copy or download. No uploads.", url: "https://webpifyy.vercel.app/dev/js-minifier", type: "website", siteName: "webpifyy", images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }] },
+  twitter: { card: "summary_large_image", title: "JavaScript Minifier Online Free \u2014 Minify JS | webpifyy", description: "Minify JavaScript code online free using Terser. Remove whitespace, shorten variable names, reduce bundle size. Copy or download. No uploads.", images: ["https://webpifyy.vercel.app/opengraph-image"] },
 };
 
 const faqs = [

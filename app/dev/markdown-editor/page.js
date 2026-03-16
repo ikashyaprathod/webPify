@@ -3,18 +3,11 @@ import Breadcrumb from "@/components/Breadcrumb";
 import MarkdownEditor from "@/components/MarkdownEditor";
 
 export const metadata = {
-  title: "Markdown Editor Online Free — Live Preview",
-  description: "Write Markdown with instant HTML preview. Toolbar shortcuts for bold, italic, headings, links, and code. Copy HTML or Markdown. Free, browser-based.",
+  title: "Markdown Editor Online Free \u2014 Live Preview",
+  description: "Write and preview Markdown online free. Live split-pane preview, formatting toolbar, copy HTML or Markdown output. Browser-based, no uploads.",
   alternates: { canonical: "https://webpifyy.vercel.app/dev/markdown-editor" },
-  openGraph: {
-    title: "Markdown Editor Online Free — Live Preview",
-    description: "Write Markdown with instant HTML preview. Toolbar shortcuts, word count, copy HTML or Markdown.",
-    url: "https://webpifyy.vercel.app/dev/markdown-editor",
-  },
-  twitter: { card: "summary_large_image", title: "Markdown Editor Online Free — Live Preview", description: "Write Markdown with instant HTML preview and toolbar shortcuts." },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Developer Tools","item":"https://webpifyy.vercel.app/dev"},{"@type":"ListItem","position":3,"name":"Markdown Editor"}]})
-  },
+  openGraph: { title: "Markdown Editor Online Free \u2014 Live Preview | webpifyy", description: "Write and preview Markdown online free. Live split-pane preview, formatting toolbar, copy HTML or Markdown output. Browser-based, no uploads.", url: "https://webpifyy.vercel.app/dev/markdown-editor", type: "website", siteName: "webpifyy", images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }] },
+  twitter: { card: "summary_large_image", title: "Markdown Editor Online Free \u2014 Live Preview | webpifyy", description: "Write and preview Markdown online free. Live split-pane preview, formatting toolbar, copy HTML or Markdown output. Browser-based, no uploads.", images: ["https://webpifyy.vercel.app/opengraph-image"] },
 };
 
 const faqs = [

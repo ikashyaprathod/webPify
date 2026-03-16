@@ -3,19 +3,12 @@ import Breadcrumb from "@/components/Breadcrumb";
 import OgImageResizer from "@/components/OgImageResizer";
 
 export const metadata = {
-  title: "OG Image Resizer — Open Graph Image Generator Online",
-  description: "Resize images to Open Graph, Twitter Card, LinkedIn, and Facebook sizes. Generate all OG images at once. Download as ZIP. Free, browser-based.",
+  title: "OG Image Resizer Online Free \u2014 Open Graph",
+  description: "Resize images to Open Graph dimensions online free. 1200x630 for Facebook/Twitter, LinkedIn and more. Browser-based Sharp, no uploads needed.",
   alternates: { canonical: "https://webpifyy.vercel.app/dev/og-image-resizer" },
   keywords: ["og image resizer", "open graph image", "twitter card size", "social media image resizer", "og image generator"],
-  openGraph: {
-    title: "OG Image Resizer — Open Graph Image Generator Online",
-    description: "Generate Open Graph, Twitter Card, LinkedIn, and Facebook images. Download as ZIP.",
-    url: "https://webpifyy.vercel.app/dev/og-image-resizer",
-  },
-  twitter: { card: "summary_large_image", title: "OG Image Resizer Online Free", description: "Generate all OG image sizes. Download as ZIP." },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Developer Tools","item":"https://webpifyy.vercel.app/dev"},{"@type":"ListItem","position":3,"name":"OG Image Resizer"}]})
-  },
+  openGraph: { title: "OG Image Resizer Online Free \u2014 Open Graph | webpifyy", description: "Resize images to Open Graph dimensions online free. 1200x630 for Facebook/Twitter, LinkedIn and more. Browser-based Sharp, no uploads needed.", url: "https://webpifyy.vercel.app/dev/og-image-resizer", type: "website", siteName: "webpifyy", images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }] },
+  twitter: { card: "summary_large_image", title: "OG Image Resizer Online Free \u2014 Open Graph | webpifyy", description: "Resize images to Open Graph dimensions online free. 1200x630 for Facebook/Twitter, LinkedIn and more. Browser-based Sharp, no uploads needed.", images: ["https://webpifyy.vercel.app/opengraph-image"] },
 };
 
 const faqs = [

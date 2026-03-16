@@ -3,19 +3,12 @@ import Breadcrumb from "@/components/Breadcrumb";
 import Base64Encoder from "@/components/Base64Encoder";
 
 export const metadata = {
-  title: "Image to Base64 Encoder Online Free",
-  description: "Encode images to base64 strings or decode base64 back to images. Supports data URL format. Copy base64 string, preview decoded image. Free, browser-based.",
+  title: "Base64 Image Encoder Online Free",
+  description: "Encode images to Base64 data URL online free. Get data:image/png;base64 string. Copy or download. Decode Base64 back to image. No uploads.",
   alternates: { canonical: "https://webpifyy.vercel.app/dev/base64-encoder" },
   keywords: ["image to base64", "base64 encoder", "base64 decoder", "image base64 online", "data url generator"],
-  openGraph: {
-    title: "Image to Base64 Encoder Online Free",
-    description: "Encode images to base64 or decode base64 back to images. Browser-based.",
-    url: "https://webpifyy.vercel.app/dev/base64-encoder",
-  },
-  twitter: { card: "summary_large_image", title: "Image to Base64 Encoder Online Free", description: "Encode/decode images to base64. Free tool." },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Developer Tools","item":"https://webpifyy.vercel.app/dev"},{"@type":"ListItem","position":3,"name":"Base64 Encoder"}]})
-  },
+  openGraph: { title: "Base64 Image Encoder Online Free | webpifyy", description: "Encode images to Base64 data URL online free. Get data:image/png;base64 string. Copy or download. Decode Base64 back to image. No uploads.", url: "https://webpifyy.vercel.app/dev/base64-encoder", type: "website", siteName: "webpifyy", images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }] },
+  twitter: { card: "summary_large_image", title: "Base64 Image Encoder Online Free | webpifyy", description: "Encode images to Base64 data URL online free. Get data:image/png;base64 string. Copy or download. Decode Base64 back to image. No uploads.", images: ["https://webpifyy.vercel.app/opengraph-image"] },
 };
 
 const faqs = [

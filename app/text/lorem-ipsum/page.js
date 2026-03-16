@@ -3,18 +3,18 @@ import Breadcrumb from "@/components/Breadcrumb";
 import LoremIpsum from "@/components/LoremIpsum";
 
 export const metadata = {
-  title: "Lorem Ipsum Generator Free Online — webpifyy",
-  description: "Generate lorem ipsum placeholder text by words, sentences, or paragraphs. Option to start with 'Lorem ipsum...' and wrap in HTML paragraph tags. Free, instant.",
+  title: "Lorem Ipsum Generator Online Free",
+  description: "Generate Lorem Ipsum placeholder text online free. Choose words, sentences or paragraphs. Classic or random text. Copy or download. No signup.",
   alternates: { canonical: "https://webpifyy.vercel.app/text/lorem-ipsum" },
-  openGraph: { title: "Lorem Ipsum Generator Free Online — webpifyy", description: "Generate placeholder lorem ipsum text by words, sentences, or paragraphs.", url: "https://webpifyy.vercel.app/text/lorem-ipsum" },
-  twitter: { card: "summary_large_image", title: "Lorem Ipsum Generator Free Online — webpifyy", description: "Generate lorem ipsum with optional HTML paragraph wrapping." },
+  openGraph: { title: "Lorem Ipsum Generator Online Free | webpifyy", description: "Generate Lorem Ipsum placeholder text online free. Choose words, sentences or paragraphs. Classic or random text. Copy or download. No signup.", url: "https://webpifyy.vercel.app/text/lorem-ipsum", type: "website", siteName: "webpifyy", images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }] },
+  twitter: { card: "summary_large_image", title: "Lorem Ipsum Generator Online Free | webpifyy", description: "Generate Lorem Ipsum placeholder text online free. Choose words, sentences or paragraphs. Classic or random text. Copy or download. No signup.", images: ["https://webpifyy.vercel.app/opengraph-image"] },
 };
 
 const faqs = [
-  { q: "What is Lorem Ipsum?", a: "Lorem ipsum is standard placeholder text used in design and publishing to fill space where real content will go. It originates from a scrambled passage of Cicero's 'de Finibus Bonorum et Malorum' from 45 BC." },
-  { q: "Can I generate just a few words instead of full paragraphs?", a: "Yes. Use the type selector to switch between Words, Sentences, and Paragraphs, then set the number you need in the Number input." },
-  { q: "What does 'Wrap in <p> tags' do?", a: "Enabling this option wraps each paragraph (or the entire output for words/sentences) in HTML <p> tags, making the output ready to paste directly into HTML markup." },
-  { q: "Can I download the generated text?", a: "Yes. Click 'Download .txt' to save the generated content as a plain text file to your device." },
+  { q: "What is Lorem Ipsum text used for?", a: "Lorem Ipsum is placeholder text used in design and typesetting to fill space where real content is not yet available. It lets designers focus on visual layout without distraction." },
+  { q: "Can I generate random Lorem Ipsum or the classic version?", a: "Both options are available. Classic always starts with Lorem ipsum dolor sit amet. Random generates varied Latin-like placeholder text." },
+  { q: "Can I generate Lorem Ipsum with HTML paragraph tags?", a: "Yes. Toggle HTML mode to wrap each paragraph in p tags. Ready to paste directly into HTML templates and design mockups." },
+  { q: "How much Lorem Ipsum can I generate?", a: "Generate 1 to 100 words, sentences or paragraphs. For very long placeholder text, generate in batches and combine." },
 ];
 
 export default function LoremIpsumPage() {

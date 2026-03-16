@@ -3,18 +3,11 @@ import Breadcrumb from "@/components/Breadcrumb";
 import PasswordGenerator from "@/components/PasswordGenerator";
 
 export const metadata = {
-  title: "Password Generator Free Online — Secure & Random",
-  description: "Generate secure, random passwords up to 64 characters. Customize with uppercase, lowercase, symbols, and numbers. Free, browser-based, no data stored.",
+  title: "Password Generator Online Free \u2014 Strong & Secure",
+  description: "Generate strong random passwords online free. Control length, uppercase, numbers, symbols. Strength indicator. No signup, browser-based.",
   alternates: { canonical: "https://webpifyy.vercel.app/dev/password-generator" },
-  openGraph: {
-    title: "Password Generator Free Online — Secure & Random",
-    description: "Generate secure, random passwords up to 64 characters. Customize with symbols, numbers, and more.",
-    url: "https://webpifyy.vercel.app/dev/password-generator",
-  },
-  twitter: { card: "summary_large_image", title: "Password Generator Free Online — Secure & Random", description: "Generate strong random passwords instantly. Free and private." },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Developer Tools","item":"https://webpifyy.vercel.app/dev"},{"@type":"ListItem","position":3,"name":"Password Generator"}]})
-  },
+  openGraph: { title: "Password Generator Online Free \u2014 Strong & Secure | webpifyy", description: "Generate strong random passwords online free. Control length, uppercase, numbers, symbols. Strength indicator. No signup, browser-based.", url: "https://webpifyy.vercel.app/dev/password-generator", type: "website", siteName: "webpifyy", images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }] },
+  twitter: { card: "summary_large_image", title: "Password Generator Online Free \u2014 Strong & Secure | webpifyy", description: "Generate strong random passwords online free. Control length, uppercase, numbers, symbols. Strength indicator. No signup, browser-based.", images: ["https://webpifyy.vercel.app/opengraph-image"] },
 };
 
 const faqs = [

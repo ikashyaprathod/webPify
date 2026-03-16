@@ -3,18 +3,11 @@ import Breadcrumb from "@/components/Breadcrumb";
 import JsonFormatter from "@/components/JsonFormatter";
 
 export const metadata = {
-  title: "JSON Formatter & Validator Online Free — webpifyy",
-  description: "Format, validate, and minify JSON data instantly. Beautify JSON with proper indentation, detect syntax errors with line numbers. Free, browser-based.",
+  title: "JSON Formatter & Validator Online Free",
+  description: "Format, beautify and validate JSON online free. Minify JSON, highlight errors with line numbers. Copy formatted output. Browser-based, no uploads.",
   alternates: { canonical: "https://webpifyy.vercel.app/dev/json-formatter" },
-  openGraph: {
-    title: "JSON Formatter & Validator Online Free — webpifyy",
-    description: "Format, validate, and minify JSON data. Instantly beautify JSON with proper indentation and error detection.",
-    url: "https://webpifyy.vercel.app/dev/json-formatter",
-  },
-  twitter: { card: "summary_large_image", title: "JSON Formatter & Validator Online Free", description: "Beautify, validate, and minify JSON instantly. Free online tool." },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Developer Tools","item":"https://webpifyy.vercel.app/dev"},{"@type":"ListItem","position":3,"name":"JSON Formatter"}]})
-  },
+  openGraph: { title: "JSON Formatter & Validator Online Free | webpifyy", description: "Format, beautify and validate JSON online free. Minify JSON, highlight errors with line numbers. Copy formatted output. Browser-based, no uploads.", url: "https://webpifyy.vercel.app/dev/json-formatter", type: "website", siteName: "webpifyy", images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }] },
+  twitter: { card: "summary_large_image", title: "JSON Formatter & Validator Online Free | webpifyy", description: "Format, beautify and validate JSON online free. Minify JSON, highlight errors with line numbers. Copy formatted output. Browser-based, no uploads.", images: ["https://webpifyy.vercel.app/opengraph-image"] },
 };
 
 const faqs = [

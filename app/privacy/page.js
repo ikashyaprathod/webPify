@@ -2,13 +2,13 @@ import Link from "next/link";
 import Breadcrumb from "@/components/Breadcrumb";
 
 export const metadata = {
-    title: "Privacy Policy – Webpifyy",
-    description: "Webpifyy Privacy Policy. We don't collect data, store files, or track users. All processing happens client-side in your browser.",
+    title: "Privacy Policy",
+    description: "webpifyy privacy policy. All file processing happens in your browser. No files are uploaded to any server. Read our full privacy policy here.",
     alternates: { canonical: 'https://webpifyy.vercel.app/privacy' },
     robots: 'index, follow',
     openGraph: {
-        title: "Privacy Policy – Webpifyy",
-        description: "Webpifyy Privacy Policy. We don't collect data, store files, or track users.",
+        title: "Privacy Policy | webpifyy",
+        description: "webpifyy privacy policy. All file processing happens in your browser. No files are uploaded to any server. Read our full privacy policy here.",
         url: "https://webpifyy.vercel.app/privacy",
     },
   other: {

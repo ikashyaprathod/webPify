@@ -3,18 +3,11 @@ import Breadcrumb from "@/components/Breadcrumb";
 import WebcamTest from "@/components/WebcamTest";
 
 export const metadata = {
-  title: "Webcam Test Online Free — Test Camera & Microphone",
-  description: "Test your webcam and microphone online. Check camera resolution, device label, audio levels, and switch between devices. Free, browser-based, nothing recorded.",
+  title: "Webcam Test Online Free \u2014 Test Camera & Microphone",
+  description: "Test your webcam and microphone online free. See live video, check resolution and frame rate, test audio levels. No uploads, browser-based.",
   alternates: { canonical: "https://webpifyy.vercel.app/dev/webcam-test" },
-  openGraph: {
-    title: "Webcam Test Online Free — Test Camera & Microphone",
-    description: "Test your webcam and microphone online. Check resolution, frame rate, audio levels, and device info.",
-    url: "https://webpifyy.vercel.app/dev/webcam-test",
-  },
-  twitter: { card: "summary_large_image", title: "Webcam Test Online Free", description: "Test your camera and microphone instantly in your browser." },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Developer Tools","item":"https://webpifyy.vercel.app/dev"},{"@type":"ListItem","position":3,"name":"Webcam Test"}]})
-  },
+  openGraph: { title: "Webcam Test Online Free \u2014 Test Camera & Microphone | webpifyy", description: "Test your webcam and microphone online free. See live video, check resolution and frame rate, test audio levels. No uploads, browser-based.", url: "https://webpifyy.vercel.app/dev/webcam-test", type: "website", siteName: "webpifyy", images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }] },
+  twitter: { card: "summary_large_image", title: "Webcam Test Online Free \u2014 Test Camera & Microphone | webpifyy", description: "Test your webcam and microphone online free. See live video, check resolution and frame rate, test audio levels. No uploads, browser-based.", images: ["https://webpifyy.vercel.app/opengraph-image"] },
 };
 
 const faqs = [
