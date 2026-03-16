@@ -16,7 +16,8 @@ export const metadata = {
 };
 
 const cards = [
-  { href: "/audio/edit/trim", icon: "✂️", title: "Audio Trimmer", desc: "Cut and trim audio clips to exact start/end times. Perfect for ringtones and clips.", gradient: "linear-gradient(135deg,#fdf4ff,#fae8ff)", cta: "Trim Audio" },
+  { href: "/audio/edit/trim",   icon: "✂️", title: "Audio Trimmer",        desc: "Cut and trim audio clips to exact start/end times. Perfect for ringtones and clips.", gradient: "linear-gradient(135deg,#fdf4ff,#fae8ff)", cta: "Trim Audio" },
+  { href: "/audio/edit/volume", icon: "🔊", title: "Volume Adjuster",       desc: "Increase or decrease audio volume from 0% to 200%. Supports MP3, WAV, OGG.",         gradient: "linear-gradient(135deg,#f0fdf4,#dcfce7)", cta: "Adjust Volume" },
 ];
 
 const faqs = [

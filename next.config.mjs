@@ -26,6 +26,14 @@ const nextConfig = {
           { key: 'Cross-Origin-Embedder-Policy', value: 'require-corp' },
         ],
       },
+      {
+        // Screen recorder uses getDisplayMedia + SharedArrayBuffer
+        source: '/screen/:path*',
+        headers: [
+          { key: 'Cross-Origin-Opener-Policy', value: 'same-origin' },
+          { key: 'Cross-Origin-Embedder-Policy', value: 'require-corp' },
+        ],
+      },
     ];
   },
   async redirects() {
@@ -74,6 +82,8 @@ const nextConfig = {
       { source: '/gif/compressor/webm',       destination: '/gif/convert/gif-to-webm',          permanent: true },
       // SVG
       { source: '/svg-optimizer',             destination: '/svg/optimize',                     permanent: true },
+      // Color picker moved to /color/picker
+      { source: '/image/edit/color-picker',   destination: '/color/picker',                     permanent: true },
     ];
   },
 };

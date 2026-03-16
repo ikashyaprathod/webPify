@@ -56,6 +56,39 @@ const ALL_TOOLS = [
   { name: "Favicon Generator",   href: "/dev/favicon-generator",           category: "Dev Tools" },
   { name: "OG Image Resizer",    href: "/dev/og-image-resizer",            category: "Dev Tools" },
   { name: "Base64 Encoder",      href: "/dev/base64-encoder",              category: "Dev Tools" },
+  { name: "QR Code Generator",   href: "/dev/qr-code",                     category: "Dev Tools" },
+  { name: "Password Generator",  href: "/dev/password-generator",          category: "Dev Tools" },
+  { name: "JSON Formatter",      href: "/dev/json-formatter",              category: "Dev Tools" },
+  { name: "Regex Tester",        href: "/dev/regex-tester",                category: "Dev Tools" },
+  { name: "CSS Minifier",        href: "/dev/css-minifier",                category: "Dev Tools" },
+  { name: "HTML Minifier",       href: "/dev/html-minifier",               category: "Dev Tools" },
+  { name: "JS Minifier",         href: "/dev/js-minifier",                 category: "Dev Tools" },
+  { name: "Webcam Test",         href: "/dev/webcam-test",                 category: "Dev Tools" },
+  { name: "Markdown Editor",     href: "/dev/markdown-editor",             category: "Dev Tools" },
+  { name: "Color Palette",       href: "/color/palette-generator",         category: "Color Tools" },
+  { name: "Color Picker",        href: "/color/picker",                    category: "Color Tools" },
+  { name: "Color Converter",     href: "/color/converter",                 category: "Color Tools" },
+  { name: "Gradient Generator",  href: "/color/gradient-generator",        category: "Color Tools" },
+  { name: "Contrast Checker",    href: "/color/contrast-checker",          category: "Color Tools" },
+  { name: "Screen Recorder",     href: "/screen/recorder",                 category: "Screen Tools" },
+  { name: "Screenshot Tool",     href: "/screen/screenshot",               category: "Screen Tools" },
+  { name: "Word Counter",        href: "/text/word-counter",               category: "Text Tools" },
+  { name: "Case Converter",      href: "/text/case-converter",             category: "Text Tools" },
+  { name: "Lorem Ipsum",         href: "/text/lorem-ipsum",                category: "Text Tools" },
+  { name: "Diff Checker",        href: "/text/diff-checker",               category: "Text Tools" },
+  { name: "Text to Speech",      href: "/text/text-to-speech",             category: "Text Tools" },
+  { name: "MP4 to MOV",          href: "/video/convert/mp4-to-mov",        category: "Video" },
+  { name: "WebM to MP4",         href: "/video/convert/webm-to-mp4",       category: "Video" },
+  { name: "Add Subtitles",       href: "/video/edit/add-subtitles",        category: "Video" },
+  { name: "WAV to OGG",          href: "/audio/convert/wav-to-ogg",        category: "Audio" },
+  { name: "MP3 to OGG",          href: "/audio/convert/mp3-to-ogg",        category: "Audio" },
+  { name: "Volume Adjuster",     href: "/audio/edit/volume",               category: "Audio" },
+  { name: "Blur Image",          href: "/image/edit/blur",                 category: "Image" },
+  { name: "Grayscale Image",     href: "/image/edit/grayscale",            category: "Image" },
+  { name: "Adjust Brightness",   href: "/image/edit/brightness",           category: "Image" },
+  { name: "Add Watermark PDF",   href: "/pdf/add-watermark",               category: "PDF" },
+  { name: "PDF Password",        href: "/pdf/add-password",                category: "PDF" },
+  { name: "Reorder PDF Pages",   href: "/pdf/reorder-pages",               category: "PDF" },
 ];
 
 export default function Navbar() {
@@ -172,14 +205,35 @@ export default function Navbar() {
                     <Link href="/pdf/jpg-to-pdf" className="nb-dropdown-item" onClick={() => setToolsOpen(false)}>JPG → PDF</Link>
                   </div>
                   <div className="nb-dropdown-group">
-                    <span className="nb-dropdown-label">Audio &amp; Dev</span>
+                    <span className="nb-dropdown-label">Audio</span>
                     <Link href="/audio/compress/mp3" className="nb-dropdown-item" onClick={() => setToolsOpen(false)}>Audio Compressor</Link>
                     <Link href="/audio/convert/mp3-to-wav" className="nb-dropdown-item" onClick={() => setToolsOpen(false)}>MP3 → WAV</Link>
                     <Link href="/audio/convert/wav-to-mp3" className="nb-dropdown-item" onClick={() => setToolsOpen(false)}>WAV → MP3</Link>
+                    <Link href="/audio/convert/wav-to-ogg" className="nb-dropdown-item" onClick={() => setToolsOpen(false)}>WAV → OGG</Link>
                     <Link href="/audio/edit/trim" className="nb-dropdown-item" onClick={() => setToolsOpen(false)}>Trim Audio</Link>
+                    <Link href="/audio/edit/volume" className="nb-dropdown-item" onClick={() => setToolsOpen(false)}>Volume Adjuster</Link>
+                  </div>
+                  <div className="nb-dropdown-group">
+                    <span className="nb-dropdown-label">Dev Tools</span>
                     <Link href="/dev/favicon-generator" className="nb-dropdown-item" onClick={() => setToolsOpen(false)}>Favicon Generator</Link>
-                    <Link href="/dev/og-image-resizer" className="nb-dropdown-item" onClick={() => setToolsOpen(false)}>OG Image Resizer</Link>
-                    <Link href="/dev/base64-encoder" className="nb-dropdown-item" onClick={() => setToolsOpen(false)}>Base64 Encoder</Link>
+                    <Link href="/dev/qr-code" className="nb-dropdown-item" onClick={() => setToolsOpen(false)}>QR Code</Link>
+                    <Link href="/dev/password-generator" className="nb-dropdown-item" onClick={() => setToolsOpen(false)}>Password Generator</Link>
+                    <Link href="/dev/json-formatter" className="nb-dropdown-item" onClick={() => setToolsOpen(false)}>JSON Formatter</Link>
+                    <Link href="/dev/css-minifier" className="nb-dropdown-item" onClick={() => setToolsOpen(false)}>CSS Minifier</Link>
+                    <Link href="/dev/js-minifier" className="nb-dropdown-item" onClick={() => setToolsOpen(false)}>JS Minifier</Link>
+                    <Link href="/dev/markdown-editor" className="nb-dropdown-item" onClick={() => setToolsOpen(false)}>Markdown Editor</Link>
+                    <Link href="/dev" className="nb-dropdown-item" onClick={() => setToolsOpen(false)}>All Dev Tools →</Link>
+                  </div>
+                  <div className="nb-dropdown-group">
+                    <span className="nb-dropdown-label">Color &amp; Text</span>
+                    <Link href="/color/palette-generator" className="nb-dropdown-item" onClick={() => setToolsOpen(false)}>Color Palette</Link>
+                    <Link href="/color/picker" className="nb-dropdown-item" onClick={() => setToolsOpen(false)}>Color Picker</Link>
+                    <Link href="/color/gradient-generator" className="nb-dropdown-item" onClick={() => setToolsOpen(false)}>Gradient Generator</Link>
+                    <Link href="/color/contrast-checker" className="nb-dropdown-item" onClick={() => setToolsOpen(false)}>Contrast Checker</Link>
+                    <Link href="/text/word-counter" className="nb-dropdown-item" onClick={() => setToolsOpen(false)}>Word Counter</Link>
+                    <Link href="/text/diff-checker" className="nb-dropdown-item" onClick={() => setToolsOpen(false)}>Diff Checker</Link>
+                    <Link href="/screen/recorder" className="nb-dropdown-item" onClick={() => setToolsOpen(false)}>Screen Recorder</Link>
+                    <Link href="/text" className="nb-dropdown-item" onClick={() => setToolsOpen(false)}>All Text Tools →</Link>
                   </div>
                 </div>
               </div>

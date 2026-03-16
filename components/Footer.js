@@ -111,26 +111,40 @@ export default function Footer() {
             <Link href="/image/compress" className="ft-nav-link">Image Compressor</Link>
             <Link href="/image/convert" className="ft-nav-link">Image Converter</Link>
             <Link href="/image/resize" className="ft-nav-link">Image Resizer</Link>
-            <Link href="/image/edit" className="ft-nav-link">Image Editor</Link>
+            <Link href="/image/edit/crop" className="ft-nav-link">Crop Image</Link>
+            <Link href="/image/edit/blur" className="ft-nav-link">Blur Image</Link>
             <Link href="/image/convert/heic-to-jpg" className="ft-nav-link">HEIC to JPG</Link>
-            <Link href="/image/convert/image-to-pdf" className="ft-nav-link">Image to PDF</Link>
             <Link href="/image/edit/remove-background" className="ft-nav-link">Remove Background</Link>
           </div>
           <div className="ft-nav-col">
-            <h4 className="ft-nav-heading">Video Tools</h4>
+            <h4 className="ft-nav-heading">Video &amp; Audio</h4>
             <Link href="/video/compress" className="ft-nav-link">Video Compressor</Link>
-            <Link href="/video/compress/mp4" className="ft-nav-link">MP4 Compressor</Link>
-            <Link href="/video/compress/webm" className="ft-nav-link">WebM Compressor</Link>
-            <Link href="/video/compress/mov" className="ft-nav-link">MOV Compressor</Link>
-            <Link href="/video/convert/video-to-gif" className="ft-nav-link">Video to GIF</Link>
+            <Link href="/video/convert/mp4-to-webm" className="ft-nav-link">MP4 to WebM</Link>
+            <Link href="/video/convert/mp4-to-mov" className="ft-nav-link">MP4 to MOV</Link>
+            <Link href="/video/edit/add-subtitles" className="ft-nav-link">Add Subtitles</Link>
+            <Link href="/audio/compress/mp3" className="ft-nav-link">Audio Compressor</Link>
+            <Link href="/audio/convert/wav-to-ogg" className="ft-nav-link">WAV to OGG</Link>
+            <Link href="/audio/edit/volume" className="ft-nav-link">Volume Adjuster</Link>
           </div>
           <div className="ft-nav-col">
-            <h4 className="ft-nav-heading">GIF, PDF &amp; SVG</h4>
-            <Link href="/gif/compress" className="ft-nav-link">GIF Compressor</Link>
-            <Link href="/gif/convert/gif-to-mp4" className="ft-nav-link">GIF to MP4</Link>
-            <Link href="/gif/convert/gif-to-webm" className="ft-nav-link">GIF to WebM</Link>
-            <Link href="/pdf/pdf-to-jpg" className="ft-nav-link">PDF to JPG</Link>
-            <Link href="/svg/optimize" className="ft-nav-link">SVG Optimizer</Link>
+            <h4 className="ft-nav-heading">Dev &amp; Color</h4>
+            <Link href="/dev/qr-code" className="ft-nav-link">QR Code Generator</Link>
+            <Link href="/dev/json-formatter" className="ft-nav-link">JSON Formatter</Link>
+            <Link href="/dev/css-minifier" className="ft-nav-link">CSS Minifier</Link>
+            <Link href="/dev/markdown-editor" className="ft-nav-link">Markdown Editor</Link>
+            <Link href="/color/palette-generator" className="ft-nav-link">Color Palette</Link>
+            <Link href="/color/gradient-generator" className="ft-nav-link">Gradient Generator</Link>
+            <Link href="/color/contrast-checker" className="ft-nav-link">Contrast Checker</Link>
+          </div>
+          <div className="ft-nav-col">
+            <h4 className="ft-nav-heading">Text &amp; Screen</h4>
+            <Link href="/text/word-counter" className="ft-nav-link">Word Counter</Link>
+            <Link href="/text/case-converter" className="ft-nav-link">Case Converter</Link>
+            <Link href="/text/diff-checker" className="ft-nav-link">Diff Checker</Link>
+            <Link href="/text/lorem-ipsum" className="ft-nav-link">Lorem Ipsum</Link>
+            <Link href="/screen/recorder" className="ft-nav-link">Screen Recorder</Link>
+            <Link href="/screen/screenshot" className="ft-nav-link">Screenshot Tool</Link>
+            <Link href="/pdf/add-watermark" className="ft-nav-link">PDF Watermark</Link>
           </div>
           <div className="ft-nav-col">
             <h4 className="ft-nav-heading">Company</h4>

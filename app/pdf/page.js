@@ -22,7 +22,10 @@ const tools = [
   { href:'/pdf/split', icon:'✂️', title:'Split PDF', desc:'Extract specific pages or page ranges from any PDF. Enter ranges like 1-3, 5, 7-9.', gradient:'linear-gradient(135deg,#f0fdf4,#dcfce7)', cta:'Split PDF' },
   { href:'/pdf/rotate', icon:'🔃', title:'Rotate PDF', desc:'Rotate all pages in a PDF clockwise, counter-clockwise, or 180°. Instant.', gradient:'linear-gradient(135deg,#fffbeb,#fef3c7)', cta:'Rotate PDF' },
   { href:'/pdf/jpg-to-pdf', icon:'🖼️', title:'JPG to PDF', desc:'Convert JPG, PNG, WebP images to a PDF document. Choose page size, reorder freely.', gradient:'linear-gradient(135deg,#faf5ff,#f3e8ff)', cta:'Convert Images' },
-  { href:'/pdf/pdf-to-jpg', icon:'📄', title:'PDF to JPG', desc:'Convert every page of a PDF to a high-quality JPG. Download individually or as ZIP.', gradient:'linear-gradient(135deg,#fdf4ff,#fae8ff)', cta:'Convert PDF' },
+  { href:'/pdf/pdf-to-jpg',       icon:'📄', title:'PDF to JPG',        desc:'Convert every page of a PDF to a high-quality JPG. Download individually or as ZIP.', gradient:'linear-gradient(135deg,#fdf4ff,#fae8ff)', cta:'Convert PDF' },
+  { href:'/pdf/add-watermark',    icon:'💧', title:'Add Watermark',      desc:'Add custom text watermark to every page of a PDF. Control font, opacity, rotation.', gradient:'linear-gradient(135deg,#e0f2fe,#bae6fd)', cta:'Add Watermark' },
+  { href:'/pdf/add-password',     icon:'🔐', title:'Add Password',       desc:'Set password protection on any PDF. User and owner passwords with permission controls.', gradient:'linear-gradient(135deg,#fef2f2,#fee2e2)', cta:'Protect PDF' },
+  { href:'/pdf/reorder-pages',    icon:'🔀', title:'Reorder Pages',      desc:'Rearrange, delete, or reorder PDF pages by entering a custom page order.', gradient:'linear-gradient(135deg,#fffbeb,#fef3c7)', cta:'Reorder Pages' },
 ];
 
 const faqs = [

@@ -16,9 +16,11 @@ export const metadata = {
 };
 
 const tools = [
-  { href:'/video/convert/video-to-gif', icon:'🎞', title:'Video to GIF', desc:'Convert MP4, WebM, or MOV clips to animated GIF. Control FPS and size.', gradient:'linear-gradient(135deg,#f0fdf4,#dcfce7)', cta:'Convert to GIF' },
-  { href:'/video/convert/mp4-to-webm', icon:'🔄', title:'MP4 to WebM', desc:'Convert MP4 videos to WebM format using VP9 codec. Smaller files, same quality.', gradient:'linear-gradient(135deg,#eff6ff,#dbeafe)', cta:'Convert to WebM' },
-  { href:'/video/convert/mp4-to-mp3', icon:'🎵', title:'MP4 to MP3', desc:'Extract audio from MP4, MOV, or WebM video files as high-quality MP3.', gradient:'linear-gradient(135deg,#fdf4ff,#f3e8ff)', cta:'Extract Audio' },
+  { href:'/video/convert/video-to-gif',  icon:'🎞', title:'Video to GIF',   desc:'Convert MP4, WebM, or MOV clips to animated GIF. Control FPS and size.',             gradient:'linear-gradient(135deg,#f0fdf4,#dcfce7)', cta:'Convert to GIF' },
+  { href:'/video/convert/mp4-to-webm',   icon:'🔄', title:'MP4 to WebM',    desc:'Convert MP4 videos to WebM format using VP9 codec. Smaller files, same quality.',   gradient:'linear-gradient(135deg,#eff6ff,#dbeafe)', cta:'Convert to WebM' },
+  { href:'/video/convert/mp4-to-mp3',    icon:'🎵', title:'MP4 to MP3',     desc:'Extract audio from MP4, MOV, or WebM video files as high-quality MP3.',              gradient:'linear-gradient(135deg,#fdf4ff,#f3e8ff)', cta:'Extract Audio' },
+  { href:'/video/convert/mp4-to-mov',    icon:'🎬', title:'MP4 to MOV',     desc:'Convert MP4 to MOV format for Apple devices and Final Cut Pro. Stream copy — instant.', gradient:'linear-gradient(135deg,#fffbeb,#fef3c7)', cta:'Convert to MOV' },
+  { href:'/video/convert/webm-to-mp4',   icon:'📹', title:'WebM to MP4',    desc:'Convert WebM to MP4 with H.264 + AAC. Maximum device compatibility.',               gradient:'linear-gradient(135deg,#fdf4ff,#fae8ff)', cta:'Convert to MP4' },
 ];
 
 const faqs = [

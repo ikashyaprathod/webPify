@@ -441,6 +441,58 @@ export default function sitemap() {
             priority: 0.9,
         },
 
+        // New Dev Tools
+        { url: `${baseUrl}/dev/qr-code`,          lastModified: staticDate, changeFrequency: 'weekly', priority: 0.8 },
+        { url: `${baseUrl}/dev/password-generator`,lastModified: staticDate, changeFrequency: 'weekly', priority: 0.8 },
+        { url: `${baseUrl}/dev/json-formatter`,   lastModified: staticDate, changeFrequency: 'weekly', priority: 0.8 },
+        { url: `${baseUrl}/dev/regex-tester`,     lastModified: staticDate, changeFrequency: 'weekly', priority: 0.8 },
+        { url: `${baseUrl}/dev/css-minifier`,     lastModified: staticDate, changeFrequency: 'weekly', priority: 0.8 },
+        { url: `${baseUrl}/dev/html-minifier`,    lastModified: staticDate, changeFrequency: 'weekly', priority: 0.8 },
+        { url: `${baseUrl}/dev/js-minifier`,      lastModified: staticDate, changeFrequency: 'weekly', priority: 0.8 },
+        { url: `${baseUrl}/dev/webcam-test`,      lastModified: staticDate, changeFrequency: 'weekly', priority: 0.7 },
+        { url: `${baseUrl}/dev/markdown-editor`,  lastModified: staticDate, changeFrequency: 'weekly', priority: 0.8 },
+
+        // Color Tools
+        { url: `${baseUrl}/color`,                     lastModified: staticDate, changeFrequency: 'weekly', priority: 0.9 },
+        { url: `${baseUrl}/color/palette-generator`,   lastModified: staticDate, changeFrequency: 'weekly', priority: 0.8 },
+        { url: `${baseUrl}/color/picker`,              lastModified: staticDate, changeFrequency: 'weekly', priority: 0.8 },
+        { url: `${baseUrl}/color/converter`,           lastModified: staticDate, changeFrequency: 'weekly', priority: 0.8 },
+        { url: `${baseUrl}/color/gradient-generator`,  lastModified: staticDate, changeFrequency: 'weekly', priority: 0.8 },
+        { url: `${baseUrl}/color/contrast-checker`,    lastModified: staticDate, changeFrequency: 'weekly', priority: 0.8 },
+
+        // Screen Tools
+        { url: `${baseUrl}/screen`,            lastModified: staticDate, changeFrequency: 'weekly', priority: 0.8 },
+        { url: `${baseUrl}/screen/recorder`,   lastModified: staticDate, changeFrequency: 'weekly', priority: 0.8 },
+        { url: `${baseUrl}/screen/screenshot`, lastModified: staticDate, changeFrequency: 'weekly', priority: 0.8 },
+
+        // Text Tools
+        { url: `${baseUrl}/text`,                  lastModified: staticDate, changeFrequency: 'weekly', priority: 0.9 },
+        { url: `${baseUrl}/text/word-counter`,     lastModified: staticDate, changeFrequency: 'weekly', priority: 0.8 },
+        { url: `${baseUrl}/text/case-converter`,   lastModified: staticDate, changeFrequency: 'weekly', priority: 0.8 },
+        { url: `${baseUrl}/text/lorem-ipsum`,      lastModified: staticDate, changeFrequency: 'weekly', priority: 0.8 },
+        { url: `${baseUrl}/text/diff-checker`,     lastModified: staticDate, changeFrequency: 'weekly', priority: 0.8 },
+        { url: `${baseUrl}/text/text-to-speech`,   lastModified: staticDate, changeFrequency: 'weekly', priority: 0.7 },
+
+        // New Audio Pages
+        { url: `${baseUrl}/audio/convert/wav-to-ogg`, lastModified: staticDate, changeFrequency: 'weekly', priority: 0.8 },
+        { url: `${baseUrl}/audio/convert/mp3-to-ogg`, lastModified: staticDate, changeFrequency: 'weekly', priority: 0.8 },
+        { url: `${baseUrl}/audio/edit/volume`,         lastModified: staticDate, changeFrequency: 'weekly', priority: 0.8 },
+
+        // New Video Pages
+        { url: `${baseUrl}/video/convert/mp4-to-mov`,    lastModified: staticDate, changeFrequency: 'weekly', priority: 0.8 },
+        { url: `${baseUrl}/video/convert/webm-to-mp4`,   lastModified: staticDate, changeFrequency: 'weekly', priority: 0.8 },
+        { url: `${baseUrl}/video/edit/add-subtitles`,    lastModified: staticDate, changeFrequency: 'weekly', priority: 0.8 },
+
+        // New Image Edit Pages
+        { url: `${baseUrl}/image/edit/blur`,        lastModified: staticDate, changeFrequency: 'weekly', priority: 0.8 },
+        { url: `${baseUrl}/image/edit/grayscale`,   lastModified: staticDate, changeFrequency: 'weekly', priority: 0.8 },
+        { url: `${baseUrl}/image/edit/brightness`,  lastModified: staticDate, changeFrequency: 'weekly', priority: 0.8 },
+
+        // New PDF Pages
+        { url: `${baseUrl}/pdf/add-watermark`,  lastModified: staticDate, changeFrequency: 'weekly', priority: 0.8 },
+        { url: `${baseUrl}/pdf/add-password`,   lastModified: staticDate, changeFrequency: 'weekly', priority: 0.8 },
+        { url: `${baseUrl}/pdf/reorder-pages`,  lastModified: staticDate, changeFrequency: 'weekly', priority: 0.8 },
+
         // Trust Pages
         {
             url: `${baseUrl}/about`,

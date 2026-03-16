@@ -18,6 +18,8 @@ export const metadata = {
 const cards = [
   { href: "/audio/convert/mp3-to-wav", icon: "🔄", title: "MP3 to WAV", desc: "Convert MP3 to uncompressed WAV format. Full quality for studio and production use.", gradient: "linear-gradient(135deg,#e0f2fe,#bae6fd)", cta: "Convert to WAV" },
   { href: "/audio/convert/wav-to-mp3", icon: "🔃", title: "WAV to MP3", desc: "Convert WAV to compressed MP3. Much smaller file sizes for web and sharing.", gradient: "linear-gradient(135deg,#fffbeb,#fef3c7)", cta: "Convert to MP3" },
+  { href: "/audio/convert/wav-to-ogg", icon: "🎵", title: "WAV to OGG", desc: "Convert WAV audio to OGG Vorbis format. Open-source, royalty-free, smaller file sizes.", gradient: "linear-gradient(135deg,#f0fdf4,#dcfce7)", cta: "Convert to OGG" },
+  { href: "/audio/convert/mp3-to-ogg", icon: "🎶", title: "MP3 to OGG", desc: "Convert MP3 to OGG Vorbis. Royalty-free format ideal for web audio and games.", gradient: "linear-gradient(135deg,#faf5ff,#f3e8ff)", cta: "Convert to OGG" },
 ];
 
 const faqs = [

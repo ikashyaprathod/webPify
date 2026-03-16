@@ -6,7 +6,7 @@
  */
 export const topicalGraph = {
     '/': {
-        children: ['/image', '/video', '/gif', '/svg', '/pdf', '/audio', '/dev', '/about', '/privacy', '/terms'],
+        children: ['/image', '/video', '/gif', '/svg', '/pdf', '/audio', '/dev', '/color', '/screen', '/text', '/about', '/privacy', '/terms'],
         related: ['/image/compress', '/image/convert', '/video/compress', '/gif/compress', '/image/resize', '/svg/optimize']
     },
 
@@ -36,7 +36,7 @@ export const topicalGraph = {
     '/audio/convert': {
         parent: '/audio',
         siblings: ['/audio/compress', '/audio/edit'],
-        children: ['/audio/convert/mp3-to-wav', '/audio/convert/wav-to-mp3'],
+        children: ['/audio/convert/mp3-to-wav', '/audio/convert/wav-to-mp3', '/audio/convert/wav-to-ogg', '/audio/convert/mp3-to-ogg'],
         related: ['/audio/compress', '/video/convert']
     },
 
@@ -44,7 +44,7 @@ export const topicalGraph = {
     '/audio/edit': {
         parent: '/audio',
         siblings: ['/audio/compress', '/audio/convert'],
-        children: ['/audio/edit/trim'],
+        children: ['/audio/edit/trim', '/audio/edit/volume'],
         related: ['/audio/compress', '/video/edit']
     },
 
@@ -73,8 +73,8 @@ export const topicalGraph = {
     // Developer Tools Hub
     '/dev': {
         parent: '/',
-        children: ['/dev/favicon-generator', '/dev/og-image-resizer', '/dev/base64-encoder'],
-        related: ['/image/convert', '/image/compress']
+        children: ['/dev/favicon-generator', '/dev/og-image-resizer', '/dev/base64-encoder', '/dev/qr-code', '/dev/password-generator', '/dev/json-formatter', '/dev/regex-tester', '/dev/css-minifier', '/dev/html-minifier', '/dev/js-minifier', '/dev/webcam-test', '/dev/markdown-editor'],
+        related: ['/image/convert', '/image/compress', '/text', '/color']
     },
     '/dev/favicon-generator': {
         parent: '/dev',
@@ -148,7 +148,7 @@ export const topicalGraph = {
     '/image/edit': {
         parent: '/image',
         siblings: ['/image/compress', '/image/convert', '/image/resize'],
-        children: ['/image/edit/compare', '/image/edit/crop', '/image/edit/rotate', '/image/edit/watermark', '/image/edit/remove-background', '/image/edit/color-picker', '/image/edit/metadata'],
+        children: ['/image/edit/compare', '/image/edit/crop', '/image/edit/rotate', '/image/edit/watermark', '/image/edit/remove-background', '/image/edit/color-picker', '/image/edit/metadata', '/image/edit/blur', '/image/edit/grayscale', '/image/edit/brightness'],
         related: ['/image/compress', '/image/convert']
     },
 
@@ -290,7 +290,7 @@ export const topicalGraph = {
     '/video/convert': {
         parent: '/video',
         siblings: ['/video/compress', '/video/edit'],
-        children: ['/video/convert/video-to-gif', '/video/convert/mp4-to-webm', '/video/convert/mp4-to-mp3'],
+        children: ['/video/convert/video-to-gif', '/video/convert/mp4-to-webm', '/video/convert/mp4-to-mp3', '/video/convert/mp4-to-mov', '/video/convert/webm-to-mp4'],
         related: ['/gif/compress', '/video/compress', '/audio/compress']
     },
 
@@ -298,7 +298,7 @@ export const topicalGraph = {
     '/video/edit': {
         parent: '/video',
         siblings: ['/video/compress', '/video/convert'],
-        children: ['/video/edit/trim', '/video/edit/mute', '/video/edit/screenshot'],
+        children: ['/video/edit/trim', '/video/edit/mute', '/video/edit/screenshot', '/video/edit/add-subtitles'],
         related: ['/video/compress', '/audio/edit']
     },
 
@@ -393,7 +393,7 @@ export const topicalGraph = {
     // PDF Tools
     '/pdf': {
         parent: '/',
-        children: ['/pdf/pdf-to-jpg', '/pdf/compress', '/pdf/merge', '/pdf/split', '/pdf/rotate', '/pdf/jpg-to-pdf'],
+        children: ['/pdf/pdf-to-jpg', '/pdf/compress', '/pdf/merge', '/pdf/split', '/pdf/rotate', '/pdf/jpg-to-pdf', '/pdf/add-watermark', '/pdf/add-password', '/pdf/reorder-pages'],
         related: ['/image/compress', '/image/convert']
     },
     '/pdf/pdf-to-jpg': {
@@ -425,6 +425,206 @@ export const topicalGraph = {
         parent: '/pdf',
         siblings: ['/pdf/pdf-to-jpg', '/pdf/compress'],
         related: ['/pdf/pdf-to-jpg', '/image/convert/image-to-pdf']
+    },
+
+    // New Video Convert Pages
+    '/video/convert/mp4-to-mov': {
+        parent: '/video/convert',
+        siblings: ['/video/convert/mp4-to-webm', '/video/convert/mp4-to-mp3'],
+        related: ['/video/compress', '/video/convert/webm-to-mp4']
+    },
+    '/video/convert/webm-to-mp4': {
+        parent: '/video/convert',
+        siblings: ['/video/convert/mp4-to-webm', '/video/convert/mp4-to-mov'],
+        related: ['/video/compress', '/video/convert/mp4-to-webm']
+    },
+
+    // New Video Edit Pages
+    '/video/edit/add-subtitles': {
+        parent: '/video/edit',
+        siblings: ['/video/edit/trim', '/video/edit/mute'],
+        related: ['/video/compress', '/video/edit/trim']
+    },
+
+    // New Audio Convert Pages
+    '/audio/convert/wav-to-ogg': {
+        parent: '/audio/convert',
+        siblings: ['/audio/convert/mp3-to-wav', '/audio/convert/wav-to-mp3', '/audio/convert/mp3-to-ogg'],
+        related: ['/audio/compress/mp3', '/audio/convert/wav-to-mp3']
+    },
+    '/audio/convert/mp3-to-ogg': {
+        parent: '/audio/convert',
+        siblings: ['/audio/convert/mp3-to-wav', '/audio/convert/wav-to-ogg'],
+        related: ['/audio/compress/mp3', '/audio/convert']
+    },
+
+    // New Audio Edit Pages
+    '/audio/edit/volume': {
+        parent: '/audio/edit',
+        siblings: ['/audio/edit/trim'],
+        related: ['/audio/compress/mp3', '/audio/edit/trim']
+    },
+
+    // New Image Edit Pages
+    '/image/edit/blur': {
+        parent: '/image/edit',
+        siblings: ['/image/edit/grayscale', '/image/edit/brightness'],
+        related: ['/image/compress', '/image/edit/grayscale']
+    },
+    '/image/edit/grayscale': {
+        parent: '/image/edit',
+        siblings: ['/image/edit/blur', '/image/edit/brightness'],
+        related: ['/image/compress', '/image/edit/blur']
+    },
+    '/image/edit/brightness': {
+        parent: '/image/edit',
+        siblings: ['/image/edit/blur', '/image/edit/grayscale'],
+        related: ['/image/compress', '/image/edit/grayscale']
+    },
+
+    // New PDF Pages
+    '/pdf/add-watermark': {
+        parent: '/pdf',
+        siblings: ['/pdf/compress', '/pdf/merge', '/pdf/add-password'],
+        related: ['/pdf/compress', '/pdf/add-password']
+    },
+    '/pdf/add-password': {
+        parent: '/pdf',
+        siblings: ['/pdf/compress', '/pdf/add-watermark'],
+        related: ['/pdf/compress', '/pdf/add-watermark']
+    },
+    '/pdf/reorder-pages': {
+        parent: '/pdf',
+        siblings: ['/pdf/split', '/pdf/merge'],
+        related: ['/pdf/split', '/pdf/merge']
+    },
+
+    // Developer Tools (expanded)
+    '/dev/qr-code': {
+        parent: '/dev',
+        siblings: ['/dev/password-generator', '/dev/favicon-generator'],
+        related: ['/dev/base64-encoder', '/dev/og-image-resizer']
+    },
+    '/dev/password-generator': {
+        parent: '/dev',
+        siblings: ['/dev/qr-code', '/dev/base64-encoder'],
+        related: ['/dev/base64-encoder', '/dev/json-formatter']
+    },
+    '/dev/json-formatter': {
+        parent: '/dev',
+        siblings: ['/dev/regex-tester', '/dev/css-minifier'],
+        related: ['/dev/regex-tester', '/dev/js-minifier']
+    },
+    '/dev/regex-tester': {
+        parent: '/dev',
+        siblings: ['/dev/json-formatter', '/dev/js-minifier'],
+        related: ['/dev/json-formatter', '/dev/js-minifier']
+    },
+    '/dev/css-minifier': {
+        parent: '/dev',
+        siblings: ['/dev/html-minifier', '/dev/js-minifier'],
+        related: ['/dev/html-minifier', '/dev/js-minifier']
+    },
+    '/dev/html-minifier': {
+        parent: '/dev',
+        siblings: ['/dev/css-minifier', '/dev/js-minifier'],
+        related: ['/dev/css-minifier', '/dev/js-minifier']
+    },
+    '/dev/js-minifier': {
+        parent: '/dev',
+        siblings: ['/dev/css-minifier', '/dev/html-minifier'],
+        related: ['/dev/css-minifier', '/dev/html-minifier']
+    },
+    '/dev/webcam-test': {
+        parent: '/dev',
+        siblings: ['/dev/favicon-generator', '/dev/og-image-resizer'],
+        related: ['/screen/recorder', '/screen/screenshot']
+    },
+    '/dev/markdown-editor': {
+        parent: '/dev',
+        siblings: ['/dev/json-formatter', '/dev/base64-encoder'],
+        related: ['/text/word-counter', '/dev/json-formatter']
+    },
+
+    // Color Tools Hub
+    '/color': {
+        parent: '/',
+        children: ['/color/palette-generator', '/color/picker', '/color/converter', '/color/gradient-generator', '/color/contrast-checker'],
+        related: ['/image/edit', '/image/compress']
+    },
+    '/color/palette-generator': {
+        parent: '/color',
+        siblings: ['/color/picker', '/color/converter', '/color/gradient-generator'],
+        related: ['/color/converter', '/color/picker']
+    },
+    '/color/picker': {
+        parent: '/color',
+        siblings: ['/color/palette-generator', '/color/converter'],
+        related: ['/color/palette-generator', '/color/converter']
+    },
+    '/color/converter': {
+        parent: '/color',
+        siblings: ['/color/picker', '/color/palette-generator'],
+        related: ['/color/picker', '/color/contrast-checker']
+    },
+    '/color/gradient-generator': {
+        parent: '/color',
+        siblings: ['/color/palette-generator', '/color/contrast-checker'],
+        related: ['/color/palette-generator', '/color/converter']
+    },
+    '/color/contrast-checker': {
+        parent: '/color',
+        siblings: ['/color/gradient-generator', '/color/picker'],
+        related: ['/color/picker', '/color/converter']
+    },
+
+    // Screen Tools Hub
+    '/screen': {
+        parent: '/',
+        children: ['/screen/recorder', '/screen/screenshot'],
+        related: ['/dev/webcam-test', '/image/edit']
+    },
+    '/screen/recorder': {
+        parent: '/screen',
+        siblings: ['/screen/screenshot'],
+        related: ['/screen/screenshot', '/dev/webcam-test']
+    },
+    '/screen/screenshot': {
+        parent: '/screen',
+        siblings: ['/screen/recorder'],
+        related: ['/screen/recorder', '/image/edit/crop']
+    },
+
+    // Text Tools Hub
+    '/text': {
+        parent: '/',
+        children: ['/text/word-counter', '/text/case-converter', '/text/lorem-ipsum', '/text/diff-checker', '/text/text-to-speech'],
+        related: ['/dev', '/color']
+    },
+    '/text/word-counter': {
+        parent: '/text',
+        siblings: ['/text/case-converter', '/text/lorem-ipsum'],
+        related: ['/text/case-converter', '/text/diff-checker']
+    },
+    '/text/case-converter': {
+        parent: '/text',
+        siblings: ['/text/word-counter', '/text/lorem-ipsum'],
+        related: ['/text/word-counter', '/text/lorem-ipsum']
+    },
+    '/text/lorem-ipsum': {
+        parent: '/text',
+        siblings: ['/text/word-counter', '/text/case-converter'],
+        related: ['/text/word-counter', '/text/diff-checker']
+    },
+    '/text/diff-checker': {
+        parent: '/text',
+        siblings: ['/text/word-counter', '/text/text-to-speech'],
+        related: ['/text/word-counter', '/dev/json-formatter']
+    },
+    '/text/text-to-speech': {
+        parent: '/text',
+        siblings: ['/text/word-counter', '/text/diff-checker'],
+        related: ['/text/word-counter', '/text/case-converter']
     },
 
     // Trust Pages

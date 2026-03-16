@@ -72,6 +72,30 @@ const cards = [
     gradient: "linear-gradient(135deg,#e0f2fe,#bae6fd)",
     cta: "View Metadata",
   },
+  {
+    href: "/image/edit/blur",
+    icon: "🌀",
+    title: "Blur Image",
+    desc: "Apply Gaussian blur to any image. Adjustable intensity from 1 to 20.",
+    gradient: "linear-gradient(135deg,#f0fdf4,#dcfce7)",
+    cta: "Blur Image",
+  },
+  {
+    href: "/image/edit/grayscale",
+    icon: "⬛",
+    title: "Convert to Grayscale",
+    desc: "Convert any image to black and white. Instant conversion, free download.",
+    gradient: "linear-gradient(135deg,#f9fafb,#f3f4f6)",
+    cta: "Convert to B&W",
+  },
+  {
+    href: "/image/edit/brightness",
+    icon: "☀️",
+    title: "Adjust Brightness",
+    desc: "Brighten or darken images with precision brightness and saturation sliders.",
+    gradient: "linear-gradient(135deg,#fffbeb,#fef3c7)",
+    cta: "Adjust Brightness",
+  },
 ];
 
 const faqs = [

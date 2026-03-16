@@ -23,9 +23,10 @@ const faqs = [
 ];
 
 const cards = [
-  { href: "/video/edit/trim", icon: "✂️", title: "Video Trimmer", desc: "Cut and trim videos to exact start/end times. Downloads as MP4 instantly.", gradient: "linear-gradient(135deg,#fef2f2,#fee2e2)", cta: "Trim Video" },
-  { href: "/video/edit/mute", icon: "🔇", title: "Mute Video", desc: "Remove audio from any video file. No re-encoding — instant and lossless.", gradient: "linear-gradient(135deg,#f0fdf4,#dcfce7)", cta: "Mute Video" },
-  { href: "/video/edit/screenshot", icon: "📷", title: "Video Screenshot", desc: "Capture any frame from a video as a PNG image. No FFmpeg needed.", gradient: "linear-gradient(135deg,#faf5ff,#f3e8ff)", cta: "Take Screenshot" },
+  { href: "/video/edit/trim",          icon: "✂️", title: "Video Trimmer",  desc: "Cut and trim videos to exact start/end times. Downloads as MP4 instantly.",          gradient: "linear-gradient(135deg,#fef2f2,#fee2e2)", cta: "Trim Video" },
+  { href: "/video/edit/mute",          icon: "🔇", title: "Mute Video",     desc: "Remove audio from any video file. No re-encoding — instant and lossless.",           gradient: "linear-gradient(135deg,#f0fdf4,#dcfce7)", cta: "Mute Video" },
+  { href: "/video/edit/screenshot",    icon: "📷", title: "Video Screenshot",desc: "Capture any frame from a video as a PNG image. No FFmpeg needed.",                  gradient: "linear-gradient(135deg,#faf5ff,#f3e8ff)", cta: "Take Screenshot" },
+  { href: "/video/edit/add-subtitles", icon: "💬", title: "Add Subtitles",  desc: "Burn SRT subtitles into any video. Choose font size and color. Download result.",   gradient: "linear-gradient(135deg,#fffbeb,#fef3c7)", cta: "Add Subtitles" },
 ];
 
 export default function VideoEditHub() {
