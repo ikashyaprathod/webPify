@@ -32,7 +32,17 @@
       "Read(//c/Users/Kashyap/Desktop/webp-converter/app/dev/$dir/**)",
       "Bash(python3 /c/Users/Kashyap/Desktop/webp-converter/append_css.py)",
       "Bash(node scripts/append-css.js)",
-      "Bash(node -e \"const fs=require\\(''fs''\\); const css=fs.readFileSync\\(''C:/Users/Kashyap/Desktop/webp-converter/app/globals.css'',''utf8''\\); const checks=[''qr-wrap'',''pwgen-wrap'',''jsonf-wrap'',''regx-wrap'',''cssm-wrap'',''htmlm-wrap'',''jsm-wrap'',''wcam-wrap'',''mded-wrap'']; checks.forEach\\(c => console.log\\(c+'':'', css.includes\\(''.''+c\\) ? ''FOUND'' : ''MISSING''\\)\\);\")"
+      "Bash(node -e \"const fs=require\\(''fs''\\); const css=fs.readFileSync\\(''C:/Users/Kashyap/Desktop/webp-converter/app/globals.css'',''utf8''\\); const checks=[''qr-wrap'',''pwgen-wrap'',''jsonf-wrap'',''regx-wrap'',''cssm-wrap'',''htmlm-wrap'',''jsm-wrap'',''wcam-wrap'',''mded-wrap'']; checks.forEach\\(c => console.log\\(c+'':'', css.includes\\(''.''+c\\) ? ''FOUND'' : ''MISSING''\\)\\);\")",
+      "Bash(npx next:*)",
+      "Bash(curl -s http://localhost:3001/)",
+      "Bash(curl -s \"http://localhost:3001/image/compress/png\")",
+      "Bash(curl -s \"http://localhost:3001/image\")",
+      "Bash(curl -s \"http://localhost:3001/dev/json-formatter\")",
+      "Bash(curl -s \"http://localhost:3001/text/word-counter\")",
+      "Bash(curl -s \"http://localhost:3001/pdf/compress\")",
+      "Bash(curl -s \"http://localhost:3001/image/edit/color-picker\")",
+      "Bash(curl -sv \"http://localhost:3001/image/edit/color-picker\")",
+      "Bash(curl -sL \"http://localhost:3001/image/edit/color-picker\")"
     ],
     "additionalDirectories": [
       "C:\\Users\\Kashyap\\Desktop\\webp-converter\\app\\dev",
