@@ -9,10 +9,16 @@ export const metadata = {
         title: "About webpifyy \u2014 Free Browser-Based Media Tools | webpifyy",
         description: "webpifyy is a free browser-based toolkit for images, video, audio, PDF and developer tools. 100+ tools, no signup, no uploads, 100% private.",
         url: "https://webpifyy.vercel.app/about",
+        type: "website",
+        siteName: "webpifyy",
+        images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
     },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"About"}]})
-  },
+    twitter: {
+        card: "summary_large_image",
+        title: "About webpifyy \u2014 Free Browser-Based Media Tools | webpifyy",
+        description: "webpifyy is a free browser-based toolkit for images, video, audio, PDF and developer tools. 100+ tools, no signup, no uploads, 100% private.",
+        images: ["https://webpifyy.vercel.app/opengraph-image"],
+    },
 };
 
 export default function AboutPage() {

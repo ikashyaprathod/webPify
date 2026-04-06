@@ -10,10 +10,16 @@ export const metadata = {
         title: "Terms of Service | webpifyy",
         description: "webpifyy terms of service. Free to use, no account required. Read our terms before using our browser-based media and utility tools.",
         url: "https://webpifyy.vercel.app/terms",
+        type: "website",
+        siteName: "webpifyy",
+        images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
     },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Terms of Service"}]})
-  },
+    twitter: {
+        card: "summary_large_image",
+        title: "Terms of Service | webpifyy",
+        description: "webpifyy terms of service. Free to use, no account required. Read our terms before using our browser-based media and utility tools.",
+        images: ["https://webpifyy.vercel.app/opengraph-image"],
+    },
 };
 
 export default function TermsPage() {

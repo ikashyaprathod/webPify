@@ -10,10 +10,16 @@ export const metadata = {
         title: "Privacy Policy | webpifyy",
         description: "webpifyy privacy policy. All file processing happens in your browser. No files are uploaded to any server. Read our full privacy policy here.",
         url: "https://webpifyy.vercel.app/privacy",
+        type: "website",
+        siteName: "webpifyy",
+        images: [{ url: "https://webpifyy.vercel.app/opengraph-image" }],
     },
-  other: {
-    'application/ld+json': JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://webpifyy.vercel.app"},{"@type":"ListItem","position":2,"name":"Privacy Policy"}]})
-  },
+    twitter: {
+        card: "summary_large_image",
+        title: "Privacy Policy | webpifyy",
+        description: "webpifyy privacy policy. All file processing happens in your browser. No files are uploaded to any server. Read our full privacy policy here.",
+        images: ["https://webpifyy.vercel.app/opengraph-image"],
+    },
 };
 
 export default function PrivacyPage() {
