@@ -69,6 +69,28 @@ const TOOLS = [
       { label: "Path Simplification", href: "/svg/optimize" },
     ],
   },
+  {
+    icon: "🧮",
+    title: "Calculators",
+    desc: "Percentage, loan, BMI, age, date difference, tip, discount, and scientific — all free, browser-based.",
+    href: "/calc",
+    headerGradient: "linear-gradient(135deg,#eef2ff,#e0e7ff)",
+    links: [
+      { label: "Loan & Mortgage", href: "/calc/loan" },
+      { label: "BMI Calculator", href: "/calc/bmi" },
+    ],
+  },
+  {
+    icon: "⚖",
+    title: "Unit Converters",
+    desc: "Length, weight, temperature, speed, area, data size, and time — instant results, all units shown.",
+    href: "/convert",
+    headerGradient: "linear-gradient(135deg,#f0fdf4,#dcfce7)",
+    links: [
+      { label: "Length Converter", href: "/convert/length" },
+      { label: "Temperature Converter", href: "/convert/temperature" },
+    ],
+  },
 ];
 
 const QUICK_ACTIONS = [

@@ -533,5 +533,26 @@ export default function sitemap() {
         { url: `${baseUrl}/convert/area`, lastModified: staticDate, changeFrequency: 'weekly', priority: 0.8 },
         { url: `${baseUrl}/convert/data-size`, lastModified: staticDate, changeFrequency: 'weekly', priority: 0.8 },
         { url: `${baseUrl}/convert/time`, lastModified: staticDate, changeFrequency: 'weekly', priority: 0.8 },
+
+        // Option C — Long-tail pages
+        { url: `${baseUrl}/celsius-to-fahrenheit`, lastModified: staticDate, changeFrequency: 'weekly', priority: 0.8 },
+        { url: `${baseUrl}/fahrenheit-to-celsius`, lastModified: staticDate, changeFrequency: 'weekly', priority: 0.8 },
+        { url: `${baseUrl}/kg-to-lbs`, lastModified: staticDate, changeFrequency: 'weekly', priority: 0.8 },
+        { url: `${baseUrl}/lbs-to-kg`, lastModified: staticDate, changeFrequency: 'weekly', priority: 0.8 },
+        { url: `${baseUrl}/cm-to-feet`, lastModified: staticDate, changeFrequency: 'weekly', priority: 0.8 },
+        { url: `${baseUrl}/percentage-calculator-online`, lastModified: staticDate, changeFrequency: 'weekly', priority: 0.8 },
+        { url: `${baseUrl}/bmi-calculator-metric`, lastModified: staticDate, changeFrequency: 'weekly', priority: 0.8 },
+        { url: `${baseUrl}/loan-payment-calculator`, lastModified: staticDate, changeFrequency: 'weekly', priority: 0.8 },
+
+        // Finance Hub
+        { url: `${baseUrl}/finance`, lastModified: staticDate, changeFrequency: 'weekly', priority: 0.9 },
+        { url: `${baseUrl}/finance/compound-interest`, lastModified: staticDate, changeFrequency: 'weekly', priority: 0.8 },
+        { url: `${baseUrl}/finance/roi-calculator`, lastModified: staticDate, changeFrequency: 'weekly', priority: 0.8 },
+        { url: `${baseUrl}/finance/vat-calculator`, lastModified: staticDate, changeFrequency: 'weekly', priority: 0.8 },
+
+        // Health Hub
+        { url: `${baseUrl}/health`, lastModified: staticDate, changeFrequency: 'weekly', priority: 0.9 },
+        { url: `${baseUrl}/health/calorie-calculator`, lastModified: staticDate, changeFrequency: 'weekly', priority: 0.8 },
+        { url: `${baseUrl}/health/ideal-weight`, lastModified: staticDate, changeFrequency: 'weekly', priority: 0.8 },
     ];
 }

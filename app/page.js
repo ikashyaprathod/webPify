@@ -3,7 +3,7 @@ import HomeHero from "@/components/HomeHero";
 export const metadata = {
   title: "Free Online Media & Utility Tools — webpifyy",
   description:
-    "Free browser-based tools for images, video, audio, PDF, color, text and more. No signup, no uploads, no limits. 100+ tools, all free forever.",
+    "Free browser-based tools for images, video, audio, PDF, color, text, calculators, unit converters and more. No signup, no limits. 150+ tools, all free forever.",
   alternates: { canonical: "https://webpifyy.vercel.app" },
   keywords: [
     "image compressor", "compress images online", "convert to webp",
@@ -13,7 +13,7 @@ export const metadata = {
   openGraph: {
     title: "Free Online Media & Utility Tools — webpifyy",
     description:
-      "Free browser-based tools for images, video, audio, PDF, color, text and more. No signup, no uploads, no limits. 100+ tools, all free forever.",
+      "Free browser-based tools for images, video, audio, PDF, color, text, calculators, unit converters and more. No signup, no limits. 150+ tools, all free forever.",
     url: "https://webpifyy.vercel.app",
     type: "website",
     siteName: "webpifyy",
@@ -23,7 +23,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "Free Online Media & Utility Tools — webpifyy",
     description:
-      "Free browser-based tools for images, video, audio, PDF, color, text and more. No signup, no uploads, no limits. 100+ tools, all free forever.",
+      "Free browser-based tools for images, video, audio, PDF, color, text, calculators, unit converters and more. No signup, no limits. 150+ tools, all free forever.",
     images: ["https://webpifyy.vercel.app/opengraph-image"],
   },
 };

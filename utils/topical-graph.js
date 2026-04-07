@@ -6,8 +6,8 @@
  */
 export const topicalGraph = {
     '/': {
-        children: ['/image', '/video', '/gif', '/svg', '/pdf', '/audio', '/dev', '/color', '/screen', '/text', '/about', '/privacy', '/terms'],
-        related: ['/image/compress', '/image/convert', '/video/compress', '/gif/compress', '/image/resize', '/svg/optimize']
+        children: ['/image', '/video', '/gif', '/svg', '/pdf', '/audio', '/dev', '/color', '/screen', '/text', '/calc', '/convert', '/finance', '/health', '/about', '/privacy', '/terms'],
+        related: ['/image/compress', '/image/convert', '/video/compress', '/gif/compress', '/image/resize', '/svg/optimize', '/calc', '/convert']
     },
 
     // Master Hub
@@ -73,7 +73,7 @@ export const topicalGraph = {
     // Developer Tools Hub
     '/dev': {
         parent: '/',
-        children: ['/dev/favicon-generator', '/dev/og-image-resizer', '/dev/base64-encoder', '/dev/qr-code', '/dev/password-generator', '/dev/json-formatter', '/dev/regex-tester', '/dev/css-minifier', '/dev/html-minifier', '/dev/js-minifier', '/dev/webcam-test', '/dev/markdown-editor'],
+        children: ['/dev/favicon-generator', '/dev/og-image-resizer', '/dev/base64-encoder', '/dev/qr-code', '/dev/password-generator', '/dev/json-formatter', '/dev/regex-tester', '/dev/css-minifier', '/dev/html-minifier', '/dev/js-minifier', '/dev/webcam-test', '/dev/markdown-editor', '/dev/uuid-generator', '/dev/hash-generator', '/dev/jwt-decoder', '/dev/timestamp-converter', '/dev/url-encoder', '/dev/xml-formatter', '/dev/yaml-formatter', '/dev/html-entity-encoder', '/dev/color-shades', '/dev/image-placeholder', '/dev/number-base'],
         related: ['/image/convert', '/image/compress', '/text', '/color']
     },
     '/dev/favicon-generator': {
@@ -91,6 +91,61 @@ export const topicalGraph = {
         siblings: ['/dev/favicon-generator', '/dev/og-image-resizer'],
         related: ['/dev/favicon-generator', '/image/convert']
     },
+    '/dev/uuid-generator': {
+        parent: '/dev',
+        siblings: ['/dev/hash-generator', '/dev/password-generator'],
+        related: ['/dev/hash-generator', '/dev/password-generator']
+    },
+    '/dev/hash-generator': {
+        parent: '/dev',
+        siblings: ['/dev/uuid-generator', '/dev/password-generator'],
+        related: ['/dev/uuid-generator', '/dev/base64-encoder']
+    },
+    '/dev/jwt-decoder': {
+        parent: '/dev',
+        siblings: ['/dev/hash-generator', '/dev/url-encoder'],
+        related: ['/dev/hash-generator', '/dev/base64-encoder']
+    },
+    '/dev/timestamp-converter': {
+        parent: '/dev',
+        siblings: ['/dev/url-encoder', '/dev/json-formatter'],
+        related: ['/dev/json-formatter', '/calc/date-difference']
+    },
+    '/dev/url-encoder': {
+        parent: '/dev',
+        siblings: ['/dev/html-entity-encoder', '/dev/base64-encoder'],
+        related: ['/dev/html-entity-encoder', '/dev/base64-encoder']
+    },
+    '/dev/xml-formatter': {
+        parent: '/dev',
+        siblings: ['/dev/json-formatter', '/dev/yaml-formatter'],
+        related: ['/dev/json-formatter', '/dev/yaml-formatter']
+    },
+    '/dev/yaml-formatter': {
+        parent: '/dev',
+        siblings: ['/dev/json-formatter', '/dev/xml-formatter'],
+        related: ['/dev/json-formatter', '/dev/xml-formatter']
+    },
+    '/dev/html-entity-encoder': {
+        parent: '/dev',
+        siblings: ['/dev/url-encoder', '/dev/html-minifier'],
+        related: ['/dev/url-encoder', '/dev/html-minifier']
+    },
+    '/dev/color-shades': {
+        parent: '/dev',
+        siblings: ['/dev/image-placeholder', '/dev/favicon-generator'],
+        related: ['/color/palette-generator', '/color/converter']
+    },
+    '/dev/image-placeholder': {
+        parent: '/dev',
+        siblings: ['/dev/color-shades', '/dev/og-image-resizer'],
+        related: ['/dev/og-image-resizer', '/image/resize']
+    },
+    '/dev/number-base': {
+        parent: '/dev',
+        siblings: ['/dev/hash-generator', '/dev/uuid-generator'],
+        related: ['/dev/hash-generator', '/calc/scientific']
+    },
 
     // Video Hub
     '/video': {
@@ -102,15 +157,53 @@ export const topicalGraph = {
     // GIF Hub
     '/gif': {
         parent: '/',
-        children: ['/gif/compress', '/gif/convert'],
+        children: ['/gif/compress', '/gif/convert', '/gif/edit', '/gif/create'],
         related: ['/video/compress', '/image/compress']
+    },
+
+    // GIF Edit Hub
+    '/gif/edit': {
+        parent: '/gif',
+        siblings: ['/gif/compress', '/gif/convert', '/gif/create'],
+        children: ['/gif/edit/resize', '/gif/edit/speed'],
+        related: ['/gif/compress', '/video/edit']
+    },
+    '/gif/create': {
+        parent: '/gif',
+        siblings: ['/gif/compress', '/gif/convert', '/gif/edit'],
+        related: ['/gif/compress', '/video/convert/video-to-gif']
+    },
+    '/gif/edit/resize': {
+        parent: '/gif/edit',
+        siblings: ['/gif/edit/speed'],
+        related: ['/gif/compress', '/image/resize']
+    },
+    '/gif/edit/speed': {
+        parent: '/gif/edit',
+        siblings: ['/gif/edit/resize'],
+        related: ['/gif/compress', '/video/edit']
     },
 
     // SVG Hub
     '/svg': {
         parent: '/',
-        children: ['/svg/optimize'],
+        children: ['/svg/optimize', '/svg/svg-viewer', '/svg/svg-to-png', '/svg/svg-editor'],
         related: ['/image/compress', '/image/convert']
+    },
+    '/svg/svg-viewer': {
+        parent: '/svg',
+        siblings: ['/svg/optimize', '/svg/svg-to-png', '/svg/svg-editor'],
+        related: ['/svg/optimize', '/svg/svg-editor']
+    },
+    '/svg/svg-to-png': {
+        parent: '/svg',
+        siblings: ['/svg/optimize', '/svg/svg-viewer', '/svg/svg-editor'],
+        related: ['/svg/optimize', '/image/convert/to-png']
+    },
+    '/svg/svg-editor': {
+        parent: '/svg',
+        siblings: ['/svg/optimize', '/svg/svg-viewer', '/svg/svg-to-png'],
+        related: ['/svg/optimize', '/dev/xml-formatter']
     },
 
     // PDF Hub
@@ -598,7 +691,7 @@ export const topicalGraph = {
     // Text Tools Hub
     '/text': {
         parent: '/',
-        children: ['/text/word-counter', '/text/case-converter', '/text/lorem-ipsum', '/text/diff-checker', '/text/text-to-speech'],
+        children: ['/text/word-counter', '/text/case-converter', '/text/lorem-ipsum', '/text/diff-checker', '/text/text-to-speech', '/text/base64-text', '/text/json-to-csv', '/text/html-to-text', '/text/word-frequency', '/text/slug-generator'],
         related: ['/dev', '/color']
     },
     '/text/word-counter': {
@@ -625,6 +718,215 @@ export const topicalGraph = {
         parent: '/text',
         siblings: ['/text/word-counter', '/text/diff-checker'],
         related: ['/text/word-counter', '/text/case-converter']
+    },
+    '/text/base64-text': {
+        parent: '/text',
+        siblings: ['/text/html-to-text', '/text/json-to-csv'],
+        related: ['/dev/base64-encoder', '/dev/url-encoder']
+    },
+    '/text/json-to-csv': {
+        parent: '/text',
+        siblings: ['/text/base64-text', '/text/html-to-text'],
+        related: ['/dev/json-formatter', '/text/word-counter']
+    },
+    '/text/html-to-text': {
+        parent: '/text',
+        siblings: ['/text/json-to-csv', '/text/slug-generator'],
+        related: ['/dev/html-minifier', '/dev/html-entity-encoder']
+    },
+    '/text/word-frequency': {
+        parent: '/text',
+        siblings: ['/text/word-counter', '/text/slug-generator'],
+        related: ['/text/word-counter', '/text/diff-checker']
+    },
+    '/text/slug-generator': {
+        parent: '/text',
+        siblings: ['/text/case-converter', '/text/word-frequency'],
+        related: ['/text/case-converter', '/dev/url-encoder']
+    },
+
+    // Audio extra pages
+    '/audio/convert/aac-to-mp3': {
+        parent: '/audio/convert',
+        siblings: ['/audio/convert/mp3-to-wav', '/audio/convert/wav-to-mp3'],
+        related: ['/audio/compress/mp3', '/video/convert']
+    },
+    '/audio/compress/wav': {
+        parent: '/audio/compress',
+        siblings: ['/audio/compress/mp3'],
+        related: ['/audio/convert/wav-to-mp3', '/audio/compress/mp3']
+    },
+    '/audio/edit/merge': {
+        parent: '/audio/edit',
+        siblings: ['/audio/edit/trim', '/audio/edit/volume'],
+        related: ['/audio/edit/trim', '/video/edit']
+    },
+
+    // Calculators Hub
+    '/calc': {
+        parent: '/',
+        children: ['/calc/percentage', '/calc/loan', '/calc/bmi', '/calc/age', '/calc/date-difference', '/calc/tip', '/calc/discount', '/calc/scientific'],
+        related: ['/convert', '/dev']
+    },
+    '/calc/percentage': {
+        parent: '/calc',
+        siblings: ['/calc/discount', '/calc/tip'],
+        related: ['/calc/discount', '/calc/tip']
+    },
+    '/calc/loan': {
+        parent: '/calc',
+        siblings: ['/calc/percentage', '/calc/bmi'],
+        related: ['/calc/percentage', '/calc/discount']
+    },
+    '/calc/bmi': {
+        parent: '/calc',
+        siblings: ['/calc/age', '/calc/date-difference'],
+        related: ['/calc/age', '/convert/weight']
+    },
+    '/calc/age': {
+        parent: '/calc',
+        siblings: ['/calc/bmi', '/calc/date-difference'],
+        related: ['/calc/date-difference', '/calc/bmi']
+    },
+    '/calc/date-difference': {
+        parent: '/calc',
+        siblings: ['/calc/age', '/dev/timestamp-converter'],
+        related: ['/calc/age', '/dev/timestamp-converter']
+    },
+    '/calc/tip': {
+        parent: '/calc',
+        siblings: ['/calc/percentage', '/calc/discount'],
+        related: ['/calc/percentage', '/calc/discount']
+    },
+    '/calc/discount': {
+        parent: '/calc',
+        siblings: ['/calc/percentage', '/calc/tip'],
+        related: ['/calc/percentage', '/calc/tip']
+    },
+    '/calc/scientific': {
+        parent: '/calc',
+        siblings: ['/calc/percentage', '/calc/loan'],
+        related: ['/dev/number-base', '/convert/length']
+    },
+
+    // Unit Converters Hub
+    '/convert': {
+        parent: '/',
+        children: ['/convert/length', '/convert/weight', '/convert/temperature', '/convert/speed', '/convert/area', '/convert/data-size', '/convert/time'],
+        related: ['/calc', '/dev']
+    },
+    '/convert/length': {
+        parent: '/convert',
+        siblings: ['/convert/area', '/convert/speed'],
+        related: ['/convert/area', '/convert/speed']
+    },
+    '/convert/weight': {
+        parent: '/convert',
+        siblings: ['/convert/length', '/convert/temperature'],
+        related: ['/calc/bmi', '/convert/length']
+    },
+    '/convert/temperature': {
+        parent: '/convert',
+        siblings: ['/convert/weight', '/convert/speed'],
+        related: ['/convert/speed', '/dev/timestamp-converter']
+    },
+    '/convert/speed': {
+        parent: '/convert',
+        siblings: ['/convert/length', '/convert/temperature'],
+        related: ['/convert/length', '/convert/time']
+    },
+    '/convert/area': {
+        parent: '/convert',
+        siblings: ['/convert/length', '/convert/weight'],
+        related: ['/convert/length', '/convert/weight']
+    },
+    '/convert/data-size': {
+        parent: '/convert',
+        siblings: ['/convert/time', '/convert/speed'],
+        related: ['/dev/number-base', '/convert/time']
+    },
+    '/convert/time': {
+        parent: '/convert',
+        siblings: ['/convert/data-size', '/convert/speed'],
+        related: ['/calc/date-difference', '/dev/timestamp-converter']
+    },
+
+    // Finance Hub
+    '/finance': {
+        parent: '/',
+        children: ['/finance/compound-interest', '/finance/roi-calculator', '/finance/vat-calculator'],
+        related: ['/calc', '/calc/loan', '/calc/percentage']
+    },
+    '/finance/compound-interest': {
+        parent: '/finance',
+        siblings: ['/finance/roi-calculator', '/finance/vat-calculator'],
+        related: ['/calc/loan', '/calc/percentage']
+    },
+    '/finance/roi-calculator': {
+        parent: '/finance',
+        siblings: ['/finance/compound-interest', '/finance/vat-calculator'],
+        related: ['/calc/percentage', '/finance/compound-interest']
+    },
+    '/finance/vat-calculator': {
+        parent: '/finance',
+        siblings: ['/finance/compound-interest', '/finance/roi-calculator'],
+        related: ['/calc/percentage', '/calc/discount']
+    },
+
+    // Health Hub
+    '/health': {
+        parent: '/',
+        children: ['/health/calorie-calculator', '/health/ideal-weight'],
+        related: ['/calc/bmi', '/calc']
+    },
+    '/health/calorie-calculator': {
+        parent: '/health',
+        siblings: ['/health/ideal-weight'],
+        related: ['/calc/bmi', '/health/ideal-weight']
+    },
+    '/health/ideal-weight': {
+        parent: '/health',
+        siblings: ['/health/calorie-calculator'],
+        related: ['/calc/bmi', '/convert/weight']
+    },
+
+    // Long-tail conversion pages (Option C)
+    '/celsius-to-fahrenheit': {
+        parent: '/convert/temperature',
+        siblings: ['/fahrenheit-to-celsius'],
+        related: ['/convert/temperature', '/fahrenheit-to-celsius']
+    },
+    '/fahrenheit-to-celsius': {
+        parent: '/convert/temperature',
+        siblings: ['/celsius-to-fahrenheit'],
+        related: ['/convert/temperature', '/celsius-to-fahrenheit']
+    },
+    '/kg-to-lbs': {
+        parent: '/convert/weight',
+        siblings: ['/lbs-to-kg'],
+        related: ['/convert/weight', '/lbs-to-kg', '/calc/bmi']
+    },
+    '/lbs-to-kg': {
+        parent: '/convert/weight',
+        siblings: ['/kg-to-lbs'],
+        related: ['/convert/weight', '/kg-to-lbs', '/calc/bmi']
+    },
+    '/cm-to-feet': {
+        parent: '/convert/length',
+        siblings: ['/convert/length'],
+        related: ['/convert/length', '/calc/bmi']
+    },
+    '/percentage-calculator-online': {
+        parent: '/calc/percentage',
+        related: ['/calc/percentage', '/calc/discount']
+    },
+    '/bmi-calculator-metric': {
+        parent: '/calc/bmi',
+        related: ['/calc/bmi', '/health/ideal-weight']
+    },
+    '/loan-payment-calculator': {
+        parent: '/calc/loan',
+        related: ['/calc/loan', '/finance/compound-interest']
     },
 
     // Trust Pages
