@@ -512,5 +512,26 @@ export default function sitemap() {
             changeFrequency: 'monthly',
             priority: 0.5,
         },
+
+        // Calculators Hub
+        { url: `${baseUrl}/calc`, lastModified: staticDate, changeFrequency: 'weekly', priority: 0.9 },
+        { url: `${baseUrl}/calc/percentage`, lastModified: staticDate, changeFrequency: 'weekly', priority: 0.8 },
+        { url: `${baseUrl}/calc/loan`, lastModified: staticDate, changeFrequency: 'weekly', priority: 0.8 },
+        { url: `${baseUrl}/calc/bmi`, lastModified: staticDate, changeFrequency: 'weekly', priority: 0.8 },
+        { url: `${baseUrl}/calc/age`, lastModified: staticDate, changeFrequency: 'weekly', priority: 0.8 },
+        { url: `${baseUrl}/calc/date-difference`, lastModified: staticDate, changeFrequency: 'weekly', priority: 0.8 },
+        { url: `${baseUrl}/calc/tip`, lastModified: staticDate, changeFrequency: 'weekly', priority: 0.8 },
+        { url: `${baseUrl}/calc/discount`, lastModified: staticDate, changeFrequency: 'weekly', priority: 0.8 },
+        { url: `${baseUrl}/calc/scientific`, lastModified: staticDate, changeFrequency: 'weekly', priority: 0.8 },
+
+        // Unit Converters Hub
+        { url: `${baseUrl}/convert`, lastModified: staticDate, changeFrequency: 'weekly', priority: 0.9 },
+        { url: `${baseUrl}/convert/length`, lastModified: staticDate, changeFrequency: 'weekly', priority: 0.8 },
+        { url: `${baseUrl}/convert/weight`, lastModified: staticDate, changeFrequency: 'weekly', priority: 0.8 },
+        { url: `${baseUrl}/convert/temperature`, lastModified: staticDate, changeFrequency: 'weekly', priority: 0.8 },
+        { url: `${baseUrl}/convert/speed`, lastModified: staticDate, changeFrequency: 'weekly', priority: 0.8 },
+        { url: `${baseUrl}/convert/area`, lastModified: staticDate, changeFrequency: 'weekly', priority: 0.8 },
+        { url: `${baseUrl}/convert/data-size`, lastModified: staticDate, changeFrequency: 'weekly', priority: 0.8 },
+        { url: `${baseUrl}/convert/time`, lastModified: staticDate, changeFrequency: 'weekly', priority: 0.8 },
     ];
 }
