@@ -32,6 +32,19 @@ const RESOLUTIONS = [
 // ─────────────────────────────────────────────────────────────────────────────
 function uid() { return Math.random().toString(36).slice(2, 9); }
 
+// Extensions that browsers may not report with a video/* MIME type
+const VIDEO_EXTENSIONS = new Set([
+  'mp4','m4v','mov','webm','mkv','avi','flv','wmv','3gp','3g2',
+  'ogv','ts','mts','m2ts','mpg','mpeg','rm','rmvb','asf','f4v',
+  'vob','dv','divx','xvid','mxf','hevc',
+]);
+
+function isVideoFile(file) {
+  if (file.type.startsWith('video/')) return true;
+  const ext = file.name.split('.').pop().toLowerCase();
+  return VIDEO_EXTENSIONS.has(ext);
+}
+
 function fmtBytes(bytes) {
   if (!bytes || bytes === 0) return "0 B";
   const k = 1024, sizes = ["B", "KB", "MB", "GB"];
@@ -279,12 +292,8 @@ export default function VideoCompressor({
     const items = [], errs = [];
 
     for (const file of files) {
-      const valid = allowedFormats.includes(file.type) ||
-                    file.name.toLowerCase().endsWith(".mov");
-      if (!valid) {
-        errs.push(formatName
-          ? `${file.name}: only ${formatName} files accepted`
-          : `${file.name}: unsupported format`);
+      if (!isVideoFile(file)) {
+        errs.push(`${file.name}: not a recognized video file`);
         continue;
       }
       items.push({
@@ -300,7 +309,7 @@ export default function VideoCompressor({
     if (!items.length) return;
 
     setQueue(prev => [...prev, ...items]);
-  }, [allowedFormats, formatName]);
+  }, []);
 
   // ── Remove / Clear ───────────────────────────────────────────────────────
   const removeItem = useCallback((id) => {
@@ -616,7 +625,7 @@ export default function VideoCompressor({
         <div className="vc-trust-strip">
           <span>🔒 Videos never leave your device.</span>
           <span>🎯 Smart Adaptive Mode – per-video bitrate targeting.</span>
-          <span>📦 Bulk: up to 20 files · No file size limit.</span>
+          <span>📦 Any format · MP4, MOV, MKV, AVI, FLV & more · No size limit.</span>
         </div>
 
         {/* Error */}
@@ -637,7 +646,7 @@ export default function VideoCompressor({
           <input
             ref={fileInput}
             type="file"
-            accept="video/mp4,video/webm,video/quicktime,.mov"
+            accept="video/*,.mkv,.avi,.flv,.wmv,.3gp,.ts,.mts,.m2ts,.ogv,.rm,.rmvb,.asf,.f4v,.vob,.dv,.divx"
             multiple
             onChange={(e) => { addFiles(e.target.files); e.target.value = ""; }}
             style={{ display: "none" }}
@@ -647,7 +656,7 @@ export default function VideoCompressor({
             <p className="vc-dropzone-main">
               {queue.length ? "Add More Videos" : "Drag & Drop Videos"}
             </p>
-            <p className="vc-dropzone-sub">MP4 · MOV · WebM · Up to 20 files · No size limit</p>
+            <p className="vc-dropzone-sub">MP4 · MOV · WebM · MKV · AVI · FLV & more · No size limit</p>
           </div>
           <button className="tc-drop-btn" onClick={e => { e.stopPropagation(); if (!processing) fileInput.current?.click(); }} disabled={processing}>
             {processing ? "Processing…" : "Select Files"}

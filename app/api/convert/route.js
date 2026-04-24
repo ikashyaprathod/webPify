@@ -1,22 +1,32 @@
 import sharp from 'sharp';
 import { NextResponse } from 'next/server';
 
-// Configure API route
 export const runtime = 'nodejs';
-export const maxDuration = 30; // 30 seconds timeout
+export const maxDuration = 60;
+
+// Detect MIME type from filename extension when browser doesn't report one
+// (common for HEIC on Windows Chrome/Edge)
+function mimeFromName(name = '') {
+    const ext = name.split('.').pop().toLowerCase();
+    const map = {
+        heic: 'image/heic', heif: 'image/heif',
+        jpg: 'image/jpeg', jpeg: 'image/jpeg',
+        png: 'image/png', webp: 'image/webp',
+        avif: 'image/avif', gif: 'image/gif',
+        tiff: 'image/tiff', tif: 'image/tiff',
+        bmp: 'image/bmp',
+    };
+    return map[ext] || '';
+}
 
 export async function POST(request) {
     try {
-        // Parse form data
         const formData = await request.formData();
         const file = formData.get('file');
-        const targetFormat = formData.get('targetFormat'); // 'webp', 'png', 'jpeg'
+        const targetFormat = formData.get('targetFormat'); // 'webp', 'png', 'jpeg', 'avif'
 
         if (!file) {
-            return NextResponse.json(
-                { error: 'No file provided' },
-                { status: 400 }
-            );
+            return NextResponse.json({ error: 'No file provided' }, { status: 400 });
         }
 
         if (!targetFormat || !['webp', 'png', 'jpeg', 'avif'].includes(targetFormat)) {
@@ -26,62 +36,44 @@ export async function POST(request) {
             );
         }
 
-        // Check file size (max 10MB)
-        if (file.size > 10 * 1024 * 1024) {
+        const effectiveType = file.type || mimeFromName(file.name);
+        if (!effectiveType.startsWith('image/')) {
             return NextResponse.json(
-                { error: 'File too large. Maximum size is 10MB.' },
+                { error: `Unsupported file type: ${file.name}. Please upload an image file (JPG, PNG, WebP, HEIC, AVIF, etc.).` },
                 { status: 400 }
             );
         }
 
-        // Convert file to buffer
         const arrayBuffer = await file.arrayBuffer();
         const buffer = Buffer.from(arrayBuffer);
 
         let convertedBuffer;
         let outputType;
 
-        // Convert to target format
+        // Sharp reads HEIC/HEIF natively via libvips — no special handling needed for input.
+        // Just pipe through the desired output format.
         if (targetFormat === 'webp') {
             convertedBuffer = await sharp(buffer)
-                .webp({
-                    quality: 85,
-                    alphaQuality: 90,
-                    effort: 6,
-                })
+                .webp({ quality: 85, alphaQuality: 90, effort: 6 })
                 .toBuffer();
             outputType = 'image/webp';
-        }
-        else if (targetFormat === 'png') {
+        } else if (targetFormat === 'png') {
             convertedBuffer = await sharp(buffer)
-                .png({
-                    quality: 90,
-                    compressionLevel: 9,
-                })
+                .png({ quality: 90, compressionLevel: 9 })
                 .toBuffer();
             outputType = 'image/png';
-        }
-        else if (targetFormat === 'jpeg') {
+        } else if (targetFormat === 'jpeg') {
             convertedBuffer = await sharp(buffer)
-                .jpeg({
-                    quality: 85,
-                    mozjpeg: true,
-                    progressive: true,
-                })
+                .jpeg({ quality: 85, mozjpeg: true, progressive: true })
                 .toBuffer();
             outputType = 'image/jpeg';
-        }
-        else if (targetFormat === 'avif') {
+        } else if (targetFormat === 'avif') {
             convertedBuffer = await sharp(buffer)
-                .avif({
-                    quality: 60,
-                    effort: 4,
-                })
+                .avif({ quality: 60, effort: 4 })
                 .toBuffer();
             outputType = 'image/avif';
         }
 
-        // Return converted image
         return new NextResponse(convertedBuffer, {
             status: 200,
             headers: {
@@ -91,12 +83,11 @@ export async function POST(request) {
                 'X-Converted-Size': convertedBuffer.length.toString(),
             },
         });
-
     } catch (error) {
         console.error('Conversion error:', error);
-        return NextResponse.json(
-            { error: 'Failed to convert image: ' + error.message },
-            { status: 500 }
-        );
+        const msg = error.message?.toLowerCase().includes('input buffer contains unsupported image format')
+            ? 'Unsupported image format. Please try a different file.'
+            : 'Failed to convert image: ' + error.message;
+        return NextResponse.json({ error: msg }, { status: 500 });
     }
 }

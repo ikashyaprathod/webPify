@@ -3,8 +3,23 @@
 import { useRef, useState, useEffect, useCallback } from "react";
 import { saveRecent, loadRecent, clearRecent } from "../utils/recent-files-db";
 
-const ALLOWED_DEFAULT = ['image/png', 'image/jpeg', 'image/webp', 'image/avif'];
+const ALLOWED_DEFAULT = ['image/png', 'image/jpeg', 'image/jpg', 'image/webp', 'image/avif', 'image/heic', 'image/heif', 'image/heic-sequence', 'image/heif-sequence', 'image/gif', 'image/tiff', 'image/bmp'];
 const IDB_STORE = 'recent_compressor';
+
+// Returns the effective MIME type — browsers often report empty type for HEIC on Windows
+function getEffectiveType(file) {
+    if (file.type) return file.type;
+    const ext = file.name.split('.').pop().toLowerCase();
+    const map = {
+        heic: 'image/heic', heif: 'image/heif',
+        jpg: 'image/jpeg', jpeg: 'image/jpeg',
+        png: 'image/png', webp: 'image/webp',
+        avif: 'image/avif', gif: 'image/gif',
+        tiff: 'image/tiff', tif: 'image/tiff',
+        bmp: 'image/bmp',
+    };
+    return map[ext] || '';
+}
 
 function blobToDataUrl(blob) {
     return new Promise(resolve => {
@@ -136,10 +151,15 @@ export default function ImageCompressor({
         const reduction      = parseFloat(response.headers.get('X-Reduction')     || '0');
         const previewDataUrl = await blobToDataUrl(blob);
         const compressedFile = new File([blob], file.name, { type: file.type, lastModified: Date.now() });
-        const fmtLabel = file.type === 'image/png' ? 'PNG'
-            : file.type === 'image/jpeg' ? 'JPG'
-            : file.type === 'image/webp' ? 'WebP'
-            : file.type === 'image/avif' ? 'AVIF' : '';
+        const t = getEffectiveType(file);
+        const fmtLabel = t === 'image/png' ? 'PNG'
+            : (t === 'image/jpeg' || t === 'image/jpg') ? 'JPG'
+            : t === 'image/webp' ? 'WebP'
+            : t === 'image/avif' ? 'AVIF'
+            : (t === 'image/heic' || t === 'image/heif') ? 'HEIC'
+            : t === 'image/gif' ? 'GIF'
+            : t === 'image/tiff' ? 'TIFF'
+            : t === 'image/bmp' ? 'BMP' : '';
 
         return {
             id: newId(),
@@ -160,25 +180,21 @@ export default function ImageCompressor({
         setErrorMessage("");
 
         const validFiles = Array.from(fileList).filter(file => {
-            if (!allowedFormats.includes(file.type)) {
-                setErrorMessage(
-                    formatName
-                        ? `This tool only accepts ${formatName} images.`
-                        : `Unsupported format: ${file.name}. Use PNG, JPG, WebP, or AVIF.`
-                );
+            const type = getEffectiveType(file);
+            // For format-specific pages (formatName set), enforce the strict allowlist
+            // For the hub page, accept any image type
+            if (formatName && !allowedFormats.includes(type)) {
+                setErrorMessage(`This tool only accepts ${formatName} images.`);
+                return false;
+            }
+            if (!type.startsWith('image/')) {
+                setErrorMessage(`Unsupported file: ${file.name}. Please upload an image (JPG, PNG, WebP, HEIC, AVIF, etc.).`);
                 return false;
             }
             return true;
         });
 
         if (!validFiles.length) { setProcessing(false); return; }
-
-        const oversized = validFiles.filter(f => f.size > 10 * 1024 * 1024);
-        if (oversized.length) {
-            setErrorMessage(`File too large: ${oversized[0].name}. Max 10 MB.`);
-            setProcessing(false);
-            return;
-        }
 
         const placeholders = validFiles.map(file => ({
             id: newId(), originalFile: file, status: "pending", statusMessage: "Waiting...",
@@ -199,8 +215,8 @@ export default function ImageCompressor({
                 setSelectedIds(prev => new Set([...prev, result.id]));
                 setRecentFiles(prev => [result, ...prev].slice(0, 20));
             } catch (error) {
-                const msg = error.message.includes('too large') ? `Image too large: ${file.name}. Max 10 MB.`
-                    : error.message.includes('Unsupported') ? `Unsupported format: ${file.name}`
+                const msg = error.message.includes('Unsupported') || error.message.includes('image format')
+                    ? `Unsupported format: ${file.name}. Try JPG, PNG, WebP, HEIC, or AVIF.`
                     : `Compression failed for ${file.name}. Please try again.`;
                 setErrorMessage(msg);
                 setFiles(prev => prev.filter(f => f.id !== tempId));
@@ -214,10 +230,10 @@ export default function ImageCompressor({
         if (!items) return;
         const imgs = [];
         for (const item of items) {
-            if (allowedFormats.includes(item.type)) imgs.push(item.getAsFile());
+            if (item.type.startsWith('image/')) imgs.push(item.getAsFile());
         }
         if (imgs.length) processFiles(imgs);
-    }, [allowedFormats]);
+    }, []);
 
     useEffect(() => {
         window.addEventListener("paste", handlePaste);
@@ -250,7 +266,7 @@ export default function ImageCompressor({
         clearRecent(IDB_STORE);
     };
 
-    const acceptStr    = allowedFormats.join(",");
+    const acceptStr    = "image/*,.heic,.heif";
     const compareFile  = files.find(f => f.id === compareId);
     const completedCount = files.filter(f => f.status === "complete").length;
 
@@ -280,7 +296,7 @@ export default function ImageCompressor({
                     <div className="tc-drop-icon">📦</div>
                     <div>
                         <p className="tc-drop-title">Drag &amp; Drop Files</p>
-                        <p className="tc-drop-subtitle">Supports JPG, PNG, WebP, AVIF &nbsp;·&nbsp; Max 10MB &nbsp;·&nbsp; Paste from clipboard</p>
+                        <p className="tc-drop-subtitle">Supports JPG, PNG, WebP, AVIF, HEIC &amp; more &nbsp;·&nbsp; Paste from clipboard</p>
                     </div>
                     <button className="tc-drop-btn" onClick={(e) => { e.stopPropagation(); handleClick(); }} disabled={processing}>
                         {processing ? "Compressing…" : "Select Files"}

@@ -20,6 +20,21 @@ function dataUrlToFile(dataUrl, fileName, type) {
     return new File([u8], fileName, { type });
 }
 
+// Returns the effective MIME type — browsers often report empty type for HEIC on Windows
+function getEffectiveType(file) {
+    if (file.type) return file.type;
+    const ext = file.name.split('.').pop().toLowerCase();
+    const map = {
+        heic: 'image/heic', heif: 'image/heif',
+        jpg: 'image/jpeg', jpeg: 'image/jpeg',
+        png: 'image/png', webp: 'image/webp',
+        avif: 'image/avif', gif: 'image/gif',
+        tiff: 'image/tiff', tif: 'image/tiff',
+        bmp: 'image/bmp',
+    };
+    return map[ext] || '';
+}
+
 export default function ImageConverter({
     outputFormat = 'image/webp',
     outputFormatName = "WebP",
@@ -117,19 +132,13 @@ export default function ImageConverter({
         setErrorMessage("");
 
         const validFiles = Array.from(fileList).filter((file) => {
-            const isImage = file.type.startsWith('image/');
-            if (!isImage) setErrorMessage(`Unsupported file type: ${file.name}. Please upload an image file.`);
+            const type = getEffectiveType(file);
+            const isImage = type.startsWith('image/');
+            if (!isImage) setErrorMessage(`Unsupported file type: ${file.name}. Please upload an image file (JPG, PNG, WebP, HEIC, AVIF, etc.).`);
             return isImage;
         });
 
         if (validFiles.length === 0) { setProcessing(false); return; }
-
-        const oversizedFiles = validFiles.filter(f => f.size > 10 * 1024 * 1024);
-        if (oversizedFiles.length > 0) {
-            setErrorMessage(`File too large: ${oversizedFiles[0].name}. Max allowed size is 10MB.`);
-            setProcessing(false);
-            return;
-        }
 
         try {
             const processingFiles = validFiles.map((file) => ({
@@ -155,10 +164,8 @@ export default function ImageConverter({
                     setRecentFiles((prev) => [result, ...prev].slice(0, 20));
                 } catch (error) {
                     let friendlyMessage = "Conversion failed. Please try again.";
-                    if (error.message.includes('too large') || error.message.includes('10MB'))
-                        friendlyMessage = `Image too large: ${file.name}. Max size is 10MB.`;
-                    else if (error.message.includes('Unsupported') || error.message.includes('file type'))
-                        friendlyMessage = `Unsupported file type: ${file.name}`;
+                    if (error.message.includes('Unsupported') || error.message.includes('file type') || error.message.includes('image format'))
+                        friendlyMessage = `Unsupported format: ${file.name}. Try JPG, PNG, WebP, HEIC, or AVIF.`;
                     setErrorMessage(friendlyMessage);
                     setFiles((prev) => prev.filter((f) => f.id !== tempId));
                 }
@@ -208,7 +215,7 @@ export default function ImageConverter({
 
     return (
         <div className="tc-wrap">
-            <input ref={fileInputRef} type="file" accept="image/*" multiple onChange={handleFileSelect} style={{ display: "none" }} />
+            <input ref={fileInputRef} type="file" accept="image/*,.heic,.heif" multiple onChange={handleFileSelect} style={{ display: "none" }} />
 
             {errorMessage && (
                 <div className="tc-error">
@@ -222,7 +229,7 @@ export default function ImageConverter({
                     <div className="tc-drop-icon">📤</div>
                     <div>
                         <p className="tc-drop-title">Drag &amp; Drop Files</p>
-                        <p className="tc-drop-subtitle">Converts to {outputFormatName} &nbsp;·&nbsp; Max 10MB per file</p>
+                        <p className="tc-drop-subtitle">Converts to {outputFormatName} &nbsp;·&nbsp; JPG, PNG, WebP, HEIC, AVIF &amp; more</p>
                     </div>
                     <button className="tc-drop-btn" onClick={(e) => { e.stopPropagation(); handleClick(); }} disabled={processing}>
                         {processing ? "Converting…" : "Select Files"}
