@@ -26,9 +26,26 @@ const LANGUAGES = [
   { code: "bn",    label: "বাংলা (Bengali)" },
 ];
 
+let gtLoaded = false;
+
+function loadGoogleTranslate(cb) {
+  if (gtLoaded) { cb && cb(); return; }
+  gtLoaded = true;
+  window.googleTranslateElementInit = function () {
+    new window.google.translate.TranslateElement(
+      { pageLanguage: "en", autoDisplay: false },
+      "google_translate_element"
+    );
+    cb && cb();
+  };
+  const s = document.createElement("script");
+  s.src = "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+  s.async = true;
+  document.body.appendChild(s);
+}
+
 function translatePage(langCode) {
   if (langCode === "en") {
-    // Reset to original English
     const cookie = document.cookie.match(/googtrans=([^;]+)/);
     if (cookie) {
       document.cookie = "googtrans=; path=/; domain=" + window.location.hostname + "; expires=Thu, 01 Jan 1970 00:00:00 UTC";
@@ -37,17 +54,22 @@ function translatePage(langCode) {
     window.location.reload();
     return;
   }
-  // Set the googtrans cookie then trigger the Google Translate widget
-  const combo = document.querySelector(".goog-te-combo");
-  if (combo) {
-    combo.value = langCode;
-    combo.dispatchEvent(new Event("change"));
-  } else {
-    // Widget not loaded yet — set cookie and reload
-    document.cookie = `googtrans=/en/${langCode}; path=/`;
-    document.cookie = `googtrans=/en/${langCode}; path=/; domain=.${window.location.hostname}`;
-    window.location.reload();
-  }
+  loadGoogleTranslate(() => {
+    const tryApply = (attempts = 0) => {
+      const combo = document.querySelector(".goog-te-combo");
+      if (combo) {
+        combo.value = langCode;
+        combo.dispatchEvent(new Event("change"));
+      } else if (attempts < 20) {
+        setTimeout(() => tryApply(attempts + 1), 150);
+      } else {
+        document.cookie = `googtrans=/en/${langCode}; path=/`;
+        document.cookie = `googtrans=/en/${langCode}; path=/; domain=.${window.location.hostname}`;
+        window.location.reload();
+      }
+    };
+    tryApply();
+  });
 }
 
 export default function Footer() {
@@ -75,9 +97,9 @@ export default function Footer() {
           </Link>
 
           <div className="ft-lang-wrap">
-            <span className="ft-lang-label">Language</span>
+            <label htmlFor="ft-lang-select" className="ft-lang-label">Language</label>
             <div className="ft-lang-select-wrap">
-              <select className="ft-lang-select" value={lang} onChange={handleLangChange}>
+              <select id="ft-lang-select" className="ft-lang-select" value={lang} onChange={handleLangChange}>
                 {LANGUAGES.map(({ code, label }) => (
                   <option key={code} value={code}>{label}</option>
                 ))}
@@ -107,7 +129,7 @@ export default function Footer() {
         {/* Right: nav columns */}
         <div className="ft-nav-grid">
           <div className="ft-nav-col">
-            <h4 className="ft-nav-heading">Image Tools</h4>
+            <p className="ft-nav-heading">Image Tools</p>
             <Link href="/image/compress" className="ft-nav-link">Image Compressor</Link>
             <Link href="/image/convert" className="ft-nav-link">Image Converter</Link>
             <Link href="/image/resize" className="ft-nav-link">Image Resizer</Link>
@@ -117,7 +139,7 @@ export default function Footer() {
             <Link href="/image/edit/remove-background" className="ft-nav-link">Remove Background</Link>
           </div>
           <div className="ft-nav-col">
-            <h4 className="ft-nav-heading">Video &amp; Audio</h4>
+            <p className="ft-nav-heading">Video &amp; Audio</p>
             <Link href="/video/compress" className="ft-nav-link">Video Compressor</Link>
             <Link href="/video/convert/mp4-to-webm" className="ft-nav-link">MP4 to WebM</Link>
             <Link href="/video/convert/mp4-to-mov" className="ft-nav-link">MP4 to MOV</Link>
@@ -127,7 +149,7 @@ export default function Footer() {
             <Link href="/audio/edit/volume" className="ft-nav-link">Volume Adjuster</Link>
           </div>
           <div className="ft-nav-col">
-            <h4 className="ft-nav-heading">Dev &amp; Color</h4>
+            <p className="ft-nav-heading">Dev &amp; Color</p>
             <Link href="/dev/qr-code" className="ft-nav-link">QR Code Generator</Link>
             <Link href="/dev/json-formatter" className="ft-nav-link">JSON Formatter</Link>
             <Link href="/dev/css-minifier" className="ft-nav-link">CSS Minifier</Link>
@@ -137,7 +159,7 @@ export default function Footer() {
             <Link href="/color/contrast-checker" className="ft-nav-link">Contrast Checker</Link>
           </div>
           <div className="ft-nav-col">
-            <h4 className="ft-nav-heading">Text &amp; Screen</h4>
+            <p className="ft-nav-heading">Text &amp; Screen</p>
             <Link href="/text/word-counter" className="ft-nav-link">Word Counter</Link>
             <Link href="/text/case-converter" className="ft-nav-link">Case Converter</Link>
             <Link href="/text/diff-checker" className="ft-nav-link">Diff Checker</Link>
@@ -147,7 +169,7 @@ export default function Footer() {
             <Link href="/pdf/add-watermark" className="ft-nav-link">PDF Watermark</Link>
           </div>
           <div className="ft-nav-col">
-            <h4 className="ft-nav-heading">Company</h4>
+            <p className="ft-nav-heading">Company</p>
             <Link href="/about" className="ft-nav-link">About</Link>
             <a href="https://github.com/ikashyaprathod/webPify" target="_blank" rel="noopener noreferrer" className="ft-nav-link">GitHub</a>
             <Link href="/privacy" className="ft-nav-link">Privacy Policy</Link>

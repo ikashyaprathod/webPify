@@ -149,6 +149,11 @@ export default function RootLayout({ children }) {
         />
 
 
+        {/* Preconnect for performance */}
+        <link rel="preconnect" href="https://translate.googleapis.com" />
+        <link rel="preconnect" href="https://www.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://translate.googleapis.com" />
+
         {/* PWA */}
         <link rel="manifest" href="/manifest.webmanifest" />
         <meta name="theme-color" content="#6366f1" />
@@ -165,19 +170,10 @@ export default function RootLayout({ children }) {
         <link rel="alternate" hrefLang="en-IN" href="https://webpifyy.vercel.app/" />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        {/* Hidden Google Translate element — our custom select drives it */}
+        {/* Hidden Google Translate element — loaded lazily on first language change */}
         <div id="google_translate_element" style={{display:"none"}} />
-        <script dangerouslySetInnerHTML={{__html:`
-          function googleTranslateElementInit() {
-            new google.translate.TranslateElement(
-              { pageLanguage: 'en', autoDisplay: false },
-              'google_translate_element'
-            );
-          }
-        `}} />
-        <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async />
         <Navbar />
-        {children}
+        <main>{children}</main>
         <Footer />
         <InstallPrompt />
       </body>
