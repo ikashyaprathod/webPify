@@ -2,6 +2,8 @@
 
 import { useRef, useState, useEffect } from "react";
 import { saveRecent, loadRecent, clearRecent } from "../utils/recent-files-db";
+import { convertImage, getEffectiveType, isHeic, createDisplayUrl, getImagesFromDrop } from "../utils/image-client";
+import BeforeAfterSlider from "./BeforeAfterSlider";
 
 const IDB_STORE = 'recent_converter';
 
@@ -20,203 +22,199 @@ function dataUrlToFile(dataUrl, fileName, type) {
     return new File([u8], fileName, { type });
 }
 
-// Returns the effective MIME type — browsers often report empty type for HEIC on Windows
-function getEffectiveType(file) {
-    if (file.type) return file.type;
-    const ext = file.name.split('.').pop().toLowerCase();
-    const map = {
-        heic: 'image/heic', heif: 'image/heif',
-        jpg: 'image/jpeg', jpeg: 'image/jpeg',
-        png: 'image/png', webp: 'image/webp',
-        avif: 'image/avif', gif: 'image/gif',
-        tiff: 'image/tiff', tif: 'image/tiff',
-        bmp: 'image/bmp',
-    };
-    return map[ext] || '';
-}
-
 export default function ImageConverter({
-    outputFormat = 'image/webp',
+    outputFormat     = 'image/webp',
     outputFormatName = "WebP",
-    title = "",
-    description = "",
+    title            = "",
+    description      = "",
 }) {
-    const [files, setFiles] = useState([]);
-    const [processing, setProcessing] = useState(false);
-    const [selectedIds, setSelectedIds] = useState(new Set());
-    const [errorMessage, setErrorMessage] = useState("");
-    const [recentFiles, setRecentFiles] = useState([]);
-    const fileInputRef = useRef(null);
+    const [files,        setFiles]       = useState([]);
+    const [processing,   setProcessing]  = useState(false);
+    const [selectedIds,  setSelectedIds] = useState(new Set());
+    const [errorMessage, setErrorMessage]= useState("");
+    const [recentFiles,  setRecentFiles] = useState([]);
+    const [compareId,    setCompareId]   = useState(null);
 
-    const getTargetFormat = (format) => {
-        if (format === 'image/webp') return 'webp';
-        if (format === 'image/png') return 'png';
-        if (format === 'image/jpeg') return 'jpeg';
+    // Resize options
+    const [enableResize, setEnableResize] = useState(false);
+    const [resizeW,      setResizeW]      = useState("");
+    const [resizeH,      setResizeH]      = useState("");
+
+    const fileInputRef   = useRef(null);
+    const folderInputRef = useRef(null);
+
+    const getTargetFormat = (fmt) => {
+        if (fmt === 'image/webp')  return 'webp';
+        if (fmt === 'image/png')   return 'png';
+        if (fmt === 'image/jpeg')  return 'jpeg';
         return 'webp';
     };
 
-    // Load persisted recent files from IndexedDB on mount
+    // ── Persist / restore recent files ──────────────────────────────────────
     useEffect(() => {
         loadRecent(IDB_STORE).then(items => {
             if (!items.length) return;
-            const restored = items.map(item => ({
-                id: item.id,
-                originalFile: { name: item.originalName },
+            setRecentFiles(items.map(item => ({
+                id:            item.id,
+                originalFile:  { name: item.originalName },
                 convertedFile: dataUrlToFile(item.preview, item.fileName, item.fileType),
-                originalSize: item.originalSize,
+                originalSize:  item.originalSize,
                 convertedSize: item.convertedSize,
-                preview: item.preview,
-                status: "complete",
+                preview:       item.preview,
+                status:        "complete",
                 statusMessage: item.statusMessage,
-            }));
-            setRecentFiles(restored);
+            })));
         });
     }, []);
 
-    // Persist to IndexedDB whenever recentFiles changes
     useEffect(() => {
-        if (recentFiles.length === 0) return;
-        const serializable = recentFiles.map(f => ({
-            id: f.id,
+        if (!recentFiles.length) return;
+        saveRecent(IDB_STORE, recentFiles.map(f => ({
+            id:           f.id,
             originalName: f.originalFile.name,
-            fileName: f.convertedFile?.name || f.originalFile.name,
+            fileName:     f.convertedFile?.name || f.originalFile.name,
             originalSize: f.originalSize,
-            convertedSize: f.convertedSize,
-            fileType: f.convertedFile?.type || outputFormat,
-            statusMessage: f.statusMessage,
-            preview: f.preview,
-        }));
-        saveRecent(IDB_STORE, serializable);
+            convertedSize:f.convertedSize,
+            fileType:     f.convertedFile?.type || outputFormat,
+            statusMessage:f.statusMessage,
+            preview:      f.preview,
+        })));
     }, [recentFiles]);
 
-    const convertImage = async (file, updateProgress) => {
-        try {
-            updateProgress("uploading", "Uploading to server...");
-            const formData = new FormData();
-            formData.append('file', file);
-            formData.append('targetFormat', getTargetFormat(outputFormat));
+    // ── Core conversion (fully client-side) ─────────────────────────────────
+    const doConvert = async (file, updateProgress) => {
+        updateProgress("converting", `Converting to ${outputFormatName}…`);
 
-            const response = await fetch('/api/convert', { method: 'POST', body: formData });
-            if (!response.ok) {
-                const error = await response.json();
-                throw new Error(error.error || 'Conversion failed');
-            }
+        const options = enableResize
+            ? { resizeW: resizeW ? +resizeW : undefined, resizeH: resizeH ? +resizeH : undefined }
+            : {};
 
-            updateProgress("converting", `Converting to ${outputFormatName}...`);
-            const blob = await response.blob();
-            const originalSize = parseInt(response.headers.get('X-Original-Size') || file.size);
-            const convertedSize = parseInt(response.headers.get('X-Converted-Size') || blob.size);
-            const extension = getTargetFormat(outputFormat);
-            const baseName = file.name.replace(/\.[^/.]+$/, "");
-            const newFileName = `${baseName}.${extension}`;
-            const previewDataUrl = await blobToDataUrl(blob);
-            const convertedFile = new File([blob], newFileName, { type: outputFormat, lastModified: Date.now() });
+        const blob        = await convertImage(file, outputFormat, options);
+        const extension   = getTargetFormat(outputFormat);
+        const baseName    = file.name.replace(/\.[^/.]+$/, "");
+        const newFileName = `${baseName}.${extension}`;
+        const preview     = await blobToDataUrl(blob);
+        const convertedFile = new File([blob], newFileName, { type: outputFormat, lastModified: Date.now() });
 
-            return {
-                id: Math.random().toString(36).substr(2, 9),
-                originalFile: file,
-                convertedFile,
-                originalSize,
-                convertedSize,
-                preview: previewDataUrl,
-                status: "complete",
-                statusMessage: `Converted to ${outputFormatName}`,
-            };
-        } catch (error) {
-            throw new Error(error.message || 'Failed to convert image');
-        }
+        // Get a displayable URL for the original (needed for HEIC before/after)
+        const originalDisplayUrl = await createDisplayUrl(file);
+
+        return {
+            id:            Math.random().toString(36).substr(2, 9),
+            originalFile:  file,
+            originalUrl:   originalDisplayUrl,
+            convertedFile,
+            originalSize:  file.size,
+            convertedSize: blob.size,
+            preview,
+            status:        "complete",
+            statusMessage: `Converted to ${outputFormatName}`,
+        };
     };
 
+    // ── Process a batch of files ─────────────────────────────────────────────
     const processFiles = async (fileList) => {
         setProcessing(true);
         setErrorMessage("");
 
-        const validFiles = Array.from(fileList).filter((file) => {
-            const type = getEffectiveType(file);
-            const isImage = type.startsWith('image/');
-            if (!isImage) setErrorMessage(`Unsupported file type: ${file.name}. Please upload an image file (JPG, PNG, WebP, HEIC, AVIF, etc.).`);
-            return isImage;
+        const validFiles = Array.from(fileList).filter(file => {
+            const t = getEffectiveType(file);
+            const ok = t.startsWith('image/') || isHeic(file);
+            if (!ok) setErrorMessage(
+                `Unsupported file: ${file.name}. Please upload an image (JPG, PNG, WebP, HEIC, AVIF, etc.).`
+            );
+            return ok;
         });
 
-        if (validFiles.length === 0) { setProcessing(false); return; }
+        if (!validFiles.length) { setProcessing(false); return; }
 
-        try {
-            const processingFiles = validFiles.map((file) => ({
-                id: Math.random().toString(36).substr(2, 9),
-                originalFile: file,
-                status: "pending",
-                statusMessage: "Waiting...",
-            }));
-            setFiles((prev) => [...prev, ...processingFiles]);
+        const placeholders = validFiles.map(file => ({
+            id:            Math.random().toString(36).substr(2, 9),
+            originalFile:  file,
+            status:        "pending",
+            statusMessage: "Waiting…",
+        }));
+        setFiles(prev => [...prev, ...placeholders]);
 
-            for (let i = 0; i < validFiles.length; i++) {
-                const file = validFiles[i];
-                const tempId = processingFiles[i].id;
-                const updateProgress = (status, message) =>
-                    setFiles((prev) => prev.map((f) => f.id === tempId ? { ...f, status, statusMessage: message } : f));
+        for (let i = 0; i < validFiles.length; i++) {
+            const file   = validFiles[i];
+            const tempId = placeholders[i].id;
+            const updateProgress = (status, message) =>
+                setFiles(prev => prev.map(f => f.id === tempId ? { ...f, status, statusMessage: message } : f));
 
-                if (validFiles.length > 1) updateProgress("processing", `Processing ${i + 1} of ${validFiles.length} images...`);
+            if (validFiles.length > 1)
+                updateProgress("processing", `Processing ${i + 1} of ${validFiles.length}…`);
 
-                try {
-                    const result = await convertImage(file, updateProgress);
-                    setFiles((prev) => prev.map((f) => (f.id === tempId ? result : f)));
-                    setSelectedIds((prev) => new Set([...prev, result.id]));
-                    setRecentFiles((prev) => [result, ...prev].slice(0, 20));
-                } catch (error) {
-                    let friendlyMessage = "Conversion failed. Please try again.";
-                    if (error.message.includes('Unsupported') || error.message.includes('file type') || error.message.includes('image format'))
-                        friendlyMessage = `Unsupported format: ${file.name}. Try JPG, PNG, WebP, HEIC, or AVIF.`;
-                    setErrorMessage(friendlyMessage);
-                    setFiles((prev) => prev.filter((f) => f.id !== tempId));
-                }
+            try {
+                const result = await doConvert(file, updateProgress);
+                setFiles(prev => prev.map(f => f.id === tempId ? result : f));
+                setSelectedIds(prev => new Set([...prev, result.id]));
+                setRecentFiles(prev => [result, ...prev].slice(0, 20));
+            } catch (err) {
+                const msg = err.message?.includes('not support')
+                    ? `${outputFormatName} encoding not supported in your browser. Try WebP or JPEG.`
+                    : err.message || `Failed to convert ${file.name}`;
+                setErrorMessage(msg);
+                setFiles(prev => prev.filter(f => f.id !== tempId));
             }
-        } catch (error) {
-            setErrorMessage(error.message);
-        } finally {
-            setProcessing(false);
         }
+        setProcessing(false);
     };
 
-    const handleFileSelect = (e) => { if (e.target.files?.length) processFiles(e.target.files); };
-    const handleDrop = (e) => { e.preventDefault(); if (e.dataTransfer.files?.length) processFiles(e.dataTransfer.files); };
-    const handleDragOver = (e) => e.preventDefault();
-    const handleClick = () => { if (!processing) fileInputRef.current?.click(); };
-    const handleDownload = (file) => {
-        const link = document.createElement("a");
-        link.href = file.convertedFile
-            ? URL.createObjectURL(file.convertedFile)
-            : file.preview;
-        link.download = file.convertedFile?.name || file.originalFile.name;
-        document.body.appendChild(link); link.click(); document.body.removeChild(link);
+    // ── Event handlers ───────────────────────────────────────────────────────
+    const handleFileSelect  = e => { if (e.target.files?.length) processFiles(e.target.files); };
+    const handleFolderSelect= e => { if (e.target.files?.length) processFiles(e.target.files); };
+    const handleDrop = async e => {
+        e.preventDefault();
+        const imgs = await getImagesFromDrop(e);
+        if (imgs.length) processFiles(imgs);
     };
-    const handleSelectAll = () => setSelectedIds(new Set(files.filter((f) => f.status === "complete").map((f) => f.id)));
+    const handleDragOver    = e => e.preventDefault();
+    const handleClick       = () => { if (!processing) fileInputRef.current?.click(); };
+
+    const handleDownload = file => {
+        const a    = document.createElement("a");
+        a.href     = file.convertedFile ? URL.createObjectURL(file.convertedFile) : file.preview;
+        a.download = file.convertedFile?.name || file.originalFile.name;
+        document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    };
+
+    const handleSelectAll  = () => setSelectedIds(new Set(files.filter(f => f.status === "complete").map(f => f.id)));
     const handleSelectNone = () => setSelectedIds(new Set());
-    const handleToggleSelect = (id) => {
+    const handleToggle     = id => {
         const s = new Set(selectedIds);
         s.has(id) ? s.delete(id) : s.add(id);
         setSelectedIds(s);
     };
     const handleDownloadSelected = () =>
-        files.filter((f) => selectedIds.has(f.id) && f.status === "complete").forEach(handleDownload);
+        files.filter(f => selectedIds.has(f.id) && f.status === "complete").forEach(handleDownload);
+
     const handleReset = () => {
-        setFiles([]); setSelectedIds(new Set()); setErrorMessage(""); setRecentFiles([]);
-        if (fileInputRef.current) fileInputRef.current.value = "";
+        setFiles([]); setSelectedIds(new Set()); setErrorMessage("");
+        setCompareId(null); setRecentFiles([]);
+        if (fileInputRef.current)   fileInputRef.current.value = "";
+        if (folderInputRef.current) folderInputRef.current.value = "";
         clearRecent(IDB_STORE);
     };
 
-    const formatBytes = (bytes) => {
-        if (bytes === 0) return "0 Bytes";
-        const k = 1024, sizes = ["Bytes", "KB", "MB"];
+    const formatBytes = bytes => {
+        if (!bytes) return "0 B";
+        const k = 1024, sizes = ["B", "KB", "MB", "GB"];
         const i = Math.floor(Math.log(bytes) / Math.log(k));
-        return Math.round((bytes / Math.pow(k, i)) * 100) / 100 + " " + sizes[i];
+        return (bytes / Math.pow(k, i)).toFixed(1) + " " + sizes[i];
     };
 
     const completedCount = files.filter(f => f.status === "complete").length;
+    const compareFile    = files.find(f => f.id === compareId);
 
+    // ── Render ───────────────────────────────────────────────────────────────
     return (
         <div className="tc-wrap">
-            <input ref={fileInputRef} type="file" accept="image/*,.heic,.heif" multiple onChange={handleFileSelect} style={{ display: "none" }} />
+            {/* Hidden file inputs */}
+            <input ref={fileInputRef}   type="file" accept="image/*,.heic,.heif" multiple onChange={handleFileSelect}   style={{ display: "none" }} />
+            <input ref={folderInputRef} type="file" accept="image/*,.heic,.heif" multiple webkitdirectory="" onChange={handleFolderSelect} style={{ display: "none" }} />
 
+            {/* Error banner */}
             {errorMessage && (
                 <div className="tc-error">
                     <span>{errorMessage}</span>
@@ -224,16 +222,62 @@ export default function ImageConverter({
                 </div>
             )}
 
+            {/* Resize options */}
+            <div className="tc-options-bar" style={{ display: "flex", alignItems: "center", gap: "0.75rem", flexWrap: "wrap", marginBottom: "0.75rem" }}>
+                <label style={{ display: "flex", alignItems: "center", gap: "0.375rem", fontWeight: 600, fontSize: "0.85rem", cursor: "pointer" }}>
+                    <input type="checkbox" checked={enableResize} onChange={e => setEnableResize(e.target.checked)} />
+                    Resize
+                </label>
+                {enableResize && (
+                    <>
+                        <input
+                            type="number" min="1" placeholder="Width px"
+                            value={resizeW} onChange={e => setResizeW(e.target.value)}
+                            style={{ width: 100, padding: "0.3rem 0.5rem", borderRadius: 6, border: "1px solid var(--border, #e2e8f0)", fontSize: "0.85rem" }}
+                        />
+                        <span style={{ opacity: 0.5 }}>×</span>
+                        <input
+                            type="number" min="1" placeholder="Height px"
+                            value={resizeH} onChange={e => setResizeH(e.target.value)}
+                            style={{ width: 100, padding: "0.3rem 0.5rem", borderRadius: 6, border: "1px solid var(--border, #e2e8f0)", fontSize: "0.85rem" }}
+                        />
+                        <span style={{ fontSize: "0.75rem", opacity: 0.55 }}>Leave one blank to preserve aspect ratio</span>
+                    </>
+                )}
+            </div>
+
+            {/* Before/After compare panel */}
+            {compareFile?.originalUrl && compareFile?.preview && (
+                <div className="tc-compare-wrap">
+                    <div className="tc-compare-hd">
+                        <p className="tc-compare-hd-title">Before / After: {compareFile.originalFile.name}</p>
+                        <button onClick={() => setCompareId(null)} className="tc-compare-close">×</button>
+                    </div>
+                    <BeforeAfterSlider
+                        beforeUrl={compareFile.originalUrl}
+                        afterUrl={compareFile.preview}
+                        beforeLabel="Original"
+                        afterLabel={outputFormatName}
+                    />
+                </div>
+            )}
+
             {files.length === 0 ? (
                 <div className="tc-drop-card" onClick={handleClick} onDrop={handleDrop} onDragOver={handleDragOver}>
                     <div className="tc-drop-icon">📤</div>
                     <div>
-                        <p className="tc-drop-title">Drag &amp; Drop Files</p>
-                        <p className="tc-drop-subtitle">Converts to {outputFormatName} &nbsp;·&nbsp; JPG, PNG, WebP, HEIC, AVIF &amp; more</p>
+                        <p className="tc-drop-title">Drag &amp; Drop Files or Folders</p>
+                        <p className="tc-drop-subtitle">Converts to {outputFormatName} &nbsp;·&nbsp; JPG, PNG, WebP, HEIC, AVIF &amp; more &nbsp;·&nbsp; No size limit</p>
                     </div>
-                    <button className="tc-drop-btn" onClick={(e) => { e.stopPropagation(); handleClick(); }} disabled={processing}>
-                        {processing ? "Converting…" : "Select Files"}
-                    </button>
+                    <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap", justifyContent: "center" }}>
+                        <button className="tc-drop-btn" onClick={e => { e.stopPropagation(); handleClick(); }} disabled={processing}>
+                            {processing ? "Converting…" : "Select Files"}
+                        </button>
+                        <button className="tc-drop-btn" style={{ background: "var(--secondary, #64748b)" }}
+                            onClick={e => { e.stopPropagation(); folderInputRef.current?.click(); }} disabled={processing}>
+                            📁 Select Folder
+                        </button>
+                    </div>
                 </div>
             ) : (
                 <div className="tc-queue-card">
@@ -243,30 +287,30 @@ export default function ImageConverter({
                             <h3 className="tc-queue-hd-title">Batch Queue</h3>
                         </div>
                         <div className="tc-queue-actions">
-                            <button className="tc-queue-btn tc-queue-btn-primary" onClick={handleClick} disabled={processing}>+ Add More Images</button>
+                            <button className="tc-queue-btn tc-queue-btn-primary" onClick={handleClick} disabled={processing}>+ Add Files</button>
+                            <button className="tc-queue-btn" onClick={() => folderInputRef.current?.click()} disabled={processing}>📁 Add Folder</button>
                             <button className="tc-queue-btn" onClick={handleSelectAll}>Select All</button>
                             <button className="tc-queue-btn" onClick={handleSelectNone}>Select None</button>
                             <button className="tc-queue-btn tc-queue-btn-success" onClick={handleDownloadSelected} disabled={selectedIds.size === 0 || processing}>
-                                Download Selected ({selectedIds.size})
+                                Download ({selectedIds.size})
                             </button>
                             <button className="tc-queue-btn tc-queue-btn-danger" onClick={handleReset}>Reset</button>
                         </div>
                     </div>
 
                     <div className="tc-queue-list">
-                        {files.map((file) => (
+                        {files.map(file => (
                             <div
                                 key={file.id}
                                 className={`tc-file-item${selectedIds.has(file.id) ? " tc-file-item--selected" : ""}${file.status !== "complete" ? " tc-file-item--pending" : ""}`}
-                                onClick={() => file.status === "complete" && handleToggleSelect(file.id)}
+                                onClick={() => file.status === "complete" && handleToggle(file.id)}
                             >
                                 <input
-                                    type="checkbox"
-                                    className="tc-file-checkbox"
+                                    type="checkbox" className="tc-file-checkbox"
                                     checked={selectedIds.has(file.id)}
-                                    onChange={() => handleToggleSelect(file.id)}
+                                    onChange={() => handleToggle(file.id)}
                                     disabled={file.status !== "complete"}
-                                    onClick={(e) => e.stopPropagation()}
+                                    onClick={e => e.stopPropagation()}
                                 />
                                 {file.preview
                                     ? <img src={file.preview} alt={file.originalFile.name} className="tc-file-thumb" />
@@ -297,13 +341,17 @@ export default function ImageConverter({
                                     )}
                                 </div>
                                 <div className="tc-file-btns">
+                                    {file.status === "complete" && file.originalUrl && (
+                                        <button
+                                            className={`tc-file-cmp-btn${compareId === file.id ? " tc-file-cmp-btn--active" : ""}`}
+                                            onClick={e => { e.stopPropagation(); setCompareId(compareId === file.id ? null : file.id); }}
+                                        >Compare</button>
+                                    )}
                                     <button
                                         className="tc-file-dl-btn"
-                                        onClick={(e) => { e.stopPropagation(); handleDownload(file); }}
+                                        onClick={e => { e.stopPropagation(); handleDownload(file); }}
                                         disabled={file.status !== "complete" || processing}
-                                    >
-                                        Download
-                                    </button>
+                                    >Download</button>
                                 </div>
                             </div>
                         ))}
@@ -319,6 +367,7 @@ export default function ImageConverter({
                 </div>
             )}
 
+            {/* Recent files */}
             {recentFiles.length > 0 && (
                 <div className="tc-recent-card">
                     <div className="tc-recent-hd">

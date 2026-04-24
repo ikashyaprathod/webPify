@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState, useCallback, useEffect } from "react";
+import { getVideosFromDrop } from "../utils/image-client";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // CONSTANTS
@@ -249,6 +250,7 @@ export default function VideoCompressor({
 
   // ── Refs ─────────────────────────────────────────────────────────────────
   const fileInput      = useRef(null);
+  const folderInput    = useRef(null);
   const cancelRef      = useRef(false);
   const poolRef        = useRef(null);
   /** Active worker ceiling – reduced by CPU lag monitor */
@@ -640,7 +642,7 @@ export default function VideoCompressor({
         <div
           className={`vc-dropzone${processing ? " vc-dropzone--disabled" : ""}`}
           onClick={() => !processing && fileInput.current?.click()}
-          onDrop={(e) => { e.preventDefault(); if (!processing) addFiles(e.dataTransfer.files); }}
+          onDrop={async (e) => { e.preventDefault(); if (!processing) { const vids = await getVideosFromDrop(e); if (vids.length) addFiles(vids); } }}
           onDragOver={(e) => e.preventDefault()}
         >
           <input
@@ -651,6 +653,15 @@ export default function VideoCompressor({
             onChange={(e) => { addFiles(e.target.files); e.target.value = ""; }}
             style={{ display: "none" }}
           />
+          <input
+            ref={folderInput}
+            type="file"
+            accept="video/*,.mkv,.avi,.flv,.wmv,.3gp,.ts,.mts,.m2ts,.ogv"
+            multiple
+            webkitdirectory=""
+            onChange={(e) => { addFiles(e.target.files); e.target.value = ""; }}
+            style={{ display: "none" }}
+          />
           <div className="vc-dropzone-icon">🎬</div>
           <div>
             <p className="vc-dropzone-main">
@@ -658,9 +669,15 @@ export default function VideoCompressor({
             </p>
             <p className="vc-dropzone-sub">MP4 · MOV · WebM · MKV · AVI · FLV & more · No size limit</p>
           </div>
-          <button className="tc-drop-btn" onClick={e => { e.stopPropagation(); if (!processing) fileInput.current?.click(); }} disabled={processing}>
-            {processing ? "Processing…" : "Select Files"}
-          </button>
+          <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap", justifyContent: "center" }}>
+            <button className="tc-drop-btn" onClick={e => { e.stopPropagation(); if (!processing) fileInput.current?.click(); }} disabled={processing}>
+              {processing ? "Processing…" : "Select Files"}
+            </button>
+            <button className="tc-drop-btn" style={{ background: "var(--secondary, #64748b)" }}
+              onClick={e => { e.stopPropagation(); if (!processing) folderInput.current?.click(); }} disabled={processing}>
+              📁 Select Folder
+            </button>
+          </div>
         </div>
 
         {/* Settings + Queue */}

@@ -2,24 +2,10 @@
 
 import { useRef, useState, useEffect, useCallback } from "react";
 import { saveRecent, loadRecent, clearRecent } from "../utils/recent-files-db";
+import { compressImage, getEffectiveType, isHeic, createDisplayUrl, getImagesFromDrop } from "../utils/image-client";
+import BeforeAfterSlider from "./BeforeAfterSlider";
 
-const ALLOWED_DEFAULT = ['image/png', 'image/jpeg', 'image/jpg', 'image/webp', 'image/avif', 'image/heic', 'image/heif', 'image/heic-sequence', 'image/heif-sequence', 'image/gif', 'image/tiff', 'image/bmp'];
 const IDB_STORE = 'recent_compressor';
-
-// Returns the effective MIME type — browsers often report empty type for HEIC on Windows
-function getEffectiveType(file) {
-    if (file.type) return file.type;
-    const ext = file.name.split('.').pop().toLowerCase();
-    const map = {
-        heic: 'image/heic', heif: 'image/heif',
-        jpg: 'image/jpeg', jpeg: 'image/jpeg',
-        png: 'image/png', webp: 'image/webp',
-        avif: 'image/avif', gif: 'image/gif',
-        tiff: 'image/tiff', tif: 'image/tiff',
-        bmp: 'image/bmp',
-    };
-    return map[ext] || '';
-}
 
 function blobToDataUrl(blob) {
     return new Promise(resolve => {
@@ -37,54 +23,16 @@ function dataUrlToFile(dataUrl, fileName, type) {
 }
 
 function formatBytes(bytes) {
-    if (bytes === 0) return "0 Bytes";
-    const k = 1024, sizes = ["Bytes", "KB", "MB"];
+    if (!bytes) return "0 B";
+    const k = 1024, sizes = ["B", "KB", "MB", "GB"];
     const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return Math.round((bytes / Math.pow(k, i)) * 100) / 100 + " " + sizes[i];
+    return (bytes / Math.pow(k, i)).toFixed(1) + " " + sizes[i];
 }
 
 function newId() { return Math.random().toString(36).substr(2, 9); }
 
-function BeforeAfterSlider({ originalUrl, compressedUrl }) {
-    const [pos, setPos] = useState(50);
-    return (
-        <div className="ba-wrap" style={{ userSelect: "none" }}>
-            <div className="ba-container">
-                <img src={compressedUrl} alt="Compressed" className="ba-img ba-img--after" />
-                <div className="ba-clip" style={{ width: pos + "%" }}>
-                    <img src={originalUrl} alt="Original" className="ba-img ba-img--before" />
-                </div>
-                <div className="ba-divider" style={{ left: pos + "%" }}>
-                    <div className="ba-handle">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M8 5l-7 7 7 7V5zm8 0v14l7-7-7-7z"/>
-                        </svg>
-                    </div>
-                </div>
-                <input type="range" min="0" max="100" value={pos} onChange={e => setPos(+e.target.value)} className="ba-slider" />
-                <span className="ba-label ba-label--left">Original</span>
-                <span className="ba-label ba-label--right">Compressed</span>
-            </div>
-            <style>{`
-                .ba-wrap { border: 1.5px solid rgba(0,0,0,0.1); border-radius: 10px; overflow: hidden; }
-                .ba-container { position: relative; overflow: hidden; line-height: 0; max-height: 320px; }
-                .ba-img { display: block; width: 100%; height: auto; max-height: 320px; object-fit: contain; }
-                .ba-img--after { position: relative; }
-                .ba-img--before { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; }
-                .ba-clip { position: absolute; top: 0; left: 0; height: 100%; overflow: hidden; }
-                .ba-divider { position: absolute; top: 0; bottom: 0; width: 3px; background: white; transform: translateX(-50%); pointer-events: none; box-shadow: 0 0 6px rgba(0,0,0,0.3); }
-                .ba-handle { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 36px; height: 36px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.25); color: #333; }
-                .ba-slider { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: col-resize; margin: 0; }
-                .ba-label { position: absolute; bottom: 8px; font-size: 0.75rem; font-weight: 700; background: rgba(0,0,0,0.55); color: white; padding: 2px 8px; border-radius: 4px; pointer-events: none; }
-                .ba-label--left { left: 8px; }
-                .ba-label--right { right: 8px; }
-            `}</style>
-        </div>
-    );
-}
-
 export default function ImageCompressor({
-    allowedFormats = ALLOWED_DEFAULT,
+    allowedFormats = null,   // null = accept everything; array = restrict (for format-specific pages)
     title          = "",
     description    = "",
     formatName     = null,
@@ -95,109 +43,105 @@ export default function ImageCompressor({
     const [errorMessage, setErrorMessage]= useState("");
     const [compareId,    setCompareId]   = useState(null);
     const [recentFiles,  setRecentFiles] = useState([]);
-    const fileInputRef = useRef(null);
 
-    // Load persisted recent files from IndexedDB on mount
+    const fileInputRef   = useRef(null);
+    const folderInputRef = useRef(null);
+
+    // ── Persist / restore recent files ──────────────────────────────────────
     useEffect(() => {
         loadRecent(IDB_STORE).then(items => {
             if (!items.length) return;
-            const restored = items.map(item => ({
-                id: item.id,
-                originalFile: { name: item.originalName },
-                originalUrl: null,
+            setRecentFiles(items.map(item => ({
+                id:             item.id,
+                originalFile:   { name: item.originalName },
+                originalUrl:    null,
                 compressedFile: dataUrlToFile(item.preview, item.originalName, item.fileType),
-                originalSize: item.originalSize,
+                originalSize:   item.originalSize,
                 compressedSize: item.compressedSize,
-                reduction: item.reduction,
-                preview: item.preview,
-                status: "complete",
-                statusMessage: item.statusMessage,
-            }));
-            setRecentFiles(restored);
+                reduction:      item.reduction,
+                preview:        item.preview,
+                status:         "complete",
+                statusMessage:  item.statusMessage,
+            })));
         });
     }, []);
 
-    // Persist to IndexedDB whenever recentFiles changes
     useEffect(() => {
-        if (recentFiles.length === 0) return;
-        const serializable = recentFiles.map(f => ({
-            id: f.id,
-            originalName: f.originalFile.name,
-            originalSize: f.originalSize,
-            compressedSize: f.compressedSize,
-            reduction: f.reduction,
-            fileType: f.compressedFile?.type || 'image/jpeg',
+        if (!recentFiles.length) return;
+        saveRecent(IDB_STORE, recentFiles.map(f => ({
+            id:            f.id,
+            originalName:  f.originalFile.name,
+            originalSize:  f.originalSize,
+            compressedSize:f.compressedSize,
+            reduction:     f.reduction,
+            fileType:      f.compressedFile?.type || 'image/jpeg',
             statusMessage: f.statusMessage,
-            preview: f.preview,
-        }));
-        saveRecent(IDB_STORE, serializable);
+            preview:       f.preview,
+        })));
     }, [recentFiles]);
 
-    const compressImage = async (file, updateProgress) => {
-        updateProgress("uploading", "Uploading...");
-        const formData = new FormData();
-        formData.append('file', file);
+    // ── Core compression (fully client-side) ────────────────────────────────
+    const doCompress = async (file, updateProgress) => {
+        updateProgress("processing", "Compressing…");
 
-        const response = await fetch('/api/compress', { method: 'POST', body: formData });
-        if (!response.ok) {
-            const error = await response.json();
-            throw new Error(error.error || 'Compression failed');
-        }
+        const { blob, outputMime, noChange } = await compressImage(file);
 
-        updateProgress("processing", "Compressing...");
-        const blob           = await response.blob();
-        const originalSize   = parseInt(response.headers.get('X-Original-Size')   || file.size);
-        const compressedSize = parseInt(response.headers.get('X-Compressed-Size') || blob.size);
-        const reduction      = parseFloat(response.headers.get('X-Reduction')     || '0');
-        const previewDataUrl = await blobToDataUrl(blob);
-        const compressedFile = new File([blob], file.name, { type: file.type, lastModified: Date.now() });
+        const originalSize   = file.size;
+        const compressedSize = blob.size;
+        const reduction      = noChange ? 0
+            : parseFloat(((originalSize - compressedSize) / originalSize * 100).toFixed(1));
+
         const t = getEffectiveType(file);
-        const fmtLabel = t === 'image/png' ? 'PNG'
+        const fmtLabel = isHeic(file) ? 'HEIC'
+            : t === 'image/png' ? 'PNG'
             : (t === 'image/jpeg' || t === 'image/jpg') ? 'JPG'
             : t === 'image/webp' ? 'WebP'
             : t === 'image/avif' ? 'AVIF'
-            : (t === 'image/heic' || t === 'image/heif') ? 'HEIC'
-            : t === 'image/gif' ? 'GIF'
+            : t === 'image/gif'  ? 'GIF'
             : t === 'image/tiff' ? 'TIFF'
-            : t === 'image/bmp' ? 'BMP' : '';
+            : t === 'image/bmp'  ? 'BMP' : '';
+
+        const previewDataUrl  = await blobToDataUrl(blob);
+        const compressedFile  = new File([blob], file.name, { type: outputMime, lastModified: Date.now() });
+        const originalUrl     = await createDisplayUrl(file);
 
         return {
-            id: newId(),
-            originalFile: file,
-            originalUrl: URL.createObjectURL(file),
+            id:             newId(),
+            originalFile:   file,
+            originalUrl,
             compressedFile,
             originalSize,
             compressedSize,
             reduction,
-            preview: previewDataUrl,
-            status: "complete",
-            statusMessage: reduction > 0 ? `${fmtLabel} compressed` : "Already optimized",
+            preview:        previewDataUrl,
+            status:         "complete",
+            statusMessage:  noChange ? "Already optimized" : `${fmtLabel} compressed`,
         };
     };
 
+    // ── Process a batch of files ─────────────────────────────────────────────
     const processFiles = async (fileList) => {
         setProcessing(true);
         setErrorMessage("");
 
         const validFiles = Array.from(fileList).filter(file => {
-            const type = getEffectiveType(file);
-            // For format-specific pages (formatName set), enforce the strict allowlist
-            // For the hub page, accept any image type
-            if (formatName && !allowedFormats.includes(type)) {
+            const t = getEffectiveType(file);
+            // Format-specific page: enforce restriction
+            if (formatName && allowedFormats && !allowedFormats.includes(t)) {
                 setErrorMessage(`This tool only accepts ${formatName} images.`);
                 return false;
             }
-            if (!type.startsWith('image/')) {
-                setErrorMessage(`Unsupported file: ${file.name}. Please upload an image (JPG, PNG, WebP, HEIC, AVIF, etc.).`);
-                return false;
+            const ok = t.startsWith('image/') || isHeic(file);
+            if (!ok) {
+                setErrorMessage(`Unsupported file: ${file.name}. Upload an image (JPG, PNG, WebP, HEIC, AVIF, etc.).`);
             }
-            return true;
+            return ok;
         });
 
         if (!validFiles.length) { setProcessing(false); return; }
 
         const placeholders = validFiles.map(file => ({
-            id: newId(), originalFile: file, status: "pending", statusMessage: "Waiting...",
+            id: newId(), originalFile: file, status: "pending", statusMessage: "Waiting…",
         }));
         setFiles(prev => [...prev, ...placeholders]);
 
@@ -210,26 +154,22 @@ export default function ImageCompressor({
             if (validFiles.length > 1) updateProgress("processing", `Processing ${i + 1}/${validFiles.length}…`);
 
             try {
-                const result = await compressImage(file, updateProgress);
+                const result = await doCompress(file, updateProgress);
                 setFiles(prev => prev.map(f => f.id === tempId ? result : f));
                 setSelectedIds(prev => new Set([...prev, result.id]));
                 setRecentFiles(prev => [result, ...prev].slice(0, 20));
-            } catch (error) {
-                const msg = error.message.includes('Unsupported') || error.message.includes('image format')
-                    ? `Unsupported format: ${file.name}. Try JPG, PNG, WebP, HEIC, or AVIF.`
-                    : `Compression failed for ${file.name}. Please try again.`;
-                setErrorMessage(msg);
+            } catch (err) {
+                setErrorMessage(err.message || `Compression failed for ${file.name}.`);
                 setFiles(prev => prev.filter(f => f.id !== tempId));
             }
         }
         setProcessing(false);
     };
 
-    const handlePaste = useCallback((e) => {
-        const items = e.clipboardData?.items;
-        if (!items) return;
+    // ── Paste from clipboard ─────────────────────────────────────────────────
+    const handlePaste = useCallback(e => {
         const imgs = [];
-        for (const item of items) {
+        for (const item of Array.from(e.clipboardData?.items || [])) {
             if (item.type.startsWith('image/')) imgs.push(item.getAsFile());
         }
         if (imgs.length) processFiles(imgs);
@@ -240,17 +180,24 @@ export default function ImageCompressor({
         return () => window.removeEventListener("paste", handlePaste);
     }, [handlePaste]);
 
-    const handleDrop     = e => { e.preventDefault(); if (e.dataTransfer.files?.length) processFiles(e.dataTransfer.files); };
+    // ── Event handlers ───────────────────────────────────────────────────────
+    const handleFileSelect   = e => { if (e.target.files?.length) processFiles(e.target.files); };
+    const handleFolderSelect = e => { if (e.target.files?.length) processFiles(e.target.files); };
+    const handleDrop = async e => {
+        e.preventDefault();
+        const imgs = await getImagesFromDrop(e);
+        if (imgs.length) processFiles(imgs);
+    };
     const handleDragOver = e => e.preventDefault();
     const handleClick    = () => { if (!processing) fileInputRef.current?.click(); };
+
     const handleDownload = file => {
-        const link = document.createElement("a");
-        link.href = file.compressedFile
-            ? URL.createObjectURL(file.compressedFile)
-            : file.preview;
-        link.download = file.compressedFile?.name || file.originalFile.name;
-        document.body.appendChild(link); link.click(); document.body.removeChild(link);
+        const a    = document.createElement("a");
+        a.href     = file.compressedFile ? URL.createObjectURL(file.compressedFile) : file.preview;
+        a.download = file.compressedFile?.name || file.originalFile.name;
+        document.body.appendChild(a); a.click(); document.body.removeChild(a);
     };
+
     const handleSelectAll  = () => setSelectedIds(new Set(files.filter(f => f.status === "complete").map(f => f.id)));
     const handleSelectNone = () => setSelectedIds(new Set());
     const handleToggle     = id => {
@@ -260,20 +207,25 @@ export default function ImageCompressor({
     };
     const handleDownloadSelected = () =>
         files.filter(f => selectedIds.has(f.id) && f.status === "complete").forEach(handleDownload);
+
     const handleReset = () => {
         setFiles([]); setSelectedIds(new Set()); setErrorMessage(""); setCompareId(null); setRecentFiles([]);
-        if (fileInputRef.current) fileInputRef.current.value = "";
+        if (fileInputRef.current)   fileInputRef.current.value = "";
+        if (folderInputRef.current) folderInputRef.current.value = "";
         clearRecent(IDB_STORE);
     };
 
-    const acceptStr    = "image/*,.heic,.heif";
-    const compareFile  = files.find(f => f.id === compareId);
+    const compareFile    = files.find(f => f.id === compareId);
     const completedCount = files.filter(f => f.status === "complete").length;
 
+    // ── Render ───────────────────────────────────────────────────────────────
     return (
         <div className="tc-wrap">
-            <input ref={fileInputRef} type="file" accept={acceptStr} multiple onChange={e => processFiles(e.target.files)} style={{ display: "none" }} />
+            {/* Hidden file inputs */}
+            <input ref={fileInputRef}   type="file" accept="image/*,.heic,.heif" multiple onChange={handleFileSelect}   style={{ display: "none" }} />
+            <input ref={folderInputRef} type="file" accept="image/*,.heic,.heif" multiple webkitdirectory="" onChange={handleFolderSelect} style={{ display: "none" }} />
 
+            {/* Error banner */}
             {errorMessage && (
                 <div className="tc-error">
                     <span>{errorMessage}</span>
@@ -281,13 +233,19 @@ export default function ImageCompressor({
                 </div>
             )}
 
+            {/* Before/After panel */}
             {compareFile?.originalUrl && compareFile?.preview && (
                 <div className="tc-compare-wrap">
                     <div className="tc-compare-hd">
                         <p className="tc-compare-hd-title">Before / After: {compareFile.originalFile.name}</p>
                         <button onClick={() => setCompareId(null)} className="tc-compare-close">×</button>
                     </div>
-                    <BeforeAfterSlider originalUrl={compareFile.originalUrl} compressedUrl={compareFile.preview} />
+                    <BeforeAfterSlider
+                        beforeUrl={compareFile.originalUrl}
+                        afterUrl={compareFile.preview}
+                        beforeLabel="Original"
+                        afterLabel="Compressed"
+                    />
                 </div>
             )}
 
@@ -295,12 +253,18 @@ export default function ImageCompressor({
                 <div className="tc-drop-card" onClick={handleClick} onDrop={handleDrop} onDragOver={handleDragOver}>
                     <div className="tc-drop-icon">📦</div>
                     <div>
-                        <p className="tc-drop-title">Drag &amp; Drop Files</p>
-                        <p className="tc-drop-subtitle">Supports JPG, PNG, WebP, AVIF, HEIC &amp; more &nbsp;·&nbsp; Paste from clipboard</p>
+                        <p className="tc-drop-title">Drag &amp; Drop Files or Folders</p>
+                        <p className="tc-drop-subtitle">JPG, PNG, WebP, AVIF, HEIC &amp; more &nbsp;·&nbsp; No size limit &nbsp;·&nbsp; Paste from clipboard</p>
                     </div>
-                    <button className="tc-drop-btn" onClick={(e) => { e.stopPropagation(); handleClick(); }} disabled={processing}>
-                        {processing ? "Compressing…" : "Select Files"}
-                    </button>
+                    <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap", justifyContent: "center" }}>
+                        <button className="tc-drop-btn" onClick={e => { e.stopPropagation(); handleClick(); }} disabled={processing}>
+                            {processing ? "Compressing…" : "Select Files"}
+                        </button>
+                        <button className="tc-drop-btn" style={{ background: "var(--secondary, #64748b)" }}
+                            onClick={e => { e.stopPropagation(); folderInputRef.current?.click(); }} disabled={processing}>
+                            📁 Select Folder
+                        </button>
+                    </div>
                 </div>
             ) : (
                 <div className="tc-queue-card">
@@ -310,7 +274,8 @@ export default function ImageCompressor({
                             <h3 className="tc-queue-hd-title">Batch Queue</h3>
                         </div>
                         <div className="tc-queue-actions">
-                            <button className="tc-queue-btn tc-queue-btn-primary" onClick={handleClick} disabled={processing}>+ Add More</button>
+                            <button className="tc-queue-btn tc-queue-btn-primary" onClick={handleClick} disabled={processing}>+ Add Files</button>
+                            <button className="tc-queue-btn" onClick={() => folderInputRef.current?.click()} disabled={processing}>📁 Add Folder</button>
                             <button className="tc-queue-btn" onClick={handleSelectAll}>Select All</button>
                             <button className="tc-queue-btn" onClick={handleSelectNone}>Select None</button>
                             <button className="tc-queue-btn tc-queue-btn-success" onClick={handleDownloadSelected} disabled={selectedIds.size === 0 || processing}>
@@ -328,8 +293,7 @@ export default function ImageCompressor({
                                 onClick={() => file.status === "complete" && handleToggle(file.id)}
                             >
                                 <input
-                                    type="checkbox"
-                                    className="tc-file-checkbox"
+                                    type="checkbox" className="tc-file-checkbox"
                                     checked={selectedIds.has(file.id)}
                                     onChange={() => handleToggle(file.id)}
                                     disabled={file.status !== "complete"}
@@ -366,17 +330,13 @@ export default function ImageCompressor({
                                         <button
                                             className={`tc-file-cmp-btn${compareId === file.id ? " tc-file-cmp-btn--active" : ""}`}
                                             onClick={e => { e.stopPropagation(); setCompareId(compareId === file.id ? null : file.id); }}
-                                        >
-                                            Compare
-                                        </button>
+                                        >Compare</button>
                                     )}
                                     <button
                                         className="tc-file-dl-btn"
                                         onClick={e => { e.stopPropagation(); handleDownload(file); }}
                                         disabled={file.status !== "complete" || processing}
-                                    >
-                                        Download
-                                    </button>
+                                    >Download</button>
                                 </div>
                             </div>
                         ))}
@@ -392,6 +352,7 @@ export default function ImageCompressor({
                 </div>
             )}
 
+            {/* Recent files */}
             {recentFiles.length > 0 && (
                 <div className="tc-recent-card">
                     <div className="tc-recent-hd">

@@ -3,6 +3,7 @@ import "./globals.css";
 import "./ti-tools.css";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
+import InstallPrompt from "../components/InstallPrompt";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -148,13 +149,13 @@ export default function RootLayout({ children }) {
         />
 
 
-        {/* PWA manifest */}
-        <link rel="manifest" href="/manifest.json" />
-        <meta name="theme-color" content="#0070f3" />
+        {/* PWA */}
+        <link rel="manifest" href="/manifest.webmanifest" />
+        <meta name="theme-color" content="#6366f1" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-        <meta name="apple-mobile-web-app-title" content="Webpifyy" />
+        <meta name="apple-mobile-web-app-title" content="WebPify" />
 
         {/* hreflang tags for international SEO */}
         <link rel="alternate" hrefLang="x-default" href="https://webpifyy.vercel.app/" />
@@ -178,6 +179,7 @@ export default function RootLayout({ children }) {
         <Navbar />
         {children}
         <Footer />
+        <InstallPrompt />
       </body>
     </html>
   );
