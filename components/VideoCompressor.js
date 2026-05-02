@@ -319,12 +319,12 @@ export default function VideoCompressor({
         errs.push(`${file.name}: not a recognized video file`);
         continue;
       }
-      // Hard cap: FFmpeg.wasm must load the full file into WASM VFS.
-      // Even with core-mt (4 GB heap), file + decode buffers + output easily
-      // exceeds the Worker memory limit for files over ~700 MB.
+      // Hard cap: @ffmpeg/core has a 2 GB WASM heap. Loading the file into
+      // WASM VFS + 8K decode frame buffers + encode output can hit that limit
+      // well below 400 MB for high-res sources. Reject early with clear message.
       const fileMB = file.size / (1024 * 1024);
-      if (fileMB > 700) {
-        errs.push(`${file.name} (${Math.round(fileMB)} MB): too large for browser compression — please use HandBrake or FFmpeg on desktop`);
+      if (fileMB > 400) {
+        errs.push(`${file.name} (${Math.round(fileMB)} MB): browser compression supports up to 400 MB — use HandBrake or FFmpeg for larger files`);
         continue;
       }
       items.push({
@@ -666,7 +666,7 @@ export default function VideoCompressor({
         <div className="vc-trust-strip">
           <span>🔒 Videos never leave your device.</span>
           <span>🎯 Smart Adaptive Mode – per-video bitrate targeting.</span>
-          <span>📦 Any format · MP4, MOV, MKV, AVI, FLV & more · No size limit.</span>
+          <span>📦 Any format · MP4, MOV, MKV, AVI, FLV & more · Up to 400 MB.</span>
         </div>
 
         {/* Error */}
@@ -706,7 +706,7 @@ export default function VideoCompressor({
             <p className="vc-dropzone-main">
               {queue.length ? "Add More Videos" : "Drag & Drop Videos"}
             </p>
-            <p className="vc-dropzone-sub">MP4 · MOV · WebM · MKV · AVI · FLV & more · No size limit</p>
+            <p className="vc-dropzone-sub">MP4 · MOV · WebM · MKV · AVI · FLV & more · Up to 400 MB</p>
           </div>
           <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap", justifyContent: "center" }}>
             <button className="tc-drop-btn" onClick={e => { e.stopPropagation(); if (!processing) fileInput.current?.click(); }} disabled={processing}>
