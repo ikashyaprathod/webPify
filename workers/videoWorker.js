@@ -20,23 +20,27 @@
 import { FFmpeg } from "@ffmpeg/ffmpeg";
 import { fetchFile, toBlobURL } from "@ffmpeg/util";
 
-const FFMPEG_CORE = "https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd";
+// Use multi-threaded core (4 GB WASM heap vs 2 GB for single-threaded).
+// SharedArrayBuffer is available on /video/* paths via COEP/COOP headers.
+const FFMPEG_CORE = "https://unpkg.com/@ffmpeg/core-mt@0.12.6/dist/umd";
 
 // Cached blob URLs survive releaseFF() – no re-download between files
-let coreURL = null;
-let wasmURL = null;
-let ff      = null;
+let coreURL   = null;
+let wasmURL   = null;
+let workerURL = null;
+let ff        = null;
 
 async function ensureFF() {
   if (ff) return;
   if (!coreURL) {
-    [coreURL, wasmURL] = await Promise.all([
-      toBlobURL(`${FFMPEG_CORE}/ffmpeg-core.js`,   "text/javascript"),
-      toBlobURL(`${FFMPEG_CORE}/ffmpeg-core.wasm`, "application/wasm"),
+    [coreURL, wasmURL, workerURL] = await Promise.all([
+      toBlobURL(`${FFMPEG_CORE}/ffmpeg-core.js`,        "text/javascript"),
+      toBlobURL(`${FFMPEG_CORE}/ffmpeg-core.wasm`,      "application/wasm"),
+      toBlobURL(`${FFMPEG_CORE}/ffmpeg-core.worker.js`, "text/javascript"),
     ]);
   }
   ff = new FFmpeg();
-  await ff.load({ coreURL, wasmURL });
+  await ff.load({ coreURL, wasmURL, workerURL });
 }
 
 function releaseFF() {

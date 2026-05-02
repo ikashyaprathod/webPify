@@ -138,8 +138,20 @@ function computeSmartSettings(analysis, snap) {
   const { res, estimatedBitrateKbps, fileSize, codec } = analysis;
   const { fmt, sp, ql, noAudio, agg } = snap;
 
+  // ── WASM memory guard ─────────────────────────────────────────────────────
+  // FFmpeg.wasm needs the full file in WASM VFS + decode frame buffers +
+  // encode output. Large/high-res files exhaust the heap → force downscale.
+  //   > 800 MB  → max 720p  (keeps working set ~100 MB)
+  //   > 400 MB  → max 1080p (quarter the 4K frame buffer)
+  const fileMB    = fileSize / (1024 * 1024);
+  const memSafeRes = fileMB > 800 ? "1280:-2"
+                   : fileMB > 400 ? "1920:-2"
+                   : null;
+  const largeFileMode = memSafeRes !== null;
+
   // ── Skip: already H.264, low bitrate, targeting MP4 output ─────────────
   if (
+    !largeFileMode &&
     codec === "h264" &&
     estimatedBitrateKbps > 0 &&
     estimatedBitrateKbps < 2500 &&
@@ -149,9 +161,12 @@ function computeSmartSettings(analysis, snap) {
     return { skip: true, fmt };
   }
 
-  // ── Smart resolution ─────────────────────────────────────────────────────
-  const smartRes = (!snap.res && res && res.w > 1920) ? "1920:-2" : null;
-  const effRes   = agg && !snap.res ? "1280:720" : snap.res || null;
+  // ── Resolution ───────────────────────────────────────────────────────────
+  // memSafeRes takes priority over all user/auto choices for memory safety.
+  const smartRes = memSafeRes ?? ((!snap.res && res && res.w > 1920) ? "1920:-2" : null);
+  const effRes   = memSafeRes
+    ? null
+    : (agg && !snap.res ? "1280:720" : snap.res || null);
 
   // ── Target bitrate ───────────────────────────────────────────────────────
   let targetBitrateKbps = 0;
@@ -178,8 +193,9 @@ function computeSmartSettings(analysis, snap) {
     : 0;
   if (reduction < 0.10) targetBitrateKbps = 0;
 
-  // ── Two-pass for MP4 > 20 MB with a valid target bitrate ────────────────
-  const twoPass = fmt !== "webm"
+  // ── Two-pass: disabled for large files (memory pressure + time cost) ─────
+  const twoPass = !largeFileMode
+    && fmt !== "webm"
     && fileSize > 20 * 1024 * 1024
     && targetBitrateKbps > 0
     && !agg;
@@ -190,15 +206,18 @@ function computeSmartSettings(analysis, snap) {
   return {
     skip: false,
     fmt,
-    sp:  twoPass ? "slow" : (sp || "balanced"),
+    // Large files use ultrafast to keep per-frame memory low
+    sp:  largeFileMode ? "ultrafast" : (twoPass ? "slow" : (sp || "balanced")),
     crf,
-    targetBitrateKbps,
+    targetBitrateKbps: largeFileMode ? 0 : targetBitrateKbps, // CRF-only for large files
     smartRes,
     effRes,
-    twoPass,
+    twoPass: largeFileMode ? false : twoPass,
     audioBit,
-    noAudio: noAudio || false,
-    agg:     agg     || false,
+    noAudio:      noAudio      || false,
+    agg:          agg          || false,
+    largeFileMode,
+    largeFileMB:  Math.round(fileMB),
   };
 }
 
@@ -298,12 +317,20 @@ export default function VideoCompressor({
         errs.push(`${file.name}: not a recognized video file`);
         continue;
       }
+      // Hard cap: browser WASM heap cannot fit files much over 1.5 GB
+      if (file.size > 1.5 * 1024 * 1024 * 1024) {
+        errs.push(`${file.name}: file exceeds 1.5 GB browser limit — use a desktop tool`);
+        continue;
+      }
+      const fileMB = file.size / (1024 * 1024);
       items.push({
         id: uid(), file,
         status: "pending", progress: 0,
         origSize: file.size, detRes: null,
         outBlob: null, outSize: null, reduction: null, error: null,
         origUrl: URL.createObjectURL(file),
+        largeFileMode: fileMB > 400,
+        largeFileMB:   Math.round(fileMB),
       });
     }
 
@@ -417,6 +444,14 @@ export default function VideoCompressor({
       });
 
       const settings = computeSmartSettings(analysis, snap);
+
+      // Reflect large-file mode back to the queue item for UI badge
+      if (settings.largeFileMode) {
+        patchItem(item.id, {
+          largeFileMode: true,
+          largeFileMB:   settings.largeFileMB,
+        });
+      }
 
       if (settings.skip) {
         // Already optimal: mark done immediately without sending to worker
@@ -927,6 +962,15 @@ function QueueItem({ item, processing, onDownload, onRemove, onPreview }) {
               {item.detRes.w}×{item.detRes.h}
               {item.estimatedBitrateKbps > 0 && ` · ~${(item.estimatedBitrateKbps / 1000).toFixed(1)} Mbps`}
               {item.codec && item.codec !== "unknown" && ` · ${item.codec.toUpperCase()}`}
+            </span>
+          )}
+          {item.largeFileMode && item.status !== "done" && item.status !== "error" && (
+            <span style={{
+              fontSize: "0.7rem", fontWeight: 600, color: "#b45309",
+              background: "rgba(251,191,36,0.15)", borderRadius: 4,
+              padding: "1px 6px", marginTop: "0.2rem", display: "inline-block",
+            }}>
+              ⚡ Large file — auto-downscaling to {item.largeFileMB > 800 ? "720p" : "1080p"} for browser compatibility
             </span>
           )}
         </div>
