@@ -20,27 +20,40 @@
 import { FFmpeg } from "@ffmpeg/ffmpeg";
 import { fetchFile, toBlobURL } from "@ffmpeg/util";
 
-// Use multi-threaded core (4 GB WASM heap vs 2 GB for single-threaded).
-// SharedArrayBuffer is available on /video/* paths via COEP/COOP headers.
-const FFMPEG_CORE = "https://unpkg.com/@ffmpeg/core-mt@0.12.6/dist/umd";
+// Use multi-threaded core when SharedArrayBuffer is available (4 GB WASM heap),
+// otherwise fall back to single-threaded core (2 GB heap, no COEP/COOP needed).
+// Workers inherit crossOriginIsolated from parent pages that have COEP/COOP headers,
+// but the fallback ensures we never crash on pages without those headers.
+const HAS_SAB = typeof SharedArrayBuffer !== "undefined";
+const FFMPEG_BASE = HAS_SAB
+  ? "https://unpkg.com/@ffmpeg/core-mt@0.12.6/dist/umd"
+  : "https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd";
 
 // Cached blob URLs survive releaseFF() – no re-download between files
 let coreURL   = null;
 let wasmURL   = null;
-let workerURL = null;
+let workerURL = null; // only set when using core-mt
 let ff        = null;
 
 async function ensureFF() {
   if (ff) return;
   if (!coreURL) {
-    [coreURL, wasmURL, workerURL] = await Promise.all([
-      toBlobURL(`${FFMPEG_CORE}/ffmpeg-core.js`,        "text/javascript"),
-      toBlobURL(`${FFMPEG_CORE}/ffmpeg-core.wasm`,      "application/wasm"),
-      toBlobURL(`${FFMPEG_CORE}/ffmpeg-core.worker.js`, "text/javascript"),
-    ]);
+    const fetches = [
+      toBlobURL(`${FFMPEG_BASE}/ffmpeg-core.js`,   "text/javascript"),
+      toBlobURL(`${FFMPEG_BASE}/ffmpeg-core.wasm`, "application/wasm"),
+    ];
+    if (HAS_SAB) {
+      fetches.push(toBlobURL(`${FFMPEG_BASE}/ffmpeg-core.worker.js`, "text/javascript"));
+    }
+    const [c, w, wk] = await Promise.all(fetches);
+    coreURL   = c;
+    wasmURL   = w;
+    workerURL = wk ?? null;
   }
   ff = new FFmpeg();
-  await ff.load({ coreURL, wasmURL, workerURL });
+  const loadCfg = { coreURL, wasmURL };
+  if (workerURL) loadCfg.workerURL = workerURL;
+  await ff.load(loadCfg);
 }
 
 function releaseFF() {

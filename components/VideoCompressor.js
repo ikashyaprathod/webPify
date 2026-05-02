@@ -139,13 +139,15 @@ function computeSmartSettings(analysis, snap) {
   const { fmt, sp, ql, noAudio, agg } = snap;
 
   // ── WASM memory guard ─────────────────────────────────────────────────────
-  // FFmpeg.wasm needs the full file in WASM VFS + decode frame buffers +
-  // encode output. Large/high-res files exhaust the heap → force downscale.
-  //   > 800 MB  → max 720p  (keeps working set ~100 MB)
-  //   > 400 MB  → max 1080p (quarter the 4K frame buffer)
+  // FFmpeg.wasm loads the full input file into WASM VFS, so decode frame
+  // buffers must fit within the remaining heap. Force lower resolution to
+  // keep per-frame memory manageable:
+  //   > 500 MB  → max 480p  (~2 MB/frame vs 99 MB/frame at 8K)
+  //   > 250 MB  → max 720p  (~3 MB/frame; also applies to 4K+ sources)
+  //   ≤ 250 MB but source > 1920px wide → smartRes handles it (1920p cap)
   const fileMB    = fileSize / (1024 * 1024);
-  const memSafeRes = fileMB > 800 ? "1280:-2"
-                   : fileMB > 400 ? "1920:-2"
+  const memSafeRes = fileMB > 500 ? "854:-2"   // 480p
+                   : fileMB > 250 ? "1280:-2"  // 720p
                    : null;
   const largeFileMode = memSafeRes !== null;
 
@@ -317,19 +319,21 @@ export default function VideoCompressor({
         errs.push(`${file.name}: not a recognized video file`);
         continue;
       }
-      // Hard cap: browser WASM heap cannot fit files much over 1.5 GB
-      if (file.size > 1.5 * 1024 * 1024 * 1024) {
-        errs.push(`${file.name}: file exceeds 1.5 GB browser limit — use a desktop tool`);
+      // Hard cap: FFmpeg.wasm must load the full file into WASM VFS.
+      // Even with core-mt (4 GB heap), file + decode buffers + output easily
+      // exceeds the Worker memory limit for files over ~700 MB.
+      const fileMB = file.size / (1024 * 1024);
+      if (fileMB > 700) {
+        errs.push(`${file.name} (${Math.round(fileMB)} MB): too large for browser compression — please use HandBrake or FFmpeg on desktop`);
         continue;
       }
-      const fileMB = file.size / (1024 * 1024);
       items.push({
         id: uid(), file,
         status: "pending", progress: 0,
         origSize: file.size, detRes: null,
         outBlob: null, outSize: null, reduction: null, error: null,
         origUrl: URL.createObjectURL(file),
-        largeFileMode: fileMB > 400,
+        largeFileMode: fileMB > 250,
         largeFileMB:   Math.round(fileMB),
       });
     }
@@ -970,7 +974,7 @@ function QueueItem({ item, processing, onDownload, onRemove, onPreview }) {
               background: "rgba(251,191,36,0.15)", borderRadius: 4,
               padding: "1px 6px", marginTop: "0.2rem", display: "inline-block",
             }}>
-              ⚡ Large file — auto-downscaling to {item.largeFileMB > 800 ? "720p" : "1080p"} for browser compatibility
+              ⚡ Large file — auto-downscaling to {item.largeFileMB > 500 ? "480p" : "720p"} for browser compatibility
             </span>
           )}
         </div>
