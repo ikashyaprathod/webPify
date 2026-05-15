@@ -16,17 +16,22 @@ export async function downloadAsZip(entries, zipName) {
   const zip = new JSZip();
 
   // Deduplicate filenames to avoid silently overwriting entries inside JSZip
-  const seen = new Map();
+  // Track seen filenames (full name) to deduplicate — JSZip silently
+  // overwrites earlier entries when two files share the same name.
+  const seen = {};
   for (const { blob, filename } of entries) {
-    const ext  = filename.includes(".") ? filename.slice(filename.lastIndexOf(".")) : "";
-    const base = filename.slice(0, filename.length - ext.length);
-    const count = seen.get(base) ?? 0;
-    seen.set(base, count + 1);
-    const dedupedName = count === 0 ? filename : `${base} (${count})${ext}`;
-    zip.file(dedupedName, blob, { compression: "STORE" });
+    const ext  = filename.includes(".") ? "." + filename.split(".").pop() : "";
+    const base = ext ? filename.slice(0, -ext.length) : filename;
+    const n    = seen[filename] || 0;
+    seen[filename] = n + 1;
+    const name = n === 0 ? filename : `${base} (${n})${ext}`;
+    zip.file(name, blob);
   }
 
-  const out = await zip.generateAsync({ type: "blob", streamFiles: true });
+  // compression: "STORE" — images/videos are already compressed.
+  // Do NOT use streamFiles:true with generateAsync/type:blob — it is a
+  // Node.js streaming API and silently drops files in browser contexts.
+  const out = await zip.generateAsync({ type: "blob", compression: "STORE" });
 
   const url = URL.createObjectURL(out);
   const a   = document.createElement("a");
