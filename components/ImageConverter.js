@@ -4,6 +4,7 @@ import { useRef, useState, useEffect } from "react";
 import { saveRecent, loadRecent, clearRecent } from "../utils/recent-files-db";
 import { convertImage, getEffectiveType, isHeic, createDisplayUrl, getImagesFromDrop } from "../utils/image-client";
 import BeforeAfterSlider from "./BeforeAfterSlider";
+import { downloadAsZip } from "../utils/download-zip";
 
 const IDB_STORE = 'recent_converter';
 
@@ -28,12 +29,13 @@ export default function ImageConverter({
     title            = "",
     description      = "",
 }) {
-    const [files,        setFiles]       = useState([]);
-    const [processing,   setProcessing]  = useState(false);
-    const [selectedIds,  setSelectedIds] = useState(new Set());
-    const [errorMessage, setErrorMessage]= useState("");
-    const [recentFiles,  setRecentFiles] = useState([]);
-    const [compareId,    setCompareId]   = useState(null);
+    const [files,          setFiles]         = useState([]);
+    const [processing,     setProcessing]    = useState(false);
+    const [selectedIds,    setSelectedIds]   = useState(new Set());
+    const [errorMessage,   setErrorMessage]  = useState("");
+    const [recentFiles,    setRecentFiles]   = useState([]);
+    const [compareId,      setCompareId]     = useState(null);
+    const [zipGenerating,  setZipGenerating] = useState(false);
 
     // Resize options
     const [enableResize, setEnableResize] = useState(false);
@@ -177,6 +179,7 @@ export default function ImageConverter({
         a.href     = file.convertedFile ? URL.createObjectURL(file.convertedFile) : file.preview;
         a.download = file.convertedFile?.name || file.originalFile.name;
         document.body.appendChild(a); a.click(); document.body.removeChild(a);
+        setTimeout(() => URL.revokeObjectURL(a.href), 10_000);
     };
 
     const handleSelectAll  = () => setSelectedIds(new Set(files.filter(f => f.status === "complete").map(f => f.id)));
@@ -186,8 +189,27 @@ export default function ImageConverter({
         s.has(id) ? s.delete(id) : s.add(id);
         setSelectedIds(s);
     };
-    const handleDownloadSelected = () =>
-        files.filter(f => selectedIds.has(f.id) && f.status === "complete").forEach(handleDownload);
+
+    const handleDownloadSelected = async () => {
+        const selected = files.filter(f => selectedIds.has(f.id) && f.status === "complete");
+        if (!selected.length) return;
+        if (selected.length === 1) { handleDownload(selected[0]); return; }
+        setZipGenerating(true);
+        try {
+            const entries = selected.map(f => ({
+                blob:     f.convertedFile || f.preview,
+                filename: f.convertedFile?.name || f.originalFile.name,
+            }));
+            await downloadAsZip(entries, `converted-${selected.length}-images.zip`);
+        } catch {
+            for (const f of selected) {
+                handleDownload(f);
+                await new Promise(r => setTimeout(r, 200));
+            }
+        } finally {
+            setZipGenerating(false);
+        }
+    };
 
     const handleReset = () => {
         setFiles([]); setSelectedIds(new Set()); setErrorMessage("");
@@ -291,8 +313,8 @@ export default function ImageConverter({
                             <button className="tc-queue-btn" onClick={() => folderInputRef.current?.click()} disabled={processing}>📁 Add Folder</button>
                             <button className="tc-queue-btn" onClick={handleSelectAll}>Select All</button>
                             <button className="tc-queue-btn" onClick={handleSelectNone}>Select None</button>
-                            <button className="tc-queue-btn tc-queue-btn-success" onClick={handleDownloadSelected} disabled={selectedIds.size === 0 || processing}>
-                                Download ({selectedIds.size})
+                            <button className="tc-queue-btn tc-queue-btn-success" onClick={handleDownloadSelected} disabled={selectedIds.size === 0 || processing || zipGenerating}>
+                                {zipGenerating ? "Preparing ZIP…" : `Download (${selectedIds.size})`}
                             </button>
                             <button className="tc-queue-btn tc-queue-btn-danger" onClick={handleReset}>Reset</button>
                         </div>
@@ -359,8 +381,8 @@ export default function ImageConverter({
 
                     <div className="tc-queue-ft">
                         <span className="tc-queue-ft-info">{completedCount} of {files.length} converted</span>
-                        <button className="tc-queue-cta-btn" onClick={handleDownloadSelected} disabled={selectedIds.size === 0 || processing}>
-                            ⚡ Download Selected ({selectedIds.size})
+                        <button className="tc-queue-cta-btn" onClick={handleDownloadSelected} disabled={selectedIds.size === 0 || processing || zipGenerating}>
+                            {zipGenerating ? "⏳ Preparing ZIP…" : `⚡ Download Selected (${selectedIds.size})`}
                         </button>
                         <button className="tc-queue-clear-btn" onClick={handleReset}>Clear Queue</button>
                     </div>

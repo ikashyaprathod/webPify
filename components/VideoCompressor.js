@@ -2,6 +2,7 @@
 
 import { useRef, useState, useCallback, useEffect } from "react";
 import { getVideosFromDrop } from "../utils/image-client";
+import { downloadAsZip } from "../utils/download-zip";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // CONSTANTS
@@ -260,10 +261,11 @@ export default function VideoCompressor({
   const [showAdv, setShowAdv]         = useState(false);
 
   // ── Processing UI ────────────────────────────────────────────────────────
-  const [processing, setProcessing]   = useState(false);
-  const [overallPct, setOverallPct]   = useState(0);
-  const [workerCount, setWorkerCount] = useState(0);
-  const [globalErr, setGlobalErr]     = useState("");
+  const [processing,    setProcessing]    = useState(false);
+  const [overallPct,    setOverallPct]    = useState(0);
+  const [workerCount,   setWorkerCount]   = useState(0);
+  const [globalErr,     setGlobalErr]     = useState("");
+  const [zipGenerating, setZipGenerating] = useState(false);
 
   // ── Preview ──────────────────────────────────────────────────────────────
   const [previewId, setPreviewId]               = useState(null);
@@ -373,18 +375,18 @@ export default function VideoCompressor({
     const done = queue.filter(i => i.status === "done" && i.outBlob);
     if (!done.length) return;
     if (done.length === 1) { downloadOne(done[0]); return; }
+    setZipGenerating(true);
     try {
-      const JSZip = (await import("jszip")).default;
-      const zip   = new JSZip();
-      done.forEach(it => {
-        zip.file(`${it.file.name.replace(/\.[^.]+$/, "")}-compressed.${outFmt}`, it.outBlob);
-      });
-      const blob = await zip.generateAsync({ type: "blob", compression: "DEFLATE", compressionOptions: { level: 1 } });
-      const a = document.createElement("a");
-      a.href = URL.createObjectURL(blob);
-      a.download = "compressed-videos.zip";
-      document.body.appendChild(a); a.click(); document.body.removeChild(a);
-    } catch { done.forEach(downloadOne); }
+      const entries = done.map(it => ({
+        blob:     it.outBlob,
+        filename: `${it.file.name.replace(/\.[^.]+$/, "")}-compressed.${outFmt}`,
+      }));
+      await downloadAsZip(entries, `compressed-${done.length}-videos.zip`);
+    } catch (err) {
+      setGlobalErr(`ZIP failed: ${err.message ?? "unknown error"}. Try downloading files individually.`);
+    } finally {
+      setZipGenerating(false);
+    }
   }, [queue, outFmt, downloadOne]);
 
   // ── Cancel ───────────────────────────────────────────────────────────────
@@ -875,8 +877,10 @@ export default function VideoCompressor({
                 </button>
               )}
               {doneCount > 0 && !processing && (
-                <button onClick={downloadAll} className="vc-btn-download">
-                  ⬇ {doneCount > 1 ? `Download All (${doneCount}) as ZIP` : "Download Compressed Video"}
+                <button onClick={downloadAll} className="vc-btn-download" disabled={zipGenerating}>
+                  {zipGenerating
+                    ? "⏳ Preparing ZIP…"
+                    : `⬇ ${doneCount > 1 ? `Download All (${doneCount}) as ZIP` : "Download Compressed Video"}`}
                 </button>
               )}
               {!processing && queue.length > 0 && (

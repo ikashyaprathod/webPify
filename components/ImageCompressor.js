@@ -4,6 +4,7 @@ import { useRef, useState, useEffect, useCallback } from "react";
 import { saveRecent, loadRecent, clearRecent } from "../utils/recent-files-db";
 import { compressImage, getEffectiveType, isHeic, createDisplayUrl, getImagesFromDrop } from "../utils/image-client";
 import BeforeAfterSlider from "./BeforeAfterSlider";
+import { downloadAsZip } from "../utils/download-zip";
 
 const IDB_STORE = 'recent_compressor';
 
@@ -37,12 +38,13 @@ export default function ImageCompressor({
     description    = "",
     formatName     = null,
 }) {
-    const [files,        setFiles]       = useState([]);
-    const [processing,   setProcessing]  = useState(false);
-    const [selectedIds,  setSelectedIds] = useState(new Set());
-    const [errorMessage, setErrorMessage]= useState("");
-    const [compareId,    setCompareId]   = useState(null);
-    const [recentFiles,  setRecentFiles] = useState([]);
+    const [files,          setFiles]         = useState([]);
+    const [processing,     setProcessing]    = useState(false);
+    const [selectedIds,    setSelectedIds]   = useState(new Set());
+    const [errorMessage,   setErrorMessage]  = useState("");
+    const [compareId,      setCompareId]     = useState(null);
+    const [recentFiles,    setRecentFiles]   = useState([]);
+    const [zipGenerating,  setZipGenerating] = useState(false);
 
     const fileInputRef   = useRef(null);
     const folderInputRef = useRef(null);
@@ -196,6 +198,7 @@ export default function ImageCompressor({
         a.href     = file.compressedFile ? URL.createObjectURL(file.compressedFile) : file.preview;
         a.download = file.compressedFile?.name || file.originalFile.name;
         document.body.appendChild(a); a.click(); document.body.removeChild(a);
+        setTimeout(() => URL.revokeObjectURL(a.href), 10_000);
     };
 
     const handleSelectAll  = () => setSelectedIds(new Set(files.filter(f => f.status === "complete").map(f => f.id)));
@@ -205,8 +208,28 @@ export default function ImageCompressor({
         s.has(id) ? s.delete(id) : s.add(id);
         setSelectedIds(s);
     };
-    const handleDownloadSelected = () =>
-        files.filter(f => selectedIds.has(f.id) && f.status === "complete").forEach(handleDownload);
+
+    const handleDownloadSelected = async () => {
+        const selected = files.filter(f => selectedIds.has(f.id) && f.status === "complete");
+        if (!selected.length) return;
+        if (selected.length === 1) { handleDownload(selected[0]); return; }
+        setZipGenerating(true);
+        try {
+            const entries = selected.map(f => ({
+                blob:     f.compressedFile || f.preview,
+                filename: f.compressedFile?.name || f.originalFile.name,
+            }));
+            await downloadAsZip(entries, `compressed-${selected.length}-images.zip`);
+        } catch {
+            // ZIP failed — fall back to one-at-a-time (single file at a time to avoid browser throttle)
+            for (const f of selected) {
+                handleDownload(f);
+                await new Promise(r => setTimeout(r, 200));
+            }
+        } finally {
+            setZipGenerating(false);
+        }
+    };
 
     const handleReset = () => {
         setFiles([]); setSelectedIds(new Set()); setErrorMessage(""); setCompareId(null); setRecentFiles([]);
@@ -278,8 +301,8 @@ export default function ImageCompressor({
                             <button className="tc-queue-btn" onClick={() => folderInputRef.current?.click()} disabled={processing}>📁 Add Folder</button>
                             <button className="tc-queue-btn" onClick={handleSelectAll}>Select All</button>
                             <button className="tc-queue-btn" onClick={handleSelectNone}>Select None</button>
-                            <button className="tc-queue-btn tc-queue-btn-success" onClick={handleDownloadSelected} disabled={selectedIds.size === 0 || processing}>
-                                Download ({selectedIds.size})
+                            <button className="tc-queue-btn tc-queue-btn-success" onClick={handleDownloadSelected} disabled={selectedIds.size === 0 || processing || zipGenerating}>
+                                {zipGenerating ? "Preparing ZIP…" : `Download (${selectedIds.size})`}
                             </button>
                             <button className="tc-queue-btn tc-queue-btn-danger" onClick={handleReset}>Reset</button>
                         </div>
@@ -344,8 +367,8 @@ export default function ImageCompressor({
 
                     <div className="tc-queue-ft">
                         <span className="tc-queue-ft-info">{completedCount} of {files.length} compressed</span>
-                        <button className="tc-queue-cta-btn" onClick={handleDownloadSelected} disabled={selectedIds.size === 0 || processing}>
-                            ⚡ Download Selected ({selectedIds.size})
+                        <button className="tc-queue-cta-btn" onClick={handleDownloadSelected} disabled={selectedIds.size === 0 || processing || zipGenerating}>
+                            {zipGenerating ? "⏳ Preparing ZIP…" : `⚡ Download Selected (${selectedIds.size})`}
                         </button>
                         <button className="tc-queue-clear-btn" onClick={handleReset}>Clear Queue</button>
                     </div>
