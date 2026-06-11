@@ -4,7 +4,7 @@
  * Supports:
  *  - gif-compress  : Re-encode GIF with palettegen for smaller file size
  *  - gif-to-mp4    : Convert GIF to H.264 MP4
- *  - gif-to-webm   : Convert GIF to VP9 WebM (VP8 fallback if VP9 unavailable)
+ *  - gif-to-webm   : Convert GIF to VP9 WebM (VP8 fallback)
  *  - video-to-gif  : Convert video (MP4/WebM/MOV) to optimized GIF
  *
  * Message protocol
@@ -17,7 +17,10 @@
 import { FFmpeg } from "@ffmpeg/ffmpeg";
 import { fetchFile, toBlobURL } from "@ffmpeg/util";
 
-const FFMPEG_CORE = "https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd";
+// 0.12.9 is the version @ffmpeg/ffmpeg@0.12.15 was designed for.
+// 0.12.6 had VP9 encoder bugs causing RuntimeError: memory access out of bounds
+// when processing animated GIFs.
+const FFMPEG_CORE = "https://unpkg.com/@ffmpeg/core@0.12.9/dist/umd";
 
 let coreURL = null;
 let wasmURL = null;
@@ -33,7 +36,6 @@ async function ensureFF() {
     ]);
   }
   ff = new FFmpeg();
-  // Capture all FFmpeg log output — used in error messages when exec() fails
   ff.on("log", ({ message }) => {
     ffLogs.push(message);
     if (ffLogs.length > 20) ffLogs.shift();
@@ -47,10 +49,11 @@ function releaseFF() {
 }
 
 async function safeDelete(...names) {
-  for (const n of names) try { await ff.deleteFile(n); } catch { /* ignore */ }
+  for (const n of names) try { await ff?.deleteFile(n); } catch { /* ignore */ }
 }
 
-// exec() NEVER throws — it resolves with exit code. Must check return value.
+// exec() NEVER throws on its own — it resolves with exit code.
+// Must check return value. Throws descriptive Error on non-zero.
 async function execFF(args) {
   const code = await ff.exec(args);
   if (code !== 0) {
@@ -64,7 +67,7 @@ self.onmessage = async ({ data: { type, id, file, settings } }) => {
 
   try {
     await ensureFF();
-    ffLogs.length = 0; // clear logs for this conversion
+    ffLogs.length = 0;
 
     const ext     = file.name.includes(".") ? file.name.slice(file.name.lastIndexOf(".")) : ".gif";
     const inName  = `gin_${id}${ext}`;
@@ -95,28 +98,42 @@ self.onmessage = async ({ data: { type, id, file, settings } }) => {
       ]);
 
     } else if (task === "gif-to-webm") {
-      // Try VP9 first (single-pass needs -auto-alt-ref 0 -lag-in-frames 0).
-      // Fall back to VP8 (libvpx) if the VP9 codec is absent in this core build.
-      const vp9Code = await ff.exec([
-        "-y", "-i", inName,
-        "-vf", "scale=trunc(iw/2)*2:trunc(ih/2)*2:flags=lanczos",
-        "-c:v", "libvpx-vp9",
-        "-crf", String(quality + 10),
-        "-b:v", "0",
-        "-auto-alt-ref", "0",
-        "-lag-in-frames", "0",
-        "-cpu-used", "8",
-        "-pix_fmt", "yuv420p",
-        "-an",
-        outName,
-      ]);
-      if (vp9Code !== 0) {
-        // VP9 failed — try VP8 (same libvpx, simpler codec, guaranteed support)
-        await safeDelete(outName);
+      // VP9 attempt — may throw if codec WASM bug triggers (e.g. RuntimeError).
+      // VP8 fallback is tried in that case. Both require a fresh FF instance
+      // if VP9 caused a WASM trap (corrupted internal state).
+      let vp9ok = false;
+      try {
+        const code = await ff.exec([
+          "-y", "-i", inName,
+          "-vf", "scale=trunc(iw/2)*2:trunc(ih/2)*2",
+          "-c:v", "libvpx-vp9",
+          "-crf", String(quality + 10),
+          "-b:v", "0",
+          "-auto-alt-ref", "0",
+          "-lag-in-frames", "0",
+          "-cpu-used", "8",
+          "-pix_fmt", "yuv420p",
+          "-an",
+          outName,
+        ]);
+        vp9ok = (code === 0);
+      } catch (_) {
+        vp9ok = false;
+      }
+
+      if (!vp9ok) {
+        // Reset — VP9 may have left WASM in bad state
+        await safeDelete(outName, inName);
+        releaseFF();
         ffLogs.length = 0;
+        await ensureFF();
+        ff.on("progress", onProg);
+        await ff.writeFile(inName, await fetchFile(file));
+
+        // VP8 (libvpx) — simpler encoder, same libvpx but avoids VP9 bugs
         await execFF([
           "-y", "-i", inName,
-          "-vf", "scale=trunc(iw/2)*2:trunc(ih/2)*2:flags=lanczos",
+          "-vf", "scale=trunc(iw/2)*2:trunc(ih/2)*2",
           "-c:v", "libvpx",
           "-crf", "10",
           "-b:v", "1M",
@@ -149,7 +166,6 @@ self.onmessage = async ({ data: { type, id, file, settings } }) => {
     await safeDelete(inName, outName);
     releaseFF();
 
-    // Size guard: only for gif-compress (not format conversions)
     if (task === "gif-compress" && raw.byteLength >= file.size) {
       const empty = new ArrayBuffer(0);
       self.postMessage(
@@ -167,7 +183,6 @@ self.onmessage = async ({ data: { type, id, file, settings } }) => {
 
   } catch (err) {
     releaseFF();
-    // err may be a string (from WASM worker's e.toString()) or an Error object
     const msg = typeof err === "string" ? err : (err?.message || String(err)) || "Conversion failed";
     self.postMessage({ type: "error", id, message: msg });
   }

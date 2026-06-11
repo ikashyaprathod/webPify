@@ -23,7 +23,8 @@ import { fetchFile, toBlobURL } from "@ffmpeg/util";
 // Always use the single-threaded core — core-mt requires SharedArrayBuffer
 // which causes worker crashes when the pthread sub-workers fail to initialise
 // in certain browser/COEP configurations. Single-threaded is fully reliable.
-const FFMPEG_CORE = "https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd";
+// 0.12.9 is the version @ffmpeg/ffmpeg@0.12.15 was designed for.
+const FFMPEG_CORE = "https://unpkg.com/@ffmpeg/core@0.12.9/dist/umd";
 
 // Cached blob URLs survive releaseFF() – no re-download between files
 let coreURL    = null;

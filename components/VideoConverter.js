@@ -2,7 +2,8 @@
 
 import { useRef, useState, useCallback } from "react";
 
-const CDN_BASE = "https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd";
+// 0.12.9 matches @ffmpeg/ffmpeg@0.12.15 — 0.12.6 had VP9/GIF bugs
+const CDN_BASE = "https://unpkg.com/@ffmpeg/core@0.12.9/dist/umd";
 
 function fmtBytes(bytes) {
   if (!bytes || bytes === 0) return "0 B";
