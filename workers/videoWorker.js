@@ -26,9 +26,10 @@ import { fetchFile, toBlobURL } from "@ffmpeg/util";
 const FFMPEG_CORE = "https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd";
 
 // Cached blob URLs survive releaseFF() – no re-download between files
-let coreURL = null;
-let wasmURL = null;
-let ff      = null;
+let coreURL    = null;
+let wasmURL    = null;
+let ff         = null;
+const ffLogs   = [];
 
 async function ensureFF() {
   if (ff) return;
@@ -39,6 +40,7 @@ async function ensureFF() {
     ]);
   }
   ff = new FFmpeg();
+  ff.on("log", ({ message }) => { ffLogs.push(message); if (ffLogs.length > 20) ffLogs.shift(); });
   await ff.load({ coreURL, wasmURL });
 }
 
@@ -81,19 +83,22 @@ async function execTwoPass(inName, outName, s) {
     "-passlogfile", passlog,
   ];
 
+  const failMsg = (code) => { const log = ffLogs.slice(-5).join(" | ") || "no log"; return `FFmpeg exited with code ${code}: ${log}`; };
+
   // Pass 1 – stats only, no audio, discard output
-  await ff.exec([
+  const p1 = await ff.exec([
     "-y", "-i", inName,
     ...baseVideo, ...filterArgs,
     "-pass", "1", "-an", "-f", "null", "-",
   ]);
+  if (p1 !== 0) throw new Error(failMsg(p1));
 
   // Pass 2 – full encode with audio
   const audioArgs = s.noAudio
     ? ["-an"]
     : ["-c:a", "aac", "-b:a", "128k"];
 
-  await ff.exec([
+  const p2 = await ff.exec([
     "-y", "-i", inName,
     ...baseVideo, ...filterArgs,
     "-pass", "2",
@@ -101,6 +106,7 @@ async function execTwoPass(inName, outName, s) {
     "-movflags", "+faststart",
     outName,
   ]);
+  if (p2 !== 0) throw new Error(failMsg(p2));
 
   await safeDelete(`${passlog}-0.log`, `${passlog}-0.log.mbtree`);
 }
@@ -163,7 +169,11 @@ async function execSinglePass(inName, outName, s) {
   if (s.fmt === "mp4") args.push("-movflags", "+faststart");
 
   args.push(outName);
-  await ff.exec(args);
+  const code = await ff.exec(args);
+  if (code !== 0) {
+    const log = ffLogs.slice(-5).join(" | ") || "no log";
+    throw new Error(`FFmpeg exited with code ${code}: ${log}`);
+  }
 }
 
 // ── Message handler ────────────────────────────────────────────────────────
@@ -223,6 +233,8 @@ self.onmessage = async ({ data: { type, id, file, settings } }) => {
 
   } catch (err) {
     releaseFF();
-    self.postMessage({ type: "error", id, message: err.message || "Compression failed" });
+    // err may be a string (WASM worker rejects with e.toString()) or an Error
+    const msg = typeof err === "string" ? err : (err?.message || String(err)) || "Compression failed";
+    self.postMessage({ type: "error", id, message: msg });
   }
 };

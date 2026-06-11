@@ -4,7 +4,7 @@
  * Supports:
  *  - gif-compress  : Re-encode GIF with palettegen for smaller file size
  *  - gif-to-mp4    : Convert GIF to H.264 MP4
- *  - gif-to-webm   : Convert GIF to VP9 WebM
+ *  - gif-to-webm   : Convert GIF to VP9 WebM (VP8 fallback if VP9 unavailable)
  *  - video-to-gif  : Convert video (MP4/WebM/MOV) to optimized GIF
  *
  * Message protocol
@@ -19,10 +19,10 @@ import { fetchFile, toBlobURL } from "@ffmpeg/util";
 
 const FFMPEG_CORE = "https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd";
 
-let coreURL    = null;
-let wasmURL    = null;
-let ff         = null;
-let lastErrLog = "";
+let coreURL = null;
+let wasmURL = null;
+let ff      = null;
+const ffLogs = [];
 
 async function ensureFF() {
   if (ff) return;
@@ -33,7 +33,11 @@ async function ensureFF() {
     ]);
   }
   ff = new FFmpeg();
-  ff.on("log", ({ type, message }) => { if (type === "fferr") lastErrLog = message; });
+  // Capture all FFmpeg log output — used in error messages when exec() fails
+  ff.on("log", ({ message }) => {
+    ffLogs.push(message);
+    if (ffLogs.length > 20) ffLogs.shift();
+  });
   await ff.load({ coreURL, wasmURL });
 }
 
@@ -46,11 +50,21 @@ async function safeDelete(...names) {
   for (const n of names) try { await ff.deleteFile(n); } catch { /* ignore */ }
 }
 
+// exec() NEVER throws — it resolves with exit code. Must check return value.
+async function execFF(args) {
+  const code = await ff.exec(args);
+  if (code !== 0) {
+    const log = ffLogs.slice(-5).join(" | ") || "no log";
+    throw new Error(`FFmpeg exited with code ${code}: ${log}`);
+  }
+}
+
 self.onmessage = async ({ data: { type, id, file, settings } }) => {
   if (type !== "convert") return;
 
   try {
     await ensureFF();
+    ffLogs.length = 0; // clear logs for this conversion
 
     const ext     = file.name.includes(".") ? file.name.slice(file.name.lastIndexOf(".")) : ".gif";
     const inName  = `gin_${id}${ext}`;
@@ -66,8 +80,7 @@ self.onmessage = async ({ data: { type, id, file, settings } }) => {
     await ff.writeFile(inName, await fetchFile(file));
 
     if (task === "gif-to-mp4") {
-      // Scale to even dimensions required by H.264
-      await ff.exec([
+      await execFF([
         "-y", "-i", inName,
         "-vf", "scale=trunc(iw/2)*2:trunc(ih/2)*2:flags=lanczos",
         "-c:v", "libx264",
@@ -82,9 +95,9 @@ self.onmessage = async ({ data: { type, id, file, settings } }) => {
       ]);
 
     } else if (task === "gif-to-webm") {
-      // -auto-alt-ref 0 -lag-in-frames 0 required for single-pass VP9 CRF mode.
-      // Without them libvpx exits with code 1 (lookahead + alt-ref need 2-pass).
-      await ff.exec([
+      // Try VP9 first (single-pass needs -auto-alt-ref 0 -lag-in-frames 0).
+      // Fall back to VP8 (libvpx) if the VP9 codec is absent in this core build.
+      const vp9Code = await ff.exec([
         "-y", "-i", inName,
         "-vf", "scale=trunc(iw/2)*2:trunc(ih/2)*2:flags=lanczos",
         "-c:v", "libvpx-vp9",
@@ -97,10 +110,24 @@ self.onmessage = async ({ data: { type, id, file, settings } }) => {
         "-an",
         outName,
       ]);
+      if (vp9Code !== 0) {
+        // VP9 failed — try VP8 (same libvpx, simpler codec, guaranteed support)
+        await safeDelete(outName);
+        ffLogs.length = 0;
+        await execFF([
+          "-y", "-i", inName,
+          "-vf", "scale=trunc(iw/2)*2:trunc(ih/2)*2:flags=lanczos",
+          "-c:v", "libvpx",
+          "-crf", "10",
+          "-b:v", "1M",
+          "-pix_fmt", "yuv420p",
+          "-an",
+          outName,
+        ]);
+      }
 
     } else if (task === "video-to-gif") {
-      // Two-pass palettegen for best quality GIF
-      await ff.exec([
+      await execFF([
         "-y", "-i", inName,
         "-vf", `fps=${fps},scale=${scale}:-1:flags=lanczos,split[a][b];[a]palettegen=max_colors=${maxColors}[p];[b][p]paletteuse=dither=bayer`,
         "-loop", "0",
@@ -108,8 +135,8 @@ self.onmessage = async ({ data: { type, id, file, settings } }) => {
       ]);
 
     } else {
-      // gif-compress: re-encode GIF with palette optimisation
-      await ff.exec([
+      // gif-compress: re-encode with palette optimisation
+      await execFF([
         "-y", "-i", inName,
         "-vf", `fps=${fps},scale=${scale}:-1:flags=lanczos,split[a][b];[a]palettegen=max_colors=${maxColors}[p];[b][p]paletteuse=dither=bayer`,
         "-loop", "0",
@@ -140,6 +167,8 @@ self.onmessage = async ({ data: { type, id, file, settings } }) => {
 
   } catch (err) {
     releaseFF();
-    self.postMessage({ type: "error", id, message: err.message || lastErrLog || "Conversion failed" });
+    // err may be a string (from WASM worker's e.toString()) or an Error object
+    const msg = typeof err === "string" ? err : (err?.message || String(err)) || "Conversion failed";
+    self.postMessage({ type: "error", id, message: msg });
   }
 };

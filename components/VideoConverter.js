@@ -59,7 +59,13 @@ export default function VideoConverter() {
       const inputName = "input.mp4";
       const outputName = "output.webm";
       await ffmpeg.writeFile(inputName, await fetchFile(file));
-      await ffmpeg.exec(["-i", inputName, "-c:v", "libvpx-vp9", "-crf", "30", "-b:v", "0", "-auto-alt-ref", "0", "-lag-in-frames", "0", "-cpu-used", "8", outputName]);
+      // VP9 with single-pass flags; fall back to VP8 if VP9 codec unavailable
+      let vcode = await ffmpeg.exec(["-i", inputName, "-c:v", "libvpx-vp9", "-crf", "30", "-b:v", "0", "-auto-alt-ref", "0", "-lag-in-frames", "0", "-cpu-used", "8", outputName]);
+      if (vcode !== 0) {
+        await ffmpeg.deleteFile(outputName).catch(() => {});
+        vcode = await ffmpeg.exec(["-i", inputName, "-c:v", "libvpx", "-crf", "10", "-b:v", "1M", outputName]);
+        if (vcode !== 0) throw new Error(`VP9/VP8 encoding failed (${vcode})`);
+      }
       const data = await ffmpeg.readFile(outputName);
       const blob = new Blob([data.buffer], { type: "video/webm" });
       setResult({ blob, size: blob.size });
