@@ -119,6 +119,16 @@ export default function GifCompressor({ defaultTask = "gif-compress" }) {
           processNext();
         }
       };
+      workerRef.current.onerror = (e) => {
+        setWorking(false);
+        setItems(prev => prev.map(it =>
+          it.status === "processing"
+            ? { ...it, status: "error", pct: 0, statusMsg: "Worker crashed: " + (e.message || "unknown error") }
+            : it
+        ));
+        workerRef.current = null;
+        if (pendingRef.current.length) processNext();
+      };
     }
     return workerRef.current;
   }

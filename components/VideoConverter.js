@@ -59,7 +59,7 @@ export default function VideoConverter() {
       const inputName = "input.mp4";
       const outputName = "output.webm";
       await ffmpeg.writeFile(inputName, await fetchFile(file));
-      await ffmpeg.exec(["-i", inputName, "-c:v", "libvpx-vp9", "-crf", "30", "-b:v", "0", outputName]);
+      await ffmpeg.exec(["-i", inputName, "-c:v", "libvpx-vp9", "-crf", "30", "-b:v", "0", "-auto-alt-ref", "0", "-lag-in-frames", "0", "-cpu-used", "8", outputName]);
       const data = await ffmpeg.readFile(outputName);
       const blob = new Blob([data.buffer], { type: "video/webm" });
       setResult({ blob, size: blob.size });

@@ -117,7 +117,9 @@ async function execSinglePass(inName, outName, s) {
     if (s.targetBitrateKbps > 0) {
       args.push("-b:v", `${s.targetBitrateKbps}k`);
     } else {
-      args.push("-crf", String(s.crf), "-b:v", "0");
+      // Single-pass VP9 CRF mode needs -auto-alt-ref 0 -lag-in-frames 0;
+      // the default alt-ref lookahead requires 2-pass and crashes otherwise.
+      args.push("-crf", String(s.crf), "-b:v", "0", "-auto-alt-ref", "0", "-lag-in-frames", "0");
     }
     args.push("-cpu-used", vpxSpeed, "-row-mt", "1");
   } else {

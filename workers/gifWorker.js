@@ -19,9 +19,10 @@ import { fetchFile, toBlobURL } from "@ffmpeg/util";
 
 const FFMPEG_CORE = "https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd";
 
-let coreURL = null;
-let wasmURL = null;
-let ff      = null;
+let coreURL    = null;
+let wasmURL    = null;
+let ff         = null;
+let lastErrLog = "";
 
 async function ensureFF() {
   if (ff) return;
@@ -32,6 +33,7 @@ async function ensureFF() {
     ]);
   }
   ff = new FFmpeg();
+  ff.on("log", ({ type, message }) => { if (type === "fferr") lastErrLog = message; });
   await ff.load({ coreURL, wasmURL });
 }
 
@@ -80,12 +82,17 @@ self.onmessage = async ({ data: { type, id, file, settings } }) => {
       ]);
 
     } else if (task === "gif-to-webm") {
+      // -auto-alt-ref 0 -lag-in-frames 0 required for single-pass VP9 CRF mode.
+      // Without them libvpx exits with code 1 (lookahead + alt-ref need 2-pass).
       await ff.exec([
         "-y", "-i", inName,
         "-vf", "scale=trunc(iw/2)*2:trunc(ih/2)*2:flags=lanczos",
         "-c:v", "libvpx-vp9",
         "-crf", String(quality + 10),
         "-b:v", "0",
+        "-auto-alt-ref", "0",
+        "-lag-in-frames", "0",
+        "-cpu-used", "8",
         "-pix_fmt", "yuv420p",
         "-an",
         outName,
@@ -133,6 +140,6 @@ self.onmessage = async ({ data: { type, id, file, settings } }) => {
 
   } catch (err) {
     releaseFF();
-    self.postMessage({ type: "error", id, message: err.message || "Conversion failed" });
+    self.postMessage({ type: "error", id, message: err.message || lastErrLog || "Conversion failed" });
   }
 };
